@@ -1,0 +1,21 @@
+.header {
+    background-color: #008b8b;
+
+    .navbar-brand {
+        color: #EEAD2D;
+
+        &:hover {
+            color: #D6AB1E;
+        }
+    }
+
+    #navbarScroll {
+        .nav-link {
+            color: #FFFFFF;
+
+            &:hover {
+                color: #EEAD2D;
+            }
+        }
+    }
+}
