@@ -1,12 +1,12 @@
 .project {
     width: 100%;
-    height: 100vh;  
+    height: 100vh;
 
     // Page Header
     .project-info {
-        background-color: #697e7c;
+        background-color: #3c504e;
         font-family: 'Sarabun', sans-serif;
-        height: 170px;
+        height: 200px;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -86,14 +86,11 @@
     // Navbar Project
 
     .project-header {
-        
-
         .navbar {
             padding: 0;
-            
-    
+
             .header-content {
-                background-color: #6cd6cc;
+                background-color: #7fafaa;
                 align-items: center;
                 display: flex;
                 flex-direction: column;
@@ -104,5 +101,4 @@
         }
     }
 
-    
 }
