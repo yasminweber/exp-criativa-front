@@ -5,17 +5,18 @@ class Member_Card extends Component {
 
     render() {
         return (
-            <div className='member-card'>
-                <div className='profile-user'>
-                    <img src={profilePhoto} className="photo"/>
+            <div class="col-md-3 col-sm-6">
+                <div class={"member-card " + this.props.userType}>
+                    <div className='profile-user'>
+                        <img src={profilePhoto} className="photo" />
+                    </div>
+
+                    <h2 className='user-name'> {this.props.name} </h2>
+                    <h3 className='user-type'> {this.props.userType} </h3>
+
+                    <button className='profile-button'> Ver Perfil </button>
                 </div>
-
-                <h2 className='user-name'> Guilherme Weber </h2>
-                <h3 className='user-type'> Moderador </h3>
-
-                <button className='profile-button'> Ver Perfil </button>
             </div>
-
         )
     }
 }

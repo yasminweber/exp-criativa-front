@@ -88,16 +88,130 @@
     .project-header {
         .navbar {
             padding: 0;
+            font-family: 'Sarabun', sans-serif;
 
             .header-content {
-                background-color: #7fafaa;
+                background-color: #0cb39c;
                 align-items: center;
                 display: flex;
                 flex-direction: column;
                 flex-wrap: wrap;
                 justify-content: center;
                 text-align: center;
+
+                .nav-item {
+                    margin: 0px 20px;
+                    
+                    .nav-link {
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        letter-spacing: 2px;
+                        color: #ffffff;
+
+                        &:hover {
+                            color:rgb(189, 209, 205);
+                        }
+                    }
+                }
             }
+        }
+    }
+
+    .project-members {
+        font-family: 'Sarabun', sans-serif;
+
+        .page-title {
+            font-size: 30px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-weight: 800;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #137c72;
+        }
+
+        .filter-subtitle {
+            color: #797979;
+        }
+
+        .user-type-filter {
+            padding: 5px 10px;
+            margin: 7px;
+            border-radius: 50px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .filter0 {
+            border: 2px solid #137c72;
+
+            &:hover {
+                background-color: #137c72;
+                transition: background-color 0.2s linear;
+                color: white;
+            }
+        }
+        .filter1 {
+            border: 2px solid #F2B705;
+
+            &:hover {
+                background-color: #F2B705;
+                transition: background-color 0.2s linear;
+                color: white;
+            }
+        }
+        .filter2 {
+            border: 2px solid #e67a00;
+
+            &:hover {
+                background-color: #e67a00;
+                transition: background-color 0.2s linear;
+                color: white;
+            }
+        }
+        .filter3 {
+            border: 2px solid #4d4d4d;
+
+            &:hover {
+                background-color: #4d4d4d;
+                transition: background-color 0.2s linear;
+                color: white;
+            }
+        }
+
+        .members-section {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+            margin-top: 30px;
+
+            .members-section-title {
+                font-size: 22px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                color: #4d4d4d;
+            }
+
+            .hr-title {
+                background-color: #8b8b8b;
+                width: 70%;
+                height: 3px;
+                margin-left: 50px;
+            }
+        }
+
+        .member-row {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
         }
     }
 

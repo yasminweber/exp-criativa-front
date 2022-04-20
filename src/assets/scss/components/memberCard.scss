@@ -1,10 +1,95 @@
-.member-card {
-    // background-color: #F2B705;
-    background-color: rgb(255, 246, 219);
+.voluntario {
+    border: #4d4d4d solid 3px;
+
+    &:hover {
+        background-color: rgb(201, 201, 201);
+        transition: background-color 0.2s linear;
+    }
+
+    .profile-button {
+        border: #4d4d4d solid 2.5px;
+        width: 60%;
+        margin-top: 10px;
+        padding: 6px;
+        border-radius: 50px;
+        box-shadow: 2px 2px 2px #888888;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 2px;
+        font-weight: 700;
+        color: #4d4d4d;
+
+        &:hover {
+            background-color: #4d4d4d;
+            transition: background-color 0.2s linear;
+            color: white;
+        }
+    }
+}
+
+.moderador {
     border: #F2B705 solid 3px;
+
+    &:hover {
+        background-color: rgb(255, 246, 219);
+        transition: background-color 0.2s linear;
+    }
+
+    .profile-button {
+        border: #F2B705 solid 2.5px;
+        width: 60%;
+        margin-top: 10px;
+        padding: 6px;
+        border-radius: 50px;
+        box-shadow: 2px 2px 2px #888888;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 2px;
+        font-weight: 700;
+        color: #9e7700;
+
+        &:hover {
+            background-color: #F2B705;
+            transition: background-color 0.2s linear;
+            color: white;
+        }
+    }
+}
+
+.organizador {
+    border: #e67a00 solid 3px;
+
+    &:hover {
+        background-color: #fde2c1;
+        transition: background-color 0.2s linear;
+    }
+
+    .profile-button {
+        border: #e67a00 solid 2.5px;
+        width: 60%;
+        margin-top: 10px;
+        padding: 6px;
+        border-radius: 50px;
+        box-shadow: 2px 2px 2px #888888;
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 2px;
+        font-weight: 700;
+        color: #e67a00;
+
+        &:hover {
+            background-color: #e67a00;
+            transition: background-color 0.2s linear;
+            color: white;
+        }
+    }
+}
+
+.member-card {
+    // border: #F2B705 solid 3px;
     border-radius: 20px;
     width: 220px;
-    height: 280px;
+    height: 80%;
     margin: 50px;
     display: flex;
     flex-direction: column;
@@ -14,10 +99,11 @@
     text-align: center;
     font-family: 'Sarabun', sans-serif;
     box-shadow: 2px 2px 2px #868686;
+    padding: 10px;
 
     .profile-user {
-        width: 140px;
-        height: 140px;
+        width: 100px;
+        height: 100px;
         background-color: rgb(86, 99, 99);
         border-radius: 100%;
         display: flex;
@@ -36,34 +122,36 @@
             border-radius: 100%;
         }
     }
+
     .user-name {
         font-size: 23px;
         margin-top: 10px;
     }
+
     .user-type {
         text-transform: uppercase;
         font-size: 13px;
         letter-spacing: 2px;
         margin-top: 8px;
     }
-    .profile-button {
-        border: #F2B705 solid 2.5px;
-        background-color: rgb(255, 236, 179);
-        width: 60%;
-        margin-top: 10px;
-        padding: 6px;
-        border-radius: 50px;
-        box-shadow: 2px 2px 2px #888888;
-        text-transform: uppercase;
-        font-size: 12px;
-        letter-spacing: 2px;
-        font-weight: 700;
-        color: #9e7700;
 
-        &:hover {
-            background-color: #F2B705;
-            transition: background-color 0.2s linear;
-            color: white;
-        }
-    }
+    // .profile-button {
+    //     border: #F2B705 solid 2.5px;
+    //     width: 60%;
+    //     margin-top: 10px;
+    //     padding: 6px;
+    //     border-radius: 50px;
+    //     box-shadow: 2px 2px 2px #888888;
+    //     text-transform: uppercase;
+    //     font-size: 12px;
+    //     letter-spacing: 2px;
+    //     font-weight: 700;
+    //     color: #9e7700;
+
+    //     &:hover {
+    //         background-color: #F2B705;
+    //         transition: background-color 0.2s linear;
+    //         color: white;
+    //     }
+    // }
 }
