@@ -4,7 +4,7 @@
 
     // Page Header
     .project-info {
-        background-color: #3c504e;
+        background-color: #58706e;
         font-family: 'Sarabun', sans-serif;
         height: 200px;
         display: flex;
@@ -84,14 +84,13 @@
     }
 
     // Navbar Project
-
     .project-header {
         .navbar {
             padding: 0;
             font-family: 'Sarabun', sans-serif;
 
             .header-content {
-                background-color: #0cb39c;
+                background-color: #b8d7da;
                 align-items: center;
                 display: flex;
                 flex-direction: column;
@@ -100,23 +99,45 @@
                 text-align: center;
 
                 .nav-item {
-                    margin: 0px 20px;
-                    
+                    margin: 10px 20px;
+                    padding: 0 6px;
+                    // border: 2px solid #137c72;
+                    // border-radius: 50px;
+
+                    &:hover {
+                        // background-color: #137c72;
+                        // transition: background-color 0.2s linear;
+                        // color: #b8d7da;
+                        border-bottom: 2px solid #137c72;
+                    }
+
                     .nav-link {
                         text-transform: uppercase;
-                        font-weight: 700;
+                        font-size: 12px;
+                        font-weight: 800;
                         letter-spacing: 2px;
-                        color: #ffffff;
+                        color: #137c72;
 
-                        &:hover {
-                            color:rgb(189, 209, 205);
-                        }
+                        // &:hover {
+                        //     color: rgb(189, 209, 205);
+                        // }
                     }
                 }
             }
         }
     }
 
+    .filtros {
+        display: flex;
+        width: 100%;
+        overflow-x: scroll;
+
+        .link {
+            margin-right: 10px;
+        }
+    }
+
+    // Membros
     .project-members {
         font-family: 'Sarabun', sans-serif;
 
@@ -143,6 +164,7 @@
             letter-spacing: 1px;
             font-weight: 600;
         }
+
         .filter0 {
             border: 2px solid #137c72;
 
@@ -152,6 +174,7 @@
                 color: white;
             }
         }
+
         .filter1 {
             border: 2px solid #F2B705;
 
@@ -161,6 +184,7 @@
                 color: white;
             }
         }
+
         .filter2 {
             border: 2px solid #e67a00;
 
@@ -170,6 +194,7 @@
                 color: white;
             }
         }
+
         .filter3 {
             border: 2px solid #4d4d4d;
 
