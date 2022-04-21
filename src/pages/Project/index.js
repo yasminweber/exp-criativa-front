@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import Member from './Member';
+import Header_Login from '../../components/Header';
+import Member from '../../components/Project/Member';
 
 class Project_Page extends Component {
 
     render() {
         return (
             <div className='project'>
+
+                <Header_Login/>
 
                 <header class="container-fluid project-info">
                     <div class="row">
@@ -44,23 +47,34 @@ class Project_Page extends Component {
                                     </li>
 
                                     <li class="nav-item">
+                                        <a class="nav-link" href="#"> Ações & Eventos </a>
+                                    </li>
+
+                                    <li class="nav-item">
                                         <a class="nav-link" href="#"> Membros </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"> Ações </a>
+                                        <a class="nav-link" href="#"> Doações </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </nav>
+
+                    {/* <div className="filtros" style={{ backgroundColor: "#b8d7da" }}>
+                        <Link to="#members">
+                            <button className="link" type="button">Página Inicial</button>
+                        </Link>
+                        <button className="link">Fotos</button>
+                        <button className="link">Ações & Eventos</button>
+                        <button className="link">Membros</button>
+                        <button className="link">Doações</button>
+                    </div> */}
                 </section>
 
-
                 <Member/>
-
-
-
+                
 
             </div>
 

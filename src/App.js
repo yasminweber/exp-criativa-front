@@ -7,7 +7,7 @@ import HeaderDentro from './headerDentro';
 function App() {
   return (
     <div className="App">
-      <HeaderDentro />
+      {/* <HeaderDentro /> */}
       <Rotas />
     </div>
   );

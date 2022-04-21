@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
-import Member_Card from './Card';
+import Member_Card from '../../../components/Project/Member/Card';
 
 class Member extends Component {
 
     render() {
         return (
-            <section className='project-members'>
+            <section className='project-members' id="members">
 
                 <h3 className='page-title'> Conheça quem faz o projeto acontecer! </h3>
-
-                <div className='container-lg'>
-                    <label className='filter-subtitle'> Selecione abaixo qual tipo de usuário deseja visualizar: </label> <br />
-                    <button className='user-type-filter filter0'> Todos </button>
-                    <button className='user-type-filter filter1'> Moderadores </button>
-                    <button className='user-type-filter filter2'> Organizadores </button>
-                    <button className='user-type-filter filter3'> Voluntários </button>
-                </div>
+                <p> Conheça os rostos por trás de todas as ações do projeto Corrente do Bem! </p>
 
                 <div className='container-fluid members-section'>
                     <h4 className='members-section-title'> Moderadores </h4>
@@ -46,6 +39,9 @@ class Member extends Component {
 
                         <Member_Card name="Guilherme Bernardes Weber" userType="organizador" />
 
+                        <Member_Card name="Guilherme Weber" userType="organizador" />
+
+                        <Member_Card name="Guilherme Weber" userType="organizador" />
                     </div>
                 </div>
 
