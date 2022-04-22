@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header_Login from '../../components/Header';
 import Member from '../../components/Project/Member';
+//import 'bootstrap'
 
 class Project_Page extends Component {
 
@@ -8,74 +9,67 @@ class Project_Page extends Component {
         return (
             <div className='project'>
 
-                <Header_Login/>
+                <Header_Login />
 
-                <header class="container-fluid project-info">
-                    <div class="row">
-                        <div class="col-2">
-                            <div className='project-image'>
+                <header className="container-fluid project-info d-flex">
+                    <div className="row">
+                        <div className="col-lg-2 col-4">
+                            <div className='project-image d-flex'>
                                 Image
                             </div>
                         </div>
 
-                        <div class="col-6 name-causes">
+                        <div className="col-lg-6 col-8 d-flex name-causes">
                             <h2 className='project-name'> Projeto Corrente do Bem </h2>
                             <h3 className='project-cause'> Combate a Desigualdade Social </h3>
                         </div>
 
-                        <div class="col-4 subscription-column">
+                        <div className="col-lg-4 col-12 subscription-column d-flex">
                             <button className='subscription-button'> Quero Participar </button>
                         </div>
                     </div>
                 </header>
 
                 <section className='project-header'>
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light project-navbar">
-                        <div class="container-fluid header-content">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"> </span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"> Página Inicial </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"> Fotos </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"> Ações & Eventos </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"> Membros </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"> Doações </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
-
-                    {/* <div className="filtros" style={{ backgroundColor: "#b8d7da" }}>
-                        <Link to="#members">
-                            <button className="link" type="button">Página Inicial</button>
-                        </Link>
-                        <button className="link">Fotos</button>
-                        <button className="link">Ações & Eventos</button>
-                        <button className="link">Membros</button>
-                        <button className="link">Doações</button>
-                    </div> */}
+                    <ul className="nav nav-tabs project-navbar" id="myTab" role="tablist">
+                        <li className="item" role="presentation">
+                            <button className="link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Página inicial</button>
+                        </li>
+                        <li className="item" role="presentation">
+                            <button className="link" id="pictures-tab" data-bs-toggle="tab" data-bs-target="#pictures" type="button" role="tab" aria-controls="pictures" aria-selected="false">Fotos</button>
+                        </li>
+                        <li className="item" role="presentation">
+                            <button className="link" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#acoes-e-eventos" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">Ações & Eventos</button>
+                        </li>
+                        <li className="item" role="presentation">
+                            <button className="link" id="members-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false">Membros</button>
+                        </li>
+                        <li className="item" role="presentation">
+                            <button className="link" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false">Doações</button>
+                        </li>
+                    </ul>
                 </section>
 
-                <Member/>
+                <section className="project-content">
+                    <div className="tab-content" id="myTabContent">
+                        <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <h1 className="mt-3"> página principal do projeto </h1>
+                        </div>
+                        <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
+                            <h1 className="mt-3"> conteudo de fotos </h1>
+                        </div>
+                        <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
+                        <h1 className="mt-3"> conteudo de ações e eventos </h1>
+                        </div>
+                        <div className="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
+                            <Member />
+                        </div>
+                        <div className="tab-pane fade" id="donations" role="tabpanel" aria-labelledby="donations-tab">
+                            <h1 className="mt-3"> conteúdo de doações </h1>
+                        </div>
+                    </div>
+                </section>
                 
-
             </div>
 
         )

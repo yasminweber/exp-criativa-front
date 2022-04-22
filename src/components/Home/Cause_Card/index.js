@@ -7,12 +7,13 @@ class Cause_Card extends Component {
             <div className="col-lg-3 col-md-6 col-12 px-0">
                 <div className="categoria">
                     <div className="card-dentro">
-                        <div className="card-front">
+                        <div className="card-front d-flex flex-column align-items-center justify-content-between">
                             <h3 className="card-titulo"> {this.props.cause} </h3>
-                            {this.props.icon}
+                            <img className="img-fluid simbolo" src={this.props.icon} alt="Icone" />
+                            {/* {this.props.icon} */}
                         </div>
                         <div className="card-back">
-                            <h3 className="card-titulo-back"> {this.props.cause} </h3>
+                            <h3 className="card-titulo"> {this.props.cause} </h3>
                             <p className="conteudo"> {this.props.content} </p>
                         </div>
                     </div>

@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import Cause_Card from '../../components/Home/Cause_Card';
+import CauseCard from '../../components/Home/Cause_Card';
+import Helmet from 'react-helmet';
 
-import { BsGenderFemale } from 'react-icons/bs'
-import Header_Home from '../../components/Home/Header';
+//import { BsGenderFemale } from 'react-icons/bs'
+import HeaderHome from '../../components/Home/Header';
 
 class Home extends Component {
 
     render() {
         return (
-            <div className='homev2'>
+            <div className="homev2">
+                
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Home</title>
+                </Helmet>
 
-                <Header_Home/>
+                <HeaderHome/>
 
                 <section className="banner">
                     <div className="container-fluid">
@@ -52,39 +58,40 @@ class Home extends Component {
                             </div>
                         </div>
 
-                        <div className="row mt-4">
+                        <div className="row mt-5">
 
-                            <Cause_Card cause="Aqui a causa 1" icon={<BsGenderFemale />}
+                            <CauseCard cause="Empoderamento Feminino" icon="https://cdn-icons-png.flaticon.com/512/4331/4331099.png"
                                 content="Algum primeiro conteudo na linha de cima e aqui é só pra ter uma segunda linha mesmo, 
                                 com bla bla bla, pra acrescentar mais palavras que não façam sentido"/>
 
-                            <Cause_Card cause="Aqui a causa 2" icon={<BsGenderFemale />}
+                            <CauseCard cause="Doações" icon="https://cdn-icons-png.flaticon.com/512/838/838680.png"
                                 content="Algum primeiro conteudo na linha de cima e aqui é só pra ter uma segunda linha mesmo, 
                                 com bla bla bla, pra acrescentar mais palavras que não façam sentido"/>
 
-                            <Cause_Card cause="Aqui a causa 3" icon={<BsGenderFemale />}
+                            <CauseCard cause="Fome" icon="https://cdn-icons-png.flaticon.com/512/4605/4605602.png"
                                 content="Algum primeiro conteudo na linha de cima e aqui é só pra ter uma segunda linha mesmo, 
                                 com bla bla bla, pra acrescentar mais palavras que não façam sentido"/>
 
-                            <Cause_Card cause="Aqui a causa 4" icon={<BsGenderFemale />}
+                            <CauseCard cause="Saúde" icon="https://cdn-icons-png.flaticon.com/512/684/684262.png"
                                 content="Algum primeiro conteudo na linha de cima e aqui é só pra ter uma segunda linha mesmo, 
                                 com bla bla bla, pra acrescentar mais palavras que não façam sentido"/>
 
-                            <Cause_Card cause="Aqui a causa 5" icon={<BsGenderFemale />}
+                            <CauseCard cause="Mau trato aos animais" icon="https://cdn-icons-png.flaticon.com/512/672/672716.png"
                                 content="Algum primeiro conteudo na linha de cima e aqui é só pra ter uma segunda linha mesmo, 
                                 com bla bla bla, pra acrescentar mais palavras que não façam sentido"/>
 
-                            <Cause_Card cause="Aqui a causa 6" icon={<BsGenderFemale />}
+                            <CauseCard cause="Meio Ambiente" icon="https://cdn-icons-png.flaticon.com/512/1684/1684337.png"
                                 content="Algum primeiro conteudo na linha de cima e aqui é só pra ter uma segunda linha mesmo, 
                                 com bla bla bla, pra acrescentar mais palavras que não façam sentido"/>
 
-                            <Cause_Card cause="Aqui a causa 7" icon={<BsGenderFemale />}
+                            <CauseCard cause="Inclusão social" icon="https://cdn-icons-png.flaticon.com/512/2058/2058768.png"
                                 content="Algum primeiro conteudo na linha de cima e aqui é só pra ter uma segunda linha mesmo, 
                                 com bla bla bla, pra acrescentar mais palavras que não façam sentido"/>
 
-                            <Cause_Card cause="Aqui a causa 8" icon={<BsGenderFemale />}
+                            <CauseCard cause="Educação" icon="https://cdn-icons-png.flaticon.com/512/991/991922.png"
                                 content="Algum primeiro conteudo na linha de cima e aqui é só pra ter uma segunda linha mesmo, 
                                 com bla bla bla, pra acrescentar mais palavras que não façam sentido"/>
+
                         </div>
                     </div>
                 </section>
