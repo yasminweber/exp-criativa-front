@@ -5,18 +5,20 @@ import Helmet from 'react-helmet';
 //import { BsGenderFemale } from 'react-icons/bs'
 import HeaderHome from '../../components/Home/Header';
 
+import Benefits from '../../components/Home/Benefits';
+
 class Home extends Component {
 
     render() {
         return (
             <div className="homev2">
-                
+
                 <Helmet>
                     <meta charSet="utf-8" />
                     <title>Home</title>
                 </Helmet>
 
-                <HeaderHome/>
+                <HeaderHome />
 
                 <section className="banner">
                     <div className="container-fluid">
@@ -95,6 +97,23 @@ class Home extends Component {
                         </div>
                     </div>
                 </section>
+
+                <section className="slick-benefits">
+                    <div className="container-lg">
+                        <div className="row py-5">
+                            <div className="col-lg-8 col-12 mx-auto">
+                                <h2 className="titulo-01">Por que participar?</h2>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-12">
+                                <Benefits />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         )
     }

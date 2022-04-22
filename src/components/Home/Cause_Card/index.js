@@ -10,7 +10,6 @@ class Cause_Card extends Component {
                         <div className="card-front d-flex flex-column align-items-center justify-content-between">
                             <h3 className="card-titulo"> {this.props.cause} </h3>
                             <img className="img-fluid simbolo" src={this.props.icon} alt="Icone" />
-                            {/* {this.props.icon} */}
                         </div>
                         <div className="card-back">
                             <h3 className="card-titulo"> {this.props.cause} </h3>
