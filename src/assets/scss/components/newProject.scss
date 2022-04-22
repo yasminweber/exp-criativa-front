@@ -1,15 +1,69 @@
 .newProject {
-    .titulo {
-        //border-top: 1px solid black;
+    .banner-titulo {
+        color: white;
         background-image: linear-gradient(to bottom, #58706e, #008b8b, #58706e);
-        padding: 60px 0;
+        justify-content: start;
+        padding: 50px 0 100px 70px;
+
+        @include res-lg {
+            padding: 50px 0 90px;
+        }
+
+        .titulo-1 {
+            font-size: 28px;
+        }
+
+        .descricao {
+            font-size: 18px;
+        }
     }
 
     .form {
+        margin: -3.5rem 0 3rem;
+
         .projectForm {
-            padding: 20px;
+            background-color: #FFFFFF;
             box-shadow: 0 0 1rem grey;
+            border-radius: 10px;
+            padding: 20px;
+
+            .form-control,
+            .form-select {
+                &:focus {
+                    border-color: #008b8b;
+                    box-shadow: inherit;
+                }
+            }
+
+            .form-data,
+            .form-quantidades {
+                .form-floating {
+                    .form-label {
+                        padding-left: 25px;
+                    }
+                }
+            }
+
+            textarea {
+                height: 100px;
+            }
         }
     }
-    
+
+    .enviar {
+        .btn-1 {
+            font-size: 16px;
+            line-height: 22px;
+            background-color: #ffc107;
+            border-radius: 6px;
+            padding: 12px 20px;
+            transition: .7s;
+
+            &:hover {
+                color: #FFFFFF;
+                background-color: #d19e04;
+                transition: .7s;
+            }
+        }
+    }
 }
