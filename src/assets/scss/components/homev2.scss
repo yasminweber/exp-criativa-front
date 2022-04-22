@@ -1,6 +1,7 @@
 .homev2 {
     .quem-somos {
-        padding-top: 50px;
+        background-color: rgb(253, 253, 158);
+        padding: 50px 0;
 
         .titulo {
             font-size: 28px;
@@ -38,6 +39,7 @@
                 text-align: center;
                 transition: transform 0.8s;
                 transform-style: preserve-3d;
+                border: 2px solid #FFFFFF;
 
                 .card-front,
                 .card-back {
@@ -62,7 +64,7 @@
                     }
 
                     .simbolo {
-                        margin-top: 50px;
+                        margin-bottom: 25px;
                         height: 150px;
                         background-color: white;
                     }

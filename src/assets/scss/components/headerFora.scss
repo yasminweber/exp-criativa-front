@@ -1,0 +1,23 @@
+.header-home {
+    background-color: #008b8b;
+
+    .navbar-brand {
+        color: #EEAD2D;
+
+        &:hover {
+            color: #D6AB1E;
+        }
+    }
+
+    #navbarScroll {
+        .nav-link {
+            .btn-1 {
+                color: #FFFFFF;
+
+                &:hover {
+                    color: #000;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+.newProject {
+    .titulo {
+        //border-top: 1px solid black;
+        background-image: linear-gradient(to bottom, #58706e, #008b8b, #58706e);
+        padding: 60px 0;
+    }
+
+    .form {
+        .projectForm {
+            padding: 20px;
+            box-shadow: 0 0 1rem grey;
+        }
+    }
+    
+}
