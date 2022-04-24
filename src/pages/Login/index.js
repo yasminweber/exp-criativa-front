@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import api from '../../config/api'
 
 class Login extends Component {
 
@@ -9,6 +10,33 @@ class Login extends Component {
             email: "",
             password: ""
         }
+
+        this.logar = this.logar.bind(this);
+    }
+
+    async logar(e) {
+        e.preventDefault();
+
+        const user = {
+            password: this.state.password,
+            email: this.state.email
+        }
+
+        console.log(user)
+
+        await api.post('/login', user)
+            .then(res => {
+                localStorage.setItem("TOKEN_KEY", res.data.token);
+                window.location = '/project';
+            })
+            .catch(err => {
+                console.log(err);
+                if (err.message === "Network Error") {
+                    alert("Erro de conexão com o servidor")
+                } else {
+                    alert("Email ou senha incorretos")
+                }
+            });
     }
 
     render() {
@@ -66,7 +94,7 @@ class Login extends Component {
                                         <div className='row'>
                                             <div className='col'>
                                                 <div className="enviar">
-                                                    <button type="submit" class="btn-1"> Entrar </button>
+                                                    <button type="submit" class="btn-1" onClick={this.logar}> Entrar </button>
                                                 </div>
                                             </div>
                                         </div>

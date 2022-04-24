@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import HeaderLogin from '../../components/Header';
 import Helmet from 'react-helmet';
-import api from '../../config/api'
+import api from '../../config/api';
+//import { formatDate } from '../../Helpers';
 
-class NewProject extends Component {
+class EditProject extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            //id: "",
+            id: "6264668c82a16ec8841d8f2b",
             projectName: "",
             category: "",
             where: "",
@@ -15,13 +18,45 @@ class NewProject extends Component {
             endDate: new Date(),
             description: "",
             quantityBenefited: "",
-            quantityVolunteers: ""
+            quantityVolunteers: "",
+            status: ""
         }
 
-        this.createProject = this.createProject.bind(this);
+        this.componentDidMount = () => {
+            this.getProject()
+        }
+
+        this.updateProject = this.updateProject.bind(this);
+
     }
 
-    async createProject(e) {
+    async getProject() {
+        //await api.get(`/project/${this.props.match.params.id}`)
+        await api.get(`/project/${this.state.id}`)
+            .then((response) => {
+                const data = response.data;
+                this.setState({
+                    id: data._id,
+                    projectName: data.projectName,
+                    category: data.category,
+                    where: data.where,
+                    startDate: data.startDate,
+                    endDate: data.endDate,
+                    description: data.description,
+                    quantityBenefited: data.quantityBenefited,
+                    quantityVolunteers: data.quantityVolunteers,
+                    status: data.status
+                });
+
+                console.log("Pedidos carregadas");
+            })
+            .catch((error) => {
+                console.log("erro carregar projeto ", error)
+                alert('Erro para carregar o projeto');
+            })
+    }
+
+    async updateProject(e) {
         e.preventDefault();
 
         const project = {
@@ -33,14 +68,14 @@ class NewProject extends Component {
             description: this.state.description,
             quantityBenefited: this.state.quantityBenefited,
             quantityVolunteers: this.state.quantityVolunteers,
-            status: "aberto"
+            status: this.state.status
         }
 
-        console.log(project)
+        console.log(project);
 
-        await api.post('/newProject', project);
+        await api.put(`/project/${this.state.id}`, project);
 
-        alert("A sua ideia de projeto foi enviada com sucesso");
+        alert("Projeto atualizado com sucesso");
         window.location = '/dashboard';
     }
 
@@ -50,7 +85,7 @@ class NewProject extends Component {
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title>Novo Projeto</title>
+                    <title>Editar Projeto</title>
                 </Helmet>
 
                 <HeaderLogin />
@@ -59,8 +94,8 @@ class NewProject extends Component {
                     <div className="container-fluid">
                         <div className="row text-lg-start text-center">
                             <div className="col-12">
-                                <h1 className="titulo-1">Novo projeto</h1>
-                                <p className="descricao">Por favor preencha as informações para enviar um novo projeto</p>
+                                <h1 class="titulo-1">Editar projeto</h1>
+                                <p class="descricao">Colocar qualquer texto que não seja esse de criar novo projeto</p>
                             </div>
                         </div>
                     </div>
@@ -72,16 +107,17 @@ class NewProject extends Component {
                             <div className="col-lg-8 col-12 mx-auto">
                                 <div className="projectForm">
                                     <div className="text-start">
-                                        <div className="mb-3 form-floating">
-                                            <input autoFocus type="text" className="form-control" id="inputNome" placeholder="Nome"
+                                        <div class="mb-3 form-floating">
+                                            <input type="text" class="form-control" id="inputNome" placeholder="Nome"
+                                                value={this.state.projectName}
                                                 onChange={(e) => this.setState({ projectName: e.target.value })} />
-                                            <label for="inputNome" className="form-label">Nome</label>
+                                            <label for="inputNome" class="form-label">Nome</label>
                                         </div>
 
-                                        <div className="mb-3 form-floating">
-                                            <select className="form-select" id="selectCategory"
+                                        <div class="mb-3 form-floating">
+                                            <select class="form-select" id="selectCategory"
                                                 aria-label="Default select example"
-                                                onChange={(e) => this.setState({ category: e.target.value })} >
+                                                value={this.state.category} disabled >
                                                 <option defaultValue>Selecione uma opção</option>
                                                 <option value="empoderamentoFeminino">empoderamentoFeminino</option>
                                                 <option value="doacoes">doacoes</option>
@@ -89,40 +125,43 @@ class NewProject extends Component {
                                                 <option value="saude">saude</option>
                                                 <option value="meioAmbiente">meioAmbiente</option>
                                             </select>
-                                            <label for="selectCategory" className="form-label">Categoria</label>
+                                            <label for="selectCategory" class="form-label">Categoria</label>
                                         </div>
 
-                                        <div className="mb-3 form-floating">
-                                            <input type="text" className="form-control" id="inputWhere" placeholder="Localização (bairro)"
+                                        <div class="mb-3 form-floating">
+                                            <input type="text" class="form-control" id="inputWhere" placeholder="Localização (bairro)"
+                                                value={this.state.where}
                                                 onChange={(e) => this.setState({ where: e.target.value })} />
-                                            <label for="inputWhere" className="form-label">Localização (bairro)</label>
+                                            <label for="inputWhere" class="form-label">Localização (bairro)</label>
                                         </div>
 
-                                        <div className="row form-data">
-                                            <div className="col-md mb-3 form-floating">
-                                                <input type="date" className="form-control" id="dateStart"
+                                        <div class="row form-data">
+                                            <div class="col-md mb-3 form-floating">
+                                                <input type="date" class="form-control" id="dateStart"
                                                     onChange={(e) => this.setState({ startDate: e.target.value })} />
-                                                <label for="dateStart" className="form-label">Data inicio</label>
+                                                <label for="dateStart" class="form-label">Data inicio</label>
                                             </div>
 
-                                            <div className="col-md mb-3 form-floating">
-                                                <input type="date" className="form-control" id="dateEnd"
+                                            <div class="col-md mb-3 form-floating">
+                                                <input type="date" class="form-control" id="dateEnd"
                                                     onChange={(e) => this.setState({ endDate: e.target.value })} />
-                                                <label for="dateEnd" className="form-label">Data fim</label>
+                                                <label for="dateEnd" class="form-label">Data fim</label>
                                             </div>
                                         </div>
 
                                         <div className="d-flex flex-column">
-                                            <div className="mb-3 form-floating order-md-0 order-1">
-                                                <textarea className="form-control" id="floatingTextarea2" placeholder="Descrição"
+                                            <div class="mb-3 form-floating order-md-0 order-1">
+                                                <textarea class="form-control" id="floatingTextarea2" placeholder="Descrição"
+                                                    value={this.state.description}
                                                     onChange={(e) => this.setState({ description: e.target.value })} />
                                                 <label for="floatingTextarea2">Descrição</label>
                                             </div>
 
-                                            <div className="row form-quantidades order-md-1 order-0">
-                                                <div className="col-md mb-3 form-floating">
-                                                    <select className="form-select" id="selectBenefited"
+                                            <div class="row form-quantidades order-md-1 order-0">
+                                                <div class="col-md mb-3 form-floating">
+                                                    <select class="form-select" id="selectBenefited"
                                                         aria-label="Default select example"
+                                                        value={this.state.quantityBenefited}
                                                         onChange={(e) => this.setState({ quantityBenefited: e.target.value })} >
                                                         <option defaultValue>Selecione uma opção</option>
                                                         <option value="0-10">0-10</option>
@@ -132,12 +171,13 @@ class NewProject extends Component {
                                                         <option value="101-150">101-150</option>
                                                         <option value="Outro">Outro</option>
                                                     </select>
-                                                    <label for="selectBenefited" className="form-label">Quantidade estimado beneficiados</label>
+                                                    <label for="selectBenefited" class="form-label">Quantidade estimado beneficiados</label>
                                                 </div>
 
-                                                <div className="col-md mb-3 form-floating">
-                                                    <select className="form-select" id="selectVolunteers"
+                                                <div class="col-md mb-3 form-floating">
+                                                    <select class="form-select" id="selectVolunteers"
                                                         aria-label="Default select example"
+                                                        value={this.state.quantityVolunteers}
                                                         onChange={(e) => this.setState({ quantityVolunteers: e.target.value })} >
                                                         <option defaultValue>Selecione uma opção</option>
                                                         <option value="0-10">0-10</option>
@@ -147,14 +187,14 @@ class NewProject extends Component {
                                                         <option value="101-150">101-150</option>
                                                         <option value="Outro">Outro</option>
                                                     </select>
-                                                    <label for="selectVolunteers" className="form-label">Quantidade de voluntários</label>
+                                                    <label for="selectVolunteers" class="form-label">Quantidade de voluntários</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="enviar mt-3">
-                                        <button type="submit" className="btn-1" onClick={this.createProject}>Enviar</button>
+                                        <button type="submit" class="btn-1" onClick={this.updateProject}>Enviar</button>
                                     </div>
                                 </div>
                             </div>
@@ -167,4 +207,5 @@ class NewProject extends Component {
         )
     }
 }
-export default NewProject
+export default EditProject
+
