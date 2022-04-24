@@ -41,7 +41,7 @@ class Login extends Component {
 
     render() {
         return (
-            <section className='login-page'>
+            <div className='login-page'>
 
                 <Helmet>
                     <meta charSet="utf-8" />
@@ -104,7 +104,7 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
         )
     }
