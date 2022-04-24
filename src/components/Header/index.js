@@ -1,20 +1,32 @@
 import React, { Component } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { decodeToken } from '../../config/auth';
 
 class Header_Login extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            user: decodeToken(),
             username: ''
         };
+
+        this.componentDidMount = () => {
+            console.log("user state - header", this.state.user)
+            this.checkUser();
+        }
     }
 
-    // async logout() {
-    //     alert("Você fez logout");
-    //     localStorage.removeItem('TOKEN_KEY');
-    //     window.location = '/login'
-    // }
+    async checkUser() {
+        if ((window.location.href !== 'http://localhost:3000/cadastro')) {
+            if (this.state.user === null) {
+                alert("Usuario não logado. Por favor, faça o login.");
+                window.location = '/login'
+            } else {
+                this.setState({ username: this.state.user.user.username });
+            }
+        }
+    }
 
     render() {
         return (
