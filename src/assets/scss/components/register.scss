@@ -208,6 +208,7 @@
                 margin-top: 20px;
                 margin-bottom: 10px;
             }
+
             .subtitle-login {
                 color: rgb(62, 62, 62);
                 text-align: center;
@@ -239,6 +240,119 @@
 
         }
 
-        .form-column {}
+        .form-column {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            text-align: center;
+            justify-content: center;
+            transition: 0.4s;
+
+            .register-form {
+                .switch-button {
+                    align-items: center;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    text-align: center;
+                    justify-content: center;
+
+                    .switch-input {
+                        height: 0;
+                        width: 0;
+                        visibility: hidden;
+
+                        &:checked+.switch-label {
+                            background-color: #0e5e56;
+
+                            &::after {
+                                margin-left: 46%;
+                                background-color: rgb(154, 201, 196);
+                                transition: 0.5s;
+                            }
+                        }
+                    }
+
+                    .switch-label {
+                        border: 1px solid #0e5e56;
+                        text-indent: -9999px;
+                        display: block;
+                        border-radius: 100px;
+                        width: 50px;
+                        height: 25px;
+                        position: relative;
+
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                        text-align: center;
+                        justify-content: center;
+                        padding-left: 3px;
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            width: 21px;
+                            height: 21px;
+                            background-color: #0e5e56;
+                            border-radius: 80%;
+                            transition: 0.5s;
+                        }
+                    }
+                }
+
+                .form-control,
+                .form-select {
+                    &:focus {
+                        border-color: #008b8b;
+                        box-shadow: inherit;
+                    }
+                }
+
+                .hr {
+                    height: 1.5px;
+                    width: 100%;
+                    background-color: #acacac;
+                }
+
+                .hr-text {
+                    background-color: rgb(248, 248, 248);
+                    padding: 0 10px;
+                    color: rgb(173, 173, 173);
+                    width: auto;
+                    margin: 0 auto;
+                    margin-top: -8px;
+                    font-size: 10px;
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                    font-weight: 700;
+                }
+
+                .gender-label {
+                    margin-left: 6px;
+                }
+
+                .register-button {
+                    padding: 7px 17px;
+                    border: 2px solid #107369;
+                    color: #107369;
+                    font-weight: 600;
+                    font-size: 14px;
+                    text-transform: uppercase;
+                    background-color: #ffffff00;
+                    border-radius: 50px;
+                    box-shadow: 2px 2px 2px #757575;
+                    letter-spacing: 1px;
+                    word-spacing: 3px;
+
+                    &:hover {
+                        background-color: #107369;
+                        transition: background-color 0.4s linear;
+                        color: #F2F2F2;
+                    }
+                }
+            }
+        }
     }
 }
