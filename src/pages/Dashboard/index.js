@@ -44,27 +44,26 @@ class Dashboard extends Component {
                     <div className="container-fluid">
                         <div className="row text-lg-start text-center">
                             <div className="col-12">
-                                <h1 class="titulo-1">Ver todos os projetos</h1>
+                                <h1 className="titulo-1">Ver todos os projetos</h1>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <section class="projetos">
-                    <div class="container-lg">
-                        <div class="row">
+                <section className="projetos">
+                    <div className="container-lg">
+                        <div className="row">
                             <div className="col-lg-10 col-12 mx-auto">
-                                <div class="row my-4 text-start">
+                                <div className="row my-4 text-start">
                                     {this.state.projects.map((child, id) => (
-                                        <div class="col-lg-4 col-12" key={id}>
-                                            {console.log(child)}
+                                        <div className="col-lg-4 col-12" key={id}>
                                             <div className="projeto my-4 mx-2">
-                                                <div class="fundo"></div>
-                                                <div class="projeto-interno">
-                                                    <h2 class="titulo-projeto mb-2">{child.projectName}</h2>
-                                                    <h3 class="categoria">{child.category}</h3>
-                                                    <h3 class="categoria">{child.creator.name}</h3>
-                                                    <p class="descricao mt-3">{child.description}</p>
+                                                <div className="fundo"></div>
+                                                <div className="projeto-interno">
+                                                    <h2 className="titulo-projeto mb-2">{child.projectName}</h2>
+                                                    <h3 className="categoria">{child.category}</h3>
+                                                    <h3 className="categoria">{child.creator.name}</h3>
+                                                    <p className="descricao mt-3">{child.description}</p>
                                                     <div className="text-center enviar mt-4">
                                                         <button className="btn-1" onClick={() => { window.location.href = `/editProject/${child._id}` }}>
                                                             Entrar no projeto

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import HeaderHome from '../../components/Home/Header';
 import api from '../../config/api'
 
 class Login extends Component {
@@ -48,57 +49,60 @@ class Login extends Component {
                     <title> Nome - Entrar </title>
                 </Helmet>
 
-                <div className='container-fluid register-cover'> </div>
+                <HeaderHome />
 
-                <div class="container register-content">
-                    <div class="row">
-                        <div class="col-5 title-column">
-                            <h2 className='title'> Bem-Vindo(a) de Volta! </h2>
+                <div className='container-fluid register-cover'></div>
 
-                            <p className='subtitle'> Digite seu e-mail e senha para entrar! </p>
+                <div class="container-lg d-flex justify-content-center">
+                    <div class="row register-content">
+                        <div class="col-lg-5 col-12 title-column d-flex">
+                            <h2 className="title mb-3"> Bem-Vindo(a) de Volta! </h2>
+                            <p className="subtitle py-2"> Digite seu e-mail e senha para entrar! </p>
 
-                            <span className='hr'> </span>
-                            <span className='hr-text'> ou </span>
+                            <div className="d-lg-block d-none">
+                                <div className="d-flex flex-column align-items-center">
+                                    <span className='hr'> </span>
+                                    <span className='hr-text'> ou </span>
+                                </div>
 
-                            <h2 className='title login'> Ainda não tem uma conta? </h2>
-                            <button className='login-button'> Quero me Cadastrar </button>
-
+                                <h2 className='title login'> Ainda não tem uma conta? </h2>
+                                <button className='login-button'> Quero me Cadastrar </button>
+                            </div>
                         </div>
 
-                        <div class="container-fluid col-7 form-column">
-                            <section className="form">
-                                <div className="projectForm">
-                                    <div className='row'>
-                                        <div className='col'>
-                                            <div class="mb-3 form-floating">
-                                                <input autoFocus type="email" class="form-control" id="email" placeholder="E-mail"
-                                                    onChange={(e) => this.setState({ email: e.target.value })} />
-                                                <label for="inputNome" class="form-label">E-mail</label>
-                                            </div>
-
-                                            <div class="mb-3 form-floating">
-                                                <input type="password" class="form-control" id="password" placeholder="Senha"
-                                                    onChange={(e) => this.setState({ password: e.target.value })} />
-                                                <label for="inputNome" class="form-label">Senha</label>
-                                            </div>
+                        <div class="col-lg-7 col-12 d-flex justify-content-center form-column">
+                            <section className="form mt-lg-0 my-5">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div class="form-floating mb-3">
+                                            <input autoFocus type="email" class="form-control" id="email" placeholder="E-mail"
+                                                onChange={(e) => this.setState({ email: e.target.value })} />
+                                            <label for="inputNome" class="form-label">E-mail</label>
                                         </div>
 
-                                        <div className='row'>
-                                            <div className='col'>
-                                                <a href="#"> Esqueci minha senha </a>
-                                            </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="password" class="form-control" id="password" placeholder="Senha"
+                                                onChange={(e) => this.setState({ password: e.target.value })} />
+                                            <label for="inputNome" class="form-label">Senha</label>
                                         </div>
+                                    </div>
 
-                                        <div className='row'>
-                                            <div className='col'>
-                                                <div className="enviar">
-                                                    <button type="submit" class="btn-1" onClick={this.logar}> Entrar </button>
-                                                </div>
-                                            </div>
+                                    <div className="col-12">
+                                        <a href="#"> Esqueci minha senha </a>
+                                    </div>
+
+                                    <div className="col-12">
+                                        <div className="enviar">
+                                            <button type="submit" class="btn-1" onClick={this.logar}> Entrar </button>
                                         </div>
                                     </div>
                                 </div>
                             </section>
+                        </div>
+
+                        <div className="col-12 d-lg-none special-1">
+                            <h2 className='title login'> Ainda não tem uma conta? </h2>
+                            <button className='login-button'> Quero me Cadastrar </button>
                         </div>
                     </div>
                 </div>
@@ -107,4 +111,5 @@ class Login extends Component {
         )
     }
 }
+
 export default Login
