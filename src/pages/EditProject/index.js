@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import HeaderLogin from '../../components/Header';
 import Helmet from 'react-helmet';
+import { currentUrl } from '../../Helpers'
 import api from '../../config/api';
-//import { formatDate } from '../../Helpers';
 
 class EditProject extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            //id: "",
-            id: "6264668c82a16ec8841d8f2b",
+            id: "",
             projectName: "",
             category: "",
             where: "",
@@ -24,15 +23,16 @@ class EditProject extends Component {
 
         this.componentDidMount = () => {
             this.getProject()
+            let variavel = currentUrl()
+            console.log(variavel)
         }
 
         this.updateProject = this.updateProject.bind(this);
-
+        this.deletePost = this.deletePost.bind(this);
     }
 
     async getProject() {
-        //await api.get(`/project/${this.props.match.params.id}`)
-        await api.get(`/project/${this.state.id}`)
+        await api.get(`/project/${currentUrl()}`)
             .then((response) => {
                 const data = response.data;
                 this.setState({
@@ -79,6 +79,18 @@ class EditProject extends Component {
         window.location = '/dashboard';
     }
 
+    async deletePost() {
+        await api.delete(`/project/${this.state.id}`)
+            .then(() => {
+                alert("Projeto apagado");
+                window.location = '/dashboard';
+            })
+            .catch((error) => {
+                console.log(error)
+                alert('Erro para deletar projeto');
+            })
+    }
+
     render() {
         return (
             <div className="newProject">
@@ -94,8 +106,9 @@ class EditProject extends Component {
                     <div className="container-fluid">
                         <div className="row text-lg-start text-center">
                             <div className="col-12">
-                                <h1 class="titulo-1">Editar projeto</h1>
-                                <p class="descricao">Colocar qualquer texto que não seja esse de criar novo projeto</p>
+                                <h1 className="titulo-1">Editar projeto</h1>
+                                <p className="descricao">Colocar qualquer texto que não seja esse de criar novo projeto</p>
+                                <button type="submit" onClick={this.deletePost}>apagar projeto</button>
                             </div>
                         </div>
                     </div>
@@ -107,15 +120,15 @@ class EditProject extends Component {
                             <div className="col-lg-8 col-12 mx-auto">
                                 <div className="projectForm">
                                     <div className="text-start">
-                                        <div class="mb-3 form-floating">
-                                            <input type="text" class="form-control" id="inputNome" placeholder="Nome"
+                                        <div className="mb-3 form-floating">
+                                            <input type="text" className="form-control" id="inputNome" placeholder="Nome"
                                                 value={this.state.projectName}
                                                 onChange={(e) => this.setState({ projectName: e.target.value })} />
-                                            <label for="inputNome" class="form-label">Nome</label>
+                                            <label for="inputNome" className="form-label">Nome</label>
                                         </div>
 
-                                        <div class="mb-3 form-floating">
-                                            <select class="form-select" id="selectCategory"
+                                        <div className="mb-3 form-floating">
+                                            <select className="form-select" id="selectCategory"
                                                 aria-label="Default select example"
                                                 value={this.state.category} disabled >
                                                 <option defaultValue>Selecione uma opção</option>
@@ -125,41 +138,41 @@ class EditProject extends Component {
                                                 <option value="saude">saude</option>
                                                 <option value="meioAmbiente">meioAmbiente</option>
                                             </select>
-                                            <label for="selectCategory" class="form-label">Categoria</label>
+                                            <label for="selectCategory" className="form-label">Categoria</label>
                                         </div>
 
-                                        <div class="mb-3 form-floating">
-                                            <input type="text" class="form-control" id="inputWhere" placeholder="Localização (bairro)"
+                                        <div className="mb-3 form-floating">
+                                            <input type="text" className="form-control" id="inputWhere" placeholder="Localização (bairro)"
                                                 value={this.state.where}
                                                 onChange={(e) => this.setState({ where: e.target.value })} />
-                                            <label for="inputWhere" class="form-label">Localização (bairro)</label>
+                                            <label for="inputWhere" className="form-label">Localização (bairro)</label>
                                         </div>
 
-                                        <div class="row form-data">
-                                            <div class="col-md mb-3 form-floating">
-                                                <input type="date" class="form-control" id="dateStart"
+                                        <div className="row form-data">
+                                            <div className="col-md mb-3 form-floating">
+                                                <input type="date" className="form-control" id="dateStart"
                                                     onChange={(e) => this.setState({ startDate: e.target.value })} />
-                                                <label for="dateStart" class="form-label">Data inicio</label>
+                                                <label for="dateStart" className="form-label">Data inicio</label>
                                             </div>
 
-                                            <div class="col-md mb-3 form-floating">
-                                                <input type="date" class="form-control" id="dateEnd"
+                                            <div className="col-md mb-3 form-floating">
+                                                <input type="date" className="form-control" id="dateEnd"
                                                     onChange={(e) => this.setState({ endDate: e.target.value })} />
-                                                <label for="dateEnd" class="form-label">Data fim</label>
+                                                <label for="dateEnd" className="form-label">Data fim</label>
                                             </div>
                                         </div>
 
                                         <div className="d-flex flex-column">
-                                            <div class="mb-3 form-floating order-md-0 order-1">
-                                                <textarea class="form-control" id="floatingTextarea2" placeholder="Descrição"
+                                            <div className="mb-3 form-floating order-md-0 order-1">
+                                                <textarea className="form-control" id="floatingTextarea2" placeholder="Descrição"
                                                     value={this.state.description}
                                                     onChange={(e) => this.setState({ description: e.target.value })} />
                                                 <label for="floatingTextarea2">Descrição</label>
                                             </div>
 
-                                            <div class="row form-quantidades order-md-1 order-0">
-                                                <div class="col-md mb-3 form-floating">
-                                                    <select class="form-select" id="selectBenefited"
+                                            <div className="row form-quantidades order-md-1 order-0">
+                                                <div className="col-md mb-3 form-floating">
+                                                    <select className="form-select" id="selectBenefited"
                                                         aria-label="Default select example"
                                                         value={this.state.quantityBenefited}
                                                         onChange={(e) => this.setState({ quantityBenefited: e.target.value })} >
@@ -171,11 +184,11 @@ class EditProject extends Component {
                                                         <option value="101-150">101-150</option>
                                                         <option value="Outro">Outro</option>
                                                     </select>
-                                                    <label for="selectBenefited" class="form-label">Quantidade estimado beneficiados</label>
+                                                    <label for="selectBenefited" className="form-label">Quantidade estimado beneficiados</label>
                                                 </div>
 
-                                                <div class="col-md mb-3 form-floating">
-                                                    <select class="form-select" id="selectVolunteers"
+                                                <div className="col-md mb-3 form-floating">
+                                                    <select className="form-select" id="selectVolunteers"
                                                         aria-label="Default select example"
                                                         value={this.state.quantityVolunteers}
                                                         onChange={(e) => this.setState({ quantityVolunteers: e.target.value })} >
@@ -187,14 +200,14 @@ class EditProject extends Component {
                                                         <option value="101-150">101-150</option>
                                                         <option value="Outro">Outro</option>
                                                     </select>
-                                                    <label for="selectVolunteers" class="form-label">Quantidade de voluntários</label>
+                                                    <label for="selectVolunteers" className="form-label">Quantidade de voluntários</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="enviar mt-3">
-                                        <button type="submit" class="btn-1" onClick={this.updateProject}>Enviar</button>
+                                        <button type="submit" className="btn-1" onClick={this.updateProject}>Enviar</button>
                                     </div>
                                 </div>
                             </div>

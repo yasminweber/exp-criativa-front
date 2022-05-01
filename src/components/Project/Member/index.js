@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Member_Card from '../../../components/Project/Member/Card';
+import MemberCard from '../../../components/Project/Member/Card';
 
 class Member extends Component {
 
@@ -7,61 +7,63 @@ class Member extends Component {
         return (
             <section className='project-members' id="members">
 
-                <h3 className='page-title'> Conheça quem faz o projeto acontecer! </h3>
+                <h3 className='page-title mt-5'> Conheça quem faz o projeto acontecer! </h3>
                 <p> Conheça os rostos por trás de todas as ações do projeto Corrente do Bem! </p>
 
-                <div className='container-fluid members-section'>
-                    <h4 className='members-section-title'> Moderadores </h4>
-                    <span className='hr-title'> </span>
-                </div>
-
-                <div class="container">
-                    <div class="row equal">
-
-                        <Member_Card name="Guilherme Weber" userType="moderador" />
-
-                        <Member_Card name="Guilherme Bernardes Weber" userType="moderador" />
-
+                <div className='container-lg'>
+                    <div class="members-section">
+                        <div class="row w-100">
+                            <div class="col-12 d-flex members-section-col">
+                                <h4 className='members-section-title'> Moderadores </h4>
+                                <span className='hr-title'> </span>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div className='container-fluid members-section'>
-                    <h4 className='members-section-title'> Organizadores </h4>
-                    <span className='hr-title'> </span>
-                </div>
-
-                <div class="container">
                     <div class="row equal">
+                        <MemberCard name="Guilherme Weber" userType="moderador" />
 
-                        <Member_Card name="Guilherme Weber" userType="organizador" />
-
-                        <Member_Card name="Guilherme Bernardes Weber" userType="organizador" />
-
-                        <Member_Card name="Guilherme Bernardes Weber" userType="organizador" />
-
-                        <Member_Card name="Guilherme Weber" userType="organizador" />
-
-                        <Member_Card name="Guilherme Weber" userType="organizador" />
+                        <MemberCard name="Guilherme Bernardes Weber" userType="moderador" />
                     </div>
-                </div>
 
-                <div className='container-fluid members-section'>
-                    <h4 className='members-section-title'> Voluntários </h4>
-                    <span className='hr-title'> </span>
-                </div>
+                    <div class="members-section">
+                        <div class="row w-100">
+                            <div class="col-12 d-flex members-section-col">
+                                <h4 className='members-section-title'> Organizadores </h4>
+                                <span className='hr-title'> </span>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="container">
                     <div class="row equal">
+                        <MemberCard name="Guilherme Weber" userType="organizador" />
 
-                        <Member_Card name="Guilherme Weber" userType="voluntario" />
+                        <MemberCard name="Guilherme Bernardes Weber" userType="organizador" />
 
-                        <Member_Card name="Guilherme Bernardes Weber" userType="voluntario" />
+                        <MemberCard name="Guilherme Bernardes Weber" userType="organizador" />
 
+                        <MemberCard name="Guilherme Weber" userType="organizador" />
+
+                        <MemberCard name="Guilherme Weber" userType="organizador" />
+                    </div>
+
+                    <div class="members-section">
+                        <div class="row w-100">
+                            <div class="col-12 d-flex members-section-col">
+                                <h4 className='members-section-title'> Voluntários </h4>
+                                <span className='hr-title'> </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row equal">
+                        <MemberCard name="Guilherme Weber" userType="voluntario" />
+
+                        <MemberCard name="Guilherme Bernardes Weber" userType="voluntario" />
                     </div>
                 </div>
 
             </section>
-
         )
     }
 }

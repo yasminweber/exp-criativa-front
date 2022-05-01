@@ -23,12 +23,12 @@ class Login extends Component {
             email: this.state.email
         }
 
-        console.log(user)
+        //console.log(user)
 
         await api.post('/login', user)
             .then(res => {
                 localStorage.setItem("TOKEN_KEY", res.data.token);
-                window.location = '/project';
+                window.location = '/dashboard';
             })
             .catch(err => {
                 console.log(err);
@@ -71,7 +71,7 @@ class Login extends Component {
                         </div>
 
                         <div class="col-lg-7 col-12 d-flex justify-content-center form-column">
-                            <section className="form mt-lg-0 my-5">
+                            <form onSubmit={this.logar} className="form my-lg-0 my-5">
                                 <div className="row">
                                     <div className="col-12">
                                         <div class="form-floating mb-3">
@@ -93,11 +93,11 @@ class Login extends Component {
 
                                     <div className="col-12">
                                         <div className="enviar">
-                                            <button type="submit" class="btn-1" onClick={this.logar}> Entrar </button>
+                                            <button type="submit" class="btn-1"> Entrar </button>
                                         </div>
                                     </div>
                                 </div>
-                            </section>
+                            </form>
                         </div>
 
                         <div className="col-12 d-lg-none special-1">

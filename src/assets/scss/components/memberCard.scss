@@ -90,7 +90,7 @@
     border-radius: 20px;
     width: 220px;
     height: 80%;
-    margin: 50px;
+    margin: 50px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -100,6 +100,10 @@
     font-family: 'Sarabun', sans-serif;
     box-shadow: 2px 2px 2px #868686;
     padding: 10px;
+
+    @include res-min-1366 {
+        margin: 50px;
+    }
 
     .profile-user {
         width: 100px;

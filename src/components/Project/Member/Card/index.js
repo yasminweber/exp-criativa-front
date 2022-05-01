@@ -5,10 +5,10 @@ class Member_Card extends Component {
 
     render() {
         return (
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class={"member-card " + this.props.userType}>
                     <div className='profile-user'>
-                        <img src={profilePhoto} className="photo" />
+                        <img src={profilePhoto} className="photo" alt="Foto Perfil" />
                     </div>
 
                     <h2 className='user-name'> {this.props.name} </h2>

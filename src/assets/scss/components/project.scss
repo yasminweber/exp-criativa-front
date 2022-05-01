@@ -1,6 +1,6 @@
 .project {
-    width: 100%;
-    height: 100vh;
+    // width: 100%;
+    // height: 100vh;
 
     // Page Header
     .project-info {
@@ -14,18 +14,29 @@
         border-bottom: #666666ac 2px solid;
         z-index: 2;
 
+        @include res-lg {
+            height: 240px;
+        }
+
         .project-image {
             background-color: rgb(206, 206, 206);
             height: 150px;
             width: 150px;
             align-items: center;
-            flex-direction: column;
-            flex-wrap: wrap;
             justify-content: center;
-            text-align: center;
             border-radius: 100%;
-            float: right;
             box-shadow: 2px 2px 2px #666666;
+            margin: 0 auto;
+
+            @include res-md {
+                width: 100px;
+                height: 100px;
+                margin: 0 auto;
+            }
+
+            @include res-sm {
+                margin-top: 20px;
+            }
         }
 
         .name-causes {
@@ -35,12 +46,21 @@
             flex-wrap: wrap;
             justify-content: end;
             text-align: start;
+
+            @include res-md {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
         }
 
         .project-name {
             text-transform: capitalize;
             font-size: 35px;
             color: white;
+
+            @include res-md {
+                font-size: 24px;
+            }
         }
 
         .project-cause {
@@ -56,6 +76,15 @@
             text-align: start;
             padding-bottom: 10px;
 
+            @include res-lg {
+                align-items: end;
+                margin-top: 16px;
+            }
+
+            @include res-sm {
+                align-items: start;
+            }
+
             .subscription-button {
                 padding: 7px 17px;
                 border: 2px solid #F29F05;
@@ -68,6 +97,7 @@
                 box-shadow: 2px 2px 2px #757575;
                 letter-spacing: 1px;
                 word-spacing: 3px;
+                transition: background-color 0.3s linear;
                 float: left;
 
                 &:hover {
@@ -103,7 +133,7 @@
             .item {
                 margin: 10px 20px;
                 padding: 0 6px;
-                
+
                 @include res-md {
                     margin: 10px 15px 15px;
                 }
@@ -123,6 +153,11 @@
                     &:hover {
                         border-bottom: 2px solid #137c72;
                     }
+
+                    &.disabled {
+                        color: #666666;
+                        border: none;
+                    }
                 }
             }
         }
@@ -137,7 +172,6 @@
             text-transform: uppercase;
             letter-spacing: 5px;
             font-weight: 800;
-            margin-top: 30px;
             margin-bottom: 10px;
             color: #137c72;
         }
@@ -205,6 +239,15 @@
             text-align: center;
             margin-top: 30px;
 
+            .members-section-col {
+                justify-content: center;
+                align-items: center;
+
+                @include res-md {
+                    flex-direction: column;
+                }
+            }
+
             .members-section-title {
                 font-size: 22px;
                 font-weight: 700;
@@ -218,6 +261,10 @@
                 width: 70%;
                 height: 3px;
                 margin-left: 50px;
+
+                @include res-md {
+                    margin: 5px 0 0;
+                }
             }
         }
 
@@ -228,6 +275,40 @@
             flex-wrap: wrap;
             justify-content: center;
             text-align: center;
+        }
+    }
+
+    .project-content {
+        .project-infos {
+            .left-down {
+                padding-right: 30px;
+
+                @include res-md {
+                    padding-left: 0;
+                }
+
+                .titulo-1 {
+                    font-size: 21px;
+                }
+
+                .descricao {
+                    font-size: 18px;
+                    letter-spacing: .5px;
+                }
+            }
+
+            .right-up {
+                padding: 20px 16px;
+                border: 2px solid #b8d7da;
+
+                .titulo-1 {
+                    font-size: 18px;
+                }
+
+                .descricao {
+                    font-size: 17px;
+                }
+            }
         }
     }
 
