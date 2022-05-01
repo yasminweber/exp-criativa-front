@@ -32,7 +32,7 @@ class Header_Login extends Component {
         return (
             <Navbar expand="lg" className="header">
                 <Container>
-                    <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+                    <Navbar.Brand href="/dashboard">Navbar scroll</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav

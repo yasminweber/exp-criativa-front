@@ -27,11 +27,14 @@
             border-radius: 10px;
 
             .fundo {
-                background-color: #008b8b;
                 border-top-left-radius: 10px;
                 border-top-right-radius: 10px;
                 width: 100%;
-                height: 100px;
+                height: 12px;
+            }
+
+            .bg-dog {
+                background-color: #008b8b;
             }
 
             .projeto-interno {
@@ -39,6 +42,7 @@
 
                 .titulo-projeto {
                     font-size: 20px;
+                    height: 46px;
                 }
 
                 .categoria {
@@ -46,8 +50,30 @@
                     color: #808080;
                 }
 
+                .criador {
+                    font-weight: 400;
+                    text-decoration: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+
                 .descricao {
                     font-size: 16px;
+                    height: 122px;
+
+                    @include res-mac {
+                        height: 146px;
+                    }
+
+                    @include res-lg {
+                        height: 122px;
+                    }
+
+                    @include res-sm {
+                        height: 146px;
+                    }
                 }
 
                 .enviar {

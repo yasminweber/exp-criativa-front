@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import HeaderLogin from '../../components/Header';
 import Helmet from 'react-helmet';
-import { currentUrl } from '../../Helpers'
+import { currentUrl, dateInput } from '../../Helpers'
 import api from '../../config/api';
 
 class EditProject extends Component {
@@ -23,8 +23,6 @@ class EditProject extends Component {
 
         this.componentDidMount = () => {
             this.getProject()
-            let variavel = currentUrl()
-            console.log(variavel)
         }
 
         this.updateProject = this.updateProject.bind(this);
@@ -47,8 +45,7 @@ class EditProject extends Component {
                     quantityVolunteers: data.quantityVolunteers,
                     status: data.status
                 });
-
-                console.log("Pedidos carregadas");
+                console.log("Projeto carregado");
             })
             .catch((error) => {
                 console.log("erro carregar projeto ", error)
@@ -151,12 +148,14 @@ class EditProject extends Component {
                                         <div className="row form-data">
                                             <div className="col-md mb-3 form-floating">
                                                 <input type="date" className="form-control" id="dateStart"
+                                                    value={dateInput(this.state.startDate)}
                                                     onChange={(e) => this.setState({ startDate: e.target.value })} />
                                                 <label for="dateStart" className="form-label">Data inicio</label>
                                             </div>
 
                                             <div className="col-md mb-3 form-floating">
                                                 <input type="date" className="form-control" id="dateEnd"
+                                                    value={dateInput(this.state.endDate)}
                                                     onChange={(e) => this.setState({ endDate: e.target.value })} />
                                                 <label for="dateEnd" className="form-label">Data fim</label>
                                             </div>

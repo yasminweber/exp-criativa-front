@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet'
-import { currentUrl } from '../../Helpers'
+import { currentUrl, formatDate, checkMonthYear } from '../../Helpers'
 import HeaderLogin from '../../components/Header';
 import Member from '../../components/Project/Member';
 import api from '../../config/api';
+import { decodeToken } from '../../config/auth';
 
 class ProjectPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            user: decodeToken(),
+            projectCreator: "",
             id: "",
             projectName: "",
             category: "",
             where: "",
-            startDate: new Date(),
-            endDate: new Date(),
+            startDate: "",
+            endDate: "",
             description: "",
             quantityBenefited: "",
             quantityVolunteers: "",
+            volunteers: [],
+            //projectColor: "",
             status: ""
         }
 
         this.componentDidMount = () => {
             this.getProject()
-            let variavel = currentUrl()
-            console.log(variavel)
         }
     }
 
@@ -34,6 +37,7 @@ class ProjectPage extends Component {
             .then((response) => {
                 const data = response.data;
                 this.setState({
+                    projectCreator: data.creator.username,
                     id: data._id,
                     projectName: data.projectName,
                     category: data.category,
@@ -43,14 +47,28 @@ class ProjectPage extends Component {
                     description: data.description,
                     quantityBenefited: data.quantityBenefited,
                     quantityVolunteers: data.quantityVolunteers,
+                    volunteers: data.volunteers,
+                    //projectColor: data.projectColor,
                     status: data.status
                 });
-                console.log("data", data)
-                console.log("Pedidos carregadas");
+                console.log("Projeto carregado");
             })
             .catch((error) => {
                 console.log("erro carregar projeto ", error)
                 alert('Erro para carregar o projeto');
+            })
+    }
+
+    async inscrever(id) {
+        await api.put(`/project/signup/${id}`)
+            .then((response) => {
+                console.log("Deu certo");
+                alert("Inscrição feita");
+                this.getProject();
+            })
+            .catch((error) => {
+                console.log("error inscrever no projeto: ", error)
+                alert('Erro para inscrver no');
             })
     }
 
@@ -60,7 +78,7 @@ class ProjectPage extends Component {
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title>Nome do projeto</title>
+                    <title>{this.state.projectName}</title>
                 </Helmet>
 
                 <HeaderLogin />
@@ -79,9 +97,19 @@ class ProjectPage extends Component {
                             <h3 className='project-cause'> {this.state.category} </h3>
                         </div>
 
+                        {/* check if user is the one watching -- username unique */}
+                        {(this.state.user.user.username !== this.state.projectCreator) ?
                         <div className="col-lg-4 col-12 subscription-column d-flex">
-                            <button className='subscription-button'> Quero Participar </button>
-                        </div>
+                            {(this.state.volunteers.indexOf(this.state.user.user._id) === -1) ?
+                                <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Quero Participar </button>
+                                : <></>
+                            }
+                            {(this.state.volunteers.indexOf(this.state.user.user._id) !== -1) ?
+                                <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Deixar de Participar </button>
+                                : <></>
+                            }
+                        </div> : <></>
+                        }
                     </div>
                 </header>
 
@@ -107,10 +135,12 @@ class ProjectPage extends Component {
 
                 <section className="project-content">
                     <div className="tab-content" id="myTabContent">
+
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <section className="project-infos text-start my-5" id="project-infos">
                                 <div className="container-lg">
                                     <div className="row">
+
                                         <div className="col-md-8 col-12 order-md-0 order-1">
                                             <div className="left-down mt-4">
                                                 <div className="row">
@@ -122,7 +152,6 @@ class ProjectPage extends Component {
                                                 </div>
                                                 <section className="creator-projects text-start mt-5">
                                                     <h1>teste</h1>
-
                                                 </section>
                                             </div>
                                         </div>
@@ -132,22 +161,25 @@ class ProjectPage extends Component {
                                                 <div className="row">
                                                     <div className="col-12">
                                                         <h2 className="titulo-1 mb-1">Quando?</h2>
-                                                        <p className="descricao mb-4">start-end - back</p>
+                                                        <p className="descricao mb-4">{formatDate(this.state.startDate)} - {formatDate(this.state.endDate)}</p>
                                                         <h2 className="titulo-1 mb-1">Onde?</h2>
                                                         <p className="descricao mb-4">{this.state.where}</p>
                                                         <h2 className="titulo-1 mb-1">Quantidade estimada de pessoas que serão ajudadas?</h2>
                                                         <p className="descricao mb-4">{this.state.quantityBenefited}</p>
                                                         <h2 className="titulo-1 mb-1">Quantidade de voluntários necessários?</h2>
                                                         <p className="descricao mb-4">{this.state.quantityVolunteers}</p>
+                                                        <h2 className="titulo-1 mb-1">Quantidade de voluntários inscritos?</h2>
+                                                        <p className="descricao mb-4">{this.state.volunteers.length}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </section>
-
                         </div>
+
                         <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
                             <h1 className="mt-3"> conteudo de fotos </h1>
                         </div>
@@ -161,7 +193,7 @@ class ProjectPage extends Component {
                             <h1 className="mt-3"> conteúdo de doações </h1>
                         </div>
                     </div>
-                    
+
                 </section>
 
             </div>
