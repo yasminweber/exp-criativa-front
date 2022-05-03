@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import CategoryCard from '../../components/Register/CategoryCard';
 
 class Register extends Component {
 
@@ -17,6 +18,48 @@ class Register extends Component {
             password: "",
             cnpj: "",
             razaoSocial: "",
+            selectedCauses: [],
+        }
+
+        this.categoryClick = this.categoryClick.bind(this);
+        this.nextClick = this.nextClick.bind(this)
+    }
+
+    nextClick() {
+        if (!this.state.companyAccount) {
+            if (this.state.name === "" || this.state.lastName === "" || this.state.cpf === "" || this.state.birth === ""
+            || this.state.email === "" || this.state.gender === "" || this.state.password === "" || 
+            document.getElementById('passwordConfirmation').value === "") {
+                alert("Você deve preencher todos os campos!")
+                return
+            } else {
+                if (this.state.password === document.getElementById('passwordConfirmation').value) {
+                    document.getElementById("register-form").classList.add("d-none")
+                    document.getElementById("category-column").classList.remove("d-none");
+                } else {
+                    alert("As senhas não correspondem!")
+                }
+            }
+        } else {
+            alert("empresa")
+        }
+    }
+
+    categoryClick(category) {
+        let selectedList = this.state.selectedCauses
+
+        if (selectedList.indexOf(category) != -1) {
+            selectedList.splice(selectedList.indexOf(category), 1)
+            return true
+        } else {
+            if (selectedList.length >= 5) {
+                alert("Você já selecionou 5 categorias!")
+                return false
+            } else {
+                selectedList.push(category)
+            }
+            this.setState({ selectedCauses: selectedList }, () => { console.log(this.state.selectedCauses) })
+            return true
         }
     }
 
@@ -48,7 +91,7 @@ class Register extends Component {
                         </div>
 
                         <div class="container-fluid col-7 form-column">
-                            <div className='register-form'>
+                            <div className='register-form' id="register-form">
                                 <div class="row mt-3">
                                     <div class="col-5">
                                         Conta Pessoal
@@ -110,7 +153,7 @@ class Register extends Component {
 
                                                 <div class="col mx-auto mt-3">
                                                     <div class="col form-floating">
-                                                        <input type="text" class="form-control" id="lastName" placeholder="Sobrenome"/>
+                                                        <input type="text" class="form-control" id="lastName" placeholder="Sobrenome" />
                                                         <label for="inputNome" class="form-label"> Confirme a Senha </label>
                                                     </div>
                                                 </div>
@@ -195,15 +238,15 @@ class Register extends Component {
 
                                             <div className='row mt-3'>
                                                 <div className='col'>
-                                                    <input type='radio' id="gender1" name="gender" />
+                                                    <input type='radio' id="gender1" name="gender" onChange={(e) => { this.setState({ gender: 0 }) }} />
                                                     <label className='gender-label' for="gender1"> Feminino </label>
                                                 </div>
                                                 <div className='col'>
-                                                    <input type='radio' id="gender2" name="gender" />
+                                                    <input type='radio' id="gender2" name="gender" onChange={(e) => { this.setState({ gender: 1 }) }} />
                                                     <label className='gender-label' for="gender2"> Masculino </label>
                                                 </div>
                                                 <div className='col'>
-                                                    <input type='radio' id="gender3" name="gender" />
+                                                    <input type='radio' id="gender3" name="gender" onChange={(e) => { this.setState({ gender: 2 }) }} />
                                                     <label className='gender-label' for="gender3"> Não binário </label>
                                                 </div>
                                             </div>
@@ -219,8 +262,7 @@ class Register extends Component {
 
                                                 <div class="col mx-auto mt-3">
                                                     <div class="col form-floating">
-                                                        <input type="password" class="form-control" id="lastName" placeholder="Confirme a Senha"
-                                                            onChange={(e) => this.setState({ password: e.target.value })} />
+                                                        <input type="password" class="form-control" id="passwordConfirmation" placeholder="Confirme a Senha"/>
                                                         <label for="inputNome" class="form-label"> Confirme a Senha </label>
                                                     </div>
                                                 </div>
@@ -231,10 +273,50 @@ class Register extends Component {
 
                                 <div className='row mt-4'>
                                     <div className='col'>
-                                        <button className='register-button' onClick={() => {console.log(this.state)}}> Finalizar cadastro </button>
+                                        <button className='register-button' onClick={this.nextClick}> Continuar </button>
                                     </div>
                                 </div>
                             </div>
+
+                            <section id="category-column" className='category-column d-none'>
+                                <div className='row'>
+                                    <h2 className='category-title'> Seus interesses </h2>
+                                    {this.state.companyAccount ?
+                                        <p className='mt-3'> Selecione as 5 categorias de projetos que mais se encaixam com sua empresa. </p>
+                                        :
+                                        <p className='mt-3'> Selecione as 5 categorias de projetos que você mais se identifica. <br /> Usaremos isso para mostrar projetos que mais combinam com você! </p>
+                                    }
+                                </div>
+
+                                <div class="container category-buttons">
+                                    <div class="row">
+                                        <CategoryCard clickFunction={this.categoryClick} category="Empoderamento Feminino" />
+                                        <CategoryCard clickFunction={this.categoryClick} category="Doações" />
+                                        <CategoryCard clickFunction={this.categoryClick} category="Fome" />
+                                        <CategoryCard clickFunction={this.categoryClick} category="Saúde" />
+
+                                        <CategoryCard clickFunction={this.categoryClick} category="Maus Tratos aos Animais" />
+                                        <CategoryCard clickFunction={this.categoryClick} category="Meio Ambiente" />
+                                        <CategoryCard clickFunction={this.categoryClick} category="Inclusão Social" />
+                                        <CategoryCard clickFunction={this.categoryClick} category="Educação" />
+
+                                        <CategoryCard clickFunction={this.categoryClick} category="Um Teste" />
+                                        <CategoryCard clickFunction={this.categoryClick} category="Um Teste Maior" />
+                                        <CategoryCard clickFunction={this.categoryClick} category="Testando tamanho de texto" />
+                                        <CategoryCard clickFunction={this.categoryClick} category="Aqui é o último teste" />
+
+                                    </div>
+                                </div>
+
+                                <div className='row mt-3'>
+                                    <div className='col'>
+                                        <button className='register-button' onClick={() => { console.log(this.state) }}> Finalizar cadastro </button>
+                                    </div>
+                                </div>
+                            </section>
+
+
+
                         </div>
                     </div>
                 </div>
