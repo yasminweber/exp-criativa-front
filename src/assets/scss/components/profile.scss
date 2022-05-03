@@ -1,0 +1,273 @@
+.profile-page {
+    height: 100vh;
+    width: 100%;
+    font-family: 'Sarabun', sans-serif;
+
+    .user-menu {
+        height: 470px;
+        padding: 0;
+        border-radius: 15px;
+        font-family: 'Sarabun', sans-serif;
+        overflow: hidden;
+        border: #008b8b 3px solid;
+
+        @include res-md {
+            height: 260px;
+        }
+
+        .user-header {
+            height: 50%;
+
+            .cover {
+                background-color: #008b8b;
+                height: 50%;
+                margin-top: -1px;
+            }
+
+            .user-photo-section {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+                height: 110px;
+                margin-top: -55px;
+
+                .user-photo {
+                    background-color: rgb(202, 0, 0);
+                    border: 4px solid #dadada;
+                    height: 110px;
+                    width: 110px;
+                    border-radius: 100%;
+                    position: absolute;
+                }
+
+                .photo-input {
+                    z-index: 2;
+                    position: relative;
+                    left: 40px;
+                    bottom: 35px;
+
+                    .user-photo-icon {
+                        background-color: #0e5e56;
+                        padding: 10px;
+                        color: #e4e4e4;
+                        align-items: center;
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        text-align: center;
+                        border-radius: 100px;
+                        cursor: pointer;
+                        transition: all 0.2s linear;
+
+                        &:hover {
+                            border: 3px solid #e4e4e4;
+                            color: #e4e4e4;
+                            font-size: 18px;
+                            transition: all 0.2s linear;
+                        }
+                    }
+
+                }
+            }
+
+            .user-info {
+                margin-top: 15px;
+
+                .user-name {
+                    font-size: 25px;
+                }
+            }
+
+            // Navbar Project
+            .project-header {
+                padding: 0;
+                font-family: 'Sarabun', sans-serif;
+
+                .project-navbar {
+                    margin-top: 20px;
+                    background-color: #ddebec;
+                    align-items: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    text-align: center;
+
+                    // md pela quantidade de informações no menu - se aumentar, mudar
+                    @include res-md {
+                        width: 100%;
+                        overflow-x: scroll;
+                        justify-content: start;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        white-space: nowrap;
+                        box-shadow: inset -5px 0 5px -5px #333;
+                    }
+
+                    .item {
+                        margin: 10px 20px;
+                        padding: 0 6px;
+
+                        @include res-md {
+                            margin: 10px 15px 15px;
+                        }
+
+                        .link {
+                            text-transform: uppercase;
+                            font-size: 12px;
+                            font-weight: 800;
+                            letter-spacing: 2px;
+                            color: #137c72;
+                            padding-bottom: 2px;
+
+                            &.active {
+                                border-bottom: 2px solid #137c72;
+                            }
+
+                            &:hover {
+                                border-bottom: 2px solid #137c72;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .section-title {
+        color: #008b8b;
+        text-transform: uppercase;
+        font-size: 27px;
+        font-weight: 700;
+        letter-spacing: 5px;
+        word-spacing: 4px;
+    }
+
+    .section-subtitle {
+        color: rgb(139, 139, 139);
+    }
+
+
+    // Achievements Section
+    .achievements-section {
+        margin-bottom: 40px;
+    }
+
+    .card-content {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+
+        .card-img-top {
+            width: 140px;
+            height: 140px;
+            background-color: #008b8b;
+        }
+    }
+
+    .card-footer {
+        height: 100%;
+        align-items: center;
+        display: block;
+        flex-direction: row;
+        justify-content: center;
+
+        .progress-bar {
+            background-color: #008b8b;
+        }
+
+        .reward-button {
+            background-color: #ffffff00;
+            border-radius: 50px;
+            border: 2px solid #008b8b;
+            color: #008b8b;
+            text-transform: uppercase;
+            font-size: 13px;
+            padding: 5px 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            // letter-spacing: 3px;
+
+            &:hover {
+                background-color: #008b8b;
+                color: white;
+            }
+        }
+    }
+
+    // My Account Section
+    .account-type {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+
+        .type-title {
+            color: #0e5e56;
+            font-size: 17px;
+            word-spacing: 4px;
+        }
+
+        .popover-icon {
+            color: rgb(139, 139, 139);
+            margin-left: 10px;
+        }
+
+        .popover {
+            background-color: #008b8b;
+        }
+    }
+
+    .category-buttons {
+        width: 100%;
+        height: 44%;
+        overflow: auto;
+        margin-top: 15px;
+
+        .category-card {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            text-align: center;
+            justify-content: center;
+
+            .category-option {
+                width: 100px;
+                height: 100px;
+                border: 3px solid #008b8b;
+                border-radius: 20px;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                text-align: center;
+                justify-content: center;
+                cursor: pointer;
+                z-index: 2;
+
+                .category-icon {
+                    width: 60%;
+                    z-index: 0;
+                }
+            }
+
+            .selected {
+                background-color: #008b8b;
+            }
+
+        }
+
+    }
+
+
+
+
+
+}
