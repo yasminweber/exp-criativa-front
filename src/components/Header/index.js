@@ -15,6 +15,8 @@ class Header_Login extends Component {
             console.log("user state - header", this.state.user)
             this.checkUser();
         }
+
+        this.logout = this.logout.bind(this)
     }
 
     async checkUser() {
@@ -28,11 +30,17 @@ class Header_Login extends Component {
         }
     }
 
+    async logout() {
+        alert("Você fez logout");
+        localStorage.removeItem('TOKEN_KEY');
+        window.location = '/login'
+    }
+
     render() {
         return (
             <Navbar expand="lg" className="header">
                 <Container>
-                    <Navbar.Brand href="/dashboard">Navbar scroll</Navbar.Brand>
+                    <Navbar.Brand href="/dashboard">Nome Projeto</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -40,15 +48,12 @@ class Header_Login extends Component {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="#action1">Home</Nav.Link>
-                            <Nav.Link href="#action2">Link</Nav.Link>
-                            <NavDropdown title="Dropdown" id="navbarScrollingDropdown">
-                                <NavDropdown.Item href="#action3">Dropdown 1</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">Dropdown 2</NavDropdown.Item>
+                            <Nav.Link href="/dashboard">Meus interesses</Nav.Link>
+                            <Nav.Link href="/newProject">Novo projeto</Nav.Link>
+                            <NavDropdown title="Causas" id="navbarScrollingDropdown">
+                                <NavDropdown.Item href="/fome">Fome</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action5">
-                                    Dropdown 3
-                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/saude">Saúde</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
 
@@ -74,7 +79,7 @@ class Header_Login extends Component {
                                 />
                             }
                         >
-                            <NavDropdown.Item href="/perfil" className="dropdown-color"> Perfil </NavDropdown.Item>
+                            <NavDropdown.Item href="/profile" className="dropdown-color"> Perfil </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item onClick={this.logout} className="dropdown-color"> Sair </NavDropdown.Item>
                         </NavDropdown>
