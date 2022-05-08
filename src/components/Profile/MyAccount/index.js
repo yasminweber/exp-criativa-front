@@ -14,21 +14,35 @@ const popoverCompanyAccount = (
     </Popover>
 );
 
-const popoverPersonalAccount = (
-    <Popover id="popover-trigger-hover-focus" title="Popover bottom" className="popover">
-        Seu tipo de conta não pode ser alterado! <br /> Se deseja atribuir um projeto pessoal a uma conta empresarial, procure as opções de moderadores do projeto!
-    </Popover>
-);
-
 class MyAccount extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             companyAccount: false,
+            selectedCauses: [],
         }
+
+        this.categoryClick = this.categoryClick.bind(this)
     }
 
+    categoryClick(category) {
+        let selectedList = this.state.selectedCauses
+
+        if (selectedList.indexOf(category) != -1) {
+            selectedList.splice(selectedList.indexOf(category), 1)
+            return true
+        } else {
+            if (selectedList.length >= 5) {
+                alert("Você já selecionou 5 categorias!")
+                return false
+            } else {
+                selectedList.push(category)
+            }
+            this.setState({ selectedCauses: selectedList }, () => { console.log(this.state.selectedCauses) })
+            return true
+        }
+    }
 
     render() {
         return (
@@ -41,7 +55,7 @@ class MyAccount extends Component {
                     <hr />
 
                     <div className='container-lg account-type'>
-                        <h5 className='type-title'> Você se cadastrou como uma conta pessoal </h5>
+                        <h5 className='type-title'> Você se cadastrou como uma conta {this.state.companyAccount ? "empresarial" : "pessoal."}  </h5>
                         <OverlayTrigger
                             trigger={['hover', 'focus']}
                             placement="bottom"
@@ -167,13 +181,13 @@ class MyAccount extends Component {
                     </div>
                 </section>
 
-                <section className='mt-5 category-section'>
+                <section className='my-5 category-section'>
                     <h2 className='section-title'> Minhas Categorias Favoritas </h2>
-                    <h4 className='section-subtitle mt-2'> Utilizamos essa informações para te recomendar projetos que sejam sua cara! </h4>
+                    <h4 className='section-subtitle mt-2'> Utilizamos essa informações para te recomendar projetos que sejam sua cara! <br/>Lembre-se, você pode selecionar no máximo 5 categorias!</h4>
 
                     <hr />
 
-                    <div class="container category-buttons">
+                    <div class="container-lg col-8">
                         <div class="row">
                             <CategoryCardProfile clickFunction={this.categoryClick} category="Empoderamento Feminino" />
                             <CategoryCardProfile clickFunction={this.categoryClick} category="Doações" />
@@ -189,11 +203,10 @@ class MyAccount extends Component {
                             <CategoryCardProfile clickFunction={this.categoryClick} category="Um Teste Maior" />
                             <CategoryCardProfile clickFunction={this.categoryClick} category="Testando tamanho de texto" />
                             <CategoryCardProfile clickFunction={this.categoryClick} category="Aqui é o último teste" />
-
                         </div>
                     </div>
 
-                    <div className='row mt-4'>
+                    <div className='row mt24'>
                         <div className='col'>
                             <button className='register-button' onClick={this.nextClick}> Alterar Senha </button>
                         </div>

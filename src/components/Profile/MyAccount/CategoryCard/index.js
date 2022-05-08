@@ -7,10 +7,10 @@ class CategoryCardProfile extends Component {
             selected: false
         }
     }
-
     render() {
         return (
-            <div class="col-lg-3 my-2 category-card">
+            <div class="col-lg-4 col-md-4 col-sm-6 my-3">
+                <div class="category-card">
                 <div className={this.state.selected ? 'category-option selected' : 'category-option'} id={this.props.category}
                     onClick={() => {
                         let selected = this.props.clickFunction(this.props.category)
@@ -23,6 +23,7 @@ class CategoryCardProfile extends Component {
                     <img disable className='category-icon' id={this.props.category} src="https://cdn-icons-png.flaticon.com/512/672/672716.png" />
                 </div>
                 <h4> {this.props.category} </h4>
+                </div>
             </div>
         )
     }

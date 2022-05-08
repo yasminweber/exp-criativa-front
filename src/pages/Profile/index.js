@@ -15,7 +15,7 @@ class Profile extends Component {
 
                 <Header_Login />
 
-                <div className='container'>
+                <div className='container-lg'>
                     <div class="row">
 
                         <section class="col-sm-12 col-lg-3 user-menu mt-4">
@@ -67,23 +67,26 @@ class Profile extends Component {
                         </section>
 
                         <section className="project-content col-sm-12 col-lg-9 mt-4">
-                            <div className="tab-content" id="myTabContent">
-                                <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <MyAccount/>
-                                </div>
-                                <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
-                                    <h1 className="mt-3"> conteudo de fotos </h1>
-                                </div>
-                                <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
-                                    <h1 className="mt-3"> conteudo de ações e eventos </h1>
-                                </div>
-                                <div className="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
-                                    <Achievements />
-                                </div>
-                                <div className="tab-pane fade" id="donations" role="tabpanel" aria-labelledby="donations-tab">
-                                    <h1 className="mt-3"> conteúdo de doações </h1>
+                            <div className='container-lg col-sm-12 col-lg-9 mt-4'>
+                                <div className="tab-content" id="myTabContent">
+                                    <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <MyAccount />
+                                    </div>
+                                    <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
+                                        <ProfileProjects />
+                                    </div>
+                                    <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
+                                        <h1 className="mt-3"> conteudo de ações e eventos </h1>
+                                    </div>
+                                    <div className="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
+                                        <Achievements />
+                                    </div>
+                                    <div className="tab-pane fade" id="donations" role="tabpanel" aria-labelledby="donations-tab">
+                                        <h1 className="mt-3"> conteúdo de doações </h1>
+                                    </div>
                                 </div>
                             </div>
+
                         </section>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ class Achievements extends Component {
                 <hr />
 
                 <div className='container-lg achievements-section'>
-                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <div class="row row-cols-lg-3 row-cols-md-1 row-cols-sm-1 row-cols-1 g-4">
                         <AchievementsCard title="teste1" percentage="100%" content="Para conseguir recuperar esses pontos, teste 1tenha pelo menos um projeto aprovado."/>
 
                         <AchievementsCard title="teste2" percentage="78%" content="Para conseguir recuperar esses pontos, teste 2 tenha pelo menos um projeto aprovado."/>

@@ -150,6 +150,34 @@
         color: rgb(139, 139, 139);
     }
 
+    .register-button {
+        padding: 7px 17px;
+        border: 2px solid #107369;
+        color: #107369;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        background-color: #ffffff00;
+        border-radius: 50px;
+        box-shadow: 2px 2px 2px #757575;
+        letter-spacing: 1px;
+        word-spacing: 3px;
+
+        &:hover {
+            background-color: #107369;
+            transition: background-color 0.4s linear;
+            color: #F2F2F2;
+        }
+    }
+
+    .project-content {
+        // background-color: #757575;
+        // align-items: center;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        // text-align: center;
+    }
 
     // Achievements Section
     .achievements-section {
@@ -161,11 +189,10 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        text-align: center;
 
         .card-img-top {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             background-color: #008b8b;
         }
     }
@@ -224,50 +251,46 @@
         }
     }
 
-    .category-buttons {
-        width: 100%;
-        height: 44%;
-        overflow: auto;
-        margin-top: 15px;
+    .form-control,
+    .form-select {
+        &:focus {
+            border-color: #008b8b;
+            box-shadow: inherit;
+        }
+    }
 
-        .category-card {
+    .category-card {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+        // border: 1px solid #444;
+        // background-color: #008b8b;
+
+        .category-option {
+            width: 100px;
+            height: 100px;
+            border: 3px solid #008b8b;
+            border-radius: 20px;
             align-items: center;
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
             text-align: center;
             justify-content: center;
+            cursor: pointer;
+            z-index: 2;
 
-            .category-option {
-                width: 100px;
-                height: 100px;
-                border: 3px solid #008b8b;
-                border-radius: 20px;
-                align-items: center;
-                display: flex;
-                flex-direction: column;
-                flex-wrap: wrap;
-                text-align: center;
-                justify-content: center;
-                cursor: pointer;
-                z-index: 2;
-
-                .category-icon {
-                    width: 60%;
-                    z-index: 0;
-                }
+            .category-icon {
+                width: 60%;
+                z-index: 0;
             }
-
-            .selected {
-                background-color: #008b8b;
-            }
-
         }
 
+        .selected {
+            background-color: #008b8b;
+        }
     }
-
-
-
-
-
 }
