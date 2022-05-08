@@ -1,3 +1,4 @@
+import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers';
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import CategoryCard from '../../components/Register/CategoryCard';
@@ -8,41 +9,67 @@ class Register extends Component {
         super(props);
         this.state = {
             companyAccount: false,
-            accountType: "",
-            name: "",
-            lastName: "",
-            cpf: "",
-            birth: "",
-            email: "",
-            gender: "",
-            password: "",
-            cnpj: "",
-            razaoSocial: "",
+            form: {
+                // Comum entre os tipos
+                name: "",
+                lastName: "",
+                email: "",
+                password: "",
+                confirmPassword: "",
+
+                // Pessoais
+                cpf: "",
+                birth: "",
+                gender: "",
+
+                // Empresariais
+                cnpj: "",
+                razaoSocial: "",
+            },
             selectedCauses: [],
         }
 
+        this.formData = this.formData.bind(this);
         this.categoryClick = this.categoryClick.bind(this);
-        this.nextClick = this.nextClick.bind(this)
+        this.accountTypeChange = this.accountTypeChange.bind(this);
+        this.formSend = this.formSend.bind(this);
+        this.finishClick = this.finishClick.bind(this);
     }
 
-    nextClick() {
-        if (!this.state.companyAccount) {
-            if (this.state.name === "" || this.state.lastName === "" || this.state.cpf === "" || this.state.birth === ""
-            || this.state.email === "" || this.state.gender === "" || this.state.password === "" || 
-            document.getElementById('passwordConfirmation').value === "") {
-                alert("Você deve preencher todos os campos!")
-                return
+    formData(e) {
+        let form = this.state.form
+        form[e.target.name] = e.target.value;
+        this.setState({ form: form });
+    }
+
+    accountTypeChange(e) {
+        this.setState({ companyAccount: !this.state.companyAccount }, () => {
+            if (this.state.companyAccount) {
+                Array.from(document.getElementsByClassName('personal-input')).forEach((doc) =>
+                    doc.disabled = true
+                );
+                document.getElementById('personalForm').classList.add("d-none")
+
+
+                Array.from(document.getElementsByClassName('company-input')).forEach((doc) =>
+                    doc.disabled = false
+                );
+                document.getElementById('companyForm').classList.remove("d-none")
+
             } else {
-                if (this.state.password === document.getElementById('passwordConfirmation').value) {
-                    document.getElementById("register-form").classList.add("d-none")
-                    document.getElementById("category-column").classList.remove("d-none");
-                } else {
-                    alert("As senhas não correspondem!")
-                }
+                Array.from(document.getElementsByClassName('company-input')).forEach((doc) =>
+                    doc.disabled = true
+                );
+                document.getElementById('companyForm').classList.add("d-none")
+
+
+                Array.from(document.getElementsByClassName('personal-input')).forEach((doc) =>
+                    doc.disabled = false
+                );
+                document.getElementById('personalForm').classList.remove("d-none")
             }
-        } else {
-            alert("empresa")
-        }
+
+        })
     }
 
     categoryClick(category) {
@@ -61,6 +88,21 @@ class Register extends Component {
             this.setState({ selectedCauses: selectedList }, () => { console.log(this.state.selectedCauses) })
             return true
         }
+    }
+
+    async formSend(e) {
+        e.preventDefault()
+        
+        if (this.state.form.password == this.state.form.confirmPassword) {
+            document.getElementById('form-fields').classList.add('d-none')
+            document.getElementById('category-column').classList.remove('d-none')
+        } else {
+            alert("As senhas não correspondem!")
+        }
+    }
+
+    finishClick() {
+        // AQUI VAI A FUNÇÃO PARA INTEGRAR COM O BACK
     }
 
     render() {
@@ -91,192 +133,213 @@ class Register extends Component {
                         </div>
 
                         <div class="container-fluid col-7 form-column">
-                            <div className='register-form' id="register-form">
-                                <div class="row mt-3">
-                                    <div class="col-5">
-                                        Conta Pessoal
-                                    </div>
-                                    <div class="col-2">
-                                        <div className='switch-button'>
-                                            <input type="checkbox" id="companyAccount" className='switch-input'
-                                                onChange={(e) => { this.setState({ companyAccount: e.target.checked }) }} />
-                                            <label className='switch-label' for="companyAccount"> </label>
+                            <div id="form-fields" className='container-lg'>
+                                <form className="row form-register" onSubmit={this.formSend}>
+
+                                    {/* Account Type Switch Button */}
+                                    <div class="row">
+                                        <div class="col-5">
+                                            Conta Pessoal
                                         </div>
+                                        <div class="col-2">
+                                            <div className='switch-button'>
+                                                <input type="checkbox" id="companyAccount" className='switch-input'
+                                                    onChange={(e) => { this.accountTypeChange(e) }} />
+                                                <label className='switch-label' for="companyAccount"> </label>
+                                            </div>
 
+                                        </div>
+                                        <div class="col-5">
+                                            Conta Empresarial
+                                        </div>
                                     </div>
-                                    <div class="col-5">
-                                        Conta Empresarial
-                                    </div>
-                                </div>
 
-                                {this.state.companyAccount ?
-                                    <div className="container">
-                                        <div>
-                                            <div class="row">
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input autoFocus type="text" class="form-control" id="cnpj" placeholder="CNPJ"
-                                                            onChange={(e) => this.setState({ cnpj: e.target.value })} />
-                                                        <label class="form-label"> CNPJ </label>
-                                                    </div>
+                                    {/* Campos para cadastro pessoal */}
+                                    <section id="personalForm">
+                                        <div className='row mt-3'>
+                                            {/* Nome */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control personal-input" name="name" placeholder="Nome"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.name} required />
+                                                    <label class="form-label"> Nome </label>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="text" class="form-control" id="razaoSocial" placeholder="Razão Social"
-                                                            onChange={(e) => this.setState({ razaoSocial: e.target.value })} />
-                                                        <label class="form-label"> Razão Social </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="email" class="form-control" id="email" placeholder="Nome"
-                                                            onChange={(e) => this.setState({ email: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> E-mail </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="password" class="form-control" id="name" placeholder="Nome"
-                                                            onChange={(e) => this.setState({ password: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> Senha </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="text" class="form-control" id="lastName" placeholder="Sobrenome" />
-                                                        <label for="inputNome" class="form-label"> Confirme a Senha </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mt-3">
-                                                <span className='hr'> </span>
-                                                <span className='hr-text'> Administrador da Empresa </span>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="text" class="form-control" id="name" placeholder="Nome"
-                                                            onChange={(e) => this.setState({ name: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> Nome </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="text" class="form-control" id="lastName" placeholder="Sobrenome"
-                                                            onChange={(e) => this.setState({ lastName: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> Sobrenome </label>
-                                                    </div>
+                                            {/* Sobrenome */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="Sobrenome" class="form-control personal-input" name="lastName" placeholder="Sobrenome"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.lastName} required />
+                                                    <label class="form-label"> Sobrenome </label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    :
-                                    <div className="container">
-                                        <div>
-                                            <div class="row">
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input autoFocus type="text" class="form-control" id="name" placeholder="Nome"
-                                                            onChange={(e) => this.setState({ name: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> Nome </label>
-                                                    </div>
-                                                </div>
 
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="text" class="form-control" id="lastName" placeholder="Sobrenome"
-                                                            onChange={(e) => this.setState({ lastName: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> Sobrenome </label>
-                                                    </div>
+                                        <div className='row mt-3'>
+                                            {/* CPF */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control personal-input" name="cpf" placeholder="CPF"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.cpf} required />
+                                                    <label class="form-label"> CPF </label>
                                                 </div>
                                             </div>
 
-                                            <div class="row">
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="text" class="form-control" id="cpf" placeholder="CPF"
-                                                            onChange={(e) => this.setState({ cpf: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> CPF </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="date" class="form-control" id="birth" placeholder="Sobrenome"
-                                                            onChange={(e) => this.setState({ birth: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> Data de Nascimento </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="email" class="form-control" id="email" placeholder="Nome"
-                                                            onChange={(e) => this.setState({ email: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> E-mail </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className='row mt-3'>
-                                                <span> Com qual gênero você se identifica? </span>
-                                            </div>
-
-                                            <div className='row mt-3'>
-                                                <div className='col'>
-                                                    <input type='radio' id="gender1" name="gender" onChange={(e) => { this.setState({ gender: 0 }) }} />
-                                                    <label className='gender-label' for="gender1"> Feminino </label>
-                                                </div>
-                                                <div className='col'>
-                                                    <input type='radio' id="gender2" name="gender" onChange={(e) => { this.setState({ gender: 1 }) }} />
-                                                    <label className='gender-label' for="gender2"> Masculino </label>
-                                                </div>
-                                                <div className='col'>
-                                                    <input type='radio' id="gender3" name="gender" onChange={(e) => { this.setState({ gender: 2 }) }} />
-                                                    <label className='gender-label' for="gender3"> Não binário </label>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mt-2">
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="password" class="form-control" id="password" placeholder="Senha"
-                                                            onChange={(e) => this.setState({ password: e.target.value })} />
-                                                        <label for="inputNome" class="form-label"> Senha </label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col mx-auto mt-3">
-                                                    <div class="col form-floating">
-                                                        <input type="password" class="form-control" id="passwordConfirmation" placeholder="Confirme a Senha"/>
-                                                        <label for="inputNome" class="form-label"> Confirme a Senha </label>
-                                                    </div>
+                                            {/* Data de Nascimento */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="date" class="form-control personal-input" name="birth" placeholder="Data de Nascimento"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.birth} required />
+                                                    <label class="form-label"> Data de Nascimento </label>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>}
 
+                                        <div className='row mt-3'>
+                                            {/* Email */}
+                                            <div className='col-12'>
+                                                <div class="form-floating">
+                                                    <input type="email" class="form-control personal-input" name="email" placeholder="E-mail"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.email} required />
+                                                    <label class="form-label"> E-mail </label>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                <div className='row mt-4'>
-                                    <div className='col'>
-                                        <button className='register-button' onClick={this.nextClick}> Continuar </button>
+                                        {/* Gênero */}
+                                        <div className='row mt-3'>
+                                            <span> Com qual gênero você se identifica? </span>
+                                        </div>
+
+                                        <div className='row mt-3'>
+                                            <div className='col'>
+                                                <input className="personal-input" type='radio' id="gender1" name="gender"
+                                                    onChange={(e) => { this.setState({ gender: 0 }) }} required />
+                                                <label className='gender-label' for="gender1"> Feminino </label>
+                                            </div>
+                                            <div className='col'>
+                                                <input className="personal-input" type='radio' id="gender2" name="gender"
+                                                    onChange={(e) => { this.setState({ gender: 1 }) }} required />
+                                                <label className='gender-label' for="gender2"> Masculino </label>
+                                            </div>
+                                            <div className='col'>
+                                                <input className="personal-input" type='radio' id="gender3" name="gender"
+                                                    onChange={(e) => { this.setState({ gender: 2 }) }} required />
+                                                <label className='gender-label' for="gender3"> Não binário </label>
+                                            </div>
+                                        </div>
+
+                                        <div className='row mt-3'>
+                                            {/* Senha */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="password" class="form-control personal-input" name="password" placeholder="Senha"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.password} required />
+                                                    <label class="form-label"> Senha </label>
+                                                </div>
+                                            </div>
+
+                                            {/* Confirmar Senha */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="password" class="form-control personal-input" name="confirmPassword" placeholder="Confirme a Senha"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.confirmPassword} required />
+                                                    <label class="form-label"> Confirme a Senha </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    {/* Campos para cadastro empresarial */}
+                                    <section id='companyForm' className='d-none'>
+                                        <div className='row mt-3'>
+                                            {/* CNPJ */}
+                                            <div className='col-12'>
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control company-input" name="cnpj" placeholder="CNPJ"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.cnpj} required disabled />
+                                                    <label class="form-label"> CNPJ </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className='row mt-3'>
+                                            {/* Razao Social */}
+                                            <div className='col-12'>
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control company-input" name="razaoSocial" placeholder="Razão Social"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.razaoSocial} required disabled />
+                                                    <label class="form-label"> Razão Social </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className='row mt-3'>
+                                            {/* Email */}
+                                            <div className='col-12'>
+                                                <div class="form-floating">
+                                                    <input type="email" class="form-control company-input" name="email" placeholder="E-mail"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.email} required disabled />
+                                                    <label class="form-label"> E-mail </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className='row mt-3'>
+                                            {/* Senha */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="password" class="form-control company-input" name="password" placeholder="Senha"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.password} required disabled />
+                                                    <label class="form-label"> Senha </label>
+                                                </div>
+                                            </div>
+
+                                            {/* Confirmar Senha */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="password" class="form-control company-input" name="confirmPassword" placeholder="Confirme a Senha"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.confirmPassword} required disabled />
+                                                    <label class="form-label"> Confirme a Senha </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mt-3">
+                                            <span className='hr'> </span>
+                                            <span className='hr-text'> Administrador da Empresa </span>
+                                        </div>
+
+                                        <div className='row mt-3'>
+                                            {/* Nome */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="text" class="form-control company-input" name="name" placeholder="Nome"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.name} required disabled />
+                                                    <label class="form-label"> Nome </label>
+                                                </div>
+                                            </div>
+
+                                            {/* Sobrenome */}
+                                            <div className='col-6'>
+                                                <div class="form-floating">
+                                                    <input type="Sobrenome" class="form-control company-input" name="lastName" placeholder="Sobrenome"
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.lastName} required disabled />
+                                                    <label class="form-label"> Sobrenome </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <div className='row mt-4'>
+                                        <div class="col-12">
+                                            <button class="register-button btn btn-primary" type="submit"> Continuar </button>
+                                        </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
+
 
                             <section id="category-column" className='category-column d-none'>
                                 <div className='row'>
@@ -308,11 +371,11 @@ class Register extends Component {
                                     </div>
                                 </div>
 
-                                <div className='row mt-3'>
-                                    <div className='col'>
-                                        <button className='register-button' onClick={() => { console.log(this.state) }}> Finalizar cadastro </button>
+                                <div className='row mt-4'>
+                                        <div class="col-12">
+                                            <button class="register-button btn btn-primary" type="submit" onClick={this.finishClick}> Finalizar Cadastro </button>
+                                        </div>
                                     </div>
-                                </div>
                             </section>
 
 
@@ -326,4 +389,5 @@ class Register extends Component {
         )
     }
 }
+
 export default Register
