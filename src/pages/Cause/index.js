@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import HeaderLogin from '../../components/Header';
 import Helmet from 'react-helmet';
 import api from '../../config/api'
-import { decodeToken } from '../../config/auth';
+import { currentUrl } from '../../Helpers';
 
-class Dashboard extends Component {
+class Cause extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            user: decodeToken(),
-            projects: []
+            projects: [],
+            cause: ""
         }
 
         this.componentDidMount = () => {
@@ -20,11 +20,25 @@ class Dashboard extends Component {
 
     async getProjects() {
 
-        let filter = "Sem teto"
-        let filter2 = "Empoderamento Feminino"
-        let filter3 = "Saúde"
+        let url = currentUrl()
+        let filter = ''
+        if (url === "saude") {
+            filter = "Saúde"
+        } else if (url === "maus-tratos-aos-animais") {
+            filter = "Maus tratos aos animais"
+        } else if (url === "empoderamento-feminino") {
+            filter = "Empoderamento Feminino"
+        } else if (url === "fome") {
+            filter = "Fome"
+        } else if (url === "sem-teto") {
+            filter = "Sem teto"
+        }
+        
+        this.setState({
+            cause: filter
+        })
 
-        await api.get(`/projects/filter/?filterCause1=${filter}&filterCause2=${filter2}&filterCause3=${filter3}`)
+        await api.get(`/projects/filter/?filterCause1=${filter}`)
             .then((response) => {
                 const data = response.data;
                 this.setState({ projects: data });
@@ -41,7 +55,7 @@ class Dashboard extends Component {
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title>Dashboard</title>
+                    <title>{this.state.cause}</title>
                 </Helmet>
 
                 <HeaderLogin />
@@ -50,7 +64,7 @@ class Dashboard extends Component {
                     <div className="container-fluid">
                         <div className="row text-lg-start text-center">
                             <div className="col-12">
-                                <h1 className="titulo-1">Ver todos os projetos</h1>
+                                <h1 className="titulo-1">Ver projetos da causa: {this.state.cause}</h1>
                             </div>
                         </div>
                     </div>
@@ -60,6 +74,14 @@ class Dashboard extends Component {
                     <div className="container-lg">
                         <div className="row">
                             <div className="col-lg-10 col-12 mx-auto">
+
+                                {/* Se a lista for vazia */}
+                                {(!this.state.projects.length) ?
+                                    <div className="mt-3" style={{ textAlignLast: "center" }}>
+                                        <p>No momento não temos nenhum projeto para: {this.state.cause}</p>
+                                    </div> : <></>
+                                }
+
                                 <div className="row my-4 text-start">
                                     {this.state.projects.map((child, id) => (
                                         <div className="col-lg-4 col-12" key={id}>
@@ -74,7 +96,6 @@ class Dashboard extends Component {
                                                         <button className="btn-1" onClick={() => { window.location.href = `/project/${child._id}` }}>
                                                             Entrar no projeto
                                                         </button>
-                                                       {console.log(this.state.user)} 
                                                     </div>
                                                 </div>
                                             </div>
@@ -87,9 +108,8 @@ class Dashboard extends Component {
                 </section>
 
             </div>
-
         )
     }
 }
 
-export default Dashboard
+export default Cause

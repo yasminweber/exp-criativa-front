@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Dashboard from './pages/Dashboard'
+import Cause from './pages/Cause'
 import EditProject from './pages/EditProject'
 
 const Rotas = () => {
@@ -14,6 +15,11 @@ const Rotas = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/cause/fome" element={<Cause />} />
+                <Route path="/cause/saude" element={<Cause />} />
+                <Route path="/cause/maus-tratos-aos-animais" element={<Cause />} />
+                <Route path="/cause/sem-teto" element={<Cause />} />
+                <Route path="/cause/empoderamento-feminino" element={<Cause />} />
                 <Route path="/project/:id" element={<ProjectPage />} />
                 <Route path="/editProject/:id" element={<EditProject />} />
                 <Route path="/newProject" element={<NewProject />} />

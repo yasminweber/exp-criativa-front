@@ -11,7 +11,8 @@ class EditProject extends Component {
         this.state = {
             id: "",
             projectName: "",
-            category: "",
+            causes: [],
+            cause: "",
             where: "",
             startDate: new Date(),
             endDate: new Date(),
@@ -22,11 +23,24 @@ class EditProject extends Component {
         }
 
         this.componentDidMount = () => {
-            this.getProject()
+            this.getProject();
+            this.loadCauses();
         }
 
         this.updateProject = this.updateProject.bind(this);
         this.deletePost = this.deletePost.bind(this);
+    }
+
+    async loadCauses() {
+        api.get('/cause').then(res => {
+            if (res.data.length > 0) {
+                this.setState({
+                    causes: res.data.map(cause => cause.cause),
+                    cause: res.data[0].cause
+                })
+                //console.log(this.state.causes)
+            }
+        })
     }
 
     async getProject() {
@@ -58,7 +72,7 @@ class EditProject extends Component {
 
         const project = {
             projectName: this.state.projectName,
-            category: this.state.category,
+            cause: this.state.cause,
             where: this.state.where,
             startDate: this.state.startDate,
             endDate: this.state.endDate,
@@ -119,87 +133,69 @@ class EditProject extends Component {
                                     <div className="text-start">
                                         <div className="mb-3 form-floating">
                                             <input type="text" className="form-control" id="inputNome" placeholder="Nome"
-                                                value={this.state.projectName}
-                                                onChange={(e) => this.setState({ projectName: e.target.value })} />
-                                            <label for="inputNome" className="form-label">Nome</label>
+                                                onChange={(e) => this.setState({ projectName: e.target.value })}
+                                                value={this.state.projectName} required />
+                                            <label htmlFor="inputNome" className="form-label">Nome</label>
                                         </div>
 
                                         <div className="mb-3 form-floating">
-                                            <select className="form-select" id="selectCategory"
+                                            <select className="form-select" id="selectCause"
                                                 aria-label="Default select example"
-                                                value={this.state.category} disabled >
-                                                <option defaultValue>Selecione uma opção</option>
-                                                <option value="empoderamentoFeminino">empoderamentoFeminino</option>
-                                                <option value="doacoes">doacoes</option>
-                                                <option value="fome">fome</option>
-                                                <option value="saude">saude</option>
-                                                <option value="meioAmbiente">meioAmbiente</option>
+                                                onChange={(e) => this.setState({ cause: e.target.value })}
+                                                value={this.state.cause} required >
+                                                <option key={0} value={""}> Selecionar causa </option>
+                                                {this.state.causes.map(function (cause) {
+                                                    return <option key={cause} value={cause}> {cause} </option>;
+                                                })
+                                                }
                                             </select>
-                                            <label for="selectCategory" className="form-label">Categoria</label>
+                                            <label htmlFor="selectCause" className="form-label">Causas</label>
                                         </div>
 
                                         <div className="mb-3 form-floating">
                                             <input type="text" className="form-control" id="inputWhere" placeholder="Localização (bairro)"
-                                                value={this.state.where}
-                                                onChange={(e) => this.setState({ where: e.target.value })} />
-                                            <label for="inputWhere" className="form-label">Localização (bairro)</label>
+                                                onChange={(e) => this.setState({ where: e.target.value })}
+                                                value={this.state.where} required />
+                                            <label htmlFor="inputWhere" className="form-label">Localização (bairro)</label>
                                         </div>
 
                                         <div className="row form-data">
                                             <div className="col-md mb-3 form-floating">
                                                 <input type="date" className="form-control" id="dateStart"
-                                                    value={dateInput(this.state.startDate)}
-                                                    onChange={(e) => this.setState({ startDate: e.target.value })} />
-                                                <label for="dateStart" className="form-label">Data inicio</label>
+                                                    onChange={(e) => this.setState({ startDate: e.target.value })}
+                                                    value={dateInput(this.state.startDate)} required />
+                                                <label htmlFor="dateStart" className="form-label">Data inicio</label>
                                             </div>
 
                                             <div className="col-md mb-3 form-floating">
                                                 <input type="date" className="form-control" id="dateEnd"
-                                                    value={dateInput(this.state.endDate)}
-                                                    onChange={(e) => this.setState({ endDate: e.target.value })} />
-                                                <label for="dateEnd" className="form-label">Data fim</label>
+                                                    onChange={(e) => this.setState({ endDate: e.target.value })}
+                                                    value={dateInput(this.state.endDate)} />
+                                                <label htmlFor="dateEnd" className="form-label">Data fim</label>
                                             </div>
                                         </div>
 
                                         <div className="d-flex flex-column">
                                             <div className="mb-3 form-floating order-md-0 order-1">
                                                 <textarea className="form-control" id="floatingTextarea2" placeholder="Descrição"
-                                                    value={this.state.description}
-                                                    onChange={(e) => this.setState({ description: e.target.value })} />
-                                                <label for="floatingTextarea2">Descrição</label>
+                                                    onChange={(e) => this.setState({ description: e.target.value })}
+                                                    value={this.state.description} required />
+                                                <label htmlFor="floatingTextarea2">Descrição</label>
                                             </div>
 
                                             <div className="row form-quantidades order-md-1 order-0">
-                                                <div className="col-md mb-3 form-floating">
-                                                    <select className="form-select" id="selectBenefited"
-                                                        aria-label="Default select example"
-                                                        value={this.state.quantityBenefited}
-                                                        onChange={(e) => this.setState({ quantityBenefited: e.target.value })} >
-                                                        <option defaultValue>Selecione uma opção</option>
-                                                        <option value="0-10">0-10</option>
-                                                        <option value="11-25">11-25</option>
-                                                        <option value="26-50">26-50</option>
-                                                        <option value="51-100">51-100</option>
-                                                        <option value="101-150">101-150</option>
-                                                        <option value="Outro">Outro</option>
-                                                    </select>
-                                                    <label for="selectBenefited" className="form-label">Quantidade estimado beneficiados</label>
+                                                <div className="col-md form-floating mb-3">
+                                                    <input type="number" className="form-control" id="inputBenefited" placeholder="Quantidade estimada beneficiados"
+                                                        onChange={(e) => this.setState({ quantityBenefited: e.target.value })}
+                                                        value={this.state.quantityBenefited} required />
+                                                    <label htmlFor="inputBenefited" className="form-label">Quantidade estimado beneficiados</label>
                                                 </div>
 
-                                                <div className="col-md mb-3 form-floating">
-                                                    <select className="form-select" id="selectVolunteers"
-                                                        aria-label="Default select example"
-                                                        value={this.state.quantityVolunteers}
-                                                        onChange={(e) => this.setState({ quantityVolunteers: e.target.value })} >
-                                                        <option defaultValue>Selecione uma opção</option>
-                                                        <option value="0-10">0-10</option>
-                                                        <option value="11-25">11-25</option>
-                                                        <option value="26-50">26-50</option>
-                                                        <option value="51-100">51-100</option>
-                                                        <option value="101-150">101-150</option>
-                                                        <option value="Outro">Outro</option>
-                                                    </select>
-                                                    <label for="selectVolunteers" className="form-label">Quantidade de voluntários</label>
+                                                <div className="col-md form-floating mb-3">
+                                                    <input type="number" className="form-control" id="inputVolunteers" placeholder="Quantidade de voluntários"
+                                                        onChange={(e) => this.setState({ quantityVolunteers: e.target.value })}
+                                                        value={this.state.quantityVolunteers} required />
+                                                    <label htmlFor="inputVolunteers" className="form-label">Quantidade de voluntários</label>
                                                 </div>
                                             </div>
                                         </div>
