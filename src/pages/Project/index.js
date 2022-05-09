@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet'
-import { currentUrl, formatDate, checkMonthYear } from '../../Helpers'
+import { currentUrl, formatDate } from '../../Helpers'
 import HeaderLogin from '../../components/Header';
 import Member from '../../components/Project/Member';
 import api from '../../config/api';
@@ -15,7 +15,7 @@ class ProjectPage extends Component {
             projectCreator: "",
             id: "",
             projectName: "",
-            category: "",
+            cause: "",
             where: "",
             startDate: "",
             endDate: "",
@@ -23,7 +23,7 @@ class ProjectPage extends Component {
             quantityBenefited: "",
             quantityVolunteers: "",
             volunteers: [],
-            //projectColor: "",
+            projectColor: "",
             status: ""
         }
 
@@ -40,7 +40,7 @@ class ProjectPage extends Component {
                     projectCreator: data.creator.username,
                     id: data._id,
                     projectName: data.projectName,
-                    category: data.category,
+                    cause: data.cause,
                     where: data.where,
                     startDate: data.startDate,
                     endDate: data.endDate,
@@ -48,7 +48,7 @@ class ProjectPage extends Component {
                     quantityBenefited: data.quantityBenefited,
                     quantityVolunteers: data.quantityVolunteers,
                     volunteers: data.volunteers,
-                    //projectColor: data.projectColor,
+                    projectColor: data.projectColor,
                     status: data.status
                 });
                 console.log("Projeto carregado");
@@ -62,13 +62,17 @@ class ProjectPage extends Component {
     async inscrever(id) {
         await api.put(`/project/signup/${id}`)
             .then((response) => {
-                console.log("Deu certo");
-                alert("Inscrição feita");
+                if (this.state.volunteers.indexOf(this.state.user.user._id) === -1) {
+                    alert("Inscrição feita");
+                } else {
+                    alert("Você removeu a inscrição do seu voluntariado");
+                }
+                //console.log("Deu certo");
                 this.getProject();
             })
             .catch((error) => {
                 console.log("error inscrever no projeto: ", error)
-                alert('Erro para inscrver no');
+                alert('Erro para inscrver no projeto');
             })
     }
 
@@ -94,7 +98,7 @@ class ProjectPage extends Component {
 
                         <div className="col-lg-6 col-8 d-flex name-causes">
                             <h2 className='project-name'> {this.state.projectName} </h2>
-                            <h3 className='project-cause'> {this.state.category} </h3>
+                            <h3 className='project-cause'> {this.state.cause} </h3>
                         </div>
 
                         {/* check if user is the one watching -- username unique */}
@@ -146,12 +150,12 @@ class ProjectPage extends Component {
                                                 <div className="row">
                                                     <div className="col-12">
                                                         <h2 className="titulo-1 mb-3">Descrição do projeto</h2>
-                                                        {/* de 200 characteres até 500 */}
                                                         <p className="descricao">{this.state.description}</p>
                                                     </div>
                                                 </div>
                                                 <section className="creator-projects text-start mt-5">
-                                                    <h1>teste</h1>
+                                                    <h1 className="title">Outros projeto do usuário</h1>
+
                                                 </section>
                                             </div>
                                         </div>
@@ -168,7 +172,7 @@ class ProjectPage extends Component {
                                                         <p className="descricao mb-4">{this.state.quantityBenefited}</p>
                                                         <h2 className="titulo-1 mb-1">Quantidade de voluntários necessários?</h2>
                                                         <p className="descricao mb-4">{this.state.quantityVolunteers}</p>
-                                                        <h2 className="titulo-1 mb-1">Quantidade de voluntários inscritos?</h2>
+                                                        <h2 className="titulo-1 mb-1">Quantidade de voluntários inscritos:</h2>
                                                         <p className="descricao mb-4">{this.state.volunteers.length}</p>
                                                     </div>
                                                 </div>

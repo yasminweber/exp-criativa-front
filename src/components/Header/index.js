@@ -51,9 +51,15 @@ class Header_Login extends Component {
                             <Nav.Link href="/dashboard">Meus interesses</Nav.Link>
                             <Nav.Link href="/newProject">Novo projeto</Nav.Link>
                             <NavDropdown title="Causas" id="navbarScrollingDropdown">
-                                <NavDropdown.Item href="/fome">Fome</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/fome">Fome</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/saude">Saúde</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/saude">Saúde</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="/cause/sem-teto">Sem teto</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="/cause/maus-tratos-aos-animais">Maus tratos aos animais</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="/cause/empoderamento-feminino">Empoderamento Feminino</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
 

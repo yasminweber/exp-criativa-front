@@ -34,7 +34,7 @@
                     box-shadow: inherit;
                 }
             }
-            
+
             .form-cat-color,
             .form-data,
             .form-quantidades {
@@ -45,8 +45,12 @@
                 }
             }
 
-            .form-cat-color .form-floating > .form-select {
+            .form-cat-color .form-floating>.form-select {
                 height: calc(3.5rem + 15px);
+            }
+
+            input[type=number]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
             }
 
             textarea {
