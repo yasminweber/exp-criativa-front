@@ -85,6 +85,7 @@ class Header_Login extends Component {
                                 />
                             }
                         >
+                            <div class="text-center my-2">{this.state.user.user.name}</div>
                             <NavDropdown.Item href="/profile" className="dropdown-color"> Perfil </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item onClick={this.logout} className="dropdown-color"> Sair </NavDropdown.Item>

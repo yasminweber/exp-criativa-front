@@ -1,6 +1,7 @@
-import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers';
+//import { toHaveAccessibleDescription } from '@testing-library/jest-dom/dist/matchers';
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import api from '../../config/api'
 import CategoryCard from '../../components/Register/CategoryCard';
 
 class Register extends Component {
@@ -75,7 +76,7 @@ class Register extends Component {
     categoryClick(category) {
         let selectedList = this.state.selectedCauses
 
-        if (selectedList.indexOf(category) != -1) {
+        if (selectedList.indexOf(category) !== -1) {
             selectedList.splice(selectedList.indexOf(category), 1)
             return true
         } else {
@@ -93,7 +94,7 @@ class Register extends Component {
     async formSend(e) {
         e.preventDefault()
         
-        if (this.state.form.password == this.state.form.confirmPassword) {
+        if (this.state.form.password === this.state.form.confirmPassword) {
             document.getElementById('form-fields').classList.add('d-none')
             document.getElementById('category-column').classList.remove('d-none')
         } else {
@@ -101,8 +102,36 @@ class Register extends Component {
         }
     }
 
-    finishClick() {
-        // AQUI VAI A FUNÇÃO PARA INTEGRAR COM O BACK
+    async finishClick() {
+        
+        let genero = ""
+        if (this.state.gender === 0) {
+            genero = "Feminino"
+        } else if (this.state.gender === 1) {
+            genero = "Masculino"
+        } else {
+            genero = "Não binário"
+        }
+
+        const user = {
+            name: this.state.form.name,
+            lastName: this.state.form.lastName,
+            email: this.state.form.email,
+            password: this.state.form.password,
+            cpf: this.state.form.cpf,
+            birthDate: this.state.form.birth,
+            gender: genero,
+            cnpj: this.state.form.cnpj,
+            razaoSocial: this.state.form.razaoSocial,
+            selectedCauses: this.state.selectedCauses
+        }
+
+        console.log(user)
+
+        await api.post('/register', user);
+        
+        alert("Usuário registrado com sucesso");
+        window.location = '/login';
     }
 
     render() {
@@ -116,9 +145,9 @@ class Register extends Component {
 
                 <div className='container-fluid register-cover'> </div>
 
-                <div class="container register-content">
-                    <div class="row">
-                        <div class="col-4 title-column">
+                <div className="container register-content">
+                    <div className="row">
+                        <div className="col-4 title-column">
                             <h2 className='title'> Vamos Começar! </h2>
 
                             <p className='subtitle'> Para se cadastrar, basta preencher os campos ao lado! </p>
@@ -132,24 +161,24 @@ class Register extends Component {
                             <a href="/login"><button className='login-button'> Fazer Login  </button></a>
                         </div>
 
-                        <div class="container-fluid col-7 form-column">
+                        <div className="container-fluid col-7 form-column">
                             <div id="form-fields" className='container-lg'>
                                 <form className="row form-register" onSubmit={this.formSend}>
 
                                     {/* Account Type Switch Button */}
-                                    <div class="row">
-                                        <div class="col-5">
+                                    <div className="row">
+                                        <div className="col-5">
                                             Conta Pessoal
                                         </div>
-                                        <div class="col-2">
+                                        <div className="col-2">
                                             <div className='switch-button'>
                                                 <input type="checkbox" id="companyAccount" className='switch-input'
                                                     onChange={(e) => { this.accountTypeChange(e) }} />
-                                                <label className='switch-label' for="companyAccount"> </label>
+                                                <label className='switch-label' htmlFor="companyAccount"> </label>
                                             </div>
 
                                         </div>
-                                        <div class="col-5">
+                                        <div className="col-5">
                                             Conta Empresarial
                                         </div>
                                     </div>
@@ -159,19 +188,19 @@ class Register extends Component {
                                         <div className='row mt-3'>
                                             {/* Nome */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="text" class="form-control personal-input" name="name" placeholder="Nome"
+                                                <div className="form-floating">
+                                                    <input type="text" className="form-control personal-input" name="name" placeholder="Nome"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.name} required />
-                                                    <label class="form-label"> Nome </label>
+                                                    <label className="form-label"> Nome </label>
                                                 </div>
                                             </div>
 
                                             {/* Sobrenome */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="Sobrenome" class="form-control personal-input" name="lastName" placeholder="Sobrenome"
+                                                <div className="form-floating">
+                                                    <input type="Sobrenome" className="form-control personal-input" name="lastName" placeholder="Sobrenome"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.lastName} required />
-                                                    <label class="form-label"> Sobrenome </label>
+                                                    <label className="form-label"> Sobrenome </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,19 +208,20 @@ class Register extends Component {
                                         <div className='row mt-3'>
                                             {/* CPF */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="text" class="form-control personal-input" name="cpf" placeholder="CPF"
+                                                <div className="form-floating">
+                                                    <input type="text" className="form-control personal-input" name="cpf" placeholder="CPF"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.cpf} required />
-                                                    <label class="form-label"> CPF </label>
+                                                    <label className="form-label"> CPF </label>
                                                 </div>
                                             </div>
+                                            {console.log(this.state.form)}
 
                                             {/* Data de Nascimento */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="date" class="form-control personal-input" name="birth" placeholder="Data de Nascimento"
+                                                <div className="form-floating">
+                                                    <input type="date" className="form-control personal-input" name="birth" placeholder="Data de Nascimento"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.birth} required />
-                                                    <label class="form-label"> Data de Nascimento </label>
+                                                    <label className="form-label"> Data de Nascimento </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -199,10 +229,10 @@ class Register extends Component {
                                         <div className='row mt-3'>
                                             {/* Email */}
                                             <div className='col-12'>
-                                                <div class="form-floating">
-                                                    <input type="email" class="form-control personal-input" name="email" placeholder="E-mail"
+                                                <div className="form-floating">
+                                                    <input type="email" className="form-control personal-input" name="email" placeholder="E-mail"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.email} required />
-                                                    <label class="form-label"> E-mail </label>
+                                                    <label className="form-label"> E-mail </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -216,36 +246,36 @@ class Register extends Component {
                                             <div className='col'>
                                                 <input className="personal-input" type='radio' id="gender1" name="gender"
                                                     onChange={(e) => { this.setState({ gender: 0 }) }} required />
-                                                <label className='gender-label' for="gender1"> Feminino </label>
+                                                <label className='gender-label' htmlFor="gender1"> Feminino </label>
                                             </div>
                                             <div className='col'>
                                                 <input className="personal-input" type='radio' id="gender2" name="gender"
                                                     onChange={(e) => { this.setState({ gender: 1 }) }} required />
-                                                <label className='gender-label' for="gender2"> Masculino </label>
+                                                <label className='gender-label' htmlFor="gender2"> Masculino </label>
                                             </div>
                                             <div className='col'>
                                                 <input className="personal-input" type='radio' id="gender3" name="gender"
                                                     onChange={(e) => { this.setState({ gender: 2 }) }} required />
-                                                <label className='gender-label' for="gender3"> Não binário </label>
+                                                <label className='gender-label' htmlFor="gender3"> Não binário </label>
                                             </div>
                                         </div>
 
                                         <div className='row mt-3'>
                                             {/* Senha */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="password" class="form-control personal-input" name="password" placeholder="Senha"
+                                                <div className="form-floating">
+                                                    <input type="password" className="form-control personal-input" name="password" placeholder="Senha"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.password} required />
-                                                    <label class="form-label"> Senha </label>
+                                                    <label className="form-label"> Senha </label>
                                                 </div>
                                             </div>
 
                                             {/* Confirmar Senha */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="password" class="form-control personal-input" name="confirmPassword" placeholder="Confirme a Senha"
+                                                <div className="form-floating">
+                                                    <input type="password" className="form-control personal-input" name="confirmPassword" placeholder="Confirme a Senha"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.confirmPassword} required />
-                                                    <label class="form-label"> Confirme a Senha </label>
+                                                    <label className="form-label"> Confirme a Senha </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -256,10 +286,10 @@ class Register extends Component {
                                         <div className='row mt-3'>
                                             {/* CNPJ */}
                                             <div className='col-12'>
-                                                <div class="form-floating">
-                                                    <input type="text" class="form-control company-input" name="cnpj" placeholder="CNPJ"
+                                                <div className="form-floating">
+                                                    <input type="text" className="form-control company-input" name="cnpj" placeholder="CNPJ"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.cnpj} required disabled />
-                                                    <label class="form-label"> CNPJ </label>
+                                                    <label className="form-label"> CNPJ </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -267,10 +297,10 @@ class Register extends Component {
                                         <div className='row mt-3'>
                                             {/* Razao Social */}
                                             <div className='col-12'>
-                                                <div class="form-floating">
-                                                    <input type="text" class="form-control company-input" name="razaoSocial" placeholder="Razão Social"
+                                                <div className="form-floating">
+                                                    <input type="text" className="form-control company-input" name="razaoSocial" placeholder="Razão Social"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.razaoSocial} required disabled />
-                                                    <label class="form-label"> Razão Social </label>
+                                                    <label className="form-label"> Razão Social </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -278,10 +308,10 @@ class Register extends Component {
                                         <div className='row mt-3'>
                                             {/* Email */}
                                             <div className='col-12'>
-                                                <div class="form-floating">
-                                                    <input type="email" class="form-control company-input" name="email" placeholder="E-mail"
+                                                <div className="form-floating">
+                                                    <input type="email" className="form-control company-input" name="email" placeholder="E-mail"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.email} required disabled />
-                                                    <label class="form-label"> E-mail </label>
+                                                    <label className="form-label"> E-mail </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -289,24 +319,24 @@ class Register extends Component {
                                         <div className='row mt-3'>
                                             {/* Senha */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="password" class="form-control company-input" name="password" placeholder="Senha"
+                                                <div className="form-floating">
+                                                    <input type="password" className="form-control company-input" name="password" placeholder="Senha"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.password} required disabled />
-                                                    <label class="form-label"> Senha </label>
+                                                    <label className="form-label"> Senha </label>
                                                 </div>
                                             </div>
 
                                             {/* Confirmar Senha */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="password" class="form-control company-input" name="confirmPassword" placeholder="Confirme a Senha"
+                                                <div className="form-floating">
+                                                    <input type="password" className="form-control company-input" name="confirmPassword" placeholder="Confirme a Senha"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.confirmPassword} required disabled />
-                                                    <label class="form-label"> Confirme a Senha </label>
+                                                    <label className="form-label"> Confirme a Senha </label>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="row mt-3">
+                                        <div className="row mt-3">
                                             <span className='hr'> </span>
                                             <span className='hr-text'> Administrador da Empresa </span>
                                         </div>
@@ -314,27 +344,27 @@ class Register extends Component {
                                         <div className='row mt-3'>
                                             {/* Nome */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="text" class="form-control company-input" name="name" placeholder="Nome"
+                                                <div className="form-floating">
+                                                    <input type="text" className="form-control company-input" name="name" placeholder="Nome"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.name} required disabled />
-                                                    <label class="form-label"> Nome </label>
+                                                    <label className="form-label"> Nome </label>
                                                 </div>
                                             </div>
 
                                             {/* Sobrenome */}
                                             <div className='col-6'>
-                                                <div class="form-floating">
-                                                    <input type="Sobrenome" class="form-control company-input" name="lastName" placeholder="Sobrenome"
+                                                <div className="form-floating">
+                                                    <input type="Sobrenome" className="form-control company-input" name="lastName" placeholder="Sobrenome"
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.lastName} required disabled />
-                                                    <label class="form-label"> Sobrenome </label>
+                                                    <label className="form-label"> Sobrenome </label>
                                                 </div>
                                             </div>
                                         </div>
                                     </section>
 
                                     <div className='row mt-4'>
-                                        <div class="col-12">
-                                            <button class="register-button btn btn-primary" type="submit"> Continuar </button>
+                                        <div className="col-12">
+                                            <button className="register-button btn btn-primary" type="submit"> Continuar </button>
                                         </div>
                                     </div>
                                 </form>
@@ -351,8 +381,8 @@ class Register extends Component {
                                     }
                                 </div>
 
-                                <div class="container category-buttons">
-                                    <div class="row">
+                                <div className="container category-buttons">
+                                    <div className="row">
                                         <CategoryCard clickFunction={this.categoryClick} category="Empoderamento Feminino" />
                                         <CategoryCard clickFunction={this.categoryClick} category="Doações" />
                                         <CategoryCard clickFunction={this.categoryClick} category="Fome" />
@@ -372,8 +402,8 @@ class Register extends Component {
                                 </div>
 
                                 <div className='row mt-4'>
-                                        <div class="col-12">
-                                            <button class="register-button btn btn-primary" type="submit" onClick={this.finishClick}> Finalizar Cadastro </button>
+                                        <div className="col-12">
+                                            <button className="register-button btn btn-primary" type="submit" onClick={this.finishClick}> Finalizar Cadastro </button>
                                         </div>
                                     </div>
                             </section>
