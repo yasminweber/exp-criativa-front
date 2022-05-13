@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import Header_Login from '../../components/Header';
 import Helmet from 'react-helmet';
 import Achievements from '../../components/Profile/Achievements';
-import ProfileProjects from '../../components/Profile/Projects';
+import ProfileProjects from '../../components/Profile/ProfileProjects';
 
 import { FiCamera } from 'react-icons/fi'
 import MyAccount from '../../components/Profile/MyAccount';
+import VolunteerProjects from '../../components/Profile/VolunteerProjects';
 
 class Profile extends Component {
 
@@ -76,7 +77,7 @@ class Profile extends Component {
                                         <ProfileProjects />
                                     </div>
                                     <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
-                                        <h1 className="mt-3"> conteudo de ações e eventos </h1>
+                                        <VolunteerProjects/>
                                     </div>
                                     <div className="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
                                         <Achievements />
@@ -92,7 +93,6 @@ class Profile extends Component {
                 </div>
 
             </div>
-
         )
     }
 }
