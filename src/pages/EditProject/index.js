@@ -87,14 +87,14 @@ class EditProject extends Component {
         await api.put(`/project/${this.state.id}`, project);
 
         alert("Projeto atualizado com sucesso");
-        window.location = '/dashboard';
+        window.location = '/profile';
     }
 
     async deletePost() {
         await api.delete(`/project/${this.state.id}`)
             .then(() => {
                 alert("Projeto apagado");
-                window.location = '/dashboard';
+                window.location = '/profile';
             })
             .catch((error) => {
                 console.log(error)

@@ -1,0 +1,29 @@
+.sidebar-admin {
+    background-color: rgb(154, 201, 196);
+    .nav {
+        .nav-item {
+            .nav-link {
+                display: flex;
+                align-items: center;
+                color: #f6f6f6;
+
+                &:hover {
+                    color: #EEAD2D;
+                }
+            }
+
+            .collapse {
+                &.show {
+                    margin-left: 35px;
+
+                    @include res-md {
+                        margin-left: 0;
+                    }
+                }
+            }
+            .collapsing {
+                margin-left: 35px
+            }
+        }
+    }
+}

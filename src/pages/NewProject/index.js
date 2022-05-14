@@ -60,7 +60,7 @@ class NewProject extends Component {
         await api.post('/newProject', project);
 
         alert("A sua ideia de projeto foi enviada com sucesso");
-        window.location = '/dashboard';
+        window.location = '/meusInteresses';
     }
 
     render() {

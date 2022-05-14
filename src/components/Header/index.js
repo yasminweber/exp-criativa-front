@@ -40,7 +40,7 @@ class Header_Login extends Component {
         return (
             <Navbar expand="lg" className="header">
                 <Container>
-                    <Navbar.Brand href="/dashboard">Nome Projeto</Navbar.Brand>
+                    <Navbar.Brand href="/meusInteresses">Nome Projeto</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -48,7 +48,7 @@ class Header_Login extends Component {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="/dashboard">Meus interesses</Nav.Link>
+                            <Nav.Link href="/meusInteresses">Meus interesses</Nav.Link>
                             <Nav.Link href="/newProject">Novo projeto</Nav.Link>
                             <NavDropdown title="Causas" id="navbarScrollingDropdown">
                                 <NavDropdown.Item href="/cause/fome">Fome</NavDropdown.Item>
@@ -85,7 +85,7 @@ class Header_Login extends Component {
                                 />
                             }
                         >
-                            <div class="text-center my-2">{this.state.user.user.name}</div>
+                            <div className="text-center my-2">{this.state.user.user.name}</div>
                             <NavDropdown.Item href="/profile" className="dropdown-color"> Perfil </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item onClick={this.logout} className="dropdown-color"> Sair </NavDropdown.Item>

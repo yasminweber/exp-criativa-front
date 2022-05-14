@@ -5,16 +5,19 @@ import NewProject from './pages/NewProject'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
-import Dashboard from './pages/Dashboard'
+import MeusInteresses from './pages/MeusInteresses'
 import Cause from './pages/Cause'
 import EditProject from './pages/EditProject'
+
+import AdminLogin from './pages/Admin'
+import Dashboard from './pages/Dashboard'
 
 const Rotas = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/meusInteresses" element={<MeusInteresses />} />
                 <Route path="/cause/fome" element={<Cause />} />
                 <Route path="/cause/saude" element={<Cause />} />
                 <Route path="/cause/maus-tratos-aos-animais" element={<Cause />} />
@@ -26,6 +29,10 @@ const Rotas = () => {
                 <Route path="/cadastro" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
+
+                {/* Admin routes */}
+                <Route path="/admin" element={<AdminLogin />} />
+                <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </BrowserRouter>
     )

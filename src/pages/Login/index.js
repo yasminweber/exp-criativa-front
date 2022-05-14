@@ -23,12 +23,10 @@ class Login extends Component {
             email: this.state.email
         }
 
-        //console.log(user)
-
         await api.post('/login', user)
             .then(res => {
                 localStorage.setItem("TOKEN_KEY", res.data.token);
-                window.location = '/dashboard';
+                window.location = '/meusInteresses';
             })
             .catch(err => {
                 console.log(err);
@@ -53,9 +51,9 @@ class Login extends Component {
 
                 <div className='container-fluid register-cover'></div>
 
-                <div class="container-lg d-flex justify-content-center">
-                    <div class="row register-content">
-                        <div class="col-lg-5 col-12 title-column d-flex">
+                <div className="container-lg d-flex justify-content-center">
+                    <div className="row register-content">
+                        <div className="col-lg-5 col-12 title-column d-flex">
                             <h2 className="title mb-3"> Bem-Vindo(a) de Volta! </h2>
                             <p className="subtitle py-2"> Digite seu e-mail e senha para entrar! </p>
 
@@ -70,30 +68,30 @@ class Login extends Component {
                             </div>
                         </div>
 
-                        <div class="col-lg-7 col-12 d-flex justify-content-center form-column">
+                        <div className="col-lg-7 col-12 d-flex justify-content-center form-column">
                             <form onSubmit={this.logar} className="form my-lg-0 my-5">
                                 <div className="row">
                                     <div className="col-12">
-                                        <div class="form-floating mb-3">
-                                            <input autoFocus type="email" class="form-control" id="email" placeholder="E-mail"
-                                                onChange={(e) => this.setState({ email: e.target.value })} />
-                                            <label for="inputNome" class="form-label">E-mail</label>
+                                        <div className="form-floating mb-3">
+                                            <input autoFocus type="email" className="form-control" id="email" placeholder="E-mail"
+                                                onChange={(e) => this.setState({ email: e.target.value })} required />
+                                            <label htmlFor="inputNome" className="form-label">E-mail</label>
                                         </div>
 
-                                        <div class="form-floating mb-3">
-                                            <input type="password" class="form-control" id="password" placeholder="Senha"
-                                                onChange={(e) => this.setState({ password: e.target.value })} />
-                                            <label for="inputNome" class="form-label">Senha</label>
+                                        <div className="form-floating mb-3">
+                                            <input type="password" className="form-control" id="password" placeholder="Senha"
+                                                onChange={(e) => this.setState({ password: e.target.value })} required />
+                                            <label htmlFor="inputNome" className="form-label">Senha</label>
                                         </div>
                                     </div>
 
                                     <div className="col-12">
-                                        <a href="#"> Esqueci minha senha </a>
+                                        <a href="/changePassword"> Esqueci minha senha </a>
                                     </div>
 
                                     <div className="col-12">
                                         <div className="enviar">
-                                            <button type="submit" class="btn-1"> Entrar </button>
+                                            <button type="submit" className="btn-1"> Entrar </button>
                                         </div>
                                     </div>
                                 </div>
