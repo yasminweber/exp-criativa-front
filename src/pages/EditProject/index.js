@@ -3,12 +3,14 @@ import HeaderLogin from '../../components/Header';
 import Helmet from 'react-helmet';
 import { currentUrl, dateInput } from '../../Helpers'
 import api from '../../config/api';
+import { decodeToken } from '../../config/auth';
 
 class EditProject extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            user: decodeToken(),
             id: "",
             projectName: "",
             causes: [],
@@ -19,6 +21,7 @@ class EditProject extends Component {
             description: "",
             quantityBenefited: "",
             quantityVolunteers: "",
+            creator: "waitingSetState",
             status: ""
         }
 
@@ -28,7 +31,7 @@ class EditProject extends Component {
         }
 
         this.updateProject = this.updateProject.bind(this);
-        this.deletePost = this.deletePost.bind(this);
+        this.deleteProject = this.deleteProject.bind(this);
     }
 
     async loadCauses() {
@@ -57,14 +60,29 @@ class EditProject extends Component {
                     description: data.description,
                     quantityBenefited: data.quantityBenefited,
                     quantityVolunteers: data.quantityVolunteers,
+                    creator: data.creator._id,
                     status: data.status
                 });
                 console.log("Projeto carregado");
+
+                this.checkUser()
             })
             .catch((error) => {
                 console.log("erro carregar projeto ", error)
                 alert('Erro para carregar o projeto');
             })
+    }
+
+    checkUser() {
+        if (this.state.creator !== "waitingSetState") {
+            if (this.state.user.user._id === this.state.creator) {
+                console.log("É o mesmo user")
+            } else {
+                console.log("Não é o mesmo user")
+                alert("Desculpe, mas você não tem permissão para editar esse projeto")
+                window.location.href = "/meusInteresses"
+            }
+        }
     }
 
     async updateProject(e) {
@@ -90,7 +108,7 @@ class EditProject extends Component {
         window.location = '/profile';
     }
 
-    async deletePost() {
+    async deleteProject() {
         await api.delete(`/project/${this.state.id}`)
             .then(() => {
                 alert("Projeto apagado");
@@ -115,11 +133,13 @@ class EditProject extends Component {
 
                 <section className="banner-titulo">
                     <div className="container-fluid">
-                        <div className="row text-lg-start text-center">
-                            <div className="col-12">
+                        <div className="row">
+                            <div className="col-md-8 col-12 text-lg-start text-center">
                                 <h1 className="titulo-1">Editar projeto</h1>
                                 <p className="descricao">Colocar qualquer texto que não seja esse de criar novo projeto</p>
-                                <button type="submit" onClick={this.deletePost}>apagar projeto</button>
+                            </div>
+                            <div className="col-md-4 col-12 d-flex flex-column-reverse flex-wrap-reverse align-items-end mt-md-0 mt-4">
+                                <button className="btn-1" onClick={() => { if (window.confirm('Tem certeza que deseja deletar esse projeto?')) this.deleteProject() }}> Apagar projeto </button>
                             </div>
                         </div>
                     </div>

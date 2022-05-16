@@ -214,7 +214,6 @@ class Register extends Component {
                                                     <label className="form-label"> CPF </label>
                                                 </div>
                                             </div>
-                                            {console.log(this.state.form)}
 
                                             {/* Data de Nascimento */}
                                             <div className='col-6'>

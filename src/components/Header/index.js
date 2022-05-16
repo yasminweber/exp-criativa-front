@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { decodeToken } from '../../config/auth';
 
-class Header_Login extends Component {
+class HeaderLogin extends Component {
     constructor(props) {
         super(props);
 
@@ -12,7 +12,6 @@ class Header_Login extends Component {
         };
 
         this.componentDidMount = () => {
-            console.log("user state - header", this.state.user)
             this.checkUser();
         }
 
@@ -97,4 +96,4 @@ class Header_Login extends Component {
     }
 }
 
-export default Header_Login;
+export default HeaderLogin;

@@ -16,6 +16,28 @@
         .descricao {
             font-size: 18px;
         }
+
+        .btn-1 {
+            padding: 7px 17px;
+            border: 2px solid #F29F05;
+            color: #F29F05;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            background-color: #ffffff00;
+            border-radius: 50px;
+            box-shadow: 2px 2px 2px #757575;
+            letter-spacing: 1px;
+            word-spacing: 3px;
+            transition: background-color 0.3s linear;
+            float: left;
+
+            &:hover {
+                background-color: #F29F05;
+                transition: background-color 0.2s linear;
+                color: white;
+            }
+        }
     }
 
     .form {

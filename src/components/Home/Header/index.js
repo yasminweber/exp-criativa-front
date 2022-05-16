@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
 class HeaderHome extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            username: ''
-        };
-    }
 
     render() {
         return (

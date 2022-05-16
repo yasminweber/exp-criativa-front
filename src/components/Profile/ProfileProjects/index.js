@@ -1,7 +1,36 @@
 import React, { Component } from 'react';
 import ProfilProjectCard from '../ProjectCard';
+import { decodeToken } from '../../../config/auth'
+import api from '../../../config/api'
 
 class ProfileProjects extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user: decodeToken(),
+            projects: []
+        };
+
+        this.componentDidMount = () => {
+            this.getPosts();
+            console.log(this.state.posts)
+        }
+    }
+
+    async getPosts() {
+
+        await api.get(`/project/user/${this.state.user.user._id}`)
+            .then((response) => {
+                const data = response.data;
+                this.setState({ projects: data });
+                console.log(this.state.projects);
+            })
+            .catch(() => {
+                alert('Erro para carregar os projetos');
+            })
+    }
 
     render() {
         return (
@@ -26,21 +55,35 @@ class ProfileProjects extends Component {
 
                 <section className="project-content">
                     <div className="tab-content" id="myTabContent">
-
-
                         <div className="tab-pane fade show active" id="pending-projects" role="tabpanel" aria-labelledby="pending-projects-tab">
-                            <ProfilProjectCard/>
-                            <ProfilProjectCard/>
-                            <ProfilProjectCard/>
+                            {this.state.projects.map((child, id) => (
+                                <>
+                                    <div key={id}>
+                                        {(child.status === "aberto") ?
+                                            <ProfilProjectCard url={child._id} projectName={child.projectName} cause={child.cause} description={child.description} />
+                                            : <></>
+                                        }
+                                    </div>
+                                </>
+                            ))}
                         </div>
-
                         <div className="tab-pane fade" id="in-progress" role="tabpanel" aria-labelledby="in-progress-tab">
-                            <h1 className="mt-3"> conteudo de fotos </h1>
+                            {this.state.projects.map((child, id) => (
+                                <>
+                                    <div key={id}>
+                                        {(child.status === "progress") ?
+                                            <ProfilProjectCard url={child._id} projectName={child.projectName} cause={child.cause} description={child.description} />
+                                            : <></>
+                                        }
+                                    </div>
+                                </>
+                            ))}
                         </div>
 
                         <div className="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
                             <h1 className="mt-3"> conteudo de ações e eventos </h1>
                         </div>
+
                     </div>
 
                 </section>

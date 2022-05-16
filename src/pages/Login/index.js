@@ -64,7 +64,7 @@ class Login extends Component {
                                 </div>
 
                                 <h2 className='title login'> Ainda não tem uma conta? </h2>
-                                <button className='login-button'> Quero me Cadastrar </button>
+                                <button className='login-button' onClick={() => { window.location.href = '/cadastro' }}> Quero me Cadastrar </button>
                             </div>
                         </div>
 
@@ -100,7 +100,7 @@ class Login extends Component {
 
                         <div className="col-12 d-lg-none special-1">
                             <h2 className='title login'> Ainda não tem uma conta? </h2>
-                            <button className='login-button'> Quero me Cadastrar </button>
+                            <button className='login-button' onClick={() => { window.location.href = '/cadastro' }}> Quero me Cadastrar </button>
                         </div>
                     </div>
                 </div>

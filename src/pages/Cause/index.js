@@ -51,7 +51,7 @@ class Cause extends Component {
 
     render() {
         return (
-            <div className="dashboard">
+            <div className="dashboard-interesses">
 
                 <Helmet>
                     <meta charSet="utf-8" />

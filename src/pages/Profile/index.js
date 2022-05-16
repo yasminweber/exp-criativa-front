@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header_Login from '../../components/Header';
+import HeaderLogin from '../../components/Header';
 import Helmet from 'react-helmet';
 import Achievements from '../../components/Profile/Achievements';
 import ProfileProjects from '../../components/Profile/ProfileProjects';
@@ -8,36 +8,82 @@ import { FiCamera } from 'react-icons/fi'
 import MyAccount from '../../components/Profile/MyAccount';
 import VolunteerProjects from '../../components/Profile/VolunteerProjects';
 
+import { decodeToken } from '../../config/auth';
+
 class Profile extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: decodeToken(),
+            name: "",
+            lastName: "",
+            email: "",
+            profielImage: "",
+            selectedCauses: [],
+            cpf: "",
+            birthDate: new Date(),
+            gender: "",
+            cnpj: "",
+            razaoSocial: "",
+        }
+
+        this.componentDidMount = () => {
+            this.populateState()
+        }
+    }
+
+    async populateState() {
+        var mainUser = this.state.user.user
+
+        this.setState({
+            name: mainUser.name,
+            lastName: mainUser.lastName,
+            email: mainUser.email,
+            profielImage: mainUser.profielImage,
+            selectedCauses: mainUser.selectedCauses,
+            cpf: mainUser.cpf,
+            birthDate: mainUser.birthDate,
+            gender: mainUser.gender,
+            cnpj: mainUser.cnpj,
+            razaoSocial: mainUser.razaoSocial
+        });
+    }
+    
 
     render() {
         return (
             <div className='profile-page'>
 
-                <Header_Login />
+                <Helmet>
+                    <title>Perfil</title>
+                </Helmet>
+
+                <HeaderLogin />
 
                 <div className='container-lg'>
-                    <div class="row">
+                    <div className="row">
 
-                        <section class="col-sm-12 col-lg-3 user-menu mt-4">
+                        <section className="col-12 col-lg-3 user-menu mt-4">
                             <div className='user-header'>
                                 <div className='container-fluid cover'>
-
                                 </div>
 
                                 <div className='user-photo-section'>
-                                    <div className='user-photo'> </div>
+                                    <div className='user-photo'>
+                                        <img className="profile-image" src="https://via.placeholder.com/110x110" alt="" />
+                                    </div>
 
                                     <div className='photo-input'>
                                         <input type="file" id="change-photo" className='d-none' />
-                                        <label className="user-photo-icon" for="change-photo"> <FiCamera /> </label>
+                                        <label className="user-photo-icon" htmlFor="change-photo"> <FiCamera /> </label>
                                     </div>
                                 </div>
 
                                 <div className='user-info'>
                                     <div className='container-fluid'>
                                         <div className='row'>
-                                            <p className='user-name'> Guilherme Weber </p>
+                                            <p className='user-name'>{this.state.name} {this.state.lastName}</p>
                                         </div>
                                         <div className='row'>
                                             <p> 1800 pontos </p>
@@ -71,13 +117,13 @@ class Profile extends Component {
                             <div className='container-lg col-sm-12 col-lg-9 mt-4'>
                                 <div className="tab-content" id="myTabContent">
                                     <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <MyAccount />
+                                        <MyAccount name={this.state.name} lastName={this.state.lastName} cpf={this.state.cpf} email={this.state.email} birthDate={this.state.birthDate} gender={this.state.gender} causes={this.state.selectedCauses} />
                                     </div>
                                     <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
                                         <ProfileProjects />
                                     </div>
                                     <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
-                                        <VolunteerProjects/>
+                                        <VolunteerProjects />
                                     </div>
                                     <div className="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
                                         <Achievements />
@@ -87,8 +133,8 @@ class Profile extends Component {
                                     </div>
                                 </div>
                             </div>
-
                         </section>
+
                     </div>
                 </div>
 

@@ -37,7 +37,7 @@ class ProjectPage extends Component {
             .then((response) => {
                 const data = response.data;
                 this.setState({
-                    projectCreator: data.creator.username,
+                    projectCreator: data.creator._id,
                     id: data._id,
                     projectName: data.projectName,
                     cause: data.cause,
@@ -67,7 +67,6 @@ class ProjectPage extends Component {
                 } else {
                     alert("Você removeu a inscrição do seu voluntariado");
                 }
-                //console.log("Deu certo");
                 this.getProject();
             })
             .catch((error) => {
@@ -92,7 +91,7 @@ class ProjectPage extends Component {
                     <div className="row">
                         <div className="col-lg-2 col-4">
                             <div className='project-image d-flex'>
-                                Image
+                                <img className="image-project" src="https://via.placeholder.com/150x150" alt="Imagem projeto" />
                             </div>
                         </div>
 
@@ -101,18 +100,22 @@ class ProjectPage extends Component {
                             <h3 className='project-cause'> {this.state.cause} </h3>
                         </div>
 
-                        {/* check if user is the one watching -- username unique */}
-                        {(this.state.user.user.username !== this.state.projectCreator) ?
-                        <div className="col-lg-4 col-12 subscription-column d-flex">
-                            {(this.state.volunteers.indexOf(this.state.user.user._id) === -1) ?
-                                <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Quero Participar </button>
-                                : <></>
-                            }
-                            {(this.state.volunteers.indexOf(this.state.user.user._id) !== -1) ?
-                                <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Deixar de Participar </button>
-                                : <></>
-                            }
-                        </div> : <></>
+                        {/* check if user is the one watching -- userId unique */}
+                        {console.log(this.state.projectCreator)}
+                        {(this.state.user.user._id !== this.state.projectCreator) ?
+                            <div className="col-lg-4 col-12 subscription-column d-flex">
+                                {(this.state.volunteers.indexOf(this.state.user.user._id) === -1) ?
+                                    <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Quero Participar </button>
+                                    : <></>
+                                }
+                                {(this.state.volunteers.indexOf(this.state.user.user._id) !== -1) ?
+                                    <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Deixar de Participar </button>
+                                    : <></>
+                                }
+                            </div> :
+                            <div className="col-lg-4 col-12 subscription-column d-flex">
+                                <button className='subscription-button' onClick={() => { window.location.href = `/editproject/${this.state.id}` }}> Editar projetor </button>
+                            </div>
                         }
                     </div>
                 </header>

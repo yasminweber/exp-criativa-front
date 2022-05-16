@@ -27,7 +27,7 @@ export const getToken = () => localStorage.getItem("TOKEN_KEY");
 
 export const decodeToken = () => {
     if (localStorage.getItem("TOKEN_KEY")) {
-        console.log("teste", jwt_decode(localStorage.getItem("TOKEN_KEY")))
+        //console.log("teste", jwt_decode(localStorage.getItem("TOKEN_KEY")))
         return jwt_decode(localStorage.getItem("TOKEN_KEY"));
     } else {
         //console.log("estou aqui")

@@ -3,6 +3,7 @@ import { Popover } from 'react-bootstrap';
 import { OverlayTrigger } from 'react-bootstrap';
 import { BsInfoCircle } from 'react-icons/bs'
 import CategoryCardProfile from './CategoryCard';
+import { dateInput } from '../../../Helpers'
 
 const popoverCompanyAccount = (
     <Popover id="popover-trigger-hover-focus" title="Popover bottom" style={{
@@ -20,7 +21,13 @@ class MyAccount extends Component {
         super(props);
         this.state = {
             companyAccount: false,
-            selectedCauses: [],
+            selectedCauses: []
+        }
+
+        this.componentDidMount = () => {
+            this.setState({
+                selectedCauses: props.causes
+            })
         }
 
         this.categoryClick = this.categoryClick.bind(this)
@@ -28,9 +35,10 @@ class MyAccount extends Component {
 
     categoryClick(category) {
         let selectedList = this.state.selectedCauses
-
-        if (selectedList.indexOf(category) != -1) {
+        
+        if (selectedList.indexOf(category) !== -1) {
             selectedList.splice(selectedList.indexOf(category), 1)
+            console.log("retirou categoria:", category)
             return true
         } else {
             if (selectedList.length >= 5) {
@@ -46,7 +54,7 @@ class MyAccount extends Component {
 
     render() {
         return (
-            <section>
+            <div>
 
                 <section>
                     <h2 className='section-title'> Meus Dados </h2>
@@ -66,58 +74,63 @@ class MyAccount extends Component {
                     </div>
 
                     <div className="container-lg">
-                        <div class="row">
-                            <div class="col-sm-12 col-lg mx-auto mt-3">
-                                <div class="col form-floating">
-                                    <input autoFocus type="text" class="form-control" id="name" placeholder="Nome"
-                                        onChange={(e) => this.setState({ name: e.target.value })} />
-                                    <label for="inputNome" class="form-label"> Nome </label>
+                        <div className="row">
+                            <div className="col-sm-12 col-lg mx-auto mt-3">
+                                <div className="col form-floating">
+                                    <input type="text" className="form-control" id="inputName" placeholder="Nome"
+                                        onChange={(e) => this.setState({ name: e.target.value })}
+                                        value={this.props.name} required />
+                                    <label htmlFor="inputName" className="form-label"> Nome </label>
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-lg mx-auto mt-3">
-                                <div class="col form-floating">
-                                    <input type="text" class="form-control" id="lastName" placeholder="Sobrenome"
-                                        onChange={(e) => this.setState({ lastName: e.target.value })} />
-                                    <label for="inputNome" class="form-label"> Sobrenome </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-sm-12 col-lg mx-auto mt-3">
-                                <div class="col form-floating">
-                                    <input type="text" class="form-control" id="cpf" placeholder="CPF"
-                                        onChange={(e) => this.setState({ cpf: e.target.value })} />
-                                    <label for="inputNome" class="form-label"> CPF </label>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12 col-lg mx-auto mt-3">
-                                <div class="col form-floating">
-                                    <input type="date" class="form-control" id="birth" placeholder="Sobrenome"
-                                        onChange={(e) => this.setState({ birth: e.target.value })} />
-                                    <label for="inputNome" class="form-label"> Data de Nascimento </label>
+                            <div className="col-sm-12 col-lg mx-auto mt-3">
+                                <div className="col form-floating">
+                                    <input type="text" className="form-control" id="inputLastName" placeholder="Sobrenome"
+                                        onChange={(e) => this.setState({ lastName: e.target.value })}
+                                        value={this.props.lastName} required />
+                                    <label htmlFor="inputLastName" className="form-label"> Sobrenome </label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col mx-auto mt-3">
-                                <div class="col form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Email"
+                        <div className="row">
+                            <div className="col-sm-12 col-lg mx-auto mt-3">
+                                <div className="col form-floating">
+                                    <input type="text" className="form-control" id="inputCpf" placeholder="CPF"
+                                        onChange={(e) => this.setState({ cpf: e.target.value })}
+                                        value={this.props.cpf} disabled />
+                                    <label htmlFor="inputCpf" className="form-label"> CPF </label>
+                                </div>
+                            </div>
+
+                            <div className="col-sm-12 col-lg mx-auto mt-3">
+                                <div className="col form-floating">
+                                    <input type="date" className="form-control" id="inputBirth" placeholder="Sobrenome"
+                                        onChange={(e) => this.setState({ birth: e.target.value })}
+                                        value={(dateInput(this.props.birthDate))} />
+                                    <label htmlFor="inputBirth" className="form-label"> Data de Nascimento </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col mx-auto mt-3">
+                                <div className="col form-floating">
+                                    <input type="email" className="form-control" id="inputEmail" placeholder="Email"
+                                        onChange={(e) => this.setState({ email: e.target.value })}
+                                        value={this.props.email} disabled />
+                                    <label htmlFor="inputEmail" className="form-label"> E-mail </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col mx-auto mt-3">
+                                <div className="col form-floating">
+                                    <input type="phone" className="form-control" id="inputPhone" placeholder="Telefone"
                                         onChange={(e) => this.setState({ email: e.target.value })} />
-                                    <label for="inputNome" class="form-label"> E-mail </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col mx-auto mt-3">
-                                <div class="col form-floating">
-                                    <input type="phone" class="form-control" id="phone" placeholder="Telefone"
-                                        onChange={(e) => this.setState({ email: e.target.value })} />
-                                    <label for="inputNome" class="form-label"> Telefone Celular </label>
+                                    <label htmlFor="inputPhone" className="form-label"> Telefone Celular </label>
                                 </div>
                             </div>
                         </div>
@@ -129,15 +142,15 @@ class MyAccount extends Component {
                         <div className='row mt-3'>
                             <div className='col'>
                                 <input type='radio' id="gender1" name="gender" onChange={(e) => { this.setState({ gender: 0 }) }} />
-                                <label className='gender-label' for="gender1"> Feminino </label>
+                                <label className='gender-label' htmlFor="gender1"> Feminino </label>
                             </div>
                             <div className='col'>
                                 <input type='radio' id="gender2" name="gender" onChange={(e) => { this.setState({ gender: 1 }) }} />
-                                <label className='gender-label' for="gender2"> Masculino </label>
+                                <label className='gender-label' htmlFor="gender2"> Masculino </label>
                             </div>
                             <div className='col'>
                                 <input type='radio' id="gender3" name="gender" onChange={(e) => { this.setState({ gender: 2 }) }} />
-                                <label className='gender-label' for="gender3"> Não binário </label>
+                                <label className='gender-label' htmlFor="gender3"> Não binário </label>
                             </div>
                         </div>
                     </div>
@@ -156,19 +169,20 @@ class MyAccount extends Component {
                     <hr />
 
                     <div className='container-lg'>
-                        <div class="row mt-2">
-                            <div class="col-sm-12 col-lg mx-auto mt-3">
-                                <div class="col form-floating">
-                                    <input type="password" class="form-control" id="password" placeholder="Senha"
-                                        onChange={(e) => this.setState({ password: e.target.value })} />
-                                    <label for="inputNome" class="form-label"> Senha </label>
+                        <div className="row mt-2">
+                            <div className="col-sm-12 col-lg mx-auto mt-3">
+                                <div className="col form-floating">
+                                    <input type="password" className="form-control" id="password" placeholder="Senha"
+                                        onChange={(e) => this.setState({ password: e.target.value })}
+                                        value={this.props.password} />
+                                    <label htmlFor="inputNome" className="form-label"> Senha </label>
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 col-lg mx-auto mt-3">
-                                <div class="col form-floating">
-                                    <input type="password" class="form-control" id="passwordConfirmation" placeholder="Confirme a Senha" />
-                                    <label for="inputNome" class="form-label"> Confirme a Senha </label>
+                            <div className="col-sm-12 col-lg mx-auto mt-3">
+                                <div className="col form-floating">
+                                    <input type="password" className="form-control" id="passwordConfirmation" placeholder="Confirme a Senha" />
+                                    <label htmlFor="inputNome" className="form-label"> Confirme a Senha </label>
                                 </div>
                             </div>
                         </div>
@@ -187,8 +201,8 @@ class MyAccount extends Component {
 
                     <hr />
 
-                    <div class="container-lg col-8">
-                        <div class="row">
+                    <div className="container-lg col-md-8 col-12">
+                        <div className="row">
                             <CategoryCardProfile clickFunction={this.categoryClick} category="Empoderamento Feminino" />
                             <CategoryCardProfile clickFunction={this.categoryClick} category="Doações" />
                             <CategoryCardProfile clickFunction={this.categoryClick} category="Fome" />
@@ -206,17 +220,17 @@ class MyAccount extends Component {
                         </div>
                     </div>
 
-                    <div className='row mt24'>
+                    {/* <div className='row mt24'>
                         <div className='col'>
                             <button className='register-button' onClick={this.nextClick}> Alterar Senha </button>
                         </div>
-                    </div>
+                    </div> */}
                 </section>
 
-
-            </section>
-
+            </div>
         )
     }
 }
+
 export default MyAccount
+
