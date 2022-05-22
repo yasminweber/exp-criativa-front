@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import HeaderAdminIn from '../../components/Header/AdminIn';
+import HeaderAdminIn from '../../../components/Header/Admin/AdminIn';
 import Helmet from 'react-helmet';
-import { decodeToken } from '../../config/auth';
+import { decodeToken } from '../../../config/auth';
 
 class Dashboard extends Component {
 
