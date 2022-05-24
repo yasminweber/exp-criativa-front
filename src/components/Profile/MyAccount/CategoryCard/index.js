@@ -4,8 +4,8 @@ class CategoryCardProfile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            //selected: this.props.selecionado
-            selected: false
+            selected: this.props.selected
+            // selected: false
         }
     }
 

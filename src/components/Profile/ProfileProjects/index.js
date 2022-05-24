@@ -15,7 +15,7 @@ class ProfileProjects extends Component {
 
         this.componentDidMount = () => {
             this.getPosts();
-            console.log(this.state.posts)
+            // console.log(this.state.posts)
         }
     }
 
@@ -25,7 +25,7 @@ class ProfileProjects extends Component {
             .then((response) => {
                 const data = response.data;
                 this.setState({ projects: data });
-                console.log(this.state.projects);
+                // console.log(this.state.projects);
             })
             .catch(() => {
                 alert('Erro para carregar os projetos');
