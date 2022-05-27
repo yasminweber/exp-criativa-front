@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { decodeToken } from '../../../config/auth';
-import { currentUrl } from '../../../Helpers'
+import { decodeToken } from '../../../../config/auth';
+import { currentUrl } from '../../../../Helpers'
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BsGrid, BsCheck2Square, BsExclamationSquare, BsDashSquare, BsHourglassSplit } from "react-icons/bs"
 import { FiInbox } from "react-icons/fi"
+import { HiOutlineUserGroup } from "react-icons/hi";
 
 class HeaderAdminIn extends Component {
 
@@ -16,7 +17,6 @@ class HeaderAdminIn extends Component {
 
         this.componentDidMount = () => {
             this.checkUser()
-            console.log(currentUrl)
         }
 
         this.logout = this.logout.bind(this)
@@ -31,6 +31,10 @@ class HeaderAdminIn extends Component {
                 this.setState({ username: this.state.user.admin.username });
             }
         }
+    }
+
+    async active() {
+        console.log(currentUrl())
     }
 
     async logout() {
@@ -61,41 +65,46 @@ class HeaderAdminIn extends Component {
                             <ul className="collapse nav flex-column" id="submenu1" data-bs-parent="#menu">
                                 <li className="w-100">
                                     {/* Function to filter all projects */}
-                                    <a href="/dashboard" className="nav-link px-0"> <FiInbox size={26} /> <span className="ms-1 d-none d-sm-inline">Todos os projetos</span> </a>
+                                    <a href="/approval?all" className="nav-link px-0"> <FiInbox size={26} /> <span className="ms-1 d-none d-sm-inline">Todos os projetos</span> </a>
                                 </li>
                                 <li className="w-100">
                                     {/* Function to filter in progress projects */}
-                                    <a href="/dashboard" className="nav-link px-0"> <BsHourglassSplit size={24} /> <span className="ms-1 d-none d-sm-inline">Em progresso</span> </a>
+                                    <a href="/approval?progress" className="nav-link px-0"> <BsHourglassSplit size={24} /> <span className="ms-1 d-none d-sm-inline">Em progresso</span> </a>
                                 </li>
                                 <li className="w-100">
                                     {/* Function to filter pending edition projects */}
-                                    <a href="/dashboard" className="nav-link px-0"> <BsExclamationSquare size={24} /> <span className="ms-1 d-none d-sm-inline">Pendentes</span> </a>
+                                    <a href="/approval?pending" className="nav-link px-0"> <BsExclamationSquare size={24} /> <span className="ms-1 d-none d-sm-inline">Pendentes</span> </a>
                                 </li>
                                 <li className="w-100">
                                     {/* Function to filter rejected projets */}
-                                    <a href="/dashboard" className="nav-link px-0"> <BsDashSquare size={24} /> <span className="ms-1 d-none d-sm-inline">Rejeitados</span> </a>
+                                    <a href="/approval?rejected" className="nav-link px-0"> <BsDashSquare size={24} /> <span className="ms-1 d-none d-sm-inline">Rejeitados</span> </a>
                                 </li>
                                 <li className="w-100">
                                     {/* Function to filter finished projets */}
-                                    <a href="/dashboard" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Finalizados</span> </a>
+                                    <a href="/approval?approved" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Aprovados</span> </a>
+                                </li>
+                                <li className="w-100">
+                                    {/* Function to filter finished projets */}
+                                    <a href="/approval?finished" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Finalizados</span> </a>
                                 </li>
                             </ul>
+                        </li>
+
+                        <li className="nav-item">
+                            <a href="/administration" className="nav-link px-0">
+                                <HiOutlineUserGroup size={26} /> <span className="ms-1 d-none d-sm-inline">Administradores</span>
+                            </a>
                         </li>
                     </ul>
                     <hr />
 
                     <div className="dropdown pb-4">
-                        <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" className="rounded-circle" />
+                        <button href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://via.placeholder.com/30" alt="hugenerd" width="30" height="30" className="rounded-circle" />
                             <span className="d-none d-sm-inline mx-1">{this.state.username}</span>
-                        </a>
+                        </button>
                         <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a className="dropdown-item" href="#">New project...</a></li>
-                            <li><a className="dropdown-item" href="#">Settings</a></li>
-                            <li><a className="dropdown-item" href="#">Profile</a></li>
-                            <li>
-                                <hr className="dropdown-divider" />
-                            </li>
+
                             <li>
                                 <button className="dropdown-item" onClick={this.logout}>Sign out</button>
                             </li>

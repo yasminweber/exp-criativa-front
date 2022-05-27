@@ -1,0 +1,67 @@
+.administration {
+    background-color: #f6f6f6;
+
+    .right-side {
+        @include res-lg {
+            width: 83%;
+        }
+
+        .tabela {
+            background-color: white;
+            border-radius: 10px;
+            padding: 12px 12px;
+
+            @include res-lg {
+                width: 100%;
+                overflow-x: scroll;
+            }
+    
+            .linha {
+                border-bottom: 2px solid #d3d3d3;
+                width: 95%;
+                margin: 0 auto;
+                padding: 7px 0;
+    
+                &:first-child {
+                    border-bottom: none;
+                    color: grey;
+                }
+    
+                &:last-child {
+                    border-bottom: none;
+                }
+    
+                .titulo-1 {
+                    font-size: 14px;
+                    text-transform: uppercase;
+                }
+    
+                .titulo-2 {
+                    font-weight: 600;
+                }
+    
+                .btn-1 {
+                    svg {
+                        color: #4040ff;
+                    }
+    
+                    svg:hover {
+                        color: #0000cc;
+                    }
+                }
+    
+                .btn-2 {
+                    svg {
+                        color: tomato;
+                    }
+    
+                    svg:hover {
+                        color: red;
+                    }
+                }
+            }
+        }
+    }
+
+    
+}

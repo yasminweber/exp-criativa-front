@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import HeaderAdminOut from '../../components/Header/AdminOut';
+import HeaderAdminOut from '../../components/Header/Admin/AdminOut';
 import api from '../../config/api'
 
 class AdminLogin extends Component {
