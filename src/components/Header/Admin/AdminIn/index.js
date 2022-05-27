@@ -81,6 +81,10 @@ class HeaderAdminIn extends Component {
                                 </li>
                                 <li className="w-100">
                                     {/* Function to filter finished projets */}
+                                    <a href="/approval?approved" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Aprovados</span> </a>
+                                </li>
+                                <li className="w-100">
+                                    {/* Function to filter finished projets */}
                                     <a href="/approval?finished" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Finalizados</span> </a>
                                 </li>
                             </ul>

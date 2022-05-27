@@ -1,10 +1,21 @@
-@import "./components/headerFora.scss";
 @import "./components/creatorProjects.scss";
 
-@import "./components/newProject.scss";
-@import "./components/dashboard.scss";
+/* ADMIN */
+@import "./pages/adminApproval.scss";
+@import "./pages/administration.scss";
+@import "./pages/dashboardAdmin.scss";
+@import "./pages/loginAdmin.scss";
 
-@import "./components/loginAdmin.scss";
-@import "./components/dashboardAdmin.scss";
+@import "./components/projectAdminCard.scss";
 @import "./components/sidebarAdmin.scss";
-@import "./components/administration.scss";
+
+
+
+/* PROJECT */
+@import "./pages/newProject.scss";
+
+
+
+/* USER */
+@import "./components/dashboard.scss";
+@import "./components/headerFora.scss";

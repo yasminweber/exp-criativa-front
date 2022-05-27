@@ -97,7 +97,7 @@ class Administration extends Component {
     }
 
     async editAdmin() {
-        var id = document.getElementById('id').value
+        var id = document.querySelector('.modal#modalEditUser #id').value
 
         const admin = {
             name: document.getElementsByName('nameEdit')[0].value,
@@ -106,6 +106,8 @@ class Administration extends Component {
             email: document.getElementsByName('emailEdit')[0].value
         }
 
+        console.log(id, admin)
+
         await api.put(`/admin/${id}`, admin)
             .then(() => {
                 alert("Administrador atualizado com sucesso");
@@ -113,7 +115,7 @@ class Administration extends Component {
             })
             .catch((error) => {
                 console.log(error)
-                alert('Erro para carregar o admin');
+                alert('Erro para alterar o admin');
             });
     }
 

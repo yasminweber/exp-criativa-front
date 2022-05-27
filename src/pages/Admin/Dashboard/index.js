@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import HeaderAdminIn from '../../../components/Header/Admin/AdminIn';
 import Helmet from 'react-helmet';
 import { decodeToken } from '../../../config/auth';
+import api from '../../../config/api';
+import { Chart } from 'react-google-charts'
+// import _ from 'lodash'
+
+export const data = [
+    ["Task", "Hours per Day"],
+    ["Abertos", 10],
+    ["Progresso", 1],
+];
+
+export const options = {
+    title: "Projetos abertos",
+};
 
 class Dashboard extends Component {
 
@@ -11,7 +24,46 @@ class Dashboard extends Component {
             user: decodeToken(),
             projects: []
         }
+
+        this.componentDidMount = () => {
+            this.loadProjects()
+        }
     }
+
+    async loadProjects() {
+        await api.get(`/projects`)
+            .then((response) => {
+                const data = response.data;
+                this.setState({ projects: data });
+                console.log(data)
+                //this.loadData(data)
+            })
+            .catch(() => {
+                alert('Erro para carregar os projetos');
+            })
+    }
+
+    // loadData(data) {
+    //     // const values = _.groupBy(data, (value) => {
+    //     //     return value.status;
+    //     // })
+
+    //     // console.log("valoresh", values)
+
+    //     // // const result = _.countBy(values, Math.floor)
+    //     // const result = _.map(values, (value, key) => [
+    //     //     key,
+    //     //     _.countBy(values[key], Math.floor)
+    //     // ])
+
+    //     // console.log("resultt", result)
+        
+    //     return [
+    //         ["Status", "Quantidade"],
+    //         ["something", 2],
+    //         ["3", 4]
+    //     ]
+    // }
 
     render() {
         return (
@@ -34,19 +86,18 @@ class Dashboard extends Component {
                                 </div>
 
                                 <div className="row">
-                                    <div className="col-12">
-                                        <h2>Colocar gráficos aqui</h2>
-                                    </div>
-                                </div>
-
-                                {/* <div className="row">
                                     <div className="col-md-6 col-12">
-                                        <div className="box-item" style={{backgroundColor: "lightblue"}}>
-                                            <h2>Causas</h2>
-
+                                        <div className="box-item">
+                                            <Chart
+                                                chartType="PieChart"
+                                                data={data}
+                                                options={options}
+                                                width={"100%"}
+                                                height={"400px"}
+                                            />
                                         </div>
                                     </div>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     </div>

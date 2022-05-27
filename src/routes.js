@@ -11,7 +11,7 @@ import EditProject from './pages/EditProject'
 
 import AdminLogin from './pages/Admin'
 import Dashboard from './pages/Admin/Dashboard'
-import Approval from './pages/Admin/Approval'
+import AdminApproval from './pages/Admin/Approval'
 import Administration from './pages/Admin/Administration'
 
 const Rotas = () => {
@@ -35,7 +35,7 @@ const Rotas = () => {
                 {/* Admin routes */}
                 <Route path="/admin" element={<AdminLogin />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/approval" element={<Approval />} />
+                <Route path="/approval" element={<AdminApproval />} />
                 <Route path="/administration" element={<Administration />} />
             </Routes>
         </BrowserRouter>

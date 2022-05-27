@@ -1,0 +1,17 @@
+.approval {}
+
+#modalProject {
+    .modal-footer {
+        .footer-btn {
+            gap: 15px;
+        }
+
+        #showImproove {
+            text-align: start;
+            textarea {
+                border: 1px solid black;
+                padding: 8px;
+            }
+        }
+    }
+}
