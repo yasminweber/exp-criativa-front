@@ -1,4 +1,7 @@
-.approval {}
+.approval {
+    background-color: #f6f6f6;
+    height: 100%;
+}
 
 #modalProject {
     .modal-footer {
@@ -6,10 +9,11 @@
             gap: 15px;
         }
 
-        #showImproove {
+        #showImprove {
             text-align: start;
             textarea {
-                border: 1px solid black;
+                border: 1px solid grey;
+                border-radius: 3px;
                 padding: 8px;
             }
         }

@@ -4,13 +4,7 @@ import Helmet from 'react-helmet';
 import { decodeToken } from '../../../config/auth';
 import api from '../../../config/api';
 import { Chart } from 'react-google-charts'
-// import _ from 'lodash'
-
-export const data = [
-    ["Task", "Hours per Day"],
-    ["Abertos", 10],
-    ["Progresso", 1],
-];
+import _ from 'lodash'
 
 export const options = {
     title: "Projetos abertos",
@@ -36,34 +30,34 @@ class Dashboard extends Component {
                 const data = response.data;
                 this.setState({ projects: data });
                 console.log(data)
-                //this.loadData(data)
             })
             .catch(() => {
                 alert('Erro para carregar os projetos');
             })
     }
 
-    // loadData(data) {
-    //     // const values = _.groupBy(data, (value) => {
-    //     //     return value.status;
-    //     // })
+    loadData(data) {
+        const values = _.groupBy(data, (value) => {
+            return value.status;
+        })
 
-    //     // console.log("valoresh", values)
+        const result = Object.entries(values).reduce((r, v) => {
+            r[v[0]] = v[1].length
+            return r
+        }, {})
 
-    //     // // const result = _.countBy(values, Math.floor)
-    //     // const result = _.map(values, (value, key) => [
-    //     //     key,
-    //     //     _.countBy(values[key], Math.floor)
-    //     // ])
+        let resultArray = []
+        Object.keys(result).forEach((doc) => {
+            let array = []
+            array.push(doc)
+            array.push(result[doc])
+            resultArray.push(array)
+        })
 
-    //     // console.log("resultt", result)
-        
-    //     return [
-    //         ["Status", "Quantidade"],
-    //         ["something", 2],
-    //         ["3", 4]
-    //     ]
-    // }
+        return [
+            ["Status", "Quantidade"], ...resultArray
+        ]
+    }
 
     render() {
         return (
@@ -90,7 +84,7 @@ class Dashboard extends Component {
                                         <div className="box-item">
                                             <Chart
                                                 chartType="PieChart"
-                                                data={data}
+                                                data={this.loadData(this.state.projects)}
                                                 options={options}
                                                 width={"100%"}
                                                 height={"400px"}
@@ -104,7 +98,6 @@ class Dashboard extends Component {
                 </div>
 
             </div>
-
         )
     }
 }

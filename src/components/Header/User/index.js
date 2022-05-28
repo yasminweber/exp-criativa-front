@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
-import { decodeToken } from '../../config/auth';
+import { decodeToken } from '../../../config/auth';
 
 class HeaderLogin extends Component {
     constructor(props) {
@@ -39,7 +39,7 @@ class HeaderLogin extends Component {
         return (
             <Navbar expand="lg" className="header">
                 <Container>
-                    <Navbar.Brand href="/meusInteresses">Nome Projeto</Navbar.Brand>
+                    <Navbar.Brand href="/meusInteresses">All4One</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav

@@ -46,6 +46,7 @@ class HeaderAdminIn extends Component {
     render() {
         return (
             <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark sidebar-admin">
+                {marginSidebar()}
                 <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="/" className="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span className="fs-5 d-none d-sm-inline" style={{ color: "transparent", marginBottom: "20px" }}>Menu</span>
@@ -68,21 +69,23 @@ class HeaderAdminIn extends Component {
                                     <a href="/approval?all" className="nav-link px-0"> <FiInbox size={26} /> <span className="ms-1 d-none d-sm-inline">Todos os projetos</span> </a>
                                 </li>
                                 <li className="w-100">
-                                    {/* Function to filter in progress projects */}
-                                    <a href="/approval?progress" className="nav-link px-0"> <BsHourglassSplit size={24} /> <span className="ms-1 d-none d-sm-inline">Em progresso</span> </a>
+                                    {/* Function to filter solicitation projets */}
+                                    <a href="/approval?solicitation" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Solicitações</span> </a>
                                 </li>
                                 <li className="w-100">
                                     {/* Function to filter pending edition projects */}
                                     <a href="/approval?pending" className="nav-link px-0"> <BsExclamationSquare size={24} /> <span className="ms-1 d-none d-sm-inline">Pendentes</span> </a>
                                 </li>
                                 <li className="w-100">
+                                    {/* Function to filter in progress projects */}
+                                    <a href="/approval?progress" className="nav-link px-0"> <BsHourglassSplit size={24} /> <span className="ms-1 d-none d-sm-inline">Em progresso</span> </a>
+                                </li>
+                                
+                                <li className="w-100">
                                     {/* Function to filter rejected projets */}
                                     <a href="/approval?rejected" className="nav-link px-0"> <BsDashSquare size={24} /> <span className="ms-1 d-none d-sm-inline">Rejeitados</span> </a>
                                 </li>
-                                <li className="w-100">
-                                    {/* Function to filter finished projets */}
-                                    <a href="/approval?approved" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Aprovados</span> </a>
-                                </li>
+                                
                                 <li className="w-100">
                                     {/* Function to filter finished projets */}
                                     <a href="/approval?finished" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Finalizados</span> </a>
@@ -117,3 +120,14 @@ class HeaderAdminIn extends Component {
 }
 
 export default HeaderAdminIn;
+
+function marginSidebar () {
+    const sidebar = document.querySelector('.sidebar-admin')
+    let sidebarWidth, next = ''
+    if (sidebar !==  null) {
+        sidebarWidth = sidebar.offsetWidth
+        next = sidebar.nextElementSibling.style.marginLeft = `${sidebarWidth}px`
+    }
+
+    return next
+}

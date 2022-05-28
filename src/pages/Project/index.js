@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet'
 import { currentUrl, formatDate } from '../../Helpers'
-import HeaderLogin from '../../components/Header';
+import HeaderLogin from '../../components/Header/User';
 import Member from '../../components/Project/Member';
 import api from '../../config/api';
 import { decodeToken } from '../../config/auth';
