@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HeaderLogin from '../../components/Header';
+import HeaderLogin from '../../components/Header/User';
 import Helmet from 'react-helmet';
 import Achievements from '../../components/Profile/Achievements';
 import ProfileProjects from '../../components/Profile/ProfileProjects';

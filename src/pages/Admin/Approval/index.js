@@ -31,7 +31,13 @@ class AdminApproval extends Component {
                 title: "Todos os projetos",
                 currentPage: "all"
             })
-        } else if (page === "approval?progress") {
+        } else if (page === "approval?solicitation") {
+            this.setState({
+                title: "Projetos solicitados",
+                currentPage: "solicitação"
+            })
+        }
+        else if (page === "approval?progress") {
             this.setState({
                 title: "Projetos em progresso",
                 currentPage: "progress"
@@ -39,12 +45,12 @@ class AdminApproval extends Component {
         } else if (page === "approval?pending") {
             this.setState({
                 title: "Projetos pendentes",
-                currentPage: "pending"
+                currentPage: "pendente"
             })
         } else if (page === "approval?rejected") {
             this.setState({
                 title: "Projetos rejeitados",
-                currentPage: "rejected"
+                currentPage: "rejeitado"
             })
         } else {
             this.setState({
@@ -68,7 +74,7 @@ class AdminApproval extends Component {
 
     loadProjectModal() {
         var exampleModal = document.getElementById('modalProject')
-        // console.log("modal", exampleModal)
+        console.log("modal", exampleModal)
 
         exampleModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget
@@ -96,6 +102,19 @@ class AdminApproval extends Component {
                 let id = project._id
                 console.log("usseerrr", projectName, cause, where, description, quantityBenefited, quantityVolunteers, status, improvement, id)
 
+                if (status === "rejeitado" || status === "aprovado") {
+                    document.querySelector(".modal-body").style.paddingBottom = "1.5rem"
+                    document.querySelector(".modal-footer").style.display = "none"
+                }
+                if (status === "solicitação") {
+                    document.querySelector(".modal-body").style.paddingBottom = "1rem"
+                    document.querySelector(".modal-footer").style.display = "block"
+                }
+                if (status === "pendente") {
+                    document.querySelector(".modal-body").style.paddingBottom = "1rem"
+                    document.querySelector(".modal-footer").style.display = "block"
+                }
+
                 exampleModal.querySelector('.modal#modalProject .modal-title').textContent = "Projeto - " + projectName
                 exampleModal.querySelector('.modal#modalProject #cause').textContent = cause
                 exampleModal.querySelector('.modal#modalProject #where').textContent = where
@@ -103,8 +122,11 @@ class AdminApproval extends Component {
                 exampleModal.querySelector('.modal#modalProject #benefited').textContent = quantityBenefited
                 exampleModal.querySelector('.modal#modalProject #volunteers').textContent = quantityVolunteers
                 exampleModal.querySelector('.modal#modalProject #status').textContent = status
-                if (improvement !== undefined) {
+                if (improvement !== undefined && improvement !== "") {
                     exampleModal.querySelector('.modal#modalProject #improvement').value = improvement
+                    document.getElementById("showImprove").style.display = "block";
+                } else {
+                    document.getElementById("showImprove").style.display = "none";
                 }
                 exampleModal.querySelector('.modal#modalProject #id').value = id
             }
@@ -112,32 +134,28 @@ class AdminApproval extends Component {
     }
 
     async approveProject() {
-        var id = document.getElementById('id').value
-
+        const id = document.getElementById('id').value
         const project = {
-            status: "approved"
+            status: "aprovado"
         }
 
         await api.put(`/project/${id}`, project)
             .then(() => {
                 alert("Projeto aprovado com sucesso");
-                this.loadAdmins()
+                //this.loadAdmins()
             })
             .catch((error) => {
                 console.log(error)
-                alert('Erro para alterar o projeto');
+                alert('Erro para aprovar o projeto');
             });
     }
 
     async improveProject() {
-        var id = document.getElementById('id').value
-
+        const id = document.getElementById('id').value
         const project = {
-            status: "pending",
+            status: "pendente",
             improvement: document.getElementById('improvement').value
         }
-
-        console.log(id, project)
 
         await api.put(`/project/${id}`, project)
             .then(() => {
@@ -151,13 +169,10 @@ class AdminApproval extends Component {
     }
 
     async rejectProject() {
-        var id = document.getElementById('id').value
-
+        const id = document.getElementById('id').value
         const project = {
-            status: "rejected"
+            status: "rejeitado"
         }
-
-        console.log(id, project)
 
         await api.put(`/project/${id}`, project)
             .then(() => {
@@ -183,7 +198,7 @@ class AdminApproval extends Component {
                     <div className="container-fluid">
                         <div className="row flex-nowrap">
                             <HeaderAdminIn />
-                            <div className="col-auto col-md-9 col-xl-10 px-sm-2 px-0">
+                            <div className="col-auto col-md-9 col-xl-10 px-sm-2 px-0 approval">
                                 <div className="container-lg">
                                     <div className="row text-lg-start text-center">
                                         <div className="col-12">
@@ -193,35 +208,54 @@ class AdminApproval extends Component {
 
                                     <div className="row">
                                         {this.state.projects.map((child, id) => (
-                                            <div className="col-lg-6 col-10 text-start" key={id}>
+                                            <>
                                                 {/* Todos os projetos */}
                                                 {(this.state.currentPage === "all") ?
-                                                    <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                    <div className="col-lg-6 col-10 text-start" key={id}>
+                                                        <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                    </div>
                                                     : <></>
                                                 }
-                                                {/* Em progresso */}
-                                                {(this.state.currentPage === "progress") ?
+                                                {/* Soliticações */}
+                                                {(this.state.currentPage === "solicitação") ?
                                                     <>
-                                                        {(child.status === "progress") ?
-                                                            <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                        {(child.status === "solicitação") ?
+                                                            <div className="col-lg-6 col-10 text-start" key={id}>
+                                                                <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                            </div>
                                                             : <></>
                                                         }
                                                     </> : <></>
                                                 }
                                                 {/* Pendentes */}
-                                                {(this.state.currentPage === "pending") ?
+                                                {(this.state.currentPage === "pendente") ?
                                                     <>
-                                                        {(child.status === "pending") ?
-                                                            <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                        {(child.status === "pendente") ?
+                                                            <div className="col-lg-6 col-10 text-start" key={id}>
+                                                                <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                            </div>
+                                                            : <></>
+                                                        }
+                                                    </> : <></>
+                                                }
+                                                {/* Em progresso */}
+                                                {(this.state.currentPage === "progress") ?
+                                                    <>
+                                                        {(child.status === "progress") ?
+                                                            <div className="col-lg-6 col-10 text-start" key={id}>
+                                                                <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                            </div>
                                                             : <></>
                                                         }
                                                     </> : <></>
                                                 }
                                                 {/* Rejeitados */}
-                                                {(this.state.currentPage === "rejected") ?
+                                                {(this.state.currentPage === "rejeitado") ?
                                                     <>
-                                                        {(child.status === "rejected") ?
-                                                            <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                        {(child.status === "rejeitado") ?
+                                                            <div className="col-lg-6 col-10 text-start" key={id}>
+                                                                <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                            </div>
                                                             : <></>
                                                         }
                                                     </> : <></>
@@ -230,12 +264,14 @@ class AdminApproval extends Component {
                                                 {(this.state.currentPage === "finished") ?
                                                     <>
                                                         {(child.status === "finished") ?
-                                                            <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                            <div className="col-lg-6 col-10 text-start" key={id}>
+                                                                <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
+                                                            </div>
                                                             : <></>
                                                         }
                                                     </> : <></>
                                                 }
-                                            </div>
+                                            </>
                                         ))}
                                     </div>
                                 </div>
@@ -245,7 +281,7 @@ class AdminApproval extends Component {
 
                 </div>
 
-                {/* Modal project */}
+                {/* Modal project for approval */}
                 <div className="modal fade" id="modalProject" tabIndex="-1" aria-labelledby="modalProjectLabel" aria-hidden="true">
                     <div className="modal-dialog modal-lg modal-dialog-centered">
                         <div className="modal-content">
@@ -284,13 +320,13 @@ class AdminApproval extends Component {
                             <div className="modal-footer flex-column">
                                 <div className="row w-100 pb-1">
                                     <div className="col-12 d-flex footer-btn justify-content-end">
-                                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={this.rejectProject}>Rejeitar projeto</button>
-                                        <button type="button" className="btn btn-warning" onClick={showImproove}>Solicitar alteração</button>
-                                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={this.approveProject}>Aprovar projeto</button>
+                                        <button type="button" id="btn-reject" className="btn btn-danger" data-bs-dismiss="modal" onClick={this.rejectProject}>Rejeitar projeto</button>
+                                        <button type="button" id="btn-improve" className="btn btn-warning" onClick={showImprove}>Solicitar alteração</button>
+                                        <button type="button" id="btn-approve" className="btn btn-primary" data-bs-dismiss="modal" onClick={this.approveProject}>Aprovar projeto</button>
                                     </div>
                                 </div>
 
-                                <div className="row w-100" id="showImproove" style={{ display: "none" }}>
+                                <div className="row w-100" id="showImprove" style={{ display: "none" }}>
                                     <hr />
                                     <div className="col-12 d-flex flex-column">
                                         <h4 className="mb-3">O que precisa ser alterado no projeto?</h4>
@@ -309,8 +345,8 @@ class AdminApproval extends Component {
 
 export default AdminApproval
 
-function showImproove() {
-    var x = document.getElementById("showImproove");
+function showImprove() {
+    var x = document.getElementById("showImprove");
     if (x !== null) {
         if (x.style.display === "none") {
             x.style.display = "block";
