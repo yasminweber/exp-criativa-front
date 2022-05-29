@@ -9,6 +9,18 @@
         }
     }
 
+    .navbar-toggler {
+        z-index: 9999;
+        border: none;
+        
+        &[aria-expanded=true]{
+            .navbar-toggler-icon {
+                transition: .2s ease-in-out;
+                background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNCcgaGVpZ2h0PScyNCcgdmlld0JveD0nMCAwIDI0IDI0Jz48cGF0aCBkPSdNMTkgNi40MUwxNy41OSA1IDEyIDEwLjU5IDYuNDEgNSA1IDYuNDEgMTAuNTkgMTIgNSAxNy41OSA2LjQxIDE5IDEyIDEzLjQxIDE3LjU5IDE5IDE5IDE3LjU5IDEzLjQxIDEyeicvPjxwYXRoIGQ9J00wIDBoMjR2MjRIMHonIGZpbGw9J25vbmUnLz48L3N2Zz4=);
+            }
+        }
+    }
+
     .navbar-collapse {
         .navbar-nav {
             .nav-link {
@@ -32,7 +44,8 @@
             border-radius: 0 0 .25rem .25rem;
         }
 
-        &.active, &:active {
+        &.active,
+        &:active {
             color: #000;
             background-color: lightgray;
         }
@@ -40,7 +53,13 @@
 
     .dropdown-menu {
         padding: 0;
+
+        @include res-min-lg {
+            max-height: 226px;
+            overflow-x: auto;
+        }
     }
+
     .dropdown-divider {
         margin: 0;
     }
@@ -49,6 +68,47 @@
         &:after {
             color: #EEAD2D;
             vertical-align: middle;
+        }
+    }
+
+    .menu-mobile {
+        background-color: #008b8b;
+        position: fixed;
+        width: 100%;
+        left: 100%;
+        top: 0;
+        height: 100vh;
+        z-index: 9998;
+        transition: .3s;
+
+        &.aberto {
+            transition: .4s;
+            left: 0;
+        }
+
+        .navbar-nav {
+            .nav-link {
+                color: white;
+            }
+
+            .nav-item {
+                .dropdown-menu {
+                    width: fit-content;
+                    margin: 0 auto;
+                    max-height: 226px;
+                    overflow-x: auto;
+                }
+            }
+        }
+
+        .account {
+            position: fixed;
+            bottom: 30px;
+
+            .dropdown-menu {
+                top: -90px;
+                left: 3%;
+            }
         }
     }
 }

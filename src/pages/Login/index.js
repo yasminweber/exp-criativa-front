@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import HeaderHome from '../../components/Home/Header';
+import HeaderHome from '../../components/Header/Home';
 import api from '../../config/api'
 
 class Login extends Component {

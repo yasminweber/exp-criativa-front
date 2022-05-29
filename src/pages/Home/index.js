@@ -3,7 +3,7 @@ import CauseCard from '../../components/Home/Cause_Card';
 import Helmet from 'react-helmet';
 
 //import { BsGenderFemale } from 'react-icons/bs'
-import HeaderHome from '../../components/Home/Header';
+import HeaderHome from '../../components/Header/Home';
 
 import Benefits from '../../components/Home/Benefits';
 

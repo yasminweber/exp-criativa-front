@@ -5,6 +5,7 @@ import { BsInfoCircle } from 'react-icons/bs'
 import CategoryCardProfile from './CategoryCard';
 import { dateInput } from '../../../Helpers'
 import api from '../../../config/api'
+import { decodeToken } from '../../../config/auth';
 
 const popoverCompanyAccount = (
     <Popover id="popover-trigger-hover-focus" title="Popover bottom" style={{
@@ -21,6 +22,7 @@ class MyAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: decodeToken(),
             companyAccount: false,
             causes: [],
             selectedCauses: [],
@@ -116,13 +118,18 @@ class MyAccount extends Component {
         }
     }
 
-    editClick() {
+    async editClick() {
         if (this.state.editMode) {
             this.setState({editMode: false})
 
-            // Aqui função para dar update no banco
-            console.log("Função para salvar no banco")
-            alert("Salvar no banco")
+            const edit = {
+                selectedCauses: this.state.selectedCauses
+            }
+
+            console.log(edit)
+
+            await api.put(`/user/${this.state.user.user._id}`, edit);
+            this.setState({user: decodeToken()})
         }
         else {
             this.setState({editMode: true})
