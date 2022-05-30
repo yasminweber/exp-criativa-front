@@ -43,3 +43,26 @@ export function checkMonthYear(start, end) {
     }
     return "not the same year"
 }
+
+// click mudança de idioma
+export function changeLanguage() {
+    const language = localStorage.getItem("language");
+    const selectedLanguage = window.event.target.id;
+    console.log(selectedLanguage)
+    if (language !== selectedLanguage) {
+        localStorage.setItem("language", selectedLanguage);
+        window.location.reload();
+    }
+}
+
+// para nunca deixar language em branco
+if (localStorage.getItem("language") === "") {
+    localStorage.setItem("language", "pt-br");
+}
+
+// importa json de tradução
+export function translation(language) {
+    const json = require('./config/languages/' + language + '.json')
+    // console.log(json)
+    return json
+}
