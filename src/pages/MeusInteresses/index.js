@@ -19,7 +19,6 @@ class MeusInteresses extends Component {
     }
 
     async getProjects() {
-
         var causas = this.state.user.user.selectedCauses
         console.log("user causes", causas)
 
@@ -49,7 +48,7 @@ class MeusInteresses extends Component {
                     <div className="container-fluid">
                         <div className="row text-lg-start text-center">
                             <div className="col-12">
-                                <h1 className="titulo-1">Ver todos os projetos</h1>
+                                <h1 className="titulo-1">Meus interesses</h1>
                             </div>
                         </div>
                     </div>

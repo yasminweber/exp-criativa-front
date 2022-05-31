@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Navbar, Container, Nav, Button, NavDropdown } from 'react-bootstrap';
-import { changeLanguage } from '../../../Helpers';
+import { changeLanguage, translation } from '../../../Helpers';
 
 class HeaderHome extends Component {
-
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <Navbar expand="lg" className="header-home">
                 <Container>
@@ -17,10 +17,10 @@ class HeaderHome extends Component {
                                 <NavDropdown.Item onClick={changeLanguage} id="pt-br"><img className="flag-icon" src="https://cdn-icons-png.flaticon.com/512/330/330430.png" height={"24px"} alt="Brazil Flag" />Português</NavDropdown.Item>
                             </NavDropdown>
                             <Nav.Link href="/login">
-                                <Button variant="warning" className="btn-1">Login</Button>
+                                <Button variant="warning" className="btn-1">{t.headerHome.btn1}</Button>
                             </Nav.Link>
                             <Nav.Link href="/cadastro">
-                                <Button variant="warning" className="btn-1">Cadastro</Button>
+                                <Button variant="warning" className="btn-1">{t.headerHome.btn2}</Button>
                             </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

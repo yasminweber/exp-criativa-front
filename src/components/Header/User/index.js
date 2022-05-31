@@ -176,7 +176,6 @@ class HeaderUser extends Component {
 
 export default HeaderUser;
 
-
 function openMenu() {
     const btnMenu = document.querySelector('.header .navbar-toggler');
 

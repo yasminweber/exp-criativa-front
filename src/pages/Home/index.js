@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import CauseCard from '../../components/Home/Cause_Card';
 import Helmet from 'react-helmet';
-
-//import { BsGenderFemale } from 'react-icons/bs'
 import HeaderHome from '../../components/Header/Home';
-
 import Benefits from '../../components/Home/Benefits';
+import{ translation } from '../../Helpers';
 
 class Home extends Component {
 
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <div className="homev2">
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title>Home</title>
+                    <title>{t.home.title}</title>
                 </Helmet>
 
                 <HeaderHome />

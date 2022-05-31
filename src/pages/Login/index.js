@@ -46,7 +46,7 @@ class Login extends Component {
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title> Nome - Entrar </title>
+                    <title> {t.login.title} </title>
                 </Helmet>
 
                 <HeaderHome />
