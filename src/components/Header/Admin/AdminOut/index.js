@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { Navbar, Container } from 'react-bootstrap';
 
 class HeaderAdminOut extends Component {
 

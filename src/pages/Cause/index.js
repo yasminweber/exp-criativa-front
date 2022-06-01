@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HeaderLogin from '../../components/Header';
+import HeaderLogin from '../../components/Header/User';
 import Helmet from 'react-helmet';
 import api from '../../config/api'
 import { currentUrl } from '../../Helpers';

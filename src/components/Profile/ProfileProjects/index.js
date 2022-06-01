@@ -59,7 +59,7 @@ class ProfileProjects extends Component {
                             {this.state.projects.map((child, id) => (
                                 <>
                                     <div key={id}>
-                                        {(child.status === "aberto") ?
+                                        {(child.status === "aprovado" || child.status === "solicitação") ?
                                             <ProfilProjectCard url={child._id} projectName={child.projectName} cause={child.cause} description={child.description} />
                                             : <></>
                                         }
@@ -71,7 +71,7 @@ class ProfileProjects extends Component {
                             {this.state.projects.map((child, id) => (
                                 <>
                                     <div key={id}>
-                                        {(child.status === "progress") ?
+                                        {(child.status === "progresso") ?
                                             <ProfilProjectCard url={child._id} projectName={child.projectName} cause={child.cause} description={child.description} />
                                             : <></>
                                         }

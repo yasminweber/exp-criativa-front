@@ -64,6 +64,12 @@
     }
 }
 
+@mixin res-min-lg {
+    @media (min-width:992px) {
+        @content;
+    }
+}
+
 //  resoluções especificas
 @mixin res-1920x1080 {
     @media (max-width:1921px) {

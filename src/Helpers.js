@@ -35,11 +35,37 @@ export function checkMonthYear(start, end) {
 
     if (splitEnd[2] === splitStart[2]) {
         if (splitEnd[1] === splitStart[1]) {
-            
+
             console.log("same month")
             return splitStart[0] + "/" + splitStart[1] + " - " + splitEnd[0] + "/" + splitEnd[1]
         }
         return "same year"
     }
     return "not the same year"
+}
+
+// click mudança de idioma
+export function changeLanguage() {
+    const language = localStorage.getItem("language");
+    const selectedLanguage = window.event.target.id;
+    // console.log(selectedLanguage)
+    if (language !== selectedLanguage) {
+        localStorage.setItem("language", selectedLanguage);
+        window.location.reload();
+    }
+}
+
+// para nunca deixar language em branco
+if (localStorage.getItem("language") === null) {
+    localStorage.setItem("language", "pt-br");
+    if (localStorage.getItem("language") === "") {
+        localStorage.setItem("language", "pt-br");
+    }
+}
+
+// importa json de tradução
+export function translation(language) {
+    const json = require('./config/languages/' + language + '.json')
+    // console.log(json)
+    return json
 }

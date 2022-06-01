@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HeaderLogin from '../../components/Header';
+import HeaderLogin from '../../components/Header/User';
 import Helmet from 'react-helmet';
 import api from '../../config/api'
 
@@ -52,14 +52,14 @@ class NewProject extends Component {
             quantityBenefited: this.state.quantityBenefited,
             quantityVolunteers: this.state.quantityVolunteers,
             projectColor: this.state.projectColor,
-            status: "aberto"
+            status: "solicitação"
         }
 
         console.log(project)
 
         await api.post('/newProject', project);
 
-        alert("A sua ideia de projeto foi enviada com sucesso");
+        alert("A sua ideia de projeto foi enviada. Aguarde a aprovação!");
         window.location = '/meusInteresses';
     }
 
