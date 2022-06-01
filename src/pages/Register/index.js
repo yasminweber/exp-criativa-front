@@ -28,6 +28,7 @@ class Register extends Component {
                 razaoSocial: "",
             },
             selectedCauses: [],
+            causeList: [],
         }
 
         this.formData = this.formData.bind(this);
@@ -35,6 +36,30 @@ class Register extends Component {
         this.accountTypeChange = this.accountTypeChange.bind(this);
         this.formSend = this.formSend.bind(this);
         this.finishClick = this.finishClick.bind(this);
+        this.loadCauses = this.loadCauses.bind(this);
+    }
+
+    componentDidMount() {
+        this.loadCauses();
+    }
+
+    async loadCauses() {
+        api.get('/cause').then(res => {
+            if (res.data.length > 0) {
+                this.setState({
+                    causes: res.data.map(cause => cause.cause),
+                    // selectedCauses: this.props.causes
+                }, () => {
+                    let list = []
+
+                    Array.from(this.state.causes).forEach((cause) => {
+                        list.push(<CategoryCard clickFunction={this.categoryClick} category={cause}
+                            selected={this.state.selectedCauses.includes(cause)} />)
+                    })
+                    this.setState({ causeList: list })
+                })
+            }
+        })
     }
 
     formData(e) {
@@ -86,7 +111,7 @@ class Register extends Component {
             } else {
                 selectedList.push(category)
             }
-            this.setState({ selectedCauses: selectedList }, () => { console.log(this.state.selectedCauses) })
+            this.setState({ selectedCauses: selectedList })
             return true
         }
     }
@@ -382,21 +407,7 @@ class Register extends Component {
 
                                 <div className="container category-buttons">
                                     <div className="row">
-                                        <CategoryCard clickFunction={this.categoryClick} category="Empoderamento Feminino" />
-                                        <CategoryCard clickFunction={this.categoryClick} category="Doações" />
-                                        <CategoryCard clickFunction={this.categoryClick} category="Fome" />
-                                        <CategoryCard clickFunction={this.categoryClick} category="Saúde" />
-
-                                        <CategoryCard clickFunction={this.categoryClick} category="Maus Tratos aos Animais" />
-                                        <CategoryCard clickFunction={this.categoryClick} category="Meio Ambiente" />
-                                        <CategoryCard clickFunction={this.categoryClick} category="Inclusão Social" />
-                                        <CategoryCard clickFunction={this.categoryClick} category="Educação" />
-
-                                        <CategoryCard clickFunction={this.categoryClick} category="Um Teste" />
-                                        <CategoryCard clickFunction={this.categoryClick} category="Um Teste Maior" />
-                                        <CategoryCard clickFunction={this.categoryClick} category="Testando tamanho de texto" />
-                                        <CategoryCard clickFunction={this.categoryClick} category="Aqui é o último teste" />
-
+                                        {this.state.causeList}
                                     </div>
                                 </div>
 
