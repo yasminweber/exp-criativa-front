@@ -1,4 +1,6 @@
 {
+    "language": "English (USA)",
+    "flag": "https://cdn-icons-png.flaticon.com/512/330/330459.png",
     "common": {
         "send": "send",
         "cancel": "cancel",

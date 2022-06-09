@@ -16,8 +16,7 @@ class NewProject extends Component {
             endDate: new Date(),
             description: "",
             quantityBenefited: "",
-            quantityVolunteers: "",
-            projectColor: "#000000"
+            quantityVolunteers: ""
         }
 
         this.componentDidMount = () => {
@@ -34,7 +33,6 @@ class NewProject extends Component {
                     causes: res.data.map(cause => cause.cause),
                     cause: res.data[0].cause
                 })
-                //console.log(this.state.causes)
             }
         })
     }
@@ -79,7 +77,7 @@ class NewProject extends Component {
                         <div className="row text-lg-start text-center">
                             <div className="col-12">
                                 <h1 className="titulo-1">Novo projeto</h1>
-                                <p className="descricao">Por favor preencha as informações para enviar um novo projeto</p>
+                                <p className="descricao">Por favor preencha as informações para solicitar um novo projeto</p>
                             </div>
                         </div>
                     </div>
@@ -97,26 +95,18 @@ class NewProject extends Component {
                                             <label htmlFor="inputNome" className="form-label">Nome</label>
                                         </div>
 
-                                        <div className="row form-cat-color">
-                                            <div className="col-md-8 form-floating mb-3">
-                                                <select className="form-select" id="selectCause"
-                                                    aria-label="Default select example"
-                                                    onChange={(e) => this.setState({ cause: e.target.value })} required >
-                                                    <option key={0} value={""}> Selecionar causa </option>
-                                                    {this.state.causes.map(function (cause) {
-                                                        return <option key={cause} value={cause}> {cause}
-                                                        </option>;
-                                                    })
-                                                    }
-                                                </select>
-                                                <label htmlFor="selectCause" className="form-label">Causas</label>
-                                            </div>
-                                            <div className="col-md mb-3">
-                                                <label htmlFor="exampleColorInput" className="form-label">Escolha a cor do projeto</label>
-                                                <input type="color" className="form-control form-control-color" id="exampleColorInput"
-                                                    value={this.state.projectColor} title="Choose your color"
-                                                    onChange={(e) => this.setState({ projectColor: e.target.value })} required ></input>
-                                            </div>
+                                        <div className="form-floating mb-3">
+                                            <select className="form-select" id="selectCause"
+                                                aria-label="Default select example"
+                                                onChange={(e) => this.setState({ cause: e.target.value })} required >
+                                                <option key={0} value={""}> Selecionar causa </option>
+                                                {this.state.causes.map(function (cause) {
+                                                    return <option key={cause} value={cause}> {cause}
+                                                    </option>;
+                                                })
+                                                }
+                                            </select>
+                                            <label htmlFor="selectCause" className="form-label">Causas</label>
                                         </div>
 
                                         <div className="form-floating mb-3">

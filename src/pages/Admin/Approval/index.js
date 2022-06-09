@@ -40,7 +40,7 @@ class AdminApproval extends Component {
         else if (page === "approval?progress") {
             this.setState({
                 title: "Projetos em progresso",
-                currentPage: "progress"
+                currentPage: "progresso"
             })
         } else if (page === "approval?pending") {
             this.setState({
@@ -239,9 +239,9 @@ class AdminApproval extends Component {
                                                     </> : <></>
                                                 }
                                                 {/* Em progresso */}
-                                                {(this.state.currentPage === "progress") ?
+                                                {(this.state.currentPage === "progresso") ?
                                                     <>
-                                                        {(child.status === "progress") ?
+                                                        {((child.status === "progresso") || (child.status === "aprovado")) ?
                                                             <div className="col-lg-6 col-10 text-start" key={id}>
                                                                 <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
                                                             </div>
@@ -263,7 +263,7 @@ class AdminApproval extends Component {
                                                 {/* Finalizados */}
                                                 {(this.state.currentPage === "finished") ?
                                                     <>
-                                                        {(child.status === "finished") ?
+                                                        {(child.status === "finalizado") ?
                                                             <div className="col-lg-6 col-10 text-start" key={id}>
                                                                 <ProjectAdminCard onClick={this.loadProjectModal()} projectId={child._id} projectName={child.projectName} cause={child.cause} description={child.description} startDate={child.startDate} endDate={child.endDate} status={child.status} />
                                                             </div>

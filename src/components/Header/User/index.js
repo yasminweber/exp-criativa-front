@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { decodeToken } from '../../../config/auth';
+import HeaderIdioms from '../Idioms';
 
 class HeaderUser extends Component {
     constructor(props) {
@@ -87,7 +88,7 @@ class HeaderUser extends Component {
                             />
                             <Button variant="outline-success">Search</Button>
                         </Form> */}
-
+                        <HeaderIdioms />
                         <NavDropdown
                             style={{ textDecoration: "none" }}
                             className="dropdown-toggle-color"
@@ -108,15 +109,15 @@ class HeaderUser extends Component {
                     </Navbar.Collapse>
                 </Container>
 
-                <div class="menu-mobile">
-                    <div class="container-lg h-100">
+                <div className="menu-mobile">
+                    <div className="container-lg h-100">
                         <div className="row mt-5">
-                            <div class="col-12">
+                            <div className="col-12">
                                 <Navbar.Brand href="/meusInteresses">All4One</Navbar.Brand>
                             </div>
                         </div>
-                        <div class="row h-100">
-                            <div class="col-12 px-0 w-75 mx-auto">
+                        <div className="row h-100">
+                            <div className="col-12 px-0 w-75 mx-auto">
                                 <Nav className="me-auto my-2 my-lg-0 content" navbarScroll>
                                     <Nav.Link href="/meusInteresses">Meus interesses</Nav.Link>
                                     <Nav.Link href="/newProject">Novo projeto</Nav.Link>
@@ -147,7 +148,7 @@ class HeaderUser extends Component {
                                     </NavDropdown>
                                 </Nav>
                             </div>
-                            <div class="col-12 px-0 account">
+                            <div className="col-12 px-0 account">
                                 <NavDropdown
                                     style={{ textDecoration: "none" }}
                                     className="dropdown-toggle-color"

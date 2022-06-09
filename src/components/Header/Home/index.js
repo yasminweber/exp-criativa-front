@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Navbar, Container, Nav, Button, NavDropdown } from 'react-bootstrap';
-import { changeLanguage, translation } from '../../../Helpers';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { translation } from '../../../Helpers';
+import HeaderIdioms from '../Idioms';
 
 class HeaderHome extends Component {
     render() {
@@ -12,10 +13,7 @@ class HeaderHome extends Component {
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav style={{ marginLeft: "auto" }}>
-                            <NavDropdown className="align-self-center" title={localStorage.getItem('language')} id="language">
-                                <NavDropdown.Item onClick={changeLanguage} id="en"><img className="flag-icon" src="https://cdn-icons-png.flaticon.com/512/330/330459.png" height={"24px"} alt="USA Flag" />English</NavDropdown.Item>
-                                <NavDropdown.Item onClick={changeLanguage} id="pt-br"><img className="flag-icon" src="https://cdn-icons-png.flaticon.com/512/330/330430.png" height={"24px"} alt="Brazil Flag" />Português</NavDropdown.Item>
-                            </NavDropdown>
+                            <HeaderIdioms />         
                             <Nav.Link href="/login">
                                 <Button variant="warning" className="btn-1">{t.headerHome.btn1}</Button>
                             </Nav.Link>

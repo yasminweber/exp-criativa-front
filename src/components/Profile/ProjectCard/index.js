@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ProfilProjectCard extends Component {
+class ProfileProjectCard extends Component {
 
     render() {
         return (
@@ -16,7 +16,8 @@ class ProfilProjectCard extends Component {
                                     </div>
                                 </div>
 
-                                <div className='col-9 content-column px-4 my-3'>
+                                <div className='col-9 content-column px-4 pb-3'>
+                                    <div className="project-status text-end text-uppercase mt-1">{this.props.status}</div>
                                     <h4 className='project-name mt-1'> {this.props.projectName} </h4>
                                     <h5 className='project-cause mt-1'> {this.props.cause} </h5>
                                     <p className='project-description mt-2'> {this.props.description} </p>
@@ -30,4 +31,4 @@ class ProfilProjectCard extends Component {
     }
 }
 
-export default ProfilProjectCard
+export default ProfileProjectCard

@@ -1,4 +1,6 @@
 {
+    "language": "Português - BR",
+    "flag": "https://cdn-icons-png.flaticon.com/512/330/330430.png",
     "common": {
         "send": "Enviar",
         "cancel": "Cancelar",

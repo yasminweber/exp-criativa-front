@@ -13,9 +13,12 @@
 
 /* PROJECT */
 @import "./pages/newProject.scss";
-
+@import "./components/projectVolunteers.scss";
 
 
 /* USER */
 @import "./components/dashboard.scss";
 @import "./components/headerFora.scss";
+
+/* USER PROJECT */
+@import "./components/profileProjectCard.scss";

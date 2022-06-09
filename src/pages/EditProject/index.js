@@ -41,7 +41,6 @@ class EditProject extends Component {
                     causes: res.data.map(cause => cause.cause),
                     cause: res.data[0].cause
                 })
-                //console.log(this.state.causes)
             }
         })
     }
@@ -97,7 +96,7 @@ class EditProject extends Component {
             description: this.state.description,
             quantityBenefited: this.state.quantityBenefited,
             quantityVolunteers: this.state.quantityVolunteers,
-            status: this.state.status
+            status: "solicitação"
         }
 
         console.log(project);
@@ -224,6 +223,7 @@ class EditProject extends Component {
                                     <div className="enviar mt-3">
                                         <button type="submit" className="btn-1" onClick={this.updateProject}>Enviar</button>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -231,7 +231,6 @@ class EditProject extends Component {
                 </section>
 
             </div>
-
         )
     }
 }

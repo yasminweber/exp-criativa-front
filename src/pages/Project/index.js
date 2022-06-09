@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet'
 import { currentUrl, formatDate } from '../../Helpers'
 import HeaderLogin from '../../components/Header/User';
-import Member from '../../components/Project/Member';
 import api from '../../config/api';
 import { decodeToken } from '../../config/auth';
+import ProjectVolunteers from '../../components/Project/Volunteers';
 
 class ProjectPage extends Component {
 
@@ -23,13 +23,14 @@ class ProjectPage extends Component {
             quantityBenefited: "",
             quantityVolunteers: "",
             volunteers: [],
-            projectColor: "",
             status: ""
         }
 
         this.componentDidMount = () => {
             this.getProject()
         }
+
+        // this.closeProject = this.closeProject.bind(this);
     }
 
     async getProject() {
@@ -48,7 +49,7 @@ class ProjectPage extends Component {
                     quantityBenefited: data.quantityBenefited,
                     quantityVolunteers: data.quantityVolunteers,
                     volunteers: data.volunteers,
-                    projectColor: data.projectColor,
+                    volunteersParticipated: data.volunteersParticipated,
                     status: data.status
                 });
                 console.log("Projeto carregado");
@@ -62,10 +63,10 @@ class ProjectPage extends Component {
     async inscrever(id) {
         await api.put(`/project/signup/${id}`)
             .then((response) => {
-                if (this.state.volunteers.indexOf(this.state.user.user._id) === -1) {
-                    alert("Inscrição feita");
+                if (this.state.volunteers.filter(item => item._id === this.state.user.user._id).length > 0) {
+                    alert("Sua inscrição foi removida");
                 } else {
-                    alert("Você removeu a inscrição do seu voluntariado");
+                    alert("Inscrição feita");
                 }
                 this.getProject();
             })
@@ -73,6 +74,27 @@ class ProjectPage extends Component {
                 console.log("error inscrever no projeto: ", error)
                 alert('Erro para inscrver no projeto');
             })
+
+
+        await api.get(`/changeToken/${this.state.user.user._id}`)
+            .then((res) => {
+                localStorage.setItem("TOKEN_KEY", res.data);
+            })
+            .catch((err) => {
+                //alert("Erro para trocar token");
+                console.log(err)
+            })
+    }
+
+    async closeProject() {
+
+        const project = {
+            status: "finalizado"
+        }
+
+        await api.put(`/project/${this.state.id}`, project);
+        alert("Projeto finalizado com sucesso");
+        // load membros section
     }
 
     render() {
@@ -85,7 +107,6 @@ class ProjectPage extends Component {
                 </Helmet>
 
                 <HeaderLogin />
-
 
                 <header className="container-fluid project-info d-flex">
                     <div className="row">
@@ -101,21 +122,28 @@ class ProjectPage extends Component {
                         </div>
 
                         {/* check if user is the one watching -- userId unique */}
-                        {console.log(this.state.projectCreator)}
-                        {(this.state.user.user._id !== this.state.projectCreator) ?
+                        {(this.state.user.user._id !== this.state.projectCreator && (this.state.status !== "finalizado")) ?
                             <div className="col-lg-4 col-12 subscription-column d-flex">
-                                {(this.state.volunteers.indexOf(this.state.user.user._id) === -1) ?
-                                    <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Quero Participar </button>
-                                    : <></>
-                                }
-                                {(this.state.volunteers.indexOf(this.state.user.user._id) !== -1) ?
+                                {(this.state.volunteers.filter(item => item._id === this.state.user.user._id).length > 0) ?
                                     <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Deixar de Participar </button>
-                                    : <></>
+                                    :
+                                    <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Quero Participar </button>
                                 }
                             </div> :
-                            <div className="col-lg-4 col-12 subscription-column d-flex">
-                                <button className='subscription-button' onClick={() => { window.location.href = `/editproject/${this.state.id}` }}> Editar projetor </button>
-                            </div>
+                            <>
+                                {(this.state.status === "solicitação") || (this.state.status === "pendente") ?
+                                    <div className="col-lg-4 col-12 subscription-column d-flex">
+                                        <button className='subscription-button' onClick={() => { window.location.href = `/editproject/${this.state.id}` }}> Editar projeto </button>
+                                    </div>
+                                    : <></>
+                                }
+                                {(this.state.status === "progresso") ?
+                                    <div className="col-lg-4 col-12 subscription-column d-flex">
+                                        <button className='subscription-button' onClick={() => { this.closeProject() }}> Encerrar projeto </button>
+                                    </div>
+                                    : <></>
+                                }
+                            </>
                         }
                     </div>
                 </header>
@@ -131,9 +159,10 @@ class ProjectPage extends Component {
                         <li className="item" role="presentation">
                             <button className="link disabled" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#acoes-e-eventos" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">Ações & Eventos</button>
                         </li>
+                        {(this.state.user.user._id === this.state.projectCreator) ?
                         <li className="item" role="presentation">
                             <button className="link" id="members-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false">Membros</button>
-                        </li>
+                        </li> : <></>}
                         <li className="item" role="presentation">
                             <button className="link disabled" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false">Doações</button>
                         </li>
@@ -144,7 +173,7 @@ class ProjectPage extends Component {
                     <div className="tab-content" id="myTabContent">
 
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <section className="project-infos text-start my-5" id="project-infos">
+                            <section className="project-infos text-start py-5" id="project-infos">
                                 <div className="container-lg">
                                     <div className="row">
 
@@ -157,7 +186,7 @@ class ProjectPage extends Component {
                                                     </div>
                                                 </div>
                                                 <section className="creator-projects text-start mt-5">
-                                                    <h1 className="title">Outros projeto do usuário</h1>
+                                                    <h2 className="title">Outros projeto do  mesmo criador</h2>
 
                                                 </section>
                                             </div>
@@ -167,6 +196,8 @@ class ProjectPage extends Component {
                                             <div className="right-up">
                                                 <div className="row">
                                                     <div className="col-12">
+                                                        <h2 className="titulo-1 mb-1">Status do projeto</h2>
+                                                        <p className="descricao text-capitalize mb-4">{this.state.status}</p>
                                                         <h2 className="titulo-1 mb-1">Quando?</h2>
                                                         <p className="descricao mb-4">{formatDate(this.state.startDate)} - {formatDate(this.state.endDate)}</p>
                                                         <h2 className="titulo-1 mb-1">Onde?</h2>
@@ -194,7 +225,7 @@ class ProjectPage extends Component {
                             <h1 className="mt-3"> conteudo de ações e eventos </h1>
                         </div>
                         <div className="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
-                            <Member />
+                            <ProjectVolunteers projectId={this.state.id} status={this.state.status} volunteers={this.state.volunteers} volunteersParticipated={this.state.volunteersParticipated} />
                         </div>
                         <div className="tab-pane fade" id="donations" role="tabpanel" aria-labelledby="donations-tab">
                             <h1 className="mt-3"> conteúdo de doações </h1>
@@ -204,7 +235,6 @@ class ProjectPage extends Component {
                 </section>
 
             </div>
-
         )
     }
 }

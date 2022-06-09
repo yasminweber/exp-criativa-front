@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import HeaderHome from '../../components/Header/Home';
 import api from '../../config/api'
-import { translation } from '../../Helpers';
+import { translation, setProjectProgress } from '../../Helpers';
 
 class Login extends Component {
 
@@ -11,6 +11,10 @@ class Login extends Component {
         this.state = {
             email: "",
             password: ""
+        }
+
+        this.componentDidMount = () => {
+            setProjectProgress()
         }
 
         this.logar = this.logar.bind(this);

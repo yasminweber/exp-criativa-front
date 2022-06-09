@@ -1,3 +1,5 @@
+import api from "./config/api";
+
 // Funções auxiliares
 
 export function currentUrl() {
@@ -44,6 +46,15 @@ export function checkMonthYear(start, end) {
     return "not the same year"
 }
 
+// subtract dates
+export function subtract_dates(date1) {
+    var dt1 = new Date(date1)
+    var dt2 = new Date()
+    var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+    diff /= (60 * 60 * 24);
+    return Math.abs(Math.round(diff));
+}
+
 // click mudança de idioma
 export function changeLanguage() {
     const language = localStorage.getItem("language");
@@ -51,6 +62,7 @@ export function changeLanguage() {
     // console.log(selectedLanguage)
     if (language !== selectedLanguage) {
         localStorage.setItem("language", selectedLanguage);
+        console.log(selectedLanguage)
         window.location.reload();
     }
 }
@@ -68,4 +80,22 @@ export function translation(language) {
     const json = require('./config/languages/' + language + '.json')
     // console.log(json)
     return json
+}
+
+// function to change status on project if createdDate is same as today
+export async function setProjectProgress() {
+    await api.get('/projects')
+        .then(res => {
+            res.data.forEach(project => {
+                if (project.status === "aprovado") {
+                    if (project.startDate.split('T')[0] === new Date().toISOString().split('T')[0]) {
+                        api.put(`/projects/${project._id}`, { status: 'progresso' })
+                        console.log("projeto mudado", project._id);
+                    }
+                }
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }

@@ -1,7 +1,36 @@
 import React, { Component } from 'react';
-import ProfilProjectCard from '../ProjectCard'
+import ProfileProjectCard from '../ProjectCard'
+import { decodeToken } from '../../../config/auth';
+import api from '../../../config/api';
 
 class VolunteerProjects extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user: decodeToken(),
+            volunteerIn: [],
+            volunteerParticipated: []
+        };
+
+        this.componentDidMount = () => {
+            this.getUser();
+        }
+    }
+
+    async getUser() {
+
+        await api.get(`/user/${this.state.user.user._id}`)
+            .then((response) => {
+                const data = response.data;
+                console.log("data", data)
+                this.setState({ volunteerIn: data.volunteerIn, volunteerParticipated: data.volunteerParticipated });
+            })
+            .catch(() => {
+                alert('Erro para carregar os projetos que o usuário participa');
+            })
+    }
 
     render() {
         return (
@@ -24,13 +53,16 @@ class VolunteerProjects extends Component {
                 <section className="project-content">
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="in-progress-volunteer" role="tabpanel" aria-labelledby="in-progress-volunteer-tab">
-                            <ProfilProjectCard/>
-                            <ProfilProjectCard/>
-                            <ProfilProjectCard/>
+                            {this.state.volunteerIn.filter(status => status.status === "aprovado").map((child, id) => (
+                                <ProfileProjectCard key={id} url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
+                            ))}
                         </div>
 
+                        {console.log("projeto participado", this.state.volunteerParticipated)}
                         <div className="tab-pane fade" id="finished-volunteer" role="tabpanel" aria-labelledby="finished-volunteer-tab">
-                            <h1 className="mt-3"> Nenhum projeto </h1>
+                            {this.state.volunteerParticipated.filter(status => status.status === "finalizado").map((child, id) => (
+                                <ProfileProjectCard key={id} url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
+                            ))}
                         </div>
                     </div>
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProfilProjectCard from '../ProjectCard';
+import ProfileProjectCard from '../ProjectCard';
 import { decodeToken } from '../../../config/auth'
 import api from '../../../config/api'
 
@@ -15,7 +15,6 @@ class ProfileProjects extends Component {
 
         this.componentDidMount = () => {
             this.getPosts();
-            // console.log(this.state.posts)
         }
     }
 
@@ -42,13 +41,13 @@ class ProfileProjects extends Component {
                 <section className='project-header mt-4'>
                     <ul className="nav nav-tabs project-navbar" id="myTab" role="tablist">
                         <li className="item" role="presentation">
-                            <button className="link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#pending-projects" type="button" role="tab" aria-controls="home" aria-selected="true">Aguardando Aprovação</button>
+                            <button className="link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending-projects" type="button" role="tab" aria-controls="home" aria-selected="true">Aguardando Aprovação</button>
                         </li>
                         <li className="item" role="presentation">
-                            <button className="link" id="pictures-tab" data-bs-toggle="tab" data-bs-target="#in-progress" type="button" role="tab" aria-controls="pictures" aria-selected="false">Em andamento</button>
+                            <button className="link" id="in-progress-tab" data-bs-toggle="tab" data-bs-target="#in-progress" type="button" role="tab" aria-controls="in-progress" aria-selected="false">Em andamento</button>
                         </li>
                         <li className="item" role="presentation">
-                            <button className="link" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#finished" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">Finalizados </button>
+                            <button className="link" id="finished-tab" data-bs-toggle="tab" data-bs-target="#finished" type="button" role="tab" aria-controls="finished" aria-selected="false">Finalizados </button>
                         </li>
                     </ul>
                 </section>
@@ -56,32 +55,20 @@ class ProfileProjects extends Component {
                 <section className="project-content">
                     <div className="tab-content" id="myTabContent">
                         <div className="tab-pane fade show active" id="pending-projects" role="tabpanel" aria-labelledby="pending-projects-tab">
-                            {this.state.projects.map((child, id) => (
-                                <>
-                                    <div key={id}>
-                                        {(child.status === "aprovado" || child.status === "solicitação") ?
-                                            <ProfilProjectCard url={child._id} projectName={child.projectName} cause={child.cause} description={child.description} />
-                                            : <></>
-                                        }
-                                    </div>
-                                </>
+                            {this.state.projects.filter(status => status.status === "solicitação" || status.status === "pendente").map((child, id) => (
+                                <ProfileProjectCard url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
                             ))}
                         </div>
                         <div className="tab-pane fade" id="in-progress" role="tabpanel" aria-labelledby="in-progress-tab">
-                            {this.state.projects.map((child, id) => (
-                                <>
-                                    <div key={id}>
-                                        {(child.status === "progresso") ?
-                                            <ProfilProjectCard url={child._id} projectName={child.projectName} cause={child.cause} description={child.description} />
-                                            : <></>
-                                        }
-                                    </div>
-                                </>
+                            {this.state.projects.filter(status => status.status === "progresso" || status.status === "aprovado").map((child, id) => (
+                                <ProfileProjectCard key={id} url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
                             ))}
                         </div>
 
-                        <div className="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
-                            <h1 className="mt-3"> conteudo de ações e eventos </h1>
+                        <div className="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="finished-tab">
+                            {this.state.projects.filter(status => status.status === "finalizado").map((child, id) => (
+                                <ProfileProjectCard key={id} url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
+                            ))}
                         </div>
 
                     </div>
