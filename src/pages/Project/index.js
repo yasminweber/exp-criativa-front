@@ -5,6 +5,7 @@ import HeaderLogin from '../../components/Header/User';
 import api from '../../config/api';
 import { decodeToken } from '../../config/auth';
 import ProjectVolunteers from '../../components/Project/Volunteers';
+import Posts from '../../components/Project/Posts';
 
 class ProjectPage extends Component {
 
@@ -157,7 +158,7 @@ class ProjectPage extends Component {
                             <button className="link disabled" id="pictures-tab" data-bs-toggle="tab" data-bs-target="#pictures" type="button" role="tab" aria-controls="pictures" aria-selected="false">Fotos</button>
                         </li>
                         <li className="item" role="presentation">
-                            <button className="link disabled" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#acoes-e-eventos" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">Ações & Eventos</button>
+                            <button className="link" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#acoes-e-eventos" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">Posts</button>
                         </li>
                         {(this.state.user.user._id === this.state.projectCreator) ?
                         <li className="item" role="presentation">
@@ -218,11 +219,12 @@ class ProjectPage extends Component {
                             </section>
                         </div>
 
+                        <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
+                            <Posts/>
+                        </div>
+
                         <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
                             <h1 className="mt-3"> conteudo de fotos </h1>
-                        </div>
-                        <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
-                            <h1 className="mt-3"> conteudo de ações e eventos </h1>
                         </div>
                         <div className="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
                             <ProjectVolunteers projectId={this.state.id} status={this.state.status} volunteers={this.state.volunteers} volunteersParticipated={this.state.volunteersParticipated} />
