@@ -220,7 +220,7 @@ class ProjectPage extends Component {
                         </div>
 
                         <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
-                            <Posts/>
+                            <Posts projectCreator={this.state.projectCreator} userId={this.state.user.user._id}/>
                         </div>
 
                         <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">

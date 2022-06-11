@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { FaPaperclip } from 'react-icons/fa'
+import api from '../../../../config/api';
 import { storage } from '../../../../firebase';
+import { currentUrl, getImagesUrl } from '../../../../Helpers';
 
 class NewPost extends Component {
 
@@ -17,6 +19,7 @@ class NewPost extends Component {
         this.fileAdd = this.fileAdd.bind(this);
         this.fileRemove = this.fileRemove.bind(this);
         this.newPost = this.newPost.bind(this);
+        this.firebaseUpload = this.firebaseUpload.bind(this);
     }
 
     postData(e) {
@@ -27,28 +30,32 @@ class NewPost extends Component {
         })
     }
 
-    newPost() {
-        // Aqui vai a função do mongo
-                
+    async firebaseUpload(postId, file) {
+        let ref = "posts/" + postId
+        let imageUrl = await storage.ref(ref).child(file.name).put(file)
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .catch(error => console.log("Houve um erro. Não foi possível fazer upload de imagem.", error))
+        return imageUrl
+    }
 
-        // Função upload firebase
-        if (this.state.files !== "") {
-            let url = window.location.href
-            let projectId = url.substring(url.lastIndexOf('/'));
-            let ref = 'posts/' + projectId
+    async newPost() {
+        // Busca ID do projeto
+        let projectId = currentUrl();
 
-            this.state.files.forEach((file) => {
-                storage.ref(ref).child(file['name']).put(file)
-                    .then((snapshot) => {
-                        console.log("Upload realizado!")
-                    })
-                    .catch((error) => {
-                        alert("Não foi possível fazer o upload das imagens. Tente novamente!")
-                        console.log(error)
-                    })
-            })
-            this.setState({ files: [], filesList: [] })
+        // Grava o conteúdo do post no banco e retorna o id gerado
+        let response = await api.post(`/newPost/${projectId}`, { description: this.state.postContent })
+        let newPostId = response.data
+
+        // Grava imagens no firebase e retorna array de url
+        let imagesUrl = await Promise.all(this.state.files.map(file =>
+            this.firebaseUpload(newPostId, file)
+        ))
+
+        const post = {
+            postImages: imagesUrl
         }
+        // Adiciona array de url no banco
+        console.log(post)
     }
 
     fileAdd(e) {
@@ -121,7 +128,9 @@ class NewPost extends Component {
                     </div>
                 </div>
                 <div className='attachment-list'>
-                    <span className='attachment-title'> Lista de Anexos: </span>
+                    {this.state.files.length !== 0 ?
+                        <span className='attachment-title'> Lista de Anexos: </span>
+                        : ""}
                     <ul>
                         {this.state.filesList}
                     </ul>
