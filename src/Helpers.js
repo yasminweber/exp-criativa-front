@@ -1,4 +1,5 @@
 import api from "./config/api";
+import { storage } from "./firebase";
 
 // Funções auxiliares
 
@@ -98,4 +99,19 @@ export async function setProjectProgress() {
         .catch(err => {
             console.log(err);
         });
+}
+
+// Get images URL from Firebase
+export async function getImagesUrl(postId) {
+    let ref = "/posts/" + "62a41923adc9711f508b7986"
+    let images = await storage.ref(ref).listAll();
+    // console.log(await images.items[0].getDownloadURL())
+
+    let imagesUrl = await Promise.all(images.items.map(item => item.getDownloadURL()))
+    console.log(imagesUrl)
+    // let imagesUrl = await Promise.all(images.items.map(item =>
+    //     item.getDownloadURL()
+    // ))
+    // console.log(imagesUrl)
+    // return imagesUrl
 }

@@ -22,6 +22,7 @@ class MyAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: decodeToken(),
             companyAccount: false,
             causes: [],
             selectedCauses: [],
@@ -55,9 +56,9 @@ class MyAccount extends Component {
 
     // Atualiza state quando alterado valores de input
     formData(e) {
-       let form = this.state.infos
-       form[e.target.name] = e.target.value
-       this.setState({infos: form})
+        let form = this.state.infos
+        form[e.target.name] = e.target.value
+        this.setState({ infos: form })
     }
 
     // Busca as informações do usuário de acordo com o token
@@ -154,14 +155,40 @@ class MyAccount extends Component {
     }
 
     // Função de clicar no botão de editar
-    editClick(e) {
+    async editClick(e) {
         e.preventDefault();
         if (this.state.editMode) {
             this.setState({ editMode: false })
 
             // Aqui função para dar update no banco
-            console.log("Função para salvar no banco")
-            alert("Salvar no banco")
+            const user = {
+                name: this.state.infos.name,
+                lastName: this.state.infos.lastName,
+                birthDate: this.state.infos.birth,
+                email: this.state.infos.email,
+                gender: this.state.infos.gender,
+                selectedCauses: this.state.selectedCauses
+            }
+
+            console.log(user);
+
+            await api.put(`/user/${this.state.user.user._id}`, user)
+                .then(() => {
+                    alert("deu certo pra alterar as informações")
+                })
+                .catch((error) => {
+                    console.log(error)
+                    alert("não conseguimos atualizar suas informações. Por favor tente novamente mais tarde.")
+                });
+
+            await api.get(`/changeToken/${this.state.user.user._id}`)
+                .then((res) => {
+                    localStorage.setItem("TOKEN_KEY", res.data);
+                })
+                .catch((err) => {
+                    //alert("Erro para trocar token");
+                    console.log(err)
+                })
         }
         else {
             this.setState({ editMode: true })

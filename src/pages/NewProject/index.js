@@ -49,7 +49,6 @@ class NewProject extends Component {
             description: this.state.description,
             quantityBenefited: this.state.quantityBenefited,
             quantityVolunteers: this.state.quantityVolunteers,
-            projectColor: this.state.projectColor,
             status: "solicitação"
         }
 
