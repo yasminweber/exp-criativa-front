@@ -1,0 +1,15 @@
+.nav-item {
+    #language {
+        &:after {
+            display: none;
+        }
+    }
+
+    .dropdown-menu {
+        .dropdown-item {
+            img {
+                padding-right: 5px;
+            }
+        }
+    }
+}

@@ -25,5 +25,43 @@
         "btn2": "Sign up",
         "placeholder1": "Email",
         "placeholder2": "Password"
+    },
+    "register": {
+        "title": "Register | All4One",
+        "title1": "Let's get started!",
+        "sub1": "To register, just fill in the fields on the side!",
+        "sub2": "As easy as that, you can start seeing social projects!",
+        "title2": "Already have an account?",
+        "sub3": "Click the button below to sign in!",
+        "btn1": "Sign in",
+        "part1": {
+            "account1": "Personal account",
+            "account2": "Organization account",
+            "name": "Name",
+            "surname": "Surname",
+            "cpf": "CPF",
+            "birthDate": "Birth date",
+            "email": "Email",
+            "gender": {
+                "title": "What gender you identify with?",
+                "op1": "Woman",
+                "op2": "Man",
+                "op3": "Non-binary"
+            },
+            "password": "Password",
+            "repeatPassword": "Confirm password",
+            "cnpj": "CNPJ",
+            "razaoSocial": "Corporate name",
+            "administratorName": "Name",
+            "administratorSurname": "Surname",
+            "btn1": "Continue"
+        },
+        "part2": {
+            "title": "Your interests",
+            "sub1": "Select the 5 project categories that best fit your company.",
+            "sub2": "Select 5 categories that you are interested in.",
+            "sub3": "We will use this information to help you find the best projects for you!",
+            "btn1": "Finish registration"
+        }
     }
 }
