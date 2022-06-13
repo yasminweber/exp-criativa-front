@@ -1,0 +1,61 @@
+.home {
+    .quem-somos {
+        background-color: rgb(253, 253, 158);
+        padding: 50px 0;
+
+        .titulo {
+            font-size: 28px;
+            line-height: 30px;
+            text-align: center;
+        }
+    }
+
+    .categorias {
+        padding: 50px 0;
+
+        .titulo-principal {
+            font-size: 28px;
+            line-height: 30px;
+        }
+    }
+
+    .slick-benefits {
+        background-color: lightcoral;
+
+        .titulo-01 {
+            font-size: 28px;
+            line-height: 30px;
+        }
+
+        .slick {
+            padding-bottom: 40px;
+
+            .item {
+                .dentro-item {
+                    background-color: white;
+                    border-radius: 15px;
+                    padding: 30px;
+                    margin: 0 10px;
+
+                    .titulo-1 {
+                        font-size: 20px;
+                        line-height: 24px;
+                        margin-bottom: 20px;
+                    }
+
+                    .descricao {
+                        font-size: 15px;
+                    }
+                }
+            }
+
+            .slick-prev {
+                left: -40px;
+            }
+
+            .slick-next {
+                right: -40px;
+            }
+        }
+    }
+}

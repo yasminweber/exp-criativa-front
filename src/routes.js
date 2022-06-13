@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import ProjectPage from './pages/Project'
-import NewProject from './pages/NewProject'
+import NewProject from './pages/Project/NewProject'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import MeusInteresses from './pages/MeusInteresses'
 import Cause from './pages/Cause'
-import EditProject from './pages/EditProject'
+import EditProject from './pages/Project/EditProject'
 
 import AdminLogin from './pages/Admin'
 import Dashboard from './pages/Admin/Dashboard'
@@ -20,11 +20,21 @@ const Rotas = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/meusInteresses" element={<MeusInteresses />} />
-                <Route path="/cause/fome" element={<Cause />} />
-                <Route path="/cause/saude" element={<Cause />} />
-                <Route path="/cause/maus-tratos-aos-animais" element={<Cause />} />
-                <Route path="/cause/sem-teto" element={<Cause />} />
+                {/* Causas */}
+                <Route path="/cause/acessibilidade" element={<Cause />} />
+                <Route path="/cause/criancas" element={<Cause />} />
+                <Route path="/cause/educacao" element={<Cause />} />
                 <Route path="/cause/empoderamento-feminino" element={<Cause />} />
+                <Route path="/cause/fome" element={<Cause />} />
+                <Route path="/cause/lgbtqia" element={<Cause />} />
+                <Route path="/cause/meio-ambiente" element={<Cause />} />
+                <Route path="/cause/maus-tratos-aos-animais" element={<Cause />} />
+                <Route path="/cause/terceira-idade" element={<Cause />} />
+                <Route path="/cause/tragedia" element={<Cause />} />
+                <Route path="/cause/saude" element={<Cause />} />
+                <Route path="/cause/sem-teto" element={<Cause />} />
+                {/* Fim causas */}
+                
                 <Route path="/project/:id" element={<ProjectPage />} />
                 <Route path="/editProject/:id" element={<EditProject />} />
                 <Route path="/newProject" element={<NewProject />} />

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Navbar, Container, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { decodeToken } from '../../../config/auth';
 import HeaderIdioms from '../Idioms';
+import LogoName from '../../../assets/images/logo-name-right3.svg';
+// import Logo from '../../../assets/images/logo.svg';
+import { translation } from "../../../Helpers";
 
 class HeaderUser extends Component {
     constructor(props) {
@@ -30,8 +33,6 @@ class HeaderUser extends Component {
         }
     }
 
-
-
     async logout() {
         alert("Você fez logout");
         localStorage.removeItem('TOKEN_KEY');
@@ -39,10 +40,18 @@ class HeaderUser extends Component {
     }
 
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <Navbar expand="lg" className="header">
                 <Container>
-                    <Navbar.Brand href="/meusInteresses">All4One</Navbar.Brand>
+                    <Navbar.Brand href="/meusInteresses">
+                        <img className="d-inline-block align-top" src={LogoName} alt="Logo" width="125" />
+                        {/* All4One */}
+                    </Navbar.Brand>
+                    <div className="d-lg-none d-block ms-auto">
+                        <HeaderIdioms />
+                    </div>
+
                     <Navbar.Toggle aria-controls="navbarScroll" aria-expanded={false} onClick={openMenu} />
                     <Navbar.Collapse id="navbarScroll" className="d-lg-block d-none">
                         <Nav
@@ -50,61 +59,48 @@ class HeaderUser extends Component {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="/meusInteresses">Meus interesses</Nav.Link>
-                            <Nav.Link href="/newProject">Novo projeto</Nav.Link>
-                            <NavDropdown title="Causas" id="navbarScrollingDropdown">
-                                <NavDropdown.Item href="/cause/acessibilidade">Acessibilidade</NavDropdown.Item>
+                            <Nav.Link href="/meusInteresses">{t.headerUser.interests}</Nav.Link>
+                            <Nav.Link href="/newProject">{t.headerUser.newProject}</Nav.Link>
+                            <NavDropdown title={t.headerUser.causes.title} id="navbarScrollingDropdown">
+                                <NavDropdown.Item href="/cause/acessibilidade">{t.headerUser.causes.accessibility}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/criancas">Crianças</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/criancas">{t.headerUser.causes.kids}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/educacao">Educação</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/educacao">{t.headerUser.causes.education}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/empoderamento-feminino">Empoderamento Feminino</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/empoderamento-feminino">{t.headerUser.causes.womenEmpowerment}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/fome">Fome</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/fome">{t.headerUser.causes.hunger}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/lgbtqia">LGBTQIA+</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/lgbtqia">{t.headerUser.causes.lgbtqia}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/meio-ambiente">Meio Ambiente</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/meio-ambiente">{t.headerUser.causes.environment}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/maus-tratos-aos-animais">Maus tratos aos animais</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/maus-tratos-aos-animais">{t.headerUser.causes.animals}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/terceira-idade">Terceira Idade</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/terceira-idade">{t.headerUser.causes.seniors}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/tragedia">Tragédia</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/tragedia">{t.headerUser.causes.disaster}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/saude">Saúde</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/saude">{t.headerUser.causes.health}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/sem-teto">Sem teto</NavDropdown.Item>
+                                <NavDropdown.Item href="/cause/sem-teto">{t.headerUser.causes.homeless}</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
 
-                        {/* <Form className="d-flex">
-                            <FormControl
-                                type="search"
-                                placeholder="Search"
-                                className="me-2"
-                                aria-label="Search"
-                            />
-                            <Button variant="outline-success">Search</Button>
-                        </Form> */}
                         <HeaderIdioms />
                         <NavDropdown
                             style={{ textDecoration: "none" }}
                             className="dropdown-toggle-color"
                             title={
-                                <img
-                                    src="https://via.placeholder.com/32x32"
-                                    className="rounded-circle"
-                                    width="32px" height="32px"
-                                    alt="Imagem perfil"
-                                />
+                                <img src="https://via.placeholder.com/32x32" className="rounded-circle"
+                                    width="32px" height="32px" alt="Imagem perfil" />
                             }
                         >
                             <div className="text-center my-2">{this.state.user.user.name}</div>
-                            <NavDropdown.Item href="/profile" className="dropdown-color"> Perfil </NavDropdown.Item>
+                            <NavDropdown.Item href="/profile" className="dropdown-color"> {t.headerUser.profile} </NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item onClick={this.logout} className="dropdown-color"> Sair </NavDropdown.Item>
+                            <NavDropdown.Item onClick={this.logout} className="dropdown-color"> {t.headerUser.logout} </NavDropdown.Item>
                         </NavDropdown>
                     </Navbar.Collapse>
                 </Container>
@@ -119,32 +115,32 @@ class HeaderUser extends Component {
                         <div className="row h-100">
                             <div className="col-12 px-0 w-75 mx-auto">
                                 <Nav className="me-auto my-2 my-lg-0 content" navbarScroll>
-                                    <Nav.Link href="/meusInteresses">Meus interesses</Nav.Link>
-                                    <Nav.Link href="/newProject">Novo projeto</Nav.Link>
-                                    <NavDropdown title="Causas" id="navbarScrollingDropdown">
-                                        <NavDropdown.Item href="/cause/acessibilidade">Acessibilidade</NavDropdown.Item>
+                                    <Nav.Link href="/meusInteresses">{t.headerUser.interests}</Nav.Link>
+                                    <Nav.Link href="/newProject">{t.headerUser.newProject}</Nav.Link>
+                                    <NavDropdown title={t.headerUser.causes.title} id="navbarScrollingDropdown">
+                                        <NavDropdown.Item href="/cause/acessibilidade">{t.headerUser.causes.accessibility}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/criancas">Crianças</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/criancas">{t.headerUser.causes.kids}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/educacao">Educação</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/educacao">{t.headerUser.causes.education}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/empoderamento-feminino">Empoderamento Feminino</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/empoderamento-feminino">{t.headerUser.causes.womenEmpowerment}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/fome">Fome</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/fome">{t.headerUser.causes.hunger}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/lgbtqia">LGBTQIA+</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/lgbtqia">{t.headerUser.causes.lgbtqia}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/meio-ambiente">Meio Ambiente</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/meio-ambiente">{t.headerUser.causes.environment}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/maus-tratos-aos-animais">Maus tratos aos animais</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/maus-tratos-aos-animais">{t.headerUser.causes.animals}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/terceira-idade">Terceira Idade</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/terceira-idade">{t.headerUser.causes.seniors}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/tragedia">Tragédia</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/tragedia">{t.headerUser.causes.disaster}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/saude">Saúde</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/saude">{t.headerUser.causes.health}</NavDropdown.Item>
                                         <NavDropdown.Divider />
-                                        <NavDropdown.Item href="/cause/sem-teto">Sem teto</NavDropdown.Item>
+                                        <NavDropdown.Item href="/cause/sem-teto">{t.headerUser.causes.homeless}</NavDropdown.Item>
                                     </NavDropdown>
                                 </Nav>
                             </div>
@@ -162,9 +158,9 @@ class HeaderUser extends Component {
                                     }
                                 >
                                     <div className="text-center my-2">{this.state.user.user.name}</div>
-                                    <NavDropdown.Item href="/profile" className="dropdown-color"> Perfil </NavDropdown.Item>
+                                    <NavDropdown.Item href="/profile" className="dropdown-color"> {t.headerUser.profile} </NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item onClick={this.logout} className="dropdown-color"> Sair </NavDropdown.Item>
+                                    <NavDropdown.Item onClick={this.logout} className="dropdown-color"> {t.headerUser.logout} </NavDropdown.Item>
                                 </NavDropdown>
                             </div>
                         </div>

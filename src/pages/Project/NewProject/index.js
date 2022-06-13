@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import HeaderLogin from '../../components/Header/User';
+import HeaderLogin from '../../../components/Header/User';
 import Helmet from 'react-helmet';
-import api from '../../config/api'
+import api from '../../../config/api'
+import { translation } from '../../../Helpers';
 
 class NewProject extends Component {
 
@@ -61,22 +62,23 @@ class NewProject extends Component {
     }
 
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <div className="newProject">
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title>Novo Projeto</title>
+                    <title>{t.project.newProject.title}</title>
                 </Helmet>
 
                 <HeaderLogin />
 
                 <section className="banner-titulo">
-                    <div className="container-fluid">
+                    <div className="container-xl">
                         <div className="row text-lg-start text-center">
                             <div className="col-12">
-                                <h1 className="titulo-1">Novo projeto</h1>
-                                <p className="descricao">Por favor preencha as informações para solicitar um novo projeto</p>
+                                <h1 className="titulo-1">{t.project.newProject.title1}</h1>
+                                <p className="descricao">{t.project.newProject.sub1}</p>
                             </div>
                         </div>
                     </div>
@@ -89,70 +91,70 @@ class NewProject extends Component {
                                 <form className="projectForm" onSubmit={this.createProject}>
                                     <div className="text-start">
                                         <div className="mb-3 form-floating mb-3">
-                                            <input autoFocus type="text" className="form-control" id="inputNome" placeholder="Nome"
+                                            <input autoFocus type="text" className="form-control" id="inputNome" placeholder={t.project.form.name}
                                                 onChange={(e) => this.setState({ projectName: e.target.value })} required />
-                                            <label htmlFor="inputNome" className="form-label">Nome</label>
+                                            <label htmlFor="inputNome" className="form-label">{t.project.form.name}</label>
                                         </div>
 
                                         <div className="form-floating mb-3">
                                             <select className="form-select" id="selectCause"
                                                 aria-label="Default select example"
                                                 onChange={(e) => this.setState({ cause: e.target.value })} required >
-                                                <option key={0} value={""}> Selecionar causa </option>
+                                                <option key={0} value={""}> {t.project.form.selectCause} </option>
                                                 {this.state.causes.map(function (cause) {
                                                     return <option key={cause} value={cause}> {cause}
                                                     </option>;
                                                 })
                                                 }
                                             </select>
-                                            <label htmlFor="selectCause" className="form-label">Causas</label>
+                                            <label htmlFor="selectCause" className="form-label">{t.project.form.causes}</label>
                                         </div>
 
                                         <div className="form-floating mb-3">
-                                            <input type="text" className="form-control" id="inputWhere" placeholder="Localização (bairro)"
+                                            <input type="text" className="form-control" id="inputWhere" placeholder={t.project.form.localization}
                                                 onChange={(e) => this.setState({ where: e.target.value })} required />
-                                            <label htmlFor="inputWhere" className="form-label">Localização (bairro)</label>
+                                            <label htmlFor="inputWhere" className="form-label">{t.project.form.localization}</label>
                                         </div>
 
                                         <div className="row form-data">
                                             <div className="col-md form-floating mb-3">
                                                 <input type="date" className="form-control" id="dateStart"
                                                     onChange={(e) => this.setState({ startDate: e.target.value })} required />
-                                                <label htmlFor="dateStart" className="form-label">Data inicio</label>
+                                                <label htmlFor="dateStart" className="form-label">{t.project.form.startDate}</label>
                                             </div>
 
                                             <div className="col-md form-floating mb-3">
                                                 <input type="date" className="form-control" id="dateEnd"
                                                     onChange={(e) => this.setState({ endDate: e.target.value })} />
-                                                <label htmlFor="dateEnd" className="form-label">Data fim</label>
+                                                <label htmlFor="dateEnd" className="form-label">{t.project.form.endDate}</label>
                                             </div>
                                         </div>
 
                                         <div className="d-flex flex-column">
                                             <div className="form-floating mb-3 order-md-0 order-1">
-                                                <textarea className="form-control" id="floatingTextarea2" placeholder="Descrição"
+                                                <textarea className="form-control" id="floatingTextarea2" placeholder={t.project.form.description}
                                                     onChange={(e) => this.setState({ description: e.target.value })} required />
-                                                <label htmlFor="floatingTextarea2">Descrição</label>
+                                                <label htmlFor="floatingTextarea2">{t.project.form.description}</label>
                                             </div>
 
                                             <div className="row form-quantidades order-md-1 order-0">
                                                 <div className="col-md form-floating mb-3">
-                                                    <input type="number" className="form-control" id="inputBenefited" placeholder="Quantidade estimada beneficiados"
+                                                    <input type="number" className="form-control" id="inputBenefited" placeholder={t.project.form.qntBenefited}
                                                         onChange={(e) => this.setState({ quantityBenefited: e.target.value })} required />
-                                                    <label htmlFor="inputBenefited" className="form-label">Quantidade estimado beneficiados</label>
+                                                    <label htmlFor="inputBenefited" className="form-label">{t.project.form.qntBenefited}</label>
                                                 </div>
 
                                                 <div className="col-md form-floating mb-3">
-                                                    <input type="number" className="form-control" id="inputVolunteers" placeholder="Quantidade de voluntários"
+                                                    <input type="number" className="form-control" id="inputVolunteers" placeholder={t.project.form.qntVolunteers}
                                                         onChange={(e) => this.setState({ quantityVolunteers: e.target.value })} required />
-                                                    <label htmlFor="inputVolunteers" className="form-label">Quantidade de voluntários</label>
+                                                    <label htmlFor="inputVolunteers" className="form-label">{t.project.form.qntVolunteers}</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="enviar mt-3">
-                                        <button type="submit" className="btn-1">Enviar</button>
+                                        <button type="submit" className="btn-1">{t.project.form.btn1}</button>
                                     </div>
                                 </form>
                             </div>

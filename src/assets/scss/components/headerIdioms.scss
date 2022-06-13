@@ -6,6 +6,10 @@
     }
 
     .dropdown-menu {
+        @include res-lg {
+            left: -160%;
+        }
+
         .dropdown-item {
             img {
                 padding-right: 5px;

@@ -63,6 +63,59 @@
             "sub3": "Usaremos isso para mostrar projetos que mais combinam com você!",
             "btn1": "Finalizar cadastro"
         }
+    },
+    "headerUser": {
+        "interests": "Meus interesses",
+        "newProject": "Novo projeto",
+        "causes": {
+            "title": "Causas",
+            "accessibility": "Acessibilidade",
+            "kids": "Crianças",
+            "education": "Educação",
+            "womenEmpowerment": "Empoderamento Feminino",
+            "hunger": "Fome",
+            "lgbtqia": "LGBTQIA+",
+            "environment": "Meio Ambiente",
+            "animals": "Maus Tratos aos Animais",
+            "seniors": "Terceira Idade",
+            "disaster": "Tragédia",
+            "health": "Saúde",
+            "homeless": "Sem Teto"
+        },
+        "profile": "Perfil",
+        "logout": "Sair"
+    },
+    "interests": {
+        "title": "Meus Interesses | All4One",
+        "title1": "Meus interesses",
+        "btn1": "Entrar no projeto",
+        "causes": {
+            "title1": "Ver projetos da causa:",
+            "sub1": "No momento não temos nenhum projeto para:"
+        }
+    },
+    "project": {
+        "newProject": {
+            "title": "Novo Projeto | All4One",
+            "title1": "Novo projeto",
+            "sub1": "Por favor preencha as informações para solicitar um novo projeto."
+        },
+        "editProject": {
+            "title": "Editar Projeto | All4One",
+            "title1": "Editar projeto",
+            "title2": "Edição pendente:",
+            "btn1": "Apagar projeto"
+        },
+        "form": {
+            "name": "Nome",
+            "causes": "Causas",
+            "selectCause": "Selecione causa",
+            "localization": "Localização (bairro)",
+            "startDate": "Data início",
+            "endDate": "Data fim",
+            "description": "Descrição",
+            "qntBenefited": "Quantidade de beneficiados",
+            "qntVolunteers": "Quantidade de voluntários"
+        }
     }
-
 }
