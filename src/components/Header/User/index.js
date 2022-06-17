@@ -93,7 +93,7 @@ class HeaderUser extends Component {
                             style={{ textDecoration: "none" }}
                             className="dropdown-toggle-color"
                             title={
-                                <img src="https://via.placeholder.com/32x32" className="rounded-circle"
+                                <img src={this.state.user.user.profileImage} className="rounded-circle"
                                     width="32px" height="32px" alt="Imagem perfil" />
                             }
                         >
@@ -150,7 +150,7 @@ class HeaderUser extends Component {
                                     className="dropdown-toggle-color"
                                     title={
                                         <img
-                                            src="https://via.placeholder.com/32x32"
+                                            src={this.state.user.user.profileImage}
                                             className="rounded-circle"
                                             width="32px" height="32px"
                                             alt="Imagem perfil"

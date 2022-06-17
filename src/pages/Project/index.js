@@ -24,14 +24,15 @@ class ProjectPage extends Component {
             quantityBenefited: "",
             quantityVolunteers: "",
             volunteers: [],
-            status: ""
+            status: "",
+            posts: []
         }
 
         this.componentDidMount = () => {
             this.getProject()
         }
 
-        // this.closeProject = this.closeProject.bind(this);
+        this.getProject = this.getProject.bind(this)
     }
 
     async getProject() {
@@ -51,7 +52,7 @@ class ProjectPage extends Component {
                     quantityVolunteers: data.quantityVolunteers,
                     volunteers: data.volunteers,
                     volunteersParticipated: data.volunteersParticipated,
-                    status: data.status
+                    status: data.status,
                 });
                 console.log("Projeto carregado");
             })
