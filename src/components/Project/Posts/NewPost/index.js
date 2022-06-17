@@ -43,19 +43,26 @@ class NewPost extends Component {
         let projectId = currentUrl();
 
         // Grava o conteúdo do post no banco e retorna o id gerado
-        let response = await api.post(`/newPost/${projectId}`, { description: this.state.postContent })
-        let newPostId = response.data
+        let responseNew = await api.post(`/newPost/${projectId}`, { description: this.state.postContent })
+        let newPostId = responseNew.data
 
         // Grava imagens no firebase e retorna array de url
         let imagesUrl = await Promise.all(this.state.files.map(file =>
             this.firebaseUpload(newPostId, file)
         ))
 
-        const post = {
-            postImages: imagesUrl
-        }
         // Adiciona array de url no banco
-        console.log(post)
+        let responseUpdate = await api.put(`/posts/${newPostId}`, {postImages: imagesUrl})
+
+        // Zera campos após adição
+        this.setState({
+            files: [],
+            filesList: [],
+            postContent: ""
+        })
+
+        alert("Recarregar posts")
+        // Verificar para inverter ordem do array
     }
 
     fileAdd(e) {

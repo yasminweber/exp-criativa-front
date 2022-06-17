@@ -9,6 +9,8 @@ import MyAccount from '../../components/Profile/MyAccount';
 import VolunteerProjects from '../../components/Profile/VolunteerProjects';
 
 import { decodeToken } from '../../config/auth';
+import { storage } from '../../firebase';
+import api from '../../config/api';
 
 class Profile extends Component {
 
@@ -26,15 +28,23 @@ class Profile extends Component {
             gender: "",
             cnpj: "",
             razaoSocial: "",
+            url: "",
         }
 
         this.componentDidMount = () => {
             this.populateState()
+            this.profilePhotoUpload()
         }
+
+        this.populateState = this.populateState.bind(this);
+        this.profilePhotoUpload = this.profilePhotoUpload.bind(this)
     }
 
     async populateState() {
         var mainUser = this.state.user.user
+
+        let ref = "users/" + mainUser._id
+        let url = await storage.ref(ref).getDownloadURL()
 
         this.setState({
             name: mainUser.name,
@@ -46,10 +56,34 @@ class Profile extends Component {
             birthDate: mainUser.birthDate,
             gender: mainUser.gender,
             cnpj: mainUser.cnpj,
-            razaoSocial: mainUser.razaoSocial
+            razaoSocial: mainUser.razaoSocial,
+            url: url
         });
     }
-    
+
+    async profilePhotoUpload(e) {
+        // Verificar se não foi selecionado arquivos.
+        if (e.target.files[0] == undefined) {
+            return;
+        }
+
+        let photo = e.target.files[0]
+        let url = await storage.ref("users").child(this.state.user.user._id).put(photo)
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .catch(error => console.log("Erro ao gravar imagem no banco", error))
+
+        // Atualiza usuário com link da imagem
+        await api.put(`/user/${this.state.user.user._id}`, {profileImage: url})
+
+        await api.get(`/changeToken/${this.state.user.user._id}`)
+                .then((res) => {
+                    localStorage.setItem("TOKEN_KEY", res.data);
+                })
+                .catch((err) => {
+                    //alert("Erro para trocar token");
+                    console.log(err)
+                })
+    }
 
     render() {
         return (
@@ -62,20 +96,20 @@ class Profile extends Component {
                 <HeaderLogin />
 
                 <div className='container-lg'>
-                    <div className="row">
+                    <div className="row header-row">
 
-                        <section className="col-12 col-lg-3 user-menu mt-4">
+                        <section className="col-10 col-sm-10 col-md-4 col-lg-3 user-menu mt-4">
                             <div className='user-header'>
                                 <div className='container-fluid cover'>
                                 </div>
 
                                 <div className='user-photo-section'>
                                     <div className='user-photo'>
-                                        <img className="profile-image" src="https://via.placeholder.com/110x110" alt="" />
+                                        <img className="profile-image" src={this.state.url} alt="" />
                                     </div>
 
                                     <div className='photo-input'>
-                                        <input type="file" id="change-photo" className='d-none' />
+                                        <input type="file" id="change-photo" className='d-none' onChange={this.profilePhotoUpload} />
                                         <label className="user-photo-icon" htmlFor="change-photo"> <FiCamera /> </label>
                                     </div>
                                 </div>
@@ -84,9 +118,6 @@ class Profile extends Component {
                                     <div className='container-fluid'>
                                         <div className='row'>
                                             <p className='user-name'>{this.state.name} {this.state.lastName}</p>
-                                        </div>
-                                        <div className='row'>
-                                            <p> 1800 pontos </p>
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +134,7 @@ class Profile extends Component {
                                             <button className="link" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#acoes-e-eventos" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">Sou Voluntário</button>
                                         </li>
                                         <li className="item" role="presentation">
-                                            <button className="link" id="members-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false">Conquistas</button>
+                                            <button className="link" id="members-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false" disabled>Conquistas</button>
                                         </li>
                                         <li className="item" role="presentation">
                                             <button className="link" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false" disabled>Minhas Doações</button>
@@ -113,7 +144,7 @@ class Profile extends Component {
                             </div>
                         </section>
 
-                        <section className="project-content col-sm-12 col-lg-9 mt-4">
+                        <section className="col-12 col-sm-12 col-md-8 col-lg-9 project-content mt-4">
                             <div className='container-lg col-sm-12 col-lg-9 mt-4'>
                                 <div className="tab-content" id="myTabContent">
                                     <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">

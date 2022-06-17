@@ -238,7 +238,7 @@ class MyAccount extends Component {
                             <div className="col-sm-12 col-lg mx-auto mt-3">
                                 <div className="col form-floating">
                                     <input type="text" className="form-control" id="inputCpf" placeholder="CPF" name="cpf"
-                                        value={this.state.infos.cpf} onChange={this.formData} required disabled={!this.state.editMode} />
+                                        value={this.state.infos.cpf} onChange={this.formData} required disabled />
                                     <label htmlFor="inputCpf" className="form-label"> CPF </label>
                                 </div>
                             </div>
@@ -268,15 +268,15 @@ class MyAccount extends Component {
 
                         <div className='row mt-3'>
                             <div className='col'>
-                                <input type='radio' id="gender1" name="gender" onClick={this.radioChange} disabled={!this.state.editMode} />
+                                <input type='radio' id="gender1" name="gender" onClick={this.radioChange} disabled={!this.state.editMode} /> <br/>
                                 <label className='gender-label' htmlFor="gender1"> Feminino </label>
                             </div>
                             <div className='col'>
-                                <input type='radio' id="gender2" name="gender" onChange={this.radioChange} disabled={!this.state.editMode} />
+                                <input type='radio' id="gender2" name="gender" onChange={this.radioChange} disabled={!this.state.editMode} /> <br/>
                                 <label className='gender-label' htmlFor="gender2"> Masculino </label>
                             </div>
                             <div className='col'>
-                                <input type='radio' id="gender3" name="gender" onChange={this.radioChange} disabled={!this.state.editMode} />
+                                <input type='radio' id="gender3" name="gender" onChange={this.radioChange} disabled={!this.state.editMode} /> <br/>
                                 <label className='gender-label' htmlFor="gender3"> Não binário </label>
                             </div>
                         </div>
