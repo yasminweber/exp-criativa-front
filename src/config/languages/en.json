@@ -117,6 +117,50 @@
             "description": "Description",
             "qntBenefited": "Number of benefited",
             "qntVolunteers": "Number of volunteers"
+        },
+        "info": {
+            "btnEdit": "Edit project",
+            "btnEnd": "End projeto",
+            "btnSignIn": "I want to participace",
+            "btnSignOut": "Leave participation",
+            "main": {
+                "title": "Main page",
+                "description": "Project description",
+                "status": "Status",
+                "when": "When?",
+                "where": "Where?",
+                "benefited": "Quantity of people that will be helped",
+                "volunteers": "Quantity of volunteers needed",
+                "volunteersSigned": "Quantity of volunteers signed"
+            },
+            "pictures": {
+                "title": "Pictures"
+            },
+            "posts": {
+                "title": "Posts",
+                "placeholder": "What do you want to say?",
+                "image": "Add image",
+                "characters": "remaining characters",
+                "btnPublish": "Publish",
+                "whoPublished": "Published by the moderator on"
+            },
+            "volunteers": {
+                "title": "Volunteers",
+                "title1": "Meet the volunteers that signed up for this project",
+                "sub1": "Don't forget to give presence to the volunteers by the end of the project!",
+                "sub2": "No volunteers signed up yet.",
+                "table": {
+                    "name": "Name",
+                    "surname": "Subname",
+                    "activeSince": "Active since",
+                    "days": "days",
+                    "presence": "Presence"
+                },
+                "btn": "Send"
+            },
+            "donations": {
+                "title": "Donations"
+            }
         }
     }
 }

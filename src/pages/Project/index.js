@@ -6,6 +6,7 @@ import api from '../../config/api';
 import { decodeToken } from '../../config/auth';
 import ProjectVolunteers from '../../components/Project/Volunteers';
 import Posts from '../../components/Project/Posts';
+import ProjectInfos from '../../components/Project/ProjectInfos';
 
 class ProjectPage extends Component {
 
@@ -162,7 +163,7 @@ class ProjectPage extends Component {
                         </li>
                         {(this.state.user.user._id === this.state.projectCreator) ?
                         <li className="item" role="presentation">
-                            <button className="link" id="members-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false">Membros</button>
+                            <button className="link" id="volunteers-tab" data-bs-toggle="tab" data-bs-target="#volunteers" type="button" role="tab" aria-controls="volunteers" aria-selected="false">Voluntários</button>
                         </li> : <></>}
                         <li className="item" role="presentation">
                             <button className="link disabled" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false">Doações</button>
@@ -174,49 +175,7 @@ class ProjectPage extends Component {
                     <div className="tab-content" id="myTabContent">
 
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <section className="project-infos text-start py-5" id="project-infos">
-                                <div className="container-lg">
-                                    <div className="row">
-
-                                        <div className="col-md-8 col-12 order-md-0 order-1">
-                                            <div className="left-down mt-4">
-                                                <div className="row">
-                                                    <div className="col-12">
-                                                        <h2 className="titulo-1 mb-3">Descrição do projeto</h2>
-                                                        <p className="descricao">{this.state.description}</p>
-                                                    </div>
-                                                </div>
-                                                <section className="creator-projects text-start mt-5">
-                                                    <h2 className="title">Outros projeto do  mesmo criador</h2>
-
-                                                </section>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-md-4 col-12 order-md-1 order-0">
-                                            <div className="right-up">
-                                                <div className="row">
-                                                    <div className="col-12">
-                                                        <h2 className="titulo-1 mb-1">Status do projeto</h2>
-                                                        <p className="descricao text-capitalize mb-4">{this.state.status}</p>
-                                                        <h2 className="titulo-1 mb-1">Quando?</h2>
-                                                        <p className="descricao mb-4">{formatDate(this.state.startDate)} - {formatDate(this.state.endDate)}</p>
-                                                        <h2 className="titulo-1 mb-1">Onde?</h2>
-                                                        <p className="descricao mb-4">{this.state.where}</p>
-                                                        <h2 className="titulo-1 mb-1">Quantidade estimada de pessoas que serão ajudadas?</h2>
-                                                        <p className="descricao mb-4">{this.state.quantityBenefited}</p>
-                                                        <h2 className="titulo-1 mb-1">Quantidade de voluntários necessários?</h2>
-                                                        <p className="descricao mb-4">{this.state.quantityVolunteers}</p>
-                                                        <h2 className="titulo-1 mb-1">Quantidade de voluntários inscritos:</h2>
-                                                        <p className="descricao mb-4">{this.state.volunteers.length}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </section>
+                            <ProjectInfos description={this.state.description} status={this.state.status} startDate={this.state.startDate} endDate={this.state.endDate} where={this.state.where} quantityBenefited={this.state.quantityBenefited} quantityVolunteers={this.state.quantityVolunteers} volunteers={this.state.volunteers  } />
                         </div>
 
                         <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
@@ -226,8 +185,8 @@ class ProjectPage extends Component {
                         <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
                             <h1 className="mt-3"> conteudo de fotos </h1>
                         </div>
-                        <div className="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
-                            <ProjectVolunteers projectId={this.state.id} status={this.state.status} volunteers={this.state.volunteers} volunteersParticipated={this.state.volunteersParticipated} />
+                        <div className="tab-pane fade" id="volunteers" role="tabpanel" aria-labelledby="volunteers-tab">
+                            <ProjectVolunteers projectId={this.state.id} />
                         </div>
                         <div className="tab-pane fade" id="donations" role="tabpanel" aria-labelledby="donations-tab">
                             <h1 className="mt-3"> conteúdo de doações </h1>

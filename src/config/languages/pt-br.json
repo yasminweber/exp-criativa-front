@@ -116,6 +116,50 @@
             "description": "Descrição",
             "qntBenefited": "Quantidade de beneficiados",
             "qntVolunteers": "Quantidade de voluntários"
+        },
+        "info": {
+            "btnEdit": "Editar projeto",
+            "btnEnd": "Finalizar projeto",
+            "btnSignIn": "Quero participar",
+            "btnSignOut": "Deixar de participar",
+            "main": {
+                "title": "Página inicial",
+                "description": "Descrição do projeto",
+                "status": "Status do projeto",
+                "when": "Quando?",
+                "where": "Onde?",
+                "benefited": "Quantidade de pessoas que serão ajudadas",
+                "volunteers": "Quantidade de voluntários necessários",
+                "volunteersSigned": "Quantidade de voluntários incritos"
+            },
+            "pictures": {
+                "title": "Fotos"
+            },
+            "posts": {
+                "title": "Posts",
+                "placeholder": "O que deseja compartilhar?",
+                "image": "Adicionar imagem",
+                "characters": "caracteres restantes",
+                "btnPublish": "Publicar",
+                "whoPublished": "O moderador publicou sobre o projeto dia"
+            },
+            "volunteers": {
+                "title": "Voluntários",
+                "title1": "Conheça os voluntários que estão participando do projeto",
+                "sub1": "Não esqueça de dar presença aos participantes no final do evento",
+                "sub2": "Não há nenhum voluntário inscrito.",
+                "table": {
+                    "name": "Nome",
+                    "surname": "Sobrenome",
+                    "activeSince": "Ativo há",
+                    "days": "dias",
+                    "presence": "Estava presente?"
+                },
+                "btn": "Enviar"
+            },
+            "donations": {
+                "title": "Doações"
+            }
         }
     }
 }

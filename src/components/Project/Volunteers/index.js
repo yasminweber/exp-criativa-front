@@ -1,8 +1,42 @@
 import React, { Component } from 'react';
-import { subtract_dates } from '../../../Helpers';
+import { currentUrl, subtract_dates, translation } from '../../../Helpers';
 import api from '../../../config/api';
+import { decodeToken } from '../../../config/auth';
 
 class ProjectVolunteers extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: decodeToken(),
+            projectCreator: "",
+            id: "",
+            volunteers: [],
+            volunteersParticipated: [],
+            status: ""
+        }
+
+        this.componentDidMount = () => {
+            this.getProject()
+        }
+    }
+
+    async getProject() {
+        await api.get(`/project/${currentUrl()}`)
+            .then((response) => {
+                const data = response.data;
+                this.setState({
+                    id: data._id,
+                    volunteers: data.volunteers,
+                    volunteersParticipated: data.volunteersParticipated,
+                    status: data.status
+                });
+            })
+            .catch((error) => {
+                console.log("erro carregar projeto ", error)
+                alert('Erro para carregar o projeto');
+            })
+    }
 
     async enviarParticipantes() {
         const array = []
@@ -18,9 +52,9 @@ class ProjectVolunteers extends Component {
             volunteersParticipated: array
         }
 
-        console.log("project", this.props.projectId, "volunteers", volunteers)
+        console.log("project", this.state.id, "volunteers", volunteers)
 
-        await api.put(`/attendance/${this.props.projectId}`, volunteers)
+        await api.put(`/attendance/${this.state.id}`, volunteers)
             .then(() => {
                 alert("participantes enviados")
                 window.location.reload()
@@ -32,48 +66,51 @@ class ProjectVolunteers extends Component {
     }
 
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <section className="project-volunteers" id="volunteers">
-                {console.log("volunteers", this.props.volunteers)}
-                {console.log("volunteersParticipated", this.props.volunteersParticipated)}
                 <div className="container-lg">
                     <div className="row">
                         <div className="col-12">
-                            <h3 className="title-1 mt-5"> Conheça as pessoas interessadas em ajudar seu projeto </h3>
-                            <p className="sub-title-1">Não esqueça de dar presença aos participantes no final do projeto</p>
+                            <h3 className="title-1 mt-5"> {t.project.info.volunteers.title1} </h3>
+                            <p className="sub-title-1">{t.project.info.volunteers.sub1}</p>
                         </div>
                     </div>
 
-                    {/* Show when status !== "finalizado" */}
-                    {(this.props.volunteersParticipated === 0) ?
+                    {(this.state.volunteersParticipated.length === 0) ?
                         <div className="row">
-                            {(this.props.volunteers.length !== 0) ?
+                            {(this.state.volunteers.length !== 0) ?
                                 <div className="col-12 my-5">
                                     <table className="volunteers-table w-100">
                                         <thead>
                                             <tr>
-                                                <th>Nome</th>
-                                                <th>Sobrenome</th>
-                                                <th>Ativo há</th>
-                                                <th>Estava presente?</th>
+                                                <th>{t.project.info.volunteers.table.name}</th>
+                                                <th>{t.project.info.volunteers.table.surname}</th>
+                                                <th>{t.project.info.volunteers.table.activeSince}</th>
+                                                <th>{t.project.info.volunteers.table.presence}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {this.props.volunteers.map((child, id) => (
+                                            {this.state.volunteers.map((child, id) => (
                                                 <tr key={id}>
                                                     <td>{child.name}</td>
                                                     <td>{child.lastName}</td>
-                                                    <td>{subtract_dates(child.createdAt)} dias</td>
+                                                    <td>{subtract_dates(child.createdAt)} {t.project.info.volunteers.table.days}</td>
+                                                    {(this.state.status !== "finalizado") ?
+                                                    
+                                                    <td><input type="checkbox" className="check-participation" value={child._id} disabled /></td>
+                                                    :
                                                     <td><input type="checkbox" className="check-participation" value={child._id} /></td>
+                                                    }
                                                 </tr>
                                             ))}
                                         </tbody>
                                     </table>
 
-                                    {(this.props.status === "finalizado") ?
+                                    {(this.state.status === "finalizado") ?
                                         <div>
                                             <button type="submit" onClick={() => this.enviarParticipantes()}>
-                                                Enviar
+                                            {t.project.info.volunteers.btn}
                                             </button>
                                         </div>
                                         : <></>
@@ -82,7 +119,7 @@ class ProjectVolunteers extends Component {
                                 </div>
                                 :
                                 <div className="col-12 my-5">
-                                    <h3>Não há nenhum participante inscrito.</h3>
+                                    <h3>{t.project.info.volunteers.sub2}</h3>
                                 </div>
                             }
                         </div>
@@ -92,20 +129,20 @@ class ProjectVolunteers extends Component {
                                 <table className="volunteers-table w-100">
                                     <thead>
                                         <tr>
-                                            <th>Nome</th>
-                                            <th>Sobrenome</th>
-                                            <th>Ativo há</th>
-                                            <th>Estava presente?</th>
+                                            <th>{t.project.info.volunteers.table.name}</th>
+                                            <th>{t.project.info.volunteers.table.surname}</th>
+                                            <th>{t.project.info.volunteers.table.activeSince}</th>
+                                            <th>{t.project.info.volunteers.table.presence}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {(this.props.volunteersParticipated !== undefined) ?
+                                        {(this.state.volunteersParticipated !== undefined) ?
                                             <>
-                                                {this.props.volunteers.map((child, id) => (
+                                                {this.state.volunteers.map((child, id) => (
                                                     <tr key={id}>
                                                         <td>{child.name}</td>
                                                         <td>{child.lastName}</td>
-                                                        <td>{subtract_dates(child.createdAt)} dias</td>
+                                                        <td>{subtract_dates(child.createdAt)} {t.project.info.volunteers.table.days}</td>
                                                         {(((child.volunteerParticipated).indexOf(this.props.projectId)) !== -1) ?
                                                             <td><input type="checkbox" className="check-participation" value={child._id} checked disabled /></td>
                                                             : <td><input type="checkbox" className="check-participation" value={child._id} disabled /></td>

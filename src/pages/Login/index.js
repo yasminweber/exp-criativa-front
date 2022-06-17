@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { Alert } from 'react-bootstrap';
 import Helmet from 'react-helmet';
 import HeaderHome from '../../components/Header/Home';
 import api from '../../config/api'
 import { translation, setProjectProgress } from '../../Helpers';
+import Loader from '../../assets/images/loader.svg';
+//import CustomAlert from '../../components/CustomAlert';
 
 class Login extends Component {
 
@@ -10,7 +13,8 @@ class Login extends Component {
         super(props);
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            showAlert: false
         }
 
         this.componentDidMount = () => {
@@ -28,6 +32,9 @@ class Login extends Component {
             email: this.state.email
         }
 
+        let waiting = document.getElementById('awaiting')
+        waiting.style.display = 'block'
+
         await api.post('/login', user)
             .then(res => {
                 localStorage.setItem("TOKEN_KEY", res.data.token);
@@ -36,11 +43,20 @@ class Login extends Component {
             .catch(err => {
                 console.log(err);
                 if (err.message === "Network Error") {
-                    alert("Erro de conexão com o servidor")
+                    // alert("Erro de conexão com o servidor")
+                    waiting.style.display = 'none'
+                    this.setState({ showAlert: true })
                 } else {
+                    waiting.style.display = 'none'
                     alert("Email ou senha incorretos")
                 }
             });
+    }
+
+    //create a function to toggle between true and false
+    closeAlert = () => {
+        document.querySelector('#awaiting').style.display = 'none'
+        this.setState({showAlert: false})
     }
 
     render() {
@@ -98,7 +114,15 @@ class Login extends Component {
                                     <div className="col-12">
                                         <div className="enviar">
                                             <button type="submit" className="btn-1"> {t.login.btn1} </button>
+                                            <span id="awaiting" style={{ display: "none" }}><img src={Loader} alt="loader" width={"50px"} /></span>
                                         </div>
+                                        {/* <CustomAlert show={this.state.showAlert} /> */}
+                                        {(this.state.showAlert === true) ?
+                                            <Alert variant="danger" onClose={() => this.closeAlert()} dismissible>
+                                                <Alert.Heading>Erro de conexão!</Alert.Heading>
+                                                <p>Por favor tente novamente mais tarde</p>
+                                            </Alert> : <></>
+                                        }
                                     </div>
                                 </div>
                             </form>
