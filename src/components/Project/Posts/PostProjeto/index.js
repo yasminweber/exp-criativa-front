@@ -5,7 +5,22 @@ class PostProjeto extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            imagesArray: []
         }
+
+        this.imagesAdd = this.imagesAdd.bind(this)
+    }
+
+    componentDidMount() {
+        this.imagesAdd()
+    }
+
+    imagesAdd() {
+        let images = []
+        Array.from(this.props.images).forEach( (url) => {
+            images.push(<img className='post-image' src={url} />)
+        })
+        this.setState({imagesArray: images})
     }
 
     render() {
@@ -21,7 +36,7 @@ class PostProjeto extends Component {
 
                 <div className='row post-image-row mt-4'>
                     <div className='col-lg-6 col-sm-11 post-image-column'>
-                        <img className='post-image' src="https://via.placeholder.com/1920x1080" />
+                        {this.state.imagesArray}
                     </div>
                 </div>
             </div>

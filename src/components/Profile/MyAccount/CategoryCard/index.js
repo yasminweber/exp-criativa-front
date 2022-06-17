@@ -11,7 +11,7 @@ class CategoryCardProfile extends Component {
 
     render() {
         return (
-            <div className="col-lg-4 col-md-4 col-6 my-3">
+            <div className="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-4 my-3">
                 <div className="category-card">
                 <div className={this.state.selected ? 'category-option selected' : 'category-option'} id={this.props.category}
                     onClick={() => {

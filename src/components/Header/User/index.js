@@ -30,8 +30,6 @@ class HeaderUser extends Component {
         }
     }
 
-
-
     async logout() {
         alert("Você fez logout");
         localStorage.removeItem('TOKEN_KEY');
@@ -94,7 +92,7 @@ class HeaderUser extends Component {
                             className="dropdown-toggle-color"
                             title={
                                 <img
-                                    src="https://via.placeholder.com/32x32"
+                                    src={this.state.user.user.profileImage}
                                     className="rounded-circle"
                                     width="32px" height="32px"
                                     alt="Imagem perfil"
@@ -154,14 +152,14 @@ class HeaderUser extends Component {
                                     className="dropdown-toggle-color"
                                     title={
                                         <img
-                                            src="https://via.placeholder.com/32x32"
+                                            src={this.state.user.user.profileImage}
                                             className="rounded-circle"
                                             width="32px" height="32px"
                                             alt="Imagem perfil"
                                         />
                                     }
                                 >
-                                    <div className="text-center my-2">{this.state.user.user.name}</div>
+                                    <div className="text-center my-2">{this.state.user.user.name} </div>
                                     <NavDropdown.Item href="/profile" className="dropdown-color"> Perfil </NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={this.logout} className="dropdown-color"> Sair </NavDropdown.Item>
