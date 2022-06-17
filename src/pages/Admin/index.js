@@ -44,7 +44,7 @@ class AdminLogin extends Component {
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title> Admin Login </title>
+                    <title> All4One </title>
                 </Helmet>
 
                 <HeaderAdminOut />
@@ -72,11 +72,6 @@ class AdminLogin extends Component {
                                         <button type="submit" className="btn-1"> Entrar </button>
                                     </div>
                                 </form>
-
-                                <div>
-                                    <a href="/newAdmin" className="">Esqueci minha senha</a> <br />
-                                    <a href="/newAdmin" className="">Não possui uma conta? Crie agora</a>
-                                </div>
                             </div>
                         </div>
                     </div>

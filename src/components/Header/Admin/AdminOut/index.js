@@ -7,7 +7,7 @@ class HeaderAdminOut extends Component {
         return (
             <Navbar expand="lg" className="header-admin">
                 <Container>
-                    <Navbar.Brand>Nome Projeto</Navbar.Brand>
+                    <Navbar.Brand>All4One</Navbar.Brand>
                 </Container>
             </Navbar>
         );

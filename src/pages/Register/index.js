@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import api from '../../config/api'
 import CategoryCard from '../../components/Register/CategoryCard';
+import { translation } from '../../Helpers';
+import HeaderHome from '../../components/Header/Home';
 
 class Register extends Component {
 
@@ -118,7 +120,7 @@ class Register extends Component {
 
     async formSend(e) {
         e.preventDefault()
-        
+
         if (this.state.form.password === this.state.form.confirmPassword) {
             document.getElementById('form-fields').classList.add('d-none')
             document.getElementById('category-column').classList.remove('d-none')
@@ -128,7 +130,7 @@ class Register extends Component {
     }
 
     async finishClick() {
-        
+
         let genero = ""
         if (this.state.gender === 0) {
             genero = "Feminino"
@@ -154,36 +156,41 @@ class Register extends Component {
         console.log(user)
 
         await api.post('/register', user);
-        
+
         alert("Usuário registrado com sucesso");
         window.location = '/login';
     }
 
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <section className='register-page'>
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title> Nome - Cadastre-se </title>
+                    <title> {t.register.title} </title>
                 </Helmet>
+
+                <HeaderHome />
 
                 <div className='container-fluid register-cover'> </div>
 
                 <div className="container register-content">
                     <div className="row">
                         <div className="col-4 title-column">
-                            <h2 className='title'> Vamos Começar! </h2>
+                            <h2 className='title'> {t.register.title1} </h2>
 
-                            <p className='subtitle'> Para se cadastrar, basta preencher os campos ao lado! </p>
-                            <p className='subtitle'> Fácil assim, você pode começar a ver os projetos sociais! </p>
+                            <p className='subtitle'> {t.register.sub1} </p>
+                            <p className='subtitle'> {t.register.sub2} </p>
 
                             <span className='hr'> </span>
                             <span className='hr-text'> ou </span>
 
-                            <h2 className='title login'> Já tem uma conta? </h2>
-                            <p className='subtitle-login'> Clique no botão abaixo para entrar com seus dados! </p>
-                            <a href="/login"><button className='login-button'> Fazer Login  </button></a>
+                            <h2 className='title login'> {t.register.title2} </h2>
+                            <p className='subtitle-login'> {t.register.sub3} </p>
+                            <a href="/login">
+                                <button className='login-button'> {t.register.btn1} </button>
+                            </a>
                         </div>
 
                         <div className="container-fluid col-7 form-column">
@@ -193,7 +200,7 @@ class Register extends Component {
                                     {/* Account Type Switch Button */}
                                     <div className="row">
                                         <div className="col-5">
-                                            Conta Pessoal
+                                            {t.register.part1.account1}
                                         </div>
                                         <div className="col-2">
                                             <div className='switch-button'>
@@ -204,7 +211,7 @@ class Register extends Component {
 
                                         </div>
                                         <div className="col-5">
-                                            Conta Empresarial
+                                            {t.register.part1.account2}
                                         </div>
                                     </div>
 
@@ -214,18 +221,18 @@ class Register extends Component {
                                             {/* Nome */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="text" className="form-control personal-input" name="name" placeholder="Nome"
+                                                    <input type="text" className="form-control personal-input" name="name" placeholder={t.register.part1.name}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.name} required />
-                                                    <label className="form-label"> Nome </label>
+                                                    <label className="form-label"> {t.register.part1.name} </label>
                                                 </div>
                                             </div>
 
                                             {/* Sobrenome */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="Sobrenome" className="form-control personal-input" name="lastName" placeholder="Sobrenome"
+                                                    <input type="Sobrenome" className="form-control personal-input" name="lastName" placeholder={t.register.part1.surname}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.lastName} required />
-                                                    <label className="form-label"> Sobrenome </label>
+                                                    <label className="form-label"> {t.register.part1.surname} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -234,18 +241,18 @@ class Register extends Component {
                                             {/* CPF */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="text" className="form-control personal-input" name="cpf" placeholder="CPF"
+                                                    <input type="text" className="form-control personal-input" name="cpf" placeholder={t.register.part1.cpf}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.cpf} required />
-                                                    <label className="form-label"> CPF </label>
+                                                    <label className="form-label"> {t.register.part1.cpf} </label>
                                                 </div>
                                             </div>
 
                                             {/* Data de Nascimento */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="date" className="form-control personal-input" name="birth" placeholder="Data de Nascimento"
+                                                    <input type="date" className="form-control personal-input" name="birth" placeholder={t.register.part1.birthDate}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.birth} required />
-                                                    <label className="form-label"> Data de Nascimento </label>
+                                                    <label className="form-label"> {t.register.part1.birthDate} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -254,33 +261,33 @@ class Register extends Component {
                                             {/* Email */}
                                             <div className='col-12'>
                                                 <div className="form-floating">
-                                                    <input type="email" className="form-control personal-input" name="email" placeholder="E-mail"
+                                                    <input type="email" className="form-control personal-input" name="email" placeholder={t.register.part1.email}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.email} required />
-                                                    <label className="form-label"> E-mail </label>
+                                                    <label className="form-label"> {t.register.part1.email} </label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         {/* Gênero */}
                                         <div className='row mt-3'>
-                                            <span> Com qual gênero você se identifica? </span>
+                                            <span> {t.register.part1.gender.title} </span>
                                         </div>
 
                                         <div className='row mt-3'>
                                             <div className='col'>
                                                 <input className="personal-input" type='radio' id="gender1" name="gender"
                                                     onChange={(e) => { this.setState({ gender: 0 }) }} required />
-                                                <label className='gender-label' htmlFor="gender1"> Feminino </label>
+                                                <label className='gender-label' htmlFor="gender1"> {t.register.part1.gender.op1} </label>
                                             </div>
                                             <div className='col'>
                                                 <input className="personal-input" type='radio' id="gender2" name="gender"
                                                     onChange={(e) => { this.setState({ gender: 1 }) }} required />
-                                                <label className='gender-label' htmlFor="gender2"> Masculino </label>
+                                                <label className='gender-label' htmlFor="gender2"> {t.register.part1.gender.op2} </label>
                                             </div>
                                             <div className='col'>
                                                 <input className="personal-input" type='radio' id="gender3" name="gender"
                                                     onChange={(e) => { this.setState({ gender: 2 }) }} required />
-                                                <label className='gender-label' htmlFor="gender3"> Não binário </label>
+                                                <label className='gender-label' htmlFor="gender3"> {t.register.part1.gender.op3} </label>
                                             </div>
                                         </div>
 
@@ -288,18 +295,18 @@ class Register extends Component {
                                             {/* Senha */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="password" className="form-control personal-input" name="password" placeholder="Senha"
+                                                    <input type="password" className="form-control personal-input" name="password" placeholder={t.register.part1.password}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.password} required />
-                                                    <label className="form-label"> Senha </label>
+                                                    <label className="form-label"> {t.register.part1.password} </label>
                                                 </div>
                                             </div>
 
                                             {/* Confirmar Senha */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="password" className="form-control personal-input" name="confirmPassword" placeholder="Confirme a Senha"
+                                                    <input type="password" className="form-control personal-input" name="confirmPassword" placeholder={t.register.part1.repeatPassword}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.confirmPassword} required />
-                                                    <label className="form-label"> Confirme a Senha </label>
+                                                    <label className="form-label"> {t.register.part1.repeatPassword} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -311,9 +318,9 @@ class Register extends Component {
                                             {/* CNPJ */}
                                             <div className='col-12'>
                                                 <div className="form-floating">
-                                                    <input type="text" className="form-control company-input" name="cnpj" placeholder="CNPJ"
+                                                    <input type="text" className="form-control company-input" name="cnpj" placeholder={t.register.part1.cnpj}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.cnpj} required disabled />
-                                                    <label className="form-label"> CNPJ </label>
+                                                    <label className="form-label"> {t.register.part1.cnpj} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -322,9 +329,9 @@ class Register extends Component {
                                             {/* Razao Social */}
                                             <div className='col-12'>
                                                 <div className="form-floating">
-                                                    <input type="text" className="form-control company-input" name="razaoSocial" placeholder="Razão Social"
+                                                    <input type="text" className="form-control company-input" name="razaoSocial" placeholder={t.register.part1.razaoSocial}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.razaoSocial} required disabled />
-                                                    <label className="form-label"> Razão Social </label>
+                                                    <label className="form-label"> {t.register.part1.razaoSocial} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -333,9 +340,9 @@ class Register extends Component {
                                             {/* Email */}
                                             <div className='col-12'>
                                                 <div className="form-floating">
-                                                    <input type="email" className="form-control company-input" name="email" placeholder="E-mail"
+                                                    <input type="email" className="form-control company-input" name="email" placeholder={t.register.part1.email}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.email} required disabled />
-                                                    <label className="form-label"> E-mail </label>
+                                                    <label className="form-label"> {t.register.part1.email} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -344,18 +351,18 @@ class Register extends Component {
                                             {/* Senha */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="password" className="form-control company-input" name="password" placeholder="Senha"
+                                                    <input type="password" className="form-control company-input" name="password" placeholder={t.register.part1.password}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.password} required disabled />
-                                                    <label className="form-label"> Senha </label>
+                                                    <label className="form-label"> {t.register.part1.password} </label>
                                                 </div>
                                             </div>
 
                                             {/* Confirmar Senha */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="password" className="form-control company-input" name="confirmPassword" placeholder="Confirme a Senha"
+                                                    <input type="password" className="form-control company-input" name="confirmPassword" placeholder={t.register.part1.confirmPassword}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.confirmPassword} required disabled />
-                                                    <label className="form-label"> Confirme a Senha </label>
+                                                    <label className="form-label"> {t.register.part1.confirmPassword} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -369,18 +376,18 @@ class Register extends Component {
                                             {/* Nome */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="text" className="form-control company-input" name="name" placeholder="Nome"
+                                                    <input type="text" className="form-control company-input" name="name" placeholder={t.register.part1.administratorName}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.name} required disabled />
-                                                    <label className="form-label"> Nome </label>
+                                                    <label className="form-label"> {t.register.part1.administratorName} </label>
                                                 </div>
                                             </div>
 
                                             {/* Sobrenome */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="Sobrenome" className="form-control company-input" name="lastName" placeholder="Sobrenome"
+                                                    <input type="Sobrenome" className="form-control company-input" name="lastName" placeholder={t.register.part1.administratorSurname}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.lastName} required disabled />
-                                                    <label className="form-label"> Sobrenome </label>
+                                                    <label className="form-label"> {t.register.part1.administratorSurname} </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -388,7 +395,7 @@ class Register extends Component {
 
                                     <div className='row mt-4'>
                                         <div className="col-12">
-                                            <button className="register-button btn btn-primary" type="submit"> Continuar </button>
+                                            <button className="register-button btn btn-primary" type="submit"> {t.register.part1.btn1} </button>
                                         </div>
                                     </div>
                                 </form>
@@ -397,11 +404,11 @@ class Register extends Component {
 
                             <section id="category-column" className='category-column d-none'>
                                 <div className='row'>
-                                    <h2 className='category-title'> Seus interesses </h2>
+                                    <h2 className='category-title'> {t.register.part2.title} </h2>
                                     {this.state.companyAccount ?
-                                        <p className='mt-3'> Selecione as 5 categorias de projetos que mais se encaixam com sua empresa. </p>
+                                        <p className='mt-3'> {t.register.part2.sub1} </p>
                                         :
-                                        <p className='mt-3'> Selecione as 5 categorias de projetos que você mais se identifica. <br /> Usaremos isso para mostrar projetos que mais combinam com você! </p>
+                                        <p className='mt-3'> {t.register.part2.sub2} <br /> {t.register.part2.sub3} </p>
                                     }
                                 </div>
 
@@ -412,10 +419,10 @@ class Register extends Component {
                                 </div>
 
                                 <div className='row mt-4'>
-                                        <div className="col-12">
-                                            <button className="register-button btn btn-primary" type="submit" onClick={this.finishClick}> Finalizar Cadastro </button>
-                                        </div>
+                                    <div className="col-12">
+                                        <button className="register-button btn btn-primary" type="submit" onClick={this.finishClick}> {t.register.part2.btn1} </button>
                                     </div>
+                                </div>
                             </section>
 
 

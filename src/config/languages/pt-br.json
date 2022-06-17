@@ -25,5 +25,97 @@
         "btn2": "Quero me cadastrar",
         "placeholder1": "E-mail",
         "placeholder2": "Senha"
+    },
+    "register": {
+        "title": "Cadastro | All4One",
+        "title1": "Vamos começar!",
+        "sub1": "Para se cadastrar, basta preencher os campos ao lado!",
+        "sub2": "Fácil assim, você pode começar a ver os projetos sociais!",
+        "title2": "Já tem uma conta?",
+        "sub3": "Clique no botão abaixo para entrar com seus dados!",
+        "btn1": "Fazer login",
+        "part1": {
+            "account1": "Conta Pessoal",
+            "account2": "Conta Empresarial",
+            "name": "Nome",
+            "surname": "Sobrenome",
+            "cpf": "CPF",
+            "birthDate": "Data de nascimento",
+            "email": "E-mail",
+            "gender": {
+                "title": "Com qual gênero você se identifica?",
+                "op1": "Feminino",
+                "op2": "Masculino",
+                "op3": "Não binário"
+            },
+            "password": "Senha",
+            "repeatPassword": "Confirmar a senha",
+            "cnpj": "CNPJ",
+            "razaoSocial": "Razão Social",
+            "administratorName": "Nome",
+            "administratorSurname": "Sobrenome",
+            "btn1": "Continuar"
+        },
+        "part2": {
+            "title": "Seus interesses",
+            "sub1": "Selecione as 5 categorias de projetos que mais se encaixam com sua empresa.",
+            "sub2": "Selecione as 5 categorias de projetos que você mais se identifica.",
+            "sub3": "Usaremos isso para mostrar projetos que mais combinam com você!",
+            "btn1": "Finalizar cadastro"
+        }
+    },
+    "headerUser": {
+        "interests": "Meus interesses",
+        "newProject": "Novo projeto",
+        "causes": {
+            "title": "Causas",
+            "accessibility": "Acessibilidade",
+            "kids": "Crianças",
+            "education": "Educação",
+            "womenEmpowerment": "Empoderamento Feminino",
+            "hunger": "Fome",
+            "lgbtqia": "LGBTQIA+",
+            "environment": "Meio Ambiente",
+            "animals": "Maus Tratos aos Animais",
+            "seniors": "Terceira Idade",
+            "disaster": "Tragédia",
+            "health": "Saúde",
+            "homeless": "Sem Teto"
+        },
+        "profile": "Perfil",
+        "logout": "Sair"
+    },
+    "interests": {
+        "title": "Meus Interesses | All4One",
+        "title1": "Meus interesses",
+        "btn1": "Entrar no projeto",
+        "causes": {
+            "title1": "Ver projetos da causa:",
+            "sub1": "No momento não temos nenhum projeto para:"
+        }
+    },
+    "project": {
+        "newProject": {
+            "title": "Novo Projeto | All4One",
+            "title1": "Novo projeto",
+            "sub1": "Por favor preencha as informações para solicitar um novo projeto."
+        },
+        "editProject": {
+            "title": "Editar Projeto | All4One",
+            "title1": "Editar projeto",
+            "title2": "Edição pendente:",
+            "btn1": "Apagar projeto"
+        },
+        "form": {
+            "name": "Nome",
+            "causes": "Causas",
+            "selectCause": "Selecione causa",
+            "localization": "Localização (bairro)",
+            "startDate": "Data início",
+            "endDate": "Data fim",
+            "description": "Descrição",
+            "qntBenefited": "Quantidade de beneficiados",
+            "qntVolunteers": "Quantidade de voluntários"
+        }
     }
 }

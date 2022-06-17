@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HeaderLogin from '../../components/Header/User';
 import Helmet from 'react-helmet';
 import api from '../../config/api'
-import { currentUrl } from '../../Helpers';
+import { currentUrl, translation } from '../../Helpers';
 
 class Cause extends Component {
 
@@ -22,18 +22,32 @@ class Cause extends Component {
 
         let url = currentUrl()
         let filter = ''
-        if (url === "saude") {
-            filter = "Saúde"
-        } else if (url === "maus-tratos-aos-animais") {
-            filter = "Maus tratos aos animais"
+        if (url === "acessibilidade") {
+            filter = "Acessibilidade"
+        } else if (url === "criancas") {
+            filter = "Crianças"
+        } else if (url === "educacao") {
+            filter = "Educação"
         } else if (url === "empoderamento-feminino") {
             filter = "Empoderamento Feminino"
         } else if (url === "fome") {
             filter = "Fome"
+        } else if (url === "lgbtqia") {
+            filter = "LGBTQIA+"
+        } else if (url === "meio-ambiente") {
+            filter = "Meio Ambiente"
+        } else if (url === "maus-tratos-aos-animais") {
+            filter = "Maus tratos aos animais"
+        } else if (url === "terceira-idade") {
+            filter = "Terceira Idade"
+        } else if (url === "tragedia") {
+            filter = "Tragédia"
+        } else if (url === "saude") {
+            filter = "Saúde"
         } else if (url === "sem-teto") {
             filter = "Sem teto"
         }
-        
+
         this.setState({
             cause: filter
         })
@@ -50,6 +64,7 @@ class Cause extends Component {
     }
 
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <div className="dashboard-interesses">
 
@@ -61,10 +76,10 @@ class Cause extends Component {
                 <HeaderLogin />
 
                 <section className="banner-titulo">
-                    <div className="container-fluid">
+                    <div className="container-xl">
                         <div className="row text-lg-start text-center">
                             <div className="col-12">
-                                <h1 className="titulo-1">Ver projetos da causa: {this.state.cause}</h1>
+                                <h1 className="titulo-1">{t.interests.causes.title1} {this.state.cause}</h1>
                             </div>
                         </div>
                     </div>
@@ -78,7 +93,7 @@ class Cause extends Component {
                                 {/* Se a lista for vazia */}
                                 {(!this.state.projects.length) ?
                                     <div className="mt-3" style={{ textAlignLast: "center" }}>
-                                        <p>No momento não temos nenhum projeto para: {this.state.cause}</p>
+                                        <p>{t.interests.causes.sub1} {this.state.cause}</p>
                                     </div> : <></>
                                 }
 
@@ -94,7 +109,7 @@ class Cause extends Component {
                                                     <p className="descricao mt-3">{child.description}</p>
                                                     <div className="text-center enviar mt-4">
                                                         <button className="btn-1" onClick={() => { window.location.href = `/project/${child._id}` }}>
-                                                            Entrar no projeto
+                                                            {t.interests.btn1}
                                                         </button>
                                                     </div>
                                                 </div>

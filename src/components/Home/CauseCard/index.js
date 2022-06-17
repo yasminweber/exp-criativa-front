@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-class Cause_Card extends Component {
+class CauseCard extends Component {
 
     render() {
         return (
-            <div className="col-lg-3 col-md-6 col-12 px-0">
+            <div className="col-lg-3 col-md-6 col-12 mb-4 cause-card">
                 <div className="categoria">
                     <div className="card-dentro">
                         <div className="card-front d-flex flex-column align-items-center justify-content-between">
@@ -21,4 +21,4 @@ class Cause_Card extends Component {
         )
     }
 }
-export default Cause_Card
+export default CauseCard
