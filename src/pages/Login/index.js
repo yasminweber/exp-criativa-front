@@ -3,9 +3,9 @@ import { Alert } from 'react-bootstrap';
 import Helmet from 'react-helmet';
 import HeaderHome from '../../components/Header/Home';
 import api from '../../config/api'
-import { translation, setProjectProgress } from '../../Helpers';
+import { translation, setProjectProgress, customAlert } from '../../Helpers';
 import Loader from '../../assets/images/loader.svg';
-//import CustomAlert from '../../components/CustomAlert';
+import CustomAlert from '../../components/CustomAlert';
 
 class Login extends Component {
 
@@ -48,7 +48,7 @@ class Login extends Component {
                     this.setState({ showAlert: true })
                 } else {
                     waiting.style.display = 'none'
-                    alert("Email ou senha incorretos")
+                    customAlert("E-mail ou senha incorreto.", "error");
                 }
             });
     }
@@ -134,6 +134,8 @@ class Login extends Component {
                         </div>
                     </div>
                 </div>
+
+                <CustomAlert/>
             </div>
 
         )
