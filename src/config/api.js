@@ -3,7 +3,7 @@ import { getToken } from "../config/auth";
 //require('dotenv').config();
 
 const api = axios.create({
-    baseURL: 'http://localhost:4000'
+    baseURL: 'https://all-4-one-back.herokuapp.com'
 });
 
 api.interceptors.request.use(async config => {
