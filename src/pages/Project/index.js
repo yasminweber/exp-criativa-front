@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet'
-import { currentUrl, formatDate } from '../../Helpers'
+import { currentUrl, formatDate, translation } from '../../Helpers'
 import HeaderLogin from '../../components/Header/User';
 import api from '../../config/api';
 import { decodeToken } from '../../config/auth';
@@ -84,7 +84,6 @@ class ProjectPage extends Component {
                 localStorage.setItem("TOKEN_KEY", res.data);
             })
             .catch((err) => {
-                //alert("Erro para trocar token");
                 console.log(err)
             })
     }
@@ -101,6 +100,7 @@ class ProjectPage extends Component {
     }
 
     render() {
+        const t = translation(localStorage.getItem('language'))
         return (
             <div className='project'>
 
@@ -128,21 +128,21 @@ class ProjectPage extends Component {
                         {(this.state.user.user._id !== this.state.projectCreator && (this.state.status !== "finalizado")) ?
                             <div className="col-lg-4 col-12 subscription-column d-flex">
                                 {(this.state.volunteers.filter(item => item._id === this.state.user.user._id).length > 0) ?
-                                    <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Deixar de Participar </button>
+                                    <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> {t.project.info.btnSignOut} </button>
                                     :
-                                    <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> Quero Participar </button>
+                                    <button className='subscription-button' onClick={() => this.inscrever(this.state.id)}> {t.project.info.btnSignIn} </button>
                                 }
                             </div> :
                             <>
                                 {(this.state.status === "solicitação") || (this.state.status === "pendente") ?
                                     <div className="col-lg-4 col-12 subscription-column d-flex">
-                                        <button className='subscription-button' onClick={() => { window.location.href = `/editproject/${this.state.id}` }}> Editar projeto </button>
+                                        <button className='subscription-button' onClick={() => { window.location.href = `/editproject/${this.state.id}` }}> {t.project.info.btnEdit} </button>
                                     </div>
                                     : <></>
                                 }
                                 {(this.state.status === "progresso") ?
                                     <div className="col-lg-4 col-12 subscription-column d-flex">
-                                        <button className='subscription-button' onClick={() => { this.closeProject() }}> Encerrar projeto </button>
+                                        <button className='subscription-button' onClick={() => { this.closeProject() }}> {t.project.info.btnEnd} </button>
                                     </div>
                                     : <></>
                                 }
@@ -154,20 +154,20 @@ class ProjectPage extends Component {
                 <section className='project-header'>
                     <ul className="nav nav-tabs project-navbar" id="myTab" role="tablist">
                         <li className="item" role="presentation">
-                            <button className="link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Página inicial</button>
+                            <button className="link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">{t.project.info.main.title}</button>
                         </li>
                         <li className="item" role="presentation">
-                            <button className="link disabled" id="pictures-tab" data-bs-toggle="tab" data-bs-target="#pictures" type="button" role="tab" aria-controls="pictures" aria-selected="false">Fotos</button>
+                            <button className="link disabled pe-none" id="pictures-tab" data-bs-toggle="tab" data-bs-target="#pictures" type="button" role="tab" aria-controls="pictures" aria-selected="false">{t.project.info.pictures.title}</button>
                         </li>
                         <li className="item" role="presentation">
-                            <button className="link" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#acoes-e-eventos" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">Posts</button>
+                            <button className="link" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#acoes-e-eventos" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">{t.project.info.posts.title}</button>
                         </li>
                         {(this.state.user.user._id === this.state.projectCreator) ?
                         <li className="item" role="presentation">
-                            <button className="link" id="volunteers-tab" data-bs-toggle="tab" data-bs-target="#volunteers" type="button" role="tab" aria-controls="volunteers" aria-selected="false">Voluntários</button>
+                            <button className="link" id="volunteers-tab" data-bs-toggle="tab" data-bs-target="#volunteers" type="button" role="tab" aria-controls="volunteers" aria-selected="false">{t.project.info.volunteers.title}</button>
                         </li> : <></>}
                         <li className="item" role="presentation">
-                            <button className="link disabled" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false">Doações</button>
+                            <button className="link disabled pe-none" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false">{t.project.info.donations.title}</button>
                         </li>
                     </ul>
                 </section>
@@ -179,13 +179,14 @@ class ProjectPage extends Component {
                             <ProjectInfos description={this.state.description} status={this.state.status} startDate={this.state.startDate} endDate={this.state.endDate} where={this.state.where} quantityBenefited={this.state.quantityBenefited} quantityVolunteers={this.state.quantityVolunteers} volunteers={this.state.volunteers  } />
                         </div>
 
+                        <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
+                            <h1 className="mt-3"> conteudo de fotos </h1>
+                        </div>
+
                         <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
                             <Posts projectCreator={this.state.projectCreator} userId={this.state.user.user._id}/>
                         </div>
 
-                        <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
-                            <h1 className="mt-3"> conteudo de fotos </h1>
-                        </div>
                         <div className="tab-pane fade" id="volunteers" role="tabpanel" aria-labelledby="volunteers-tab">
                             <ProjectVolunteers projectId={this.state.id} />
                         </div>

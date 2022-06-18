@@ -20,11 +20,9 @@ class VolunteerProjects extends Component {
     }
 
     async getUser() {
-
         await api.get(`/user/${this.state.user.user._id}`)
             .then((response) => {
                 const data = response.data;
-                console.log("data", data)
                 this.setState({ volunteerIn: data.volunteerIn, volunteerParticipated: data.volunteerParticipated });
             })
             .catch(() => {
@@ -56,13 +54,17 @@ class VolunteerProjects extends Component {
                             {this.state.volunteerIn.filter(status => status.status === "aprovado").map((child, id) => (
                                 <ProfileProjectCard key={id} url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
                             ))}
+                            {this.state.volunteerIn.filter(status => status.status === "aprovado").length === 0 ?
+                            <div><h2 className="mt-4">Não há projetos a exibir.</h2></div> : <></> }
                         </div>
 
-                        {console.log("projeto participado", this.state.volunteerParticipated)}
+                        {/* {console.log("projeto participado", this.state.volunteerParticipated)} */}
                         <div className="tab-pane fade" id="finished-volunteer" role="tabpanel" aria-labelledby="finished-volunteer-tab">
                             {this.state.volunteerParticipated.filter(status => status.status === "finalizado").map((child, id) => (
                                 <ProfileProjectCard key={id} url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
                             ))}
+                            {this.state.volunteerParticipated.filter(status => status.status === "finalizado").length === 0 ?
+                            <div><h2 className="mt-4">Não há projetos a exibir.</h2></div> : <></> }
                         </div>
                     </div>
 

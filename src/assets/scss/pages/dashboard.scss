@@ -1,9 +1,12 @@
 .dashboard-interesses {
     .banner-titulo {
-        color: white;
-        background-image: linear-gradient(to bottom, #58706e, #008b8b, #58706e);
-        justify-content: start;
-        padding: 50px 0 100px;
+        color: rgb(223, 223, 223);
+        text-transform: uppercase;
+        background: rgb(0, 139, 139);
+        background: linear-gradient(180deg, rgba(0, 139, 139, 1) 10%, rgba(80, 195, 195, 1) 100%);
+        letter-spacing: 3px;
+        word-spacing: 5px;
+        padding: 50px 0 50px;
 
         @include res-lg {
             padding: 50px 0 90px;
@@ -11,6 +14,7 @@
 
         .titulo-1 {
             font-size: 28px;
+            text-align: center;
         }
 
         .descricao {

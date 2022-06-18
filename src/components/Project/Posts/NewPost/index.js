@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FaPaperclip } from 'react-icons/fa'
 import api from '../../../../config/api';
 import { storage } from '../../../../firebase';
-import { currentUrl, getImagesUrl } from '../../../../Helpers';
+import { currentUrl, getImagesUrl, translation } from '../../../../Helpers';
 
 class NewPost extends Component {
 
@@ -52,7 +52,7 @@ class NewPost extends Component {
         ))
 
         // Adiciona array de url no banco
-        let responseUpdate = await api.put(`/posts/${newPostId}`, {postImages: imagesUrl})
+        await api.put(`/posts/${newPostId}`, {postImages: imagesUrl})
 
         // Zera campos após adição
         this.setState({
@@ -61,13 +61,13 @@ class NewPost extends Component {
             postContent: ""
         })
 
-        alert("Recarregar posts")
+        window.location.reload()
         // Verificar para inverter ordem do array
     }
 
     fileAdd(e) {
         // Verificar se não foi selecionado arquivos.
-        if (e.target.files[0] == undefined) {
+        if (e.target.files[0] === undefined) {
             return;
         }
 
@@ -109,11 +109,12 @@ class NewPost extends Component {
     }
 
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <div className='container-lg mt-4'>
                 <div className='row post-content'>
                     <div className='col-lg-7 col-sm-11' style={{ padding: 0 }}>
-                        <textarea placeholder='O que deseja compartilhar?' name='postContent' value={this.state.postContent}
+                        <textarea placeholder={t.project.info.posts.placeholder} name='postContent' value={this.state.postContent}
                             onChange={this.postData} maxLength="335" rows="5" />
                     </div>
                 </div>
@@ -124,19 +125,19 @@ class NewPost extends Component {
                         <div className='attachment-option'>
                             <input type="file" id="post-image" className='d-none' accept="image/*" onChange={this.fileAdd} />
                             <label for="post-image" className='post-image-label'>
-                                <span> <FaPaperclip /> </span> Adicionar Imagem
+                                <span> <FaPaperclip /> </span> {t.project.info.posts.image}
                             </label>
 
                         </div>
 
                         <div className='character-counter'>
-                            <label> {this.state.charactersCounter} caracteres restantes </label>
+                            <label> {this.state.charactersCounter} {t.project.info.posts.characters} </label>
                         </div>
                     </div>
                 </div>
                 <div className='attachment-list'>
                     {this.state.files.length !== 0 ?
-                        <span className='attachment-title'> Lista de Anexos: </span>
+                        <span className='attachment-title'> {t.project.info.posts.images} </span>
                         : ""}
                     <ul>
                         {this.state.filesList}
@@ -144,7 +145,7 @@ class NewPost extends Component {
                 </div>
                 <div className='row button-row'>
                     <div className='col-lg-7 col-sm-11 button-column'>
-                        <button onClick={this.newPost}> Publicar </button>
+                        <button onClick={this.newPost}> {t.project.info.posts.btnPublish} </button>
                     </div>
                 </div>
             </div>

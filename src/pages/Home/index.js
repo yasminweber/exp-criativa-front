@@ -17,7 +17,6 @@ class Home extends Component {
         this.componentDidMount = () => {
             this.loadCauses();
         }
-
     }
 
     async loadCauses() {

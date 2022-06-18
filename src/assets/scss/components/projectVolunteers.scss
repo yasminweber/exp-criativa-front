@@ -16,8 +16,11 @@
 
     .volunteers-table {
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        overflow-x: auto;
-        display: block;
+
+        @include res-md {
+            overflow-x: auto;
+            display: block;
+        }
 
         thead {
             border-bottom: .5px solid grey;

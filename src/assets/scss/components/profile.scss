@@ -9,15 +9,16 @@
     }
 
     .user-menu {
-        height: 450px;
+        height: fit-content;
         padding: 0;
         border-radius: 15px;
         font-family: 'Sarabun', sans-serif;
         overflow: hidden;
         border: #008b8b 3px solid;
+        margin-top: 100px;
 
         @include res-md {
-            height: 260px;
+            // height: 260px;
         }
 
         .user-header {
@@ -140,6 +141,11 @@
 
                             &:hover {
                                 border-bottom: 2px solid #137c72;
+                            }
+
+                            &.disabled {
+                                color: #666666;
+                                border: none;
                             }
                         }
                     }

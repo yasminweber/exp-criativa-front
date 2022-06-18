@@ -84,7 +84,7 @@ class NewProject extends Component {
                     </div>
                 </section>
 
-                <section className="form">
+                <section className="form pb-5">
                     <div className="container-lg">
                         <div className="row">
                             <div className="col-lg-8 col-12 mx-auto">

@@ -115,7 +115,8 @@
             "endDate": "Data fim",
             "description": "Descrição",
             "qntBenefited": "Quantidade de beneficiados",
-            "qntVolunteers": "Quantidade de voluntários"
+            "qntVolunteers": "Quantidade de voluntários",
+            "btn1": "Enviar solicitação"
         },
         "info": {
             "btnEdit": "Editar projeto",
@@ -140,6 +141,7 @@
                 "placeholder": "O que deseja compartilhar?",
                 "image": "Adicionar imagem",
                 "characters": "caracteres restantes",
+                "images": "Lista de Anexos:",
                 "btnPublish": "Publicar",
                 "whoPublished": "O moderador publicou sobre o projeto dia"
             },
@@ -151,7 +153,7 @@
                 "table": {
                     "name": "Nome",
                     "surname": "Sobrenome",
-                    "activeSince": "Ativo há",
+                    "activeSince": "Integrante da All4One desde",
                     "days": "dias",
                     "presence": "Estava presente?"
                 },

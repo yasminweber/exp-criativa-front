@@ -58,17 +58,23 @@ class ProfileProjects extends Component {
                             {this.state.projects.filter(status => status.status === "solicitação" || status.status === "pendente").map((child, id) => (
                                 <ProfileProjectCard url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
                             ))}
+                            {this.state.projects.filter(status => status.status === "solicitação" || status.status === "pendente").length === 0 ?
+                            <div><h2 className="mt-4">Não há projetos a exibir.</h2></div> : <></> }
                         </div>
                         <div className="tab-pane fade" id="in-progress" role="tabpanel" aria-labelledby="in-progress-tab">
                             {this.state.projects.filter(status => status.status === "progresso" || status.status === "aprovado").map((child, id) => (
                                 <ProfileProjectCard key={id} url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
                             ))}
+                            {this.state.projects.filter(status => status.status === "progresso" || status.status === "aprovado").length === 0 ?
+                            <div><h2 className="mt-4">Não há projetos a exibir.</h2></div> : <></> }
                         </div>
 
                         <div className="tab-pane fade" id="finished" role="tabpanel" aria-labelledby="finished-tab">
                             {this.state.projects.filter(status => status.status === "finalizado").map((child, id) => (
                                 <ProfileProjectCard key={id} url={child._id} status={child.status} projectName={child.projectName} cause={child.cause} description={child.description} />
                             ))}
+                            {this.state.projects.filter(status => status.status === "finalizado").length === 0 ?
+                            <div><h2 className="mt-4">Não há projetos a exibir.</h2></div> : <></> }
                         </div>
 
                     </div>

@@ -116,7 +116,8 @@
             "endDate": "End date",
             "description": "Description",
             "qntBenefited": "Number of benefited",
-            "qntVolunteers": "Number of volunteers"
+            "qntVolunteers": "Number of volunteers",
+            "btn1": "Send solicitation"
         },
         "info": {
             "btnEdit": "Edit project",
@@ -141,6 +142,7 @@
                 "placeholder": "What do you want to say?",
                 "image": "Add image",
                 "characters": "remaining characters",
+                "images": "List of attached images:",
                 "btnPublish": "Publish",
                 "whoPublished": "Published by the moderator on"
             },

@@ -63,7 +63,7 @@ class Profile extends Component {
 
     async profilePhotoUpload(e) {
         // Verificar se não foi selecionado arquivos.
-        if (e.target.files[0] == undefined) {
+        if (e.target.files[0] === undefined) {
             return;
         }
 
@@ -73,16 +73,16 @@ class Profile extends Component {
             .catch(error => console.log("Erro ao gravar imagem no banco", error))
 
         // Atualiza usuário com link da imagem
-        await api.put(`/user/${this.state.user.user._id}`, {profileImage: url})
+        await api.put(`/user/${this.state.user.user._id}`, { profileImage: url })
 
         await api.get(`/changeToken/${this.state.user.user._id}`)
-                .then((res) => {
-                    localStorage.setItem("TOKEN_KEY", res.data);
-                })
-                .catch((err) => {
-                    //alert("Erro para trocar token");
-                    console.log(err)
-                })
+            .then((res) => {
+                localStorage.setItem("TOKEN_KEY", res.data);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        window.location.reload();
     }
 
     render() {
@@ -98,7 +98,7 @@ class Profile extends Component {
                 <div className='container-lg'>
                     <div className="row header-row">
 
-                        <section className="col-10 col-sm-10 col-md-4 col-lg-3 user-menu mt-4">
+                        <section className="col-10 col-sm-10 col-md-4 col-lg-3 user-menu">
                             <div className='user-header'>
                                 <div className='container-fluid cover'>
                                 </div>
@@ -125,19 +125,23 @@ class Profile extends Component {
                                 <div className='project-header'>
                                     <ul className="nav nav-tabs project-navbar" id="myTab" role="tablist">
                                         <li className="item" role="presentation">
-                                            <button className="link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Meus Dados</button>
+                                            <button className="link active" id="myData-tab" data-bs-toggle="tab" data-bs-target="#myData" type="button" role="tab" aria-controls="myData" aria-selected="true">Meus Dados</button>
                                         </li>
                                         <li className="item" role="presentation">
-                                            <button className="link" id="pictures-tab" data-bs-toggle="tab" data-bs-target="#pictures" type="button" role="tab" aria-controls="pictures" aria-selected="false">Meus Projetos</button>
+                                            <button className="link" id="profileProject-tab" data-bs-toggle="tab" data-bs-target="#profileProject" type="button" role="tab" aria-controls="profileProject" aria-selected="false">Meus Projetos</button>
+                                        </li>
+                                        {(this.state.cnpj === "") ?
+                                        <>
+                                        <li className="item" role="presentation">
+                                            <button className="link" id="volunteerIn-tab" data-bs-toggle="tab" data-bs-target="#volunteerIn" type="button" role="tab" aria-controls="volunteerIn" aria-selected="false">Sou Voluntário</button>
                                         </li>
                                         <li className="item" role="presentation">
-                                            <button className="link" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#acoes-e-eventos" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">Sou Voluntário</button>
-                                        </li>
+                                            <button className="link disabled pe-none" id="awards-tab" data-bs-toggle="tab" data-bs-target="#awards" type="button" role="tab" aria-controls="awards" aria-selected="false" disabled>Conquistas</button>
+                                        </li> </>
+                                        : <></>
+                                        }
                                         <li className="item" role="presentation">
-                                            <button className="link" id="members-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false" disabled>Conquistas</button>
-                                        </li>
-                                        <li className="item" role="presentation">
-                                            <button className="link" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false" disabled>Minhas Doações</button>
+                                            <button className="link disabled pe-none" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false" disabled>Minhas Doações</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -147,16 +151,16 @@ class Profile extends Component {
                         <section className="col-12 col-sm-12 col-md-8 col-lg-9 project-content mt-4">
                             <div className='container-lg col-sm-12 col-lg-9 mt-4'>
                                 <div className="tab-content" id="myTabContent">
-                                    <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div className="tab-pane fade show active" id="myData" role="tabpanel" aria-labelledby="myData-tab">
                                         <MyAccount name={this.state.name} lastName={this.state.lastName} cpf={this.state.cpf} email={this.state.email} birthDate={this.state.birthDate} gender={this.state.gender} causes={this.state.selectedCauses} />
                                     </div>
-                                    <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
+                                    <div className="tab-pane fade" id="profileProject" role="tabpanel" aria-labelledby="profileProject-tab">
                                         <ProfileProjects />
                                     </div>
-                                    <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
+                                    <div className="tab-pane fade" id="volunteerIn" role="tabpanel" aria-labelledby="volunteerIn-tab">
                                         <VolunteerProjects />
                                     </div>
-                                    <div className="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab">
+                                    <div className="tab-pane fade" id="awards" role="tabpanel" aria-labelledby="awards-tab">
                                         <Achievements />
                                     </div>
                                     <div className="tab-pane fade" id="donations" role="tabpanel" aria-labelledby="donations-tab">

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { translation } from '../../../../Helpers';
 
 class PostProjeto extends Component {
 
@@ -24,11 +25,12 @@ class PostProjeto extends Component {
     }
 
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <div className='container mt-4'>
                 <div className='row text-row'>
                     <div className='col-lg-7 col-sm-11 post-text'>
-                        <span className='post-title'> O moderador publicou sobre o projeto em </span>
+                        <span className='post-title'> {t.project.info.posts.whoPublished} </span>
                         <span className='post-title'> {this.props.date} </span>
                         <p className='post-description'> {this.props.description} </p>
                     </div>

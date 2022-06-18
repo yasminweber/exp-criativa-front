@@ -59,33 +59,39 @@ class HeaderUser extends Component {
                             style={{ maxHeight: '100px' }}
                             navbarScroll
                         >
-                            <Nav.Link href="/meusInteresses">{t.headerUser.interests}</Nav.Link>
+                            {(this.state.user.user.cnpj === "") ?
+                                <Nav.Link href="/meusInteresses">{t.headerUser.interests}</Nav.Link>
+                                : <></>
+                            }
                             <Nav.Link href="/newProject">{t.headerUser.newProject}</Nav.Link>
-                            <NavDropdown title={t.headerUser.causes.title} id="navbarScrollingDropdown">
-                                <NavDropdown.Item href="/cause/acessibilidade">{t.headerUser.causes.accessibility}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/criancas">{t.headerUser.causes.kids}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/educacao">{t.headerUser.causes.education}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/empoderamento-feminino">{t.headerUser.causes.womenEmpowerment}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/fome">{t.headerUser.causes.hunger}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/lgbtqia">{t.headerUser.causes.lgbtqia}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/meio-ambiente">{t.headerUser.causes.environment}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/maus-tratos-aos-animais">{t.headerUser.causes.animals}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/terceira-idade">{t.headerUser.causes.seniors}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/tragedia">{t.headerUser.causes.disaster}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/saude">{t.headerUser.causes.health}</NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="/cause/sem-teto">{t.headerUser.causes.homeless}</NavDropdown.Item>
-                            </NavDropdown>
+                            {(this.state.user.user.cnpj === "") ?
+                                <NavDropdown title={t.headerUser.causes.title} id="navbarScrollingDropdown">
+                                    <NavDropdown.Item href="/cause/acessibilidade">{t.headerUser.causes.accessibility}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/criancas">{t.headerUser.causes.kids}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/educacao">{t.headerUser.causes.education}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/empoderamento-feminino">{t.headerUser.causes.womenEmpowerment}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/fome">{t.headerUser.causes.hunger}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/lgbtqia">{t.headerUser.causes.lgbtqia}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/meio-ambiente">{t.headerUser.causes.environment}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/maus-tratos-aos-animais">{t.headerUser.causes.animals}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/terceira-idade">{t.headerUser.causes.seniors}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/tragedia">{t.headerUser.causes.disaster}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/saude">{t.headerUser.causes.health}</NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/cause/sem-teto">{t.headerUser.causes.homeless}</NavDropdown.Item>
+                                </NavDropdown>
+                                : <></>
+                            }
                         </Nav>
 
                         <HeaderIdioms />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { currentUrl, subtract_dates, translation } from '../../../Helpers';
+import { currentUrl, subtract_dates, translation, formatDate } from '../../../Helpers';
 import api from '../../../config/api';
 import { decodeToken } from '../../../config/auth';
 
@@ -95,7 +95,8 @@ class ProjectVolunteers extends Component {
                                                 <tr key={id}>
                                                     <td>{child.name}</td>
                                                     <td>{child.lastName}</td>
-                                                    <td>{subtract_dates(child.createdAt)} {t.project.info.volunteers.table.days}</td>
+                                                    <td>{formatDate(child.createdAt)}</td>
+                                                    {/* <td>{subtract_dates(child.createdAt)} {t.project.info.volunteers.table.days}</td> */}
                                                     {(this.state.status !== "finalizado") ?
                                                     
                                                     <td><input type="checkbox" className="check-participation" value={child._id} disabled /></td>

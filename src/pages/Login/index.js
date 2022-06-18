@@ -107,9 +107,9 @@ class Login extends Component {
                                         </div>
                                     </div>
 
-                                    <div className="col-12">
+                                    {/* <div className="col-12">
                                         <a href="/changePassword"> {t.login.sub2} </a>
-                                    </div>
+                                    </div> */}
 
                                     <div className="col-12">
                                         <div className="enviar">
