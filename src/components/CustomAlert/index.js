@@ -1,5 +1,4 @@
 import { React, Component } from 'react';
-import { Alert } from 'react-bootstrap';
 import { translation } from '../../Helpers';
 
 class CustomAlert extends Component {
@@ -10,22 +9,21 @@ class CustomAlert extends Component {
         }
     }
 
-    closeAlert() {
-        this.setState({ show: false });
-    }
-
     render() {
         const t = translation(localStorage.getItem('language'));
+
         return (
-            <>
-                {(this.state.aNetwork === true) ?
-                    <Alert variant="danger" onClose={() => this.closeAlert()} dismissible >
-                        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                        <p>Por favor tente novamente mais tarde</p>
-                    </Alert >
-                    : <></>
-                }
-            </>
+            <div class="modal fade" id="custom-alert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content" id="custom-alert-color">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" id="modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body py-0" id="customAlert-description"> </div>
+                        <div class="modal-footer"> </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
