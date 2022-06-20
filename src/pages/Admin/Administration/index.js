@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import { decodeToken } from '../../../config/auth';
 import api from '../../../config/api';
 import { FiXSquare, FiEdit, FiPlusSquare } from "react-icons/fi";
+import { customAlert, translation } from '../../../Helpers';
 
 class Administration extends Component {
 
@@ -37,7 +38,7 @@ class Administration extends Component {
             })
             .catch((erro) => {
                 console.log(erro)
-                alert('Erro para carregar os admins');
+                customAlert(translation(localStorage.getItem('language')).error.loadAdmins, "error");
             })
     }
 
@@ -52,12 +53,21 @@ class Administration extends Component {
             password: document.getElementsByName('passwordNew')[0].value
         }
 
-        console.log("novo admin:", admin)
-
-        await api.post('/registerAdmin', admin);
-
-        alert("admin criado")
-        this.loadAdmins()
+        // console.log("novo admin:", admin)
+        await api.post('/registerAdmin', admin)
+            .then(() => {
+                customAlert(translation(localStorage.getItem('language')).success.admin, "success");
+                var exampleModal = document.getElementById('modalNewUser')
+                exampleModal.click()
+            })
+            .catch((error) => {
+                if (error.message === "Request failed with status code 409") {
+                    customAlert(translation(localStorage.getItem('language')).error.email, "error");
+                } else {
+                    console.log("erro cadastrar", error)
+                    customAlert(translation(localStorage.getItem('language')).error.admin, "error");
+                }
+            })
     }
 
     loadModalEdit() {
@@ -76,7 +86,7 @@ class Administration extends Component {
                 })
                 .catch((error) => {
                     console.log(error)
-                    alert('Erro para carregar o admin');
+                    customAlert(translation(localStorage.getItem('language')).error.loadAdmin, "error");
                 })
 
             function valores(user) {
@@ -85,7 +95,6 @@ class Administration extends Component {
                 let username = user.username
                 let email = user.email
                 let id = user._id
-                // console.log("usseerrr", name, lastName, username, email)
 
                 exampleModal.querySelector('.modal#modalEditUser #name').value = name
                 exampleModal.querySelector('.modal#modalEditUser #lastName').value = lastName
@@ -110,12 +119,12 @@ class Administration extends Component {
 
         await api.put(`/admin/${id}`, admin)
             .then(() => {
-                alert("Administrador atualizado com sucesso");
-                this.loadAdmins()
+                customAlert(translation(localStorage.getItem('language')).success.adminUpdate, "success");
+                // this.loadAdmins()
             })
             .catch((error) => {
                 console.log(error)
-                alert('Erro para alterar o admin');
+                customAlert(translation(localStorage.getItem('language')).error.updateAdmin, "error");
             });
     }
 
@@ -136,7 +145,7 @@ class Administration extends Component {
                 })
                 .catch((error) => {
                     console.log(error)
-                    alert('Erro para carregar o admin');
+                    customAlert(translation(localStorage.getItem('language')).error.loadAdmin, "error");
                 })
 
             function valores(user) {
@@ -156,14 +165,12 @@ class Administration extends Component {
 
         await api.delete(`/admin/${id}`)
             .then(() => {
-                alert("Administrador deletado com sucesso");
+                customAlert(translation(localStorage.getItem('language')).success.adminDelete, "success");
             })
             .catch((error) => {
                 console.log("erro deletar", error)
-                alert('Erro para deletar administrador');
+                customAlert(translation(localStorage.getItem('language')).error.deleteAdmin, "error");
             })
-
-        //this.loadAdmins()
     }
 
     render() {
@@ -252,7 +259,7 @@ class Administration extends Component {
                             </div>
                             <div className="modal-body text-start">
                                 <div id="id" className="d-none"></div>
-                                <form>
+                                <form onSubmit={this.newAdmin}>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="mb-3">
@@ -279,12 +286,13 @@ class Administration extends Component {
                                         <label htmlFor="newPassword" className="col-form-label">Senha</label>
                                         <input type="password" name="passwordNew" className="form-control" id="newPassword" required />
                                     </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="submit" className="btn btn-primary">Salvar mudanças</button>
+                                    </div>
                                 </form>
                             </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal" onClick={this.newAdmin}>Salvar mudanças</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -299,7 +307,7 @@ class Administration extends Component {
                             </div>
                             <div className="modal-body text-start">
                                 <div id="id" className="d-none"></div>
-                                <form>
+                                <form onSubmit={this.editAdmin}>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="mb-3">
@@ -322,11 +330,11 @@ class Administration extends Component {
                                         <label htmlFor="email" className="col-form-label">E-mail</label>
                                         <input type="text" name="emailEdit" className="form-control" id="email" disabled />
                                     </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="button" className="btn btn-primary">Salvar mudanças</button>
+                                    </div>
                                 </form>
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={this.editAdmin}>Salvar mudanças</button>
                             </div>
                         </div>
                     </div>

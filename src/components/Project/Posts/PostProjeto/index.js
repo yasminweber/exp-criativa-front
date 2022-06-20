@@ -19,7 +19,7 @@ class PostProjeto extends Component {
     imagesAdd() {
         let images = []
         Array.from(this.props.images).forEach( (url) => {
-            images.push(<img className='post-image' src={url} />)
+            images.push(<img className='post-image' src={url} alt={"imagem do post"} />)
         })
         this.setState({imagesArray: images})
     }
@@ -44,7 +44,6 @@ class PostProjeto extends Component {
             </div>
         )
     }
-
 }
 
 export default PostProjeto

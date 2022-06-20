@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { decodeToken } from '../../../../config/auth';
-import { currentUrl } from '../../../../Helpers'
+import { currentUrl, customAlert, translation } from '../../../../Helpers'
 import { AiOutlineDashboard } from "react-icons/ai";
 import { BsGrid, BsCheck2Square, BsExclamationSquare, BsDashSquare, BsHourglassSplit } from "react-icons/bs"
 import { FiInbox } from "react-icons/fi"
@@ -24,9 +24,12 @@ class HeaderAdminIn extends Component {
 
     async checkUser() {
         if ((window.location.href !== 'http://localhost:3000/cadastro')) {
-            if (this.state.username === null) {
-                alert("Usuario não logado. Por favor, faça o login.");
-                window.location = '/admin'
+            console.log("console", this.state.username)
+            if (this.state.username === null || this.state.username === "") {
+                customAlert(translation(localStorage.getItem('language')).error.logged, "error");
+                window.setTimeout(function() {
+                    window.location.href = '/admin';
+                }, 3000);
             } else {
                 this.setState({ username: this.state.user.admin.username });
             }
@@ -61,33 +64,25 @@ class HeaderAdminIn extends Component {
                         <li className="nav-item">
                             <button href="#submenu1" data-bs-toggle="collapse" className="nav-link px-0">
                                 <BsGrid size={26} /> <span className="ms-1 d-none d-sm-inline">Projetos</span> </button>
-                            {/* <button href="#submenu1" data-bs-toggle="" className="nav-link px-0">
-                                <BsGrid size={26} /> <span className="ms-1 d-none d-sm-inline">Projetos</span> </button> */}
                             <ul className="collapse nav flex-column" id="submenu1" data-bs-parent="#menu">
                                 <li className="w-100">
-                                    {/* Function to filter all projects */}
                                     <a href="/approval?all" className="nav-link px-0"> <FiInbox size={26} /> <span className="ms-1 d-none d-sm-inline">Todos os projetos</span> </a>
                                 </li>
                                 <li className="w-100">
-                                    {/* Function to filter solicitation projets */}
                                     <a href="/approval?solicitation" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Solicitações</span> </a>
                                 </li>
                                 <li className="w-100">
-                                    {/* Function to filter pending edition projects */}
                                     <a href="/approval?pending" className="nav-link px-0"> <BsExclamationSquare size={24} /> <span className="ms-1 d-none d-sm-inline">Pendentes</span> </a>
                                 </li>
                                 <li className="w-100">
-                                    {/* Function to filter in progress projects */}
                                     <a href="/approval?progress" className="nav-link px-0"> <BsHourglassSplit size={24} /> <span className="ms-1 d-none d-sm-inline">Em progresso</span> </a>
                                 </li>
-                                
+
                                 <li className="w-100">
-                                    {/* Function to filter rejected projets */}
                                     <a href="/approval?rejected" className="nav-link px-0"> <BsDashSquare size={24} /> <span className="ms-1 d-none d-sm-inline">Rejeitados</span> </a>
                                 </li>
-                                
+
                                 <li className="w-100">
-                                    {/* Function to filter finished projets */}
                                     <a href="/approval?finished" className="nav-link px-0"> <BsCheck2Square size={24} /> <span className="ms-1 d-none d-sm-inline">Finalizados</span> </a>
                                 </li>
                             </ul>
@@ -107,9 +102,8 @@ class HeaderAdminIn extends Component {
                             <span className="d-none d-sm-inline mx-1">{this.state.username}</span>
                         </button>
                         <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-
                             <li>
-                                <button className="dropdown-item" onClick={this.logout}>Sign out</button>
+                                <button className="dropdown-item" onClick={this.logout}>Sair</button>
                             </li>
                         </ul>
                     </div>
@@ -121,13 +115,12 @@ class HeaderAdminIn extends Component {
 
 export default HeaderAdminIn;
 
-function marginSidebar () {
+function marginSidebar() {
     const sidebar = document.querySelector('.sidebar-admin')
     let sidebarWidth, next = ''
-    if (sidebar !==  null) {
+    if (sidebar !== null) {
         sidebarWidth = sidebar.offsetWidth
         next = sidebar.nextElementSibling.style.marginLeft = `${sidebarWidth}px`
     }
-
     return next
 }

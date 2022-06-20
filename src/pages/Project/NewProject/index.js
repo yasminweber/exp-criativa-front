@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HeaderLogin from '../../../components/Header/User';
 import Helmet from 'react-helmet';
 import api from '../../../config/api'
-import { translation } from '../../../Helpers';
+import { customAlert, translation } from '../../../Helpers';
 
 class NewProject extends Component {
 
@@ -57,8 +57,10 @@ class NewProject extends Component {
 
         await api.post('/newProject', project);
 
-        alert("A sua ideia de projeto foi enviada. Aguarde a aprovação!");
-        window.location = '/meusInteresses';
+        customAlert(translation(localStorage.getItem('language')).success.project, "success");
+        window.setTimeout(function() {
+            window.location.href = '/meusInteresses';
+        }, 2000);
     }
 
     render() {

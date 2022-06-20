@@ -11,6 +11,7 @@ import VolunteerProjects from '../../components/Profile/VolunteerProjects';
 import { decodeToken } from '../../config/auth';
 import { storage } from '../../firebase';
 import api from '../../config/api';
+import { translation, customAlert } from '../../Helpers';
 
 class Profile extends Component {
 
@@ -82,15 +83,17 @@ class Profile extends Component {
             .catch((err) => {
                 console.log(err)
             })
+
         window.location.reload();
     }
 
     render() {
+        const t = translation(localStorage.getItem("language"));
         return (
             <div className='profile-page'>
 
                 <Helmet>
-                    <title>Perfil</title>
+                    <title>{t.user.title}</title>
                 </Helmet>
 
                 <HeaderLogin />
@@ -105,7 +108,7 @@ class Profile extends Component {
 
                                 <div className='user-photo-section'>
                                     <div className='user-photo'>
-                                        <img className="profile-image" src={this.state.url} alt="" />
+                                        <img className="profile-image" src={this.state.url} alt="Profile" />
                                     </div>
 
                                     <div className='photo-input'>
@@ -125,23 +128,23 @@ class Profile extends Component {
                                 <div className='project-header'>
                                     <ul className="nav nav-tabs project-navbar" id="myTab" role="tablist">
                                         <li className="item" role="presentation">
-                                            <button className="link active" id="myData-tab" data-bs-toggle="tab" data-bs-target="#myData" type="button" role="tab" aria-controls="myData" aria-selected="true">Meus Dados</button>
+                                            <button className="link active" id="myData-tab" data-bs-toggle="tab" data-bs-target="#myData" type="button" role="tab" aria-controls="myData" aria-selected="true">{t.user.menu.main}</button>
                                         </li>
                                         <li className="item" role="presentation">
-                                            <button className="link" id="profileProject-tab" data-bs-toggle="tab" data-bs-target="#profileProject" type="button" role="tab" aria-controls="profileProject" aria-selected="false">Meus Projetos</button>
+                                            <button className="link" id="profileProject-tab" data-bs-toggle="tab" data-bs-target="#profileProject" type="button" role="tab" aria-controls="profileProject" aria-selected="false">{t.user.menu.projects}</button>
                                         </li>
                                         {(this.state.cnpj === "") ?
                                         <>
                                         <li className="item" role="presentation">
-                                            <button className="link" id="volunteerIn-tab" data-bs-toggle="tab" data-bs-target="#volunteerIn" type="button" role="tab" aria-controls="volunteerIn" aria-selected="false">Sou Voluntário</button>
+                                            <button className="link" id="volunteerIn-tab" data-bs-toggle="tab" data-bs-target="#volunteerIn" type="button" role="tab" aria-controls="volunteerIn" aria-selected="false">{t.user.menu.volunteer}</button>
                                         </li>
                                         <li className="item" role="presentation">
-                                            <button className="link disabled pe-none" id="awards-tab" data-bs-toggle="tab" data-bs-target="#awards" type="button" role="tab" aria-controls="awards" aria-selected="false" disabled>Conquistas</button>
+                                            <button className="link disabled pe-none" id="awards-tab" data-bs-toggle="tab" data-bs-target="#awards" type="button" role="tab" aria-controls="awards" aria-selected="false" disabled>{t.user.menu.achievement}</button>
                                         </li> </>
                                         : <></>
                                         }
                                         <li className="item" role="presentation">
-                                            <button className="link disabled pe-none" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false" disabled>Minhas Doações</button>
+                                            <button className="link disabled pe-none" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false" disabled>{t.user.menu.donations}</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -177,4 +180,5 @@ class Profile extends Component {
         )
     }
 }
+
 export default Profile

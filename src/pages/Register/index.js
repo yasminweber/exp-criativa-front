@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import api from '../../config/api'
 import CategoryCard from '../../components/Register/CategoryCard';
-import { translation } from '../../Helpers';
+import { customAlert, translation } from '../../Helpers';
 import HeaderHome from '../../components/Header/Home';
 
 class Register extends Component {
@@ -108,7 +108,7 @@ class Register extends Component {
             return true
         } else {
             if (selectedList.length >= 5) {
-                alert("Você já selecionou 5 categorias!")
+                customAlert(translation(localStorage.getItem('language')).warning.userCategory, "warning");
                 return false
             } else {
                 selectedList.push(category)
@@ -125,7 +125,7 @@ class Register extends Component {
             document.getElementById('form-fields').classList.add('d-none')
             document.getElementById('category-column').classList.remove('d-none')
         } else {
-            alert("As senhas não correspondem!")
+            customAlert(translation(localStorage.getItem('language')).warning.password, "warning");
         }
     }
 
@@ -153,12 +153,14 @@ class Register extends Component {
             selectedCauses: this.state.selectedCauses
         }
 
-        console.log(user)
+        // console.log(user)
 
         await api.post('/register', user);
 
-        alert("Usuário registrado com sucesso");
-        window.location = '/login';
+        customAlert(translation(localStorage.getItem('language')).success.register, "success");
+        window.setTimeout(function() {
+            window.location.href = '/login';
+        }, 2000);
     }
 
     render() {
@@ -360,16 +362,16 @@ class Register extends Component {
                                             {/* Confirmar Senha */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="password" className="form-control company-input" name="confirmPassword" placeholder={t.register.part1.confirmPassword}
+                                                    <input type="password" className="form-control company-input" name="confirmPassword" placeholder={t.register.part1.repeatPassword}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.confirmPassword} required disabled />
-                                                    <label className="form-label"> {t.register.part1.confirmPassword} </label>
+                                                    <label className="form-label"> {t.register.part1.repeatPassword} </label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div className="row mt-3">
                                             <span className='hr'> </span>
-                                            <span className='hr-text'> Administrador da Empresa </span>
+                                            <span className='hr-text text-uppercase'> {t.register.part1.administrator} </span>
                                         </div>
 
                                         <div className='row mt-3'>
@@ -425,14 +427,11 @@ class Register extends Component {
                                 </div>
                             </section>
 
-
-
                         </div>
                     </div>
                 </div>
 
             </section>
-
         )
     }
 }

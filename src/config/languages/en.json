@@ -6,6 +6,63 @@
         "cancel": "Cancel",
         "update": "Update"
     },
+    "success": {
+        "register": "Registration successfully completed!",
+        "logout": "You have logged out.",
+        "project": "Project request sent successfully! Wait for administrator approval.",
+        "projectUpdate": "Project request updated successfully!",
+        "projectDelete": "Project deleted successfully!",
+        "projectEnd": "Project completed successfully!",
+        "projectVolunteers": "Participation in the project sent successfully!",
+        "subscribe": "You have subscribed successfully!",
+        "unsubscribe": "You have unsubscribed successfully!",
+        "admin": "Administrador cadastrado com sucesso!",
+        "adminUpdate": "Administrador atualizado com sucesso!",
+        "adminDelete": "Administrador excluído com sucesso!",
+        "projectApprove": "Projeto aprovado com sucesso!",
+        "projectImprove": "Projeto enviado para pendência com sucesso!",
+        "projectReject": "Projeto rejeitado com sucesso!",
+        "userUpdate": "User updated successfully!",
+        "userDelete": "User suspended successfully!"
+    },
+    "warning": {
+        "password": "Password does not match.",
+        "categories": "To edit the categories, you must activate the edition mode.",
+        "userCategory": "You have already selected 5 categories."
+    },
+    "error": {
+        "network": "Connection error. Please check your internet connection.",
+        "server": "Server error. Please try again later.",
+        "unknown": "Unknown error. Please try again later.",
+        "permission": "You do not have permission to see this page.",
+        "invalidCredentials": "Email or password is invalid.",
+        "register": "Registration failed. Please try again later.",
+        "email": "Email already in use.",
+        "cpf": "CPF already in use.",
+        "logged": "User not logged in.",
+        "causes": "Failed to load causes. Please try again later.",
+        "loadProject": "Failed to load project. Please try again later.",
+        "loadProjects": "Failed to load projects. Please try again later.",
+        "saveProject": "Failed to save project. Please try again later.",
+        "updateProject": "Failed to update project. Please try again later.",
+        "deleteProject": "Failed to delete project. Please try again later.",
+        "endProject": "Failed to end project. Please try again later.",
+        "volunteersProject": "Failed to send participation in the project. Please try again later.",
+        "subscribe": "Fail in subscribing. Please try again later.",
+        "admin": "Erro ao cadastrar administrador. Por favor tente novamente mais tarde.",
+        "loadAdmin": "Erro ao carregar o administrador. Por favor tente novamente mais tarde.",
+        "loadAdmins": "Erro ao carregar os administradores. Por favor tente novamente mais tarde.",
+        "saveAdmin": "Erro ao salvar o administrador. Por favor tente novamente mais tarde.",
+        "updateAdmin": "Erro ao atualizar o administrador. Por favor tente novamente mais tarde.",
+        "deleteAdmin": "Erro ao deletar o administrador. Por favor tente novamente mais tarde.",
+        "approveProject": "Erro ao aprovar o projeto. Por favor tente novamente mais tarde.",
+        "improveProject": "Erro ao enviar o projeto para pendência. Por favor tente novamente mais tarde.",
+        "rejectProject": "Erro ao rejeitar o projeto. Por favor tente novamente mais tarde.",
+        "loadUser": "Fail to load user. Please try again later.",
+        "loadUsers": "Fail to load users. Please try again later.",
+        "updateUser": "Fail to update user. Please try again later.",
+        "deleteUser": "Fail to deactivate user. Please try again later."
+    },
     "headerHome": {
         "btn1": "Sign in",
         "btn2": "Sign up"
@@ -52,6 +109,7 @@
             "repeatPassword": "Confirm password",
             "cnpj": "CNPJ",
             "razaoSocial": "Corporate name",
+            "administrator": "Company administrator",
             "administratorName": "Name",
             "administratorSurname": "Surname",
             "btn1": "Continue"
@@ -144,7 +202,8 @@
                 "characters": "remaining characters",
                 "images": "List of attached images:",
                 "btnPublish": "Publish",
-                "whoPublished": "Published by the moderator on"
+                "whoPublished": "Published by the moderator on",
+                "notYet": "Nothing to show yet."
             },
             "volunteers": {
                 "title": "Volunteers",
@@ -163,6 +222,40 @@
             "donations": {
                 "title": "Donations"
             }
+        }
+    },
+    "user": {
+        "title": "Profile | All4One",
+        "menu": {
+            "main": "My Profile",
+            "projects": "My Projects",
+            "volunteer": "I'm volunteering",
+            "achievement": "Achievements",
+            "donations": "Donations"
+        },
+        "main": {
+            "title1": "My profile",
+            "sub1": "Here you can see your profile information.",
+            "sub11": "You have created a personal account.",
+            "title2": "My favourite causes",
+            "sub2": "We use this information to help you find the best projects for you! Remember, you can choose up to 5 causes!",
+            "btn1": "Edit profile",
+            "btn2": "Save changes"
+        },
+        "projects": {
+            "title": "My projects",
+            "sub": "Here you can see the status of your projects.",
+            "op1": "Waiting for approval",
+            "op2": "In progress",
+            "op3": "Finished",
+            "notYet": "Nothing to show yet."
+        },
+        "volunteer": {
+            "title": "I'm volunteering",
+            "sub": "Here you can see the status of the projects you are volunteering for.",
+            "op1": "In progress",
+            "op2": "Finished",
+            "notYet": "Nothing to show yet."
         }
     }
 }

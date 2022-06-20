@@ -4,7 +4,7 @@ import HeaderLogin from '../../../components/Header/User';
 import { currentUrl, dateInput } from '../../../Helpers'
 import api from '../../../config/api';
 import { decodeToken } from '../../../config/auth';
-import { translation } from '../../../Helpers';
+import { translation, customAlert } from '../../../Helpers';
 
 class EditProject extends Component {
 
@@ -71,7 +71,7 @@ class EditProject extends Component {
             })
             .catch((error) => {
                 console.log("erro carregar projeto ", error)
-                alert('Erro para carregar o projeto');
+                customAlert(translation(localStorage.getItem('language')).error.loadProject, "error");
             })
     }
 
@@ -81,7 +81,7 @@ class EditProject extends Component {
                 console.log("É o mesmo user")
             } else {
                 console.log("Não é o mesmo user")
-                alert("Desculpe, mas você não tem permissão para editar esse projeto")
+                customAlert(translation(localStorage.getItem('language')).error.permission, "error");
                 window.location.href = "/meusInteresses"
             }
         }
@@ -104,21 +104,29 @@ class EditProject extends Component {
 
         console.log(project);
 
-        await api.put(`/project/${this.state.id}`, project);
-
-        alert("Projeto atualizado com sucesso");
-        window.location = '/profile';
+        await api.put(`/project/${this.state.id}`, project)
+        .then(() => {
+            customAlert(translation(localStorage.getItem('language')).success.projectUpdate, "success");
+            window.setTimeout(function() {
+                window.location.href = '/profile';
+            }, 2000)
+        }).catch((error) => {
+            console.log(error)
+            customAlert(translation(localStorage.getItem('language')).error.updateProject, "error");
+        });
     }
 
     async deleteProject() {
         await api.delete(`/project/${this.state.id}`)
             .then(() => {
-                alert("Projeto apagado");
-                window.location = '/profile';
+                customAlert(translation(localStorage.getItem('language')).success.projectDelete, "success");
+                window.setTimeout(function() {
+                    window.location.href = '/profile';
+                }, 2000)
             })
             .catch((error) => {
                 console.log(error)
-                alert('Erro para deletar projeto');
+                customAlert(translation(localStorage.getItem('language')).error.deleteProject, "error");
             })
     }
 
@@ -139,7 +147,6 @@ class EditProject extends Component {
                         <div className="row">
                             <div className="col-md-8 col-12 text-lg-start text-center">
                                 <h1 className="titulo-1">{t.project.editProject.title1}</h1>
-                                {/* <p className="descricao">Colocar qualquer texto que não seja esse de criar novo projeto</p> */}
                             </div>
                             <div className="col-md-4 col-12 d-flex flex-column-reverse align-items-end mt-md-0 mt-4">
                                 <button className="btn-1" onClick={() => { if (window.confirm('Tem certeza que deseja deletar esse projeto?')) this.deleteProject() }}> {t.project.editProject.btn1} </button>

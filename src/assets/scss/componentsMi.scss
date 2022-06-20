@@ -8,6 +8,7 @@
 @import "./pages/administration.scss";
 @import "./pages/dashboardAdmin.scss";
 @import "./pages/loginAdmin.scss";
+@import "./components/headerAdminOut.scss";
 
 @import "./components/projectAdminCard.scss";
 @import "./components/sidebarAdmin.scss";
@@ -21,8 +22,8 @@
 
 
 /* USER */
-@import "./pages/dashboard.scss";
-@import "./components/headerFora.scss";
+@import "./pages/dashboardInteresses.scss";
+@import "./components/headerHome.scss";
 
 /* USER PROJECT */
 @import "./components/profileProjectCard.scss";

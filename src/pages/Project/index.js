@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet'
-import { currentUrl, formatDate, translation } from '../../Helpers'
+import { currentUrl, formatDate, translation, customAlert } from '../../Helpers'
 import HeaderLogin from '../../components/Header/User';
 import api from '../../config/api';
 import { decodeToken } from '../../config/auth';
@@ -55,11 +55,11 @@ class ProjectPage extends Component {
                     volunteersParticipated: data.volunteersParticipated,
                     status: data.status,
                 });
-                console.log("Projeto carregado");
+                // console.log("Projeto carregado");
             })
             .catch((error) => {
                 console.log("erro carregar projeto ", error)
-                alert('Erro para carregar o projeto');
+                customAlert(translation(localStorage.getItem('language')).error.loadProject, "error");
             })
     }
 
@@ -67,15 +67,15 @@ class ProjectPage extends Component {
         await api.put(`/project/signup/${id}`)
             .then((response) => {
                 if (this.state.volunteers.filter(item => item._id === this.state.user.user._id).length > 0) {
-                    alert("Sua inscrição foi removida");
+                    customAlert(translation(localStorage.getItem('language')).success.unsubscribe, "success");
                 } else {
-                    alert("Inscrição feita");
+                    customAlert(translation(localStorage.getItem('language')).success.subscribe, "success");
                 }
                 this.getProject();
             })
             .catch((error) => {
                 console.log("error inscrever no projeto: ", error)
-                alert('Erro para inscrver no projeto');
+                customAlert(translation(localStorage.getItem('language')).error.subscribe, "error");
             })
 
 

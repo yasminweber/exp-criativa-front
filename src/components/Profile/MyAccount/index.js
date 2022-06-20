@@ -3,7 +3,7 @@ import { Popover } from 'react-bootstrap';
 import { OverlayTrigger } from 'react-bootstrap';
 import { BsInfoCircle } from 'react-icons/bs'
 import CategoryCardProfile from './CategoryCard';
-import { dateInput } from '../../../Helpers'
+import { dateInput, customAlert, translation } from '../../../Helpers'
 import api from '../../../config/api'
 import { decodeToken } from '../../../config/auth';
 
@@ -127,13 +127,15 @@ class MyAccount extends Component {
                     this.setState({ causeList: list })
                 })
             }
+        }).catch(err => {
+            customAlert(translation(localStorage.getItem('language')).error.causes, "error");
         })
     }
 
     // Função de clicar em um item da tabela de causas.
     categoryClick(category) {
         if (!this.state.editMode) {
-            alert("Para alterar as categorias preferidas, ative o modo de edição")
+            customAlert(translation(localStorage.getItem('language')).warning.categories, "warning");
             return
         }
 
@@ -144,7 +146,7 @@ class MyAccount extends Component {
             return true
         } else {
             if (selectedList.length >= 5) {
-                alert("Você já selecionou 5 categorias!")
+                customAlert(translation(localStorage.getItem('language')).warning.userCategory, "warning");
                 return false
             } else {
                 selectedList.push(category)
@@ -174,11 +176,11 @@ class MyAccount extends Component {
 
             await api.put(`/user/${this.state.user.user._id}`, user)
                 .then(() => {
-                    alert("deu certo pra alterar as informações")
+                    customAlert(translation(localStorage.getItem('language')).success.userUpdate, "success");
                 })
                 .catch((error) => {
                     console.log(error)
-                    alert("não conseguimos atualizar suas informações. Por favor tente novamente mais tarde.")
+                    customAlert(translation(localStorage.getItem('language')).error.updateUser, "error");
                 });
 
             await api.get(`/changeToken/${this.state.user.user._id}`)
@@ -186,7 +188,6 @@ class MyAccount extends Component {
                     localStorage.setItem("TOKEN_KEY", res.data);
                 })
                 .catch((err) => {
-                    //alert("Erro para trocar token");
                     console.log(err)
                 })
         }
@@ -196,40 +197,41 @@ class MyAccount extends Component {
     }
 
     render() {
+        const t = translation(localStorage.getItem('language'));
         return (
             <div>
                 <section>
-                    <h2 className='section-title'> Meus Dados </h2>
-                    <h4 className='section-subtitle mt-2'> Acompanhe ou atualize seus dados cadastrados! </h4>
+                    <h2 className='section-title'> {t.user.main.title1} </h2>
+                    <h4 className='section-subtitle mt-2'> {t.user.main.sub1} </h4>
 
                     <hr />
 
                     <div className='container-lg account-type'>
-                        <h5 className='type-title'> Você se cadastrou como uma conta {this.state.companyAccount ? "empresarial" : "pessoal."}  </h5>
-                        <OverlayTrigger
+                        <h5 className='type-title'> {t.user.main.sub11} </h5>
+                        {/* <OverlayTrigger
                             trigger={['hover', 'focus']}
                             placement="bottom"
                             overlay={popoverCompanyAccount}>
 
                             <span className='popover-icon'> <BsInfoCircle /> </span>
-                        </OverlayTrigger>
+                        </OverlayTrigger> */}
                     </div>
 
                     <form className="container-lg" id="userInfos">
                         <div className="row">
                             <div className="col-sm-12 col-lg mx-auto mt-3">
                                 <div className="col form-floating">
-                                    <input type="text" className="form-control" id="inputName" placeholder="Nome" name="name"
+                                    <input type="text" className="form-control" id="inputName" placeholder={t.register.part1.name} name="name"
                                         value={this.state.infos.name} onChange={this.formData} required disabled={!this.state.editMode} />
-                                    <label htmlFor="inputName" className="form-label"> Nome </label>
+                                    <label htmlFor="inputName" className="form-label"> {t.register.part1.name} </label>
                                 </div>
                             </div>
 
                             <div className="col-sm-12 col-lg mx-auto mt-3">
                                 <div className="col form-floating">
-                                    <input type="text" className="form-control" id="inputLastName" placeholder="Sobrenome" name="lastName"
+                                    <input type="text" className="form-control" id="inputLastName" placeholder={t.register.part1.surname} name="lastName"
                                         value={this.state.infos.lastName} onChange={this.formData} required disabled={!this.state.editMode} />
-                                    <label htmlFor="inputLastName" className="form-label"> Sobrenome </label>
+                                    <label htmlFor="inputLastName" className="form-label"> {t.register.part1.surname} </label>
                                 </div>
                             </div>
                         </div>
@@ -237,17 +239,17 @@ class MyAccount extends Component {
                         <div className="row">
                             <div className="col-sm-12 col-lg mx-auto mt-3">
                                 <div className="col form-floating">
-                                    <input type="text" className="form-control" id="inputCpf" placeholder="CPF" name="cpf"
+                                    <input type="text" className="form-control" id="inputCpf" placeholder={t.register.part1.cpf} name="cpf"
                                         value={this.state.infos.cpf} onChange={this.formData} required disabled />
-                                    <label htmlFor="inputCpf" className="form-label"> CPF </label>
+                                    <label htmlFor="inputCpf" className="form-label"> {t.register.part1.cpf} </label>
                                 </div>
                             </div>
 
                             <div className="col-sm-12 col-lg mx-auto mt-3">
                                 <div className="col form-floating">
-                                    <input type="date" className="form-control" id="inputBirth" placeholder="Data de Nascimento" name="birth"
+                                    <input type="date" className="form-control" id="inputBirth" placeholder={t.register.part1.birthDate} name="birth"
                                         value={dateInput(this.state.infos.birth)} onChange={this.formData} required disabled={!this.state.editMode} />
-                                    <label htmlFor="inputBirth" className="form-label"> Data de Nascimento </label>
+                                    <label htmlFor="inputBirth" className="form-label"> {t.register.part1.birthDate} </label>
                                 </div>
                             </div>
                         </div>
@@ -255,29 +257,29 @@ class MyAccount extends Component {
                         <div className="row">
                             <div className="col mx-auto mt-3">
                                 <div className="col form-floating">
-                                    <input type="email" className="form-control" id="inputEmail" placeholder="Email" name="email"
+                                    <input type="email" className="form-control" id="inputEmail" placeholder={t.register.part1.email} name="email"
                                         value={this.state.infos.email} onChange={this.formData} required disabled={!this.state.editMode} />
-                                    <label htmlFor="inputEmail" className="form-label"> E-mail </label>
+                                    <label htmlFor="inputEmail" className="form-label"> {t.register.part1.email} </label>
                                 </div>
                             </div>
                         </div>
 
                         <div className='row mt-3'>
-                            <span> Com qual gênero você se identifica? </span>
+                            <span> {t.register.part1.gender.title} </span>
                         </div>
 
                         <div className='row mt-3'>
                             <div className='col'>
                                 <input type='radio' id="gender1" name="gender" onClick={this.radioChange} disabled={!this.state.editMode} /> <br/>
-                                <label className='gender-label' htmlFor="gender1"> Feminino </label>
+                                <label className='gender-label' htmlFor="gender1"> {t.register.part1.gender.op1} </label>
                             </div>
                             <div className='col'>
                                 <input type='radio' id="gender2" name="gender" onChange={this.radioChange} disabled={!this.state.editMode} /> <br/>
-                                <label className='gender-label' htmlFor="gender2"> Masculino </label>
+                                <label className='gender-label' htmlFor="gender2"> {t.register.part1.gender.op2} </label>
                             </div>
                             <div className='col'>
                                 <input type='radio' id="gender3" name="gender" onChange={this.radioChange} disabled={!this.state.editMode} /> <br/>
-                                <label className='gender-label' htmlFor="gender3"> Não binário </label>
+                                <label className='gender-label' htmlFor="gender3"> {t.register.part1.gender.op3} </label>
                             </div>
                         </div>
                     </form>
@@ -292,8 +294,8 @@ class MyAccount extends Component {
                 </section>
 
                 <section className='my-5 category-section'>
-                    <h2 className='section-title'> Minhas Categorias Favoritas </h2>
-                    <h4 className='section-subtitle mt-2'> Utilizamos essa informações para te recomendar projetos que sejam sua cara! <br />Lembre-se, você pode selecionar no máximo 5 categorias!</h4>
+                    <h2 className='section-title'> {t.user.main.title2} </h2>
+                    <h4 className='section-subtitle mt-2'> {t.user.main.sub2} </h4>
 
                     <hr />
 
@@ -315,7 +317,10 @@ class MyAccount extends Component {
                 <div className='row mb-5'>
                     <div className='col'>
                         <button className='register-button' form="userInfos" onClick={this.editClick}>
-                            {this.state.editMode ? "Salvar Alterações" : "Editar Meus Dados"}
+                            {(this.state.editMode === true) ?
+                                <>{t.user.main.btn2}</>
+                                : <>{t.user.main.btn1}</>
+                            }
                         </button>
                     </div>
                 </div>
@@ -326,4 +331,3 @@ class MyAccount extends Component {
 }
 
 export default MyAccount
-

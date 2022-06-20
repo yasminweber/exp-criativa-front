@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { currentUrl, subtract_dates, translation, formatDate } from '../../../Helpers';
+import { currentUrl, subtract_dates, translation, formatDate, customAlert } from '../../../Helpers';
 import api from '../../../config/api';
 import { decodeToken } from '../../../config/auth';
 
@@ -34,7 +34,7 @@ class ProjectVolunteers extends Component {
             })
             .catch((error) => {
                 console.log("erro carregar projeto ", error)
-                alert('Erro para carregar o projeto');
+                customAlert(translation(localStorage.getItem('language')).error.loadProject, "error");
             })
     }
 
@@ -56,12 +56,14 @@ class ProjectVolunteers extends Component {
 
         await api.put(`/attendance/${this.state.id}`, volunteers)
             .then(() => {
-                alert("participantes enviados")
-                window.location.reload()
+                customAlert(translation(localStorage.getItem('language')).success.projectVolunteers, "success");
+                window.setTimeout(function() {
+                    window.location.reload()
+                }, 2000)
             })
             .catch(err => {
                 console.log(err);
-                alert("erro para enviar os participantes")
+                customAlert(translation(localStorage.getItem('language')).error.volunteersProject, "error");
             })
     }
 

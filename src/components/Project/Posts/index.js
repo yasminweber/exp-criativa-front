@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NewPost from './NewPost';
 import PostProjeto from './PostProjeto';
 import api from '../../../config/api';
-import { currentUrl, formatDate, translation } from '../../../Helpers';
+import { currentUrl, customAlert, formatDate, translation } from '../../../Helpers';
 import moment from 'moment';
 
 class Posts extends Component {
@@ -27,11 +27,11 @@ class Posts extends Component {
                 this.setState({
                     posts: data.posts
                 }, () => { this.postsMount() });
-                console.log("Posts carregados");
+                // console.log("Posts carregados");
             })
             .catch((error) => {
                 console.log("erro carregar projeto ", error)
-                alert('Erro para carregar o projeto');
+                customAlert(translation(localStorage.getItem('language')).error.loadProjects, "error");
             })
     }
 
@@ -58,14 +58,13 @@ class Posts extends Component {
                         {this.state.arrayPost}
                     </> :
                     <div className="my-4">
-                        <h2>Não há nenhum post</h2>
+                        <h2>{t.project.info.posts.notYet}</h2>
                     </div>
                 }
 
             </section>
         )
     }
-
 }
 
 export default Posts
