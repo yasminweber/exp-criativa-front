@@ -3,6 +3,7 @@ import HeaderLogin from '../../../components/Header/User';
 import Helmet from 'react-helmet';
 import api from '../../../config/api'
 import { customAlert, translation } from '../../../Helpers';
+import Footer from '../../../components/Footer';
 
 class NewProject extends Component {
 
@@ -50,6 +51,7 @@ class NewProject extends Component {
             description: this.state.description,
             quantityBenefited: this.state.quantityBenefited,
             quantityVolunteers: this.state.quantityVolunteers,
+            projectImage: "https://via.placeholder.com/130",
             status: "solicitação"
         }
 
@@ -163,6 +165,8 @@ class NewProject extends Component {
                         </div>
                     </div>
                 </section>
+
+                <Footer />
 
             </div>
 

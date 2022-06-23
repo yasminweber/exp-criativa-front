@@ -140,7 +140,8 @@
             "homeless": "Sem Teto"
         },
         "profile": "Perfil",
-        "logout": "Sair"
+        "logout": "Sair",
+        "testimonial": "Depoimento"
     },
     "interests": {
         "title": "Meus Interesses | All4One",
@@ -255,5 +256,12 @@
             "op2": "Finalizados",
             "notYet": "Não há projetos a exibir."
         }
+    },
+    "testimonial": {
+        "title": "Novo depoimento | All4One",
+        "title1": "Novo depoimento",
+        "sub1": "Compartilhe seu depoimento com a gente!",
+        "description": "Depoimento",
+        "btn": "Enviar"
     }
 }

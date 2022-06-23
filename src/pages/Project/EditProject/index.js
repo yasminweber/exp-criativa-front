@@ -5,6 +5,7 @@ import { currentUrl, dateInput } from '../../../Helpers'
 import api from '../../../config/api';
 import { decodeToken } from '../../../config/auth';
 import { translation, customAlert } from '../../../Helpers';
+import Footer from '../../../components/Footer';
 
 class EditProject extends Component {
 
@@ -28,8 +29,9 @@ class EditProject extends Component {
         }
 
         this.componentDidMount = () => {
-            this.getProject();
             this.loadCauses();
+
+            this.getProject();
         }
 
         this.updateProject = this.updateProject.bind(this);
@@ -54,7 +56,7 @@ class EditProject extends Component {
                 this.setState({
                     id: data._id,
                     projectName: data.projectName,
-                    category: data.category,
+                    cause: data.cause,
                     where: data.where,
                     startDate: data.startDate,
                     endDate: data.endDate,
@@ -65,8 +67,7 @@ class EditProject extends Component {
                     improvement: data.improvement,
                     status: data.status
                 });
-                console.log("Projeto carregado");
-
+                // console.log("Projeto carregado");
                 this.checkUser()
             })
             .catch((error) => {
@@ -182,10 +183,8 @@ class EditProject extends Component {
 
                                         <div className="mb-3 form-floating">
                                             <select className="form-select" id="selectCause"
-                                                aria-label="Default select example"
-                                                onChange={(e) => this.setState({ cause: e.target.value })}
-                                                value={this.state.cause} required >
-                                                <option key={0} value={""}> {t.project.form.selectCause} </option>
+                                                value={this.state.cause}
+                                                onChange={(e) => this.setState({ cause: e.target.value })} required >
                                                 {this.state.causes.map(function (cause) {
                                                     return <option key={cause} value={cause}> {cause} </option>;
                                                 })
@@ -252,6 +251,8 @@ class EditProject extends Component {
                         </div>
                     </div>
                 </section>
+
+                <Footer />
 
             </div>
         )

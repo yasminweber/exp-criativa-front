@@ -11,7 +11,8 @@ import VolunteerProjects from '../../components/Profile/VolunteerProjects';
 import { decodeToken } from '../../config/auth';
 import { storage } from '../../firebase';
 import api from '../../config/api';
-import { translation, customAlert } from '../../Helpers';
+import { translation } from '../../Helpers';
+import Footer from '../../components/Footer';
 
 class Profile extends Component {
 
@@ -175,6 +176,8 @@ class Profile extends Component {
 
                     </div>
                 </div>
+
+                <Footer />
 
             </div>
         )

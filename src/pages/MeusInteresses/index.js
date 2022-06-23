@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import api from '../../config/api'
 import { decodeToken } from '../../config/auth';
 import { customAlert, translation, checkPermission } from "../../Helpers";
+import Footer from '../../components/Footer';
 
 class MeusInteresses extends Component {
 
@@ -93,6 +94,8 @@ class MeusInteresses extends Component {
                         </div>
                     </div>
                 </section>
+
+                <Footer />
 
             </div>
         )

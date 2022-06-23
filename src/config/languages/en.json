@@ -23,7 +23,8 @@
         "projectImprove": "Projeto enviado para pendência com sucesso!",
         "projectReject": "Projeto rejeitado com sucesso!",
         "userUpdate": "User updated successfully!",
-        "userDelete": "User suspended successfully!"
+        "userDelete": "User suspended successfully!",
+        "testimonial": "Testimonial sent successfully!"
     },
     "warning": {
         "password": "Password does not match.",
@@ -61,7 +62,8 @@
         "loadUser": "Fail to load user. Please try again later.",
         "loadUsers": "Fail to load users. Please try again later.",
         "updateUser": "Fail to update user. Please try again later.",
-        "deleteUser": "Fail to deactivate user. Please try again later."
+        "deleteUser": "Fail to deactivate user. Please try again later.",
+        "testimonial": "Fail to send testimonial. Please try again later."
     },
     "headerHome": {
         "btn1": "Sign in",
@@ -141,7 +143,8 @@
             "homeless": "Homeless"
         },
         "profile": "Profile",
-        "logout": "Logout"
+        "logout": "Logout",
+        "testimonial": "Testimonial"
     },
     "interests": {
         "title": "My Interests | All4One",
@@ -257,5 +260,12 @@
             "op2": "Finished",
             "notYet": "Nothing to show yet."
         }
+    },
+    "testimonial": {
+        "title": "New Testimonial | All4One",
+        "title1": "New testimonial",
+        "sub1": "Share your experience with us!",
+        "description": "Testimonial",
+        "btn": "Send"
     }
 }

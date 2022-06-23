@@ -150,7 +150,9 @@ class Register extends Component {
             gender: genero,
             cnpj: this.state.form.cnpj,
             razaoSocial: this.state.form.razaoSocial,
-            selectedCauses: this.state.selectedCauses
+            selectedCauses: this.state.selectedCauses,
+            status: "ativo",
+            profileImage: "https://via.placeholder.com/102"
         }
 
         // console.log(user)
