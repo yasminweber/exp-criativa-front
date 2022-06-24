@@ -44,7 +44,7 @@ class Home extends Component {
 
                 <HeaderHome />
 
-                <section className="banner">
+                {/* <section className="banner">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12 px-0">
@@ -56,7 +56,7 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> */}
 
                 <section className="quem-somos">
                     <div className="container-lg">

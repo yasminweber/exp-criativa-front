@@ -51,7 +51,7 @@ class NewProject extends Component {
             description: this.state.description,
             quantityBenefited: this.state.quantityBenefited,
             quantityVolunteers: this.state.quantityVolunteers,
-            projectImage: "https://via.placeholder.com/130",
+            projectImage: "https://firebasestorage.googleapis.com/v0/b/all4one-2f446.appspot.com/o/projects%2Fdefault_project.png?alt=media&token=9dc49334-ec20-487e-a5ca-d5b21aa4c9a0",
             status: "solicitação"
         }
 

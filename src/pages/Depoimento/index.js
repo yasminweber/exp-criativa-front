@@ -20,7 +20,7 @@ class Depoimento extends Component {
         e.preventDefault();
 
         const testimonial = {
-            description: this.state.description,
+            description: this.state.description
         }
 
         console.log(testimonial)

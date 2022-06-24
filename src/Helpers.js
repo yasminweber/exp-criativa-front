@@ -126,10 +126,10 @@ export async function customAlert(description, status) {
     bsModal.toggle()
 }
 
-export function checkPermission(user) {
-    if (user !== "") {
-        console.log("usuário comum")
-        alert("Você não tem permissão para acessar essa página")
-        window.location.href = "/profile"
-    }
-}
+// export function checkPermission(user) {
+//     if (user !== "") {
+//         console.log("usuário comum")
+//         alert("Você não tem permissão para acessar essa página")
+//         window.location.href = "/profile"
+//     }
+// }

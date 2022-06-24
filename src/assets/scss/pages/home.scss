@@ -20,7 +20,7 @@
     }
 
     .slick-benefits {
-        background-color: lightcoral;
+        background-color: #E8E8E8;
 
         .titulo-01 {
             font-size: 28px;
@@ -38,9 +38,10 @@
                     margin: 0 10px;
 
                     .titulo-1 {
-                        font-size: 20px;
+                        font-size: 16px;
                         line-height: 24px;
                         margin-bottom: 20px;
+                        color: #008b8b;
                     }
 
                     .descricao {
@@ -51,10 +52,16 @@
 
             .slick-prev {
                 left: -40px;
+                &:before {
+                    color: black;
+                }
             }
 
             .slick-next {
                 right: -40px;
+                &:before {
+                    color: black;
+                }
             }
         }
     }

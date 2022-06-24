@@ -23,11 +23,7 @@ class Register extends Component {
                 // Pessoais
                 cpf: "",
                 birth: "",
-                gender: "",
-
-                // Empresariais
-                cnpj: "",
-                razaoSocial: "",
+                gender: ""
             },
             selectedCauses: [],
             causeList: [],
@@ -43,10 +39,12 @@ class Register extends Component {
 
     componentDidMount() {
         this.loadCauses();
+        console.log(this.state.causes)
     }
 
     async loadCauses() {
         api.get('/cause').then(res => {
+            console.log("causes", res.data)
             if (res.data.length > 0) {
                 this.setState({
                     causes: res.data.map(cause => cause.cause),
@@ -55,7 +53,7 @@ class Register extends Component {
                     let list = []
 
                     Array.from(this.state.causes).forEach((cause) => {
-                        list.push(<CategoryCard clickFunction={this.categoryClick} category={cause}
+                        list.push(<CategoryCard clickFunction={this.categoryClick} category={cause} 
                             selected={this.state.selectedCauses.includes(cause)} />)
                     })
                     this.setState({ causeList: list })
@@ -148,11 +146,9 @@ class Register extends Component {
             cpf: this.state.form.cpf,
             birthDate: this.state.form.birth,
             gender: genero,
-            cnpj: this.state.form.cnpj,
-            razaoSocial: this.state.form.razaoSocial,
             selectedCauses: this.state.selectedCauses,
             status: "ativo",
-            profileImage: "https://via.placeholder.com/102"
+            profileImage: "https://firebasestorage.googleapis.com/v0/b/all4one-2f446.appspot.com/o/users%2Fdefault_user.jpg?alt=media&token=0a93a6f0-3226-4aed-82bc-bd57db59a5cf"
         }
 
         // console.log(user)
@@ -160,7 +156,7 @@ class Register extends Component {
         await api.post('/register', user);
 
         customAlert(translation(localStorage.getItem('language')).success.register, "success");
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             window.location.href = '/login';
         }, 2000);
     }
@@ -168,7 +164,7 @@ class Register extends Component {
     render() {
         const t = translation(localStorage.getItem('language'));
         return (
-            <section className='register-page'>
+            <section className='register-page pb-5'>
 
                 <Helmet>
                     <meta charSet="utf-8" />
@@ -181,49 +177,32 @@ class Register extends Component {
 
                 <div className="container register-content">
                     <div className="row">
-                        <div className="col-4 title-column">
-                            <h2 className='title'> {t.register.title1} </h2>
-
+                        <div className="col-md-4 col-12 title-column">
+                            <h2 className='title title mt-md-0 mt-5'> {t.register.title1} </h2>
                             <p className='subtitle'> {t.register.sub1} </p>
-                            <p className='subtitle'> {t.register.sub2} </p>
+                            <p className='subtitle mb-md-0 mb-4'> {t.register.sub2} </p>
 
-                            <span className='hr'> </span>
-                            <span className='hr-text'> ou </span>
+                            <div className="d-md-block d-none">
+                                <span className='hr'> </span>
+                                <span className='hr-text'> ou </span>
 
-                            <h2 className='title login'> {t.register.title2} </h2>
-                            <p className='subtitle-login'> {t.register.sub3} </p>
-                            <a href="/login">
-                                <button className='login-button'> {t.register.btn1} </button>
-                            </a>
+                                <h2 className='title login'> {t.register.title2} </h2>
+                                <p className='subtitle-login'> {t.register.sub3} </p>
+                                <a href="/login">
+                                    <button className='login-button'> {t.register.btn1} </button>
+                                </a>
+                            </div>
                         </div>
 
-                        <div className="container-fluid col-7 form-column">
+                        <div className="container-fluid col-md-7 col-12 form-column">
                             <div id="form-fields" className='container-lg'>
                                 <form className="row form-register" onSubmit={this.formSend}>
 
-                                    {/* Account Type Switch Button */}
-                                    <div className="row">
-                                        <div className="col-5">
-                                            {t.register.part1.account1}
-                                        </div>
-                                        <div className="col-2">
-                                            <div className='switch-button'>
-                                                <input type="checkbox" id="companyAccount" className='switch-input'
-                                                    onChange={(e) => { this.accountTypeChange(e) }} />
-                                                <label className='switch-label' htmlFor="companyAccount"> </label>
-                                            </div>
-
-                                        </div>
-                                        <div className="col-5">
-                                            {t.register.part1.account2}
-                                        </div>
-                                    </div>
-
                                     {/* Campos para cadastro pessoal */}
                                     <section id="personalForm">
-                                        <div className='row mt-3'>
+                                        <div className='row mt-5'>
                                             {/* Nome */}
-                                            <div className='col-6'>
+                                            <div className='col-md-6 col-12 mb-md-0 mb-3'>
                                                 <div className="form-floating">
                                                     <input type="text" className="form-control personal-input" name="name" placeholder={t.register.part1.name}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.name} required />
@@ -232,7 +211,7 @@ class Register extends Component {
                                             </div>
 
                                             {/* Sobrenome */}
-                                            <div className='col-6'>
+                                            <div className='col-md-6 col-12'>
                                                 <div className="form-floating">
                                                     <input type="Sobrenome" className="form-control personal-input" name="lastName" placeholder={t.register.part1.surname}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.lastName} required />
@@ -243,7 +222,7 @@ class Register extends Component {
 
                                         <div className='row mt-3'>
                                             {/* CPF */}
-                                            <div className='col-6'>
+                                            <div className='col-md-6 col-12 mb-md-0 mb-3'>
                                                 <div className="form-floating">
                                                     <input type="text" className="form-control personal-input" name="cpf" placeholder={t.register.part1.cpf}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.cpf} required />
@@ -252,7 +231,7 @@ class Register extends Component {
                                             </div>
 
                                             {/* Data de Nascimento */}
-                                            <div className='col-6'>
+                                            <div className='col-md-6 col-12'>
                                                 <div className="form-floating">
                                                     <input type="date" className="form-control personal-input" name="birth" placeholder={t.register.part1.birthDate}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.birth} required />
@@ -297,7 +276,7 @@ class Register extends Component {
 
                                         <div className='row mt-3'>
                                             {/* Senha */}
-                                            <div className='col-6'>
+                                            <div className='col-md-6 col-12 mb-md-0 mb-3'>
                                                 <div className="form-floating">
                                                     <input type="password" className="form-control personal-input" name="password" placeholder={t.register.part1.password}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.password} required />
@@ -306,7 +285,7 @@ class Register extends Component {
                                             </div>
 
                                             {/* Confirmar Senha */}
-                                            <div className='col-6'>
+                                            <div className='col-md-6 col-12'>
                                                 <div className="form-floating">
                                                     <input type="password" className="form-control personal-input" name="confirmPassword" placeholder={t.register.part1.repeatPassword}
                                                         onChange={(e) => { this.formData(e) }} value={this.state.form.confirmPassword} required />
@@ -316,88 +295,7 @@ class Register extends Component {
                                         </div>
                                     </section>
 
-                                    {/* Campos para cadastro empresarial */}
-                                    <section id='companyForm' className='d-none'>
-                                        <div className='row mt-3'>
-                                            {/* CNPJ */}
-                                            <div className='col-12'>
-                                                <div className="form-floating">
-                                                    <input type="text" className="form-control company-input" name="cnpj" placeholder={t.register.part1.cnpj}
-                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.cnpj} required disabled />
-                                                    <label className="form-label"> {t.register.part1.cnpj} </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className='row mt-3'>
-                                            {/* Razao Social */}
-                                            <div className='col-12'>
-                                                <div className="form-floating">
-                                                    <input type="text" className="form-control company-input" name="razaoSocial" placeholder={t.register.part1.razaoSocial}
-                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.razaoSocial} required disabled />
-                                                    <label className="form-label"> {t.register.part1.razaoSocial} </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className='row mt-3'>
-                                            {/* Email */}
-                                            <div className='col-12'>
-                                                <div className="form-floating">
-                                                    <input type="email" className="form-control company-input" name="email" placeholder={t.register.part1.email}
-                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.email} required disabled />
-                                                    <label className="form-label"> {t.register.part1.email} </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className='row mt-3'>
-                                            {/* Senha */}
-                                            <div className='col-6'>
-                                                <div className="form-floating">
-                                                    <input type="password" className="form-control company-input" name="password" placeholder={t.register.part1.password}
-                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.password} required disabled />
-                                                    <label className="form-label"> {t.register.part1.password} </label>
-                                                </div>
-                                            </div>
-
-                                            {/* Confirmar Senha */}
-                                            <div className='col-6'>
-                                                <div className="form-floating">
-                                                    <input type="password" className="form-control company-input" name="confirmPassword" placeholder={t.register.part1.repeatPassword}
-                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.confirmPassword} required disabled />
-                                                    <label className="form-label"> {t.register.part1.repeatPassword} </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="row mt-3">
-                                            <span className='hr'> </span>
-                                            <span className='hr-text text-uppercase'> {t.register.part1.administrator} </span>
-                                        </div>
-
-                                        <div className='row mt-3'>
-                                            {/* Nome */}
-                                            <div className='col-6'>
-                                                <div className="form-floating">
-                                                    <input type="text" className="form-control company-input" name="name" placeholder={t.register.part1.administratorName}
-                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.name} required disabled />
-                                                    <label className="form-label"> {t.register.part1.administratorName} </label>
-                                                </div>
-                                            </div>
-
-                                            {/* Sobrenome */}
-                                            <div className='col-6'>
-                                                <div className="form-floating">
-                                                    <input type="Sobrenome" className="form-control company-input" name="lastName" placeholder={t.register.part1.administratorSurname}
-                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.lastName} required disabled />
-                                                    <label className="form-label"> {t.register.part1.administratorSurname} </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-
-                                    <div className='row mt-4'>
+                                    <div className='row mt-4 mb-5'>
                                         <div className="col-12">
                                             <button className="register-button btn btn-primary" type="submit"> {t.register.part1.btn1} </button>
                                         </div>
@@ -430,6 +328,15 @@ class Register extends Component {
                             </section>
 
                         </div>
+
+                        <div className="col-md-4 col-12 d-md-none title-column">
+                            <h2 className='title login'> {t.register.title2} </h2>
+                            <p className='subtitle-login'> {t.register.sub3} </p>
+                            <a href="/login">
+                                <button className='login-button'> {t.register.btn1} </button>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
 

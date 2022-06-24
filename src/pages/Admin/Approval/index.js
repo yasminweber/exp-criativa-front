@@ -157,10 +157,14 @@ class AdminApproval extends Component {
             improvement: document.getElementById('improvement').value
         }
 
+        console.log("status", project)
+
         await api.put(`/project/${id}`, project)
             .then(() => {
                 customAlert(translation(localStorage.getItem('language')).success.projectImprove, "success")
                 // this.loadAdmins()
+                    var modal = document.getElementById('modalProject')
+                    modal.click()
             })
             .catch((error) => {
                 console.log(error)
@@ -328,10 +332,12 @@ class AdminApproval extends Component {
 
                                 <div className="row w-100" id="showImprove" style={{ display: "none" }}>
                                     <hr />
-                                    <div className="col-12 d-flex flex-column">
-                                        <h4 className="mb-3">O que precisa ser alterado no projeto?</h4>
-                                        <textarea id="improvement" />
-                                        <button type="button" className="btn btn-warning mt-3" data-bs-dismiss="modal" onClick={this.improveProject}>Enviar alterações necessárias</button>
+                                    <div className="col-12">
+                                        <form onSubmit={this.improveProject} className="d-flex flex-column">
+                                            <h4 className="mb-3">O que precisa ser alterado no projeto?</h4>
+                                            <textarea id="improvement" />
+                                            <button type="submit" className="btn btn-warning mt-3">Enviar alterações necessárias</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
