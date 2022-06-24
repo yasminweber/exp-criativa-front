@@ -2,7 +2,7 @@
     background: rgb(0, 139, 139);
     background: linear-gradient(180deg, rgba(0, 139, 139, 1) 0%, rgba(0, 107, 104, 1) 50%, rgba(0, 78, 71, 1) 100%);
     font-family: 'Sarabun', sans-serif;
-    height: 200px;
+    height: 230px;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
@@ -11,8 +11,9 @@
     z-index: 2;
 
     @include res-lg {
-        height: 240px;
+        height: 320px;
     }
+
 
     .project-image-section {
         padding: 0;

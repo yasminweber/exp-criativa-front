@@ -4,7 +4,7 @@ import { decodeToken } from '../../../config/auth';
 import HeaderIdioms from '../Idioms';
 import LogoName from '../../../assets/images/logo-name-right3.svg';
 // import Logo from '../../../assets/images/logo.svg';
-import { translation } from "../../../Helpers";
+import { customAlert, translation } from "../../../Helpers";
 
 class HeaderUser extends Component {
     constructor(props) {
@@ -25,7 +25,8 @@ class HeaderUser extends Component {
     async checkUser() {
         if ((window.location.href !== 'http://localhost:3000/cadastro')) {
             if (this.state.user === null) {
-                alert("Usuario não logado. Por favor, faça o login.");
+                customAlert(translation(localStorage.getItem('language')).error.logged, "error")
+
                 window.location = '/login'
             } else {
                 this.setState({ username: this.state.user.user.username });
@@ -34,7 +35,7 @@ class HeaderUser extends Component {
     }
 
     async logout() {
-        alert("Você fez logout");
+        customAlert(translation(localStorage.getItem('language')).success.logout, "success")
         localStorage.removeItem('TOKEN_KEY');
         window.location = '/login'
     }

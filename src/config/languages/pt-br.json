@@ -28,7 +28,8 @@
     "warning": {
         "password": "As senhas não correspondem.",
         "categories": "Para alterar as categorias preferidas, ative o modo de edição",
-        "userCategory": "Você já selecionou 5 categorias."
+        "userCategory": "Você já selecionou 5 categorias.",
+        "age": "Para se cadastrar você precisa ser maior de 16 anos!"
     },
     "error": {
         "network": "Erro de conexão. Por favor verifique sua conexão com a internet.",

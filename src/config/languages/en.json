@@ -29,7 +29,8 @@
     "warning": {
         "password": "Password does not match.",
         "categories": "To edit the categories, you must activate the edition mode.",
-        "userCategory": "You have already selected 5 categories."
+        "userCategory": "You have already selected 5 categories.",
+        "age": "To register you must be over 16 years old."
     },
     "error": {
         "network": "Connection error. Please check your internet connection.",

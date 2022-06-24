@@ -18,7 +18,7 @@ class CategoryCard extends Component {
                             this.setState({ selected: !this.state.selected })
                         }
                     }}>
-                    <img className='category-icon' id={this.props.category} icon={this.props.icon} alt={this.props.category} disable />
+                    <img className='category-icon' id={this.props.category} src={this.props.image} alt={this.props.category} disable />
                 </div>
                 <h4> {this.props.category} </h4>
             </div>

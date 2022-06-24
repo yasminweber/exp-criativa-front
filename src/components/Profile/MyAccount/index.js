@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Popover } from 'react-bootstrap';
-import { OverlayTrigger } from 'react-bootstrap';
-import { BsInfoCircle } from 'react-icons/bs'
+import InputMask from 'react-input-mask';
 import CategoryCardProfile from './CategoryCard';
 import { dateInput, customAlert, translation } from '../../../Helpers'
 import api from '../../../config/api'
@@ -113,16 +112,18 @@ class MyAccount extends Component {
         // Busca causas do banco
         api.get('/cause').then(res => {
             if (res.data.length > 0) {
+                console.log(res.data)
 
                 // Atualiza states com lista de todas as causas
                 this.setState({
-                    causes: res.data.map(cause => cause.cause),
+                    causes: res.data.map(cause => cause),
                 }, () => {
+                    console.log(this.state.causes)
                     // Monta array de itens da tabela
                     let list = []
                     Array.from(this.state.causes).forEach((cause) => {
-                        list.push(<CategoryCardProfile clickFunction={this.categoryClick} category={cause}
-                            selected={this.state.selectedCauses.includes(cause)} />)
+                        list.push(<CategoryCardProfile clickFunction={this.categoryClick} category={cause.cause} image={cause.image}
+                            selected={this.state.selectedCauses.includes(cause.cause)} />)
                     })
                     this.setState({ causeList: list })
                 })
@@ -239,7 +240,7 @@ class MyAccount extends Component {
                         <div className="row">
                             <div className="col-sm-12 col-lg mx-auto mt-3">
                                 <div className="col form-floating">
-                                    <input type="text" className="form-control" id="inputCpf" placeholder={t.register.part1.cpf} name="cpf"
+                                    <InputMask mask="999.999.999-99" type="text" className="form-control" id="inputCpf" placeholder={t.register.part1.cpf} name="cpf"
                                         value={this.state.infos.cpf} onChange={this.formData} required disabled />
                                     <label htmlFor="inputCpf" className="form-label"> {t.register.part1.cpf} </label>
                                 </div>
@@ -248,7 +249,7 @@ class MyAccount extends Component {
                             <div className="col-sm-12 col-lg mx-auto mt-3">
                                 <div className="col form-floating">
                                     <input type="date" className="form-control" id="inputBirth" placeholder={t.register.part1.birthDate} name="birth"
-                                        value={dateInput(this.state.infos.birth)} onChange={this.formData} required disabled={!this.state.editMode} />
+                                        value={dateInput(this.state.infos.birth)} onChange={this.formData} required disabled/>
                                     <label htmlFor="inputBirth" className="form-label"> {t.register.part1.birthDate} </label>
                                 </div>
                             </div>
