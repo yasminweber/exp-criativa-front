@@ -14,36 +14,95 @@
         height: 240px;
     }
 
-    .project-image {
+    .project-image-section {
+        padding: 0;
         height: 150px;
         width: 150px;
         align-items: center;
         justify-content: center;
-        border-radius: 100%;
-        box-shadow: 2px 2px 2px #666666;
-        margin: 0 auto;
+        margin-left: 70px;
 
-        @include res-md {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
-        }
-
-        @include res-sm {
-            margin-top: 20px;
-        }
-
-        .image-project {
-            width: 150px;
-            height: 150px;
+        .project-image {
+            width: 100%;
+            height: 100%;
             border-radius: 100%;
+            overflow: hidden;
+            background-color: #0e5e5600;
+            border: #083d38 3px solid;
 
-            @include res-md {
-                width: 100px;
-                height: 100px;
+            .project-photo {
+                width: 100%;
+                height: 100%;
             }
         }
+
+        .project-image-input {
+            height: 30%;
+            position: relative;
+            margin-top: -152px;
+            margin-left: 105px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+
+            .project-image-icon {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: #e4e4e4;
+                height: 100%;
+                background-color: #0e5e56;
+                border-radius: 100%;
+                cursor: pointer;
+                transition: all 0.2s linear;
+
+                &:hover {
+                    border: #083d38 2px solid;
+                    color: #e4e4e4;
+                    font-size: 18px;
+                    transition: all 0.2s linear;
+                }
+            }
+        }
+
     }
+
+    // .project-image {
+    //     height: 150px;
+    //     width: 150px;
+    //     align-items: center;
+    //     justify-content: center;
+    //     border-radius: 100%;
+    //     box-shadow: 2px 2px 2px #666666;
+    //     margin: 0 auto;
+
+    //     @include res-md {
+    //         width: 100px;
+    //         height: 100px;
+    //         margin: 0 auto;
+    //     }
+
+    //     @include res-sm {
+    //         margin-top: 20px;
+    //     }
+
+    //     .image-project {
+    //         width: 150px;
+    //         height: 150px;
+    //         border-radius: 100%;
+
+    //         @include res-md {
+    //             width: 100px;
+    //             height: 100px;
+    //         }
+    //     }
+    // }
 
     .name-causes {
         padding-left: 30px;
