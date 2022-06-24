@@ -113,7 +113,7 @@ class Profile extends Component {
                                     </div>
 
                                     <div className='photo-input'>
-                                        <input type="file" id="change-photo" className='d-none' onChange={this.profilePhotoUpload} />
+                                        <input type="file" id="change-photo" className='d-none' onChange={this.profilePhotoUpload} accept="image/*" />
                                         <label className="user-photo-icon" htmlFor="change-photo"> <FiCamera /> </label>
                                     </div>
                                 </div>

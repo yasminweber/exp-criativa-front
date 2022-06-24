@@ -7,6 +7,8 @@ import { decodeToken } from '../../config/auth';
 import ProjectVolunteers from '../../components/Project/Volunteers';
 import Posts from '../../components/Project/Posts';
 import ProjectInfos from '../../components/Project/ProjectInfos';
+import { FiCamera } from 'react-icons/fi'
+import { storage } from '../../firebase';
 
 class ProjectPage extends Component {
 
@@ -26,7 +28,8 @@ class ProjectPage extends Component {
             quantityVolunteers: "",
             volunteers: [],
             status: "",
-            posts: []
+            posts: [],
+            projectImage: "",
         }
 
         this.componentDidMount = () => {
@@ -34,12 +37,14 @@ class ProjectPage extends Component {
         }
 
         this.getProject = this.getProject.bind(this)
+        this.profilePhotoUpload = this.profilePhotoUpload.bind(this)
     }
 
     async getProject() {
         await api.get(`/project/${currentUrl()}`)
             .then((response) => {
                 const data = response.data;
+                console.log(data)
                 this.setState({
                     projectCreator: data.creator._id,
                     id: data._id,
@@ -54,6 +59,7 @@ class ProjectPage extends Component {
                     volunteers: data.volunteers,
                     volunteersParticipated: data.volunteersParticipated,
                     status: data.status,
+                    projectImage: data.projectImage
                 });
                 // console.log("Projeto carregado");
             })
@@ -99,6 +105,31 @@ class ProjectPage extends Component {
         // load membros section
     }
 
+    async profilePhotoUpload(e) {
+        // Verificar se não foi selecionado arquivos.
+        if (e.target.files[0] === undefined) {
+            return;
+        }
+
+        let photo = e.target.files[0]
+        let url = await storage.ref("projects").child(this.state.id).put(photo)
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .catch(error => console.log("Erro ao gravar imagem no banco", error))
+
+        // Atualiza usuário com link da imagem
+        await api.put(`/project/${this.state.id}`, {projectImage: url})
+
+        await api.get(`/changeToken/${this.state.user.user._id}`)
+            .then((res) => {
+                localStorage.setItem("TOKEN_KEY", res.data);
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+        window.location.reload();
+    }
+
     render() {
         const t = translation(localStorage.getItem('language'))
         return (
@@ -113,9 +144,14 @@ class ProjectPage extends Component {
 
                 <header className="container-fluid project-info d-flex">
                     <div className="row">
-                        <div className="col-lg-2 col-4">
+                        <div className="col-lg-2 col-4 project-image-section">
                             <div className='project-image d-flex'>
-                                <img className="image-project" src="https://via.placeholder.com/150x150" alt="Imagem projeto" />
+                                <img className="project-photo" src={this.state.projectImage} alt="Imagem projeto" />
+                            </div>
+
+                            <div className='project-image-input'>
+                                <input type="file" id="change-photo" className='d-none' onChange={this.profilePhotoUpload} accept="image/*"/>
+                                <label className="project-image-icon" htmlFor="change-photo"> <FiCamera /> </label>
                             </div>
                         </div>
 
@@ -163,9 +199,9 @@ class ProjectPage extends Component {
                             <button className="link" id="acoes-e-eventos-tab" data-bs-toggle="tab" data-bs-target="#acoes-e-eventos" type="button" role="tab" aria-controls="acoes-e-eventos" aria-selected="false">{t.project.info.posts.title}</button>
                         </li>
                         {(this.state.user.user._id === this.state.projectCreator) ?
-                        <li className="item" role="presentation">
-                            <button className="link" id="volunteers-tab" data-bs-toggle="tab" data-bs-target="#volunteers" type="button" role="tab" aria-controls="volunteers" aria-selected="false">{t.project.info.volunteers.title}</button>
-                        </li> : <></>}
+                            <li className="item" role="presentation">
+                                <button className="link" id="volunteers-tab" data-bs-toggle="tab" data-bs-target="#volunteers" type="button" role="tab" aria-controls="volunteers" aria-selected="false">{t.project.info.volunteers.title}</button>
+                            </li> : <></>}
                         <li className="item" role="presentation">
                             <button className="link disabled pe-none" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false">{t.project.info.donations.title}</button>
                         </li>
@@ -176,7 +212,7 @@ class ProjectPage extends Component {
                     <div className="tab-content" id="myTabContent">
 
                         <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <ProjectInfos description={this.state.description} status={this.state.status} startDate={this.state.startDate} endDate={this.state.endDate} where={this.state.where} quantityBenefited={this.state.quantityBenefited} quantityVolunteers={this.state.quantityVolunteers} volunteers={this.state.volunteers  } />
+                            <ProjectInfos description={this.state.description} status={this.state.status} startDate={this.state.startDate} endDate={this.state.endDate} where={this.state.where} quantityBenefited={this.state.quantityBenefited} quantityVolunteers={this.state.quantityVolunteers} volunteers={this.state.volunteers} />
                         </div>
 
                         <div className="tab-pane fade" id="pictures" role="tabpanel" aria-labelledby="pictures-tab">
@@ -184,7 +220,7 @@ class ProjectPage extends Component {
                         </div>
 
                         <div className="tab-pane fade" id="acoes-e-eventos" role="tabpanel" aria-labelledby="acoes-e-eventos-tab">
-                            <Posts projectCreator={this.state.projectCreator} userId={this.state.user.user._id}/>
+                            <Posts projectCreator={this.state.projectCreator} userId={this.state.user.user._id} />
                         </div>
 
                         <div className="tab-pane fade" id="volunteers" role="tabpanel" aria-labelledby="volunteers-tab">
