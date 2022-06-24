@@ -15,11 +15,12 @@ class CategoryCardProfile extends Component {
                 <div className={this.state.selected ? 'category-option selected' : 'category-option'} id={this.props.category}
                     onClick={() => {
                         let selected = this.props.clickFunction(this.props.category)
+                        {console.log(this.state.selected)}
                         if (selected) {
                             this.setState({ selected: !this.state.selected })
                         }
                     }}>
-                    <img disable className='category-icon' id={this.props.category} src="https://cdn-icons-png.flaticon.com/512/672/672716.png" alt="" />
+                    <img disable className='category-icon' id={this.props.category} src={this.props.image} alt="" />
                 </div>
                 <h4> {this.props.category} </h4>
                 </div>

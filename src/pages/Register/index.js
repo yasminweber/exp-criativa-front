@@ -5,6 +5,8 @@ import api from '../../config/api'
 import CategoryCard from '../../components/Register/CategoryCard';
 import { customAlert, translation } from '../../Helpers';
 import HeaderHome from '../../components/Header/Home';
+import InputMask from 'react-input-mask';
+import moment from 'moment';
 
 class Register extends Component {
 
@@ -43,20 +45,21 @@ class Register extends Component {
 
     componentDidMount() {
         this.loadCauses();
+        console.log(this.state.causes)
     }
 
     async loadCauses() {
         api.get('/cause').then(res => {
             if (res.data.length > 0) {
                 this.setState({
-                    causes: res.data.map(cause => cause.cause),
+                    causes: res.data.map(cause => cause),
                     // selectedCauses: this.props.causes
                 }, () => {
                     let list = []
 
                     Array.from(this.state.causes).forEach((cause) => {
-                        list.push(<CategoryCard clickFunction={this.categoryClick} category={cause}
-                            selected={this.state.selectedCauses.includes(cause)} />)
+                        list.push(<CategoryCard clickFunction={this.categoryClick} category={cause.cause} image={cause.image}
+                            selected={this.state.selectedCauses.includes(cause.cause)} />)
                     })
                     this.setState({ causeList: list })
                 })
@@ -120,6 +123,12 @@ class Register extends Component {
 
     async formSend(e) {
         e.preventDefault()
+
+        let age = parseInt(moment(this.state.form.birth).fromNow('year').split(" ")[0])
+        if (age < 16) {
+            customAlert(translation(localStorage.getItem('language')).warning.age, "warning");
+            return
+        }
 
         if (this.state.form.password === this.state.form.confirmPassword) {
             document.getElementById('form-fields').classList.add('d-none')
@@ -245,8 +254,8 @@ class Register extends Component {
                                             {/* CPF */}
                                             <div className='col-6'>
                                                 <div className="form-floating">
-                                                    <input type="text" className="form-control personal-input" name="cpf" placeholder={t.register.part1.cpf}
-                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.cpf} required />
+                                                    <InputMask mask="999.999.999-99" type="text" className="form-control personal-input" name="cpf" placeholder={t.register.part1.cpf}
+                                                        onChange={(e) => { this.formData(e) }} value={this.state.form.cpf} required/>
                                                     <label className="form-label"> {t.register.part1.cpf} </label>
                                                 </div>
                                             </div>
