@@ -57,7 +57,7 @@ class Posts extends Component {
                     <>
                         {this.state.arrayPost}
                     </> :
-                    <div className="my-4">
+                    <div className="py-4">
                         <h2>{t.project.info.posts.notYet}</h2>
                     </div>
                 }

@@ -1,12 +1,12 @@
 .register-page {
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(230, 255, 255);
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    text-align: center;
+    // width: 100%;
+    // height: 100vh;
+    // background-color: rgb(230, 255, 255);
+    // align-items: center;
+    // display: flex;
+    // flex-direction: column;
+    // flex-wrap: wrap;
+    // text-align: center;
     font-family: 'Sarabun', sans-serif;
 
     .register-cover {
@@ -31,14 +31,18 @@
         // text-align: center;
         // justify-content: center;
 
+        @include res-md {
+            width: 85%;
+        }
+
         .title-column {
             background-color: rgb(154, 201, 196);
-            height: 70vh;
+            // height: 70vh;
             align-items: center;
             display: flex;
             flex-direction: column;
-            flex-wrap: wrap;
-            text-align: center;
+            // flex-wrap: wrap;
+            // text-align: center;
             justify-content: center;
             box-shadow: 2px 2px 2px #ababab;
 
@@ -127,6 +131,10 @@
                 flex-wrap: wrap;
                 text-align: center;
                 justify-content: center;
+
+                @include res-md {
+                    margin: 0;
+                }
 
                 .form-control,
                 .form-select {
@@ -227,41 +235,11 @@
                         color: #F2F2F2;
                     }
                 }
+
+                .gender-label {
+                    margin-left: 6px;
+                }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             .register-form {
                 .switch-button {
@@ -390,6 +368,12 @@
                     margin-top: 15px;
                     box-shadow: inset 0 -5px 5px -5px rgb(163, 163, 163);
                     // box-shadow: inset 0 -5px 5px -5px rgb(142, 142, 142);
+
+                    @include res-md {
+                        height: 82%;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                    }
 
                     .category-card {
                         // background-color: #757575;

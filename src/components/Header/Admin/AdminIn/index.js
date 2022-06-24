@@ -25,7 +25,7 @@ class HeaderAdminIn extends Component {
     async checkUser() {
         if ((window.location.href !== 'http://localhost:3000/cadastro')) {
             console.log("console", this.state.username)
-            if (this.state.username === null || this.state.username === "") {
+            if (this.state.username === null) {
                 customAlert(translation(localStorage.getItem('language')).error.logged, "error");
                 window.setTimeout(function() {
                     window.location.href = '/admin';

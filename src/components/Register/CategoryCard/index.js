@@ -10,7 +10,7 @@ class CategoryCard extends Component {
 
     render() {
         return (
-            <div className="col-4 my-2 category-card">
+            <div className="col-md-4 col-6 my-2 category-card">
                 <div className={this.state.selected ? 'category-option selected' : 'category-option'} id={this.props.category}
                     onClick={() => {
                         let selected = this.props.clickFunction(this.props.category)

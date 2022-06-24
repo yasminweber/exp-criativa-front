@@ -3,7 +3,7 @@ import HeaderLogin from '../../components/Header/User';
 import Helmet from 'react-helmet';
 import api from '../../config/api'
 import { decodeToken } from '../../config/auth';
-import { customAlert, translation, checkPermission } from "../../Helpers";
+import { customAlert, translation } from "../../Helpers";
 import Footer from '../../components/Footer';
 
 class MeusInteresses extends Component {
@@ -17,7 +17,7 @@ class MeusInteresses extends Component {
 
         this.componentDidMount = () => {
             this.getProjects()
-            checkPermission(this.state.user.user.cnpj)
+            // checkPermission(this.state.user.user.cnpj)
         }
     }
 

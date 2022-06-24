@@ -12,7 +12,25 @@ class Benefits extends Component {
             infinite: true,
             centerPadding: "60px",
             slidesToShow: 3,
-            speed: 500
+            speed: 500,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        // dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                }
+            ]
         };
 
         return (
@@ -20,38 +38,26 @@ class Benefits extends Component {
                 <Slider {...settings}>
                     <div className="item">
                         <div className="dentro-item">
-                            <h3 className="titulo-1">Valorização pelo mercado</h3>
-                            <p className="descricao">Um dos principais motivos para fazer um trabalho voluntário é que ele é bastante valorizado pelas empresas. Ao contar com uma experiência como essa em seu currículo, você estará demonstrando ao mercado que se envolve com projetos sociais e não hesitou em procurar por uma oportunidade de colocar em prática o que está aprendendo na graduação.</p>
+                            <h3 className="titulo-1">Yasmin Weber</h3>
+                            <p className="descricao">Amei o site! As propostas de projeto são super interessantes e acredito que podem ajudar a cidade de Curitiba</p>
                         </div>
                     </div>
                     <div className="item">
                         <div className="dentro-item">
-                            <h3 className="titulo-1">Ganho de experiência</h3>
-                            <p className="descricao">
-                                Todo estudante universitário sabe como pode ser complicado conseguir o primeiro estágio, principalmente por não ser capaz de comprovar experiência na área. Por isso, investir em um trabalho voluntário também o ajudará a ganhar experiência, mesmo se não for em sua área de atuação. <br /> <br />
-                                Só de participar de um projeto e ter um posicionamento atuante e inovador já são fatores preponderantes e benéficos para a sua carreira.
-                            </p>
+                            <h3 className="titulo-1">Guilherme Weber</h3>
+                            <p className="descricao">Funciona muito bem! Não havia achado nenhuma plataforma completa como essa!</p>
                         </div>
                     </div>
                     <div className="item">
                         <div className="dentro-item">
-                            <h3 className="titulo-1">Possibilidade de fazer networking</h3>
-                            <p className="descricao">
-                                Outro ponto positivo que vai ajudá-lo a levar um trabalho voluntário em consideração é a possibilidade de fazer networking. Muitas serão as pessoas que você entrará em contato e terá a oportunidade de demonstrar a sua capacidade.<br /> <br />
-                                Portanto, aproveite essa chance para aprimorar a sua capacidade de comunicação e de manter relações com as pessoas.
-                            </p>
+                            <h3 className="titulo-1">Marianna Bove</h3>
+                            <p className="descricao">A melhor solução para ajudar quem mais precisa! Estou sempre buscando novos projetos!</p>
                         </div>
                     </div>
                     <div className="item">
                         <div className="dentro-item">
-                            <h3 className="titulo-1">Chance de entrar em contato com outras pessoas e culturas</h3>
-                            <p className="descricao">
-                                Como consequência do networking, você também entrará em contato com outras pessoas e culturas. Muitas vezes, até o ensino médio, estamos acostumados a conviver apenas com quem tem os mesmos pensamentos e ideais que a gente. No entanto, isso mudará bastante após entrar na faculdade.
-                                <br />
-                                Em um trabalho voluntário, inclusive, provavelmente você lidará com uma realidade bastante diferente da sua. Essa experiência será imprescindível para abrir os seus olhos e mostrar a você a necessidade de investir em ideias para melhorar e tornar o mundo um lugar melhor.
-                                <br />
-                                Por menor que seja o trabalho, não tenha dúvidas de que ele já será um ponto inicial para uma transformação!
-                            </p>
+                            <h3 className="titulo-1">Joaquin Silva</h3>
+                            <p className="descricao">Adoro ajudar os outros e a plataforma tem várias ideias interessantes e que realmente são colocadas em prática!</p>
                         </div>
                     </div>
                 </Slider>
