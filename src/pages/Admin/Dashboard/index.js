@@ -5,9 +5,10 @@ import { decodeToken } from '../../../config/auth';
 import api from '../../../config/api';
 import { Chart } from 'react-google-charts'
 import _ from 'lodash'
+import { translation, customAlert } from '../../../Helpers';
 
 export const options = {
-    title: "Projetos abertos",
+    title: "Projetos",
 };
 
 class Dashboard extends Component {
@@ -29,10 +30,9 @@ class Dashboard extends Component {
             .then((response) => {
                 const data = response.data;
                 this.setState({ projects: data });
-                console.log(data)
             })
             .catch(() => {
-                alert('Erro para carregar os projetos');
+                customAlert(translation(localStorage.getItem('language')).error.loadProjects, "error");
             })
     }
 
@@ -65,7 +65,7 @@ class Dashboard extends Component {
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title>Dashboard</title>
+                    <title>Dashboard | All4One</title>
                 </Helmet>
 
                 <div className="container-fluid">
@@ -75,7 +75,7 @@ class Dashboard extends Component {
                             <div className="container-lg">
                                 <div className="row text-lg-start text-center">
                                     <div className="col-12">
-                                        <h1 className="titulo-1 mt-4 mb-5" style={{ fontSize: "24px" }}>Dashboard</h1>
+                                        <h1 className="titulo-1 mt-4 mb-5">Dashboard</h1>
                                     </div>
                                 </div>
 

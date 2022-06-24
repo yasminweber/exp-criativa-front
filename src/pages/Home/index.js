@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import CauseCard from '../../components/Home/CauseCard';
 import HeaderHome from '../../components/Header/Home';
 import Benefits from '../../components/Home/Benefits';
-import { translation } from '../../Helpers';
+import { translation, customAlert } from '../../Helpers';
 import api from '../../config/api';
 
 class Home extends Component {
@@ -17,7 +17,6 @@ class Home extends Component {
         this.componentDidMount = () => {
             this.loadCauses();
         }
-
     }
 
     async loadCauses() {
@@ -28,6 +27,7 @@ class Home extends Component {
                 })
             })
             .catch(error => {
+                customAlert(translation(localStorage.getItem('language')).error.network, "error");
                 console.log("erro para carregar iniciativas", error);
             })
     }
@@ -44,7 +44,7 @@ class Home extends Component {
 
                 <HeaderHome />
 
-                <section className="banner">
+                {/* <section className="banner">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-12 px-0">
@@ -56,7 +56,7 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> */}
 
                 <section className="quem-somos">
                     <div className="container-lg">
@@ -114,4 +114,5 @@ class Home extends Component {
         )
     }
 }
+
 export default Home

@@ -1,5 +1,6 @@
 import api from "./config/api";
 import { storage } from "./firebase";
+import { Modal } from "bootstrap";
 
 // Funções auxiliares
 
@@ -115,3 +116,20 @@ export async function getImagesUrl(postId) {
     // console.log(imagesUrl)
     // return imagesUrl
 }
+
+export async function customAlert(description, status) {
+    var modalElement = document.getElementById("custom-alert")
+    document.getElementById('customAlert-description').textContent = description
+    document.getElementById('custom-alert-color').classList.add(status)
+    var bsModal = new Modal(modalElement, {
+        backdrop: false})
+    bsModal.toggle()
+}
+
+// export function checkPermission(user) {
+//     if (user !== "") {
+//         console.log("usuário comum")
+//         alert("Você não tem permissão para acessar essa página")
+//         window.location.href = "/profile"
+//     }
+// }

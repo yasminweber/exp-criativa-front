@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import HeaderLogin from '../../../components/Header/User';
 import Helmet from 'react-helmet';
 import api from '../../../config/api'
-import { translation } from '../../../Helpers';
+import { customAlert, translation } from '../../../Helpers';
+import Footer from '../../../components/Footer';
 
 class NewProject extends Component {
 
@@ -50,6 +51,7 @@ class NewProject extends Component {
             description: this.state.description,
             quantityBenefited: this.state.quantityBenefited,
             quantityVolunteers: this.state.quantityVolunteers,
+            projectImage: "https://firebasestorage.googleapis.com/v0/b/all4one-2f446.appspot.com/o/projects%2Fdefault_project.png?alt=media&token=9dc49334-ec20-487e-a5ca-d5b21aa4c9a0",
             status: "solicitação"
         }
 
@@ -57,8 +59,10 @@ class NewProject extends Component {
 
         await api.post('/newProject', project);
 
-        alert("A sua ideia de projeto foi enviada. Aguarde a aprovação!");
-        window.location = '/meusInteresses';
+        customAlert(translation(localStorage.getItem('language')).success.project, "success");
+        window.setTimeout(function() {
+            window.location.href = '/meusInteresses';
+        }, 2000);
     }
 
     render() {
@@ -84,7 +88,7 @@ class NewProject extends Component {
                     </div>
                 </section>
 
-                <section className="form">
+                <section className="form pb-5">
                     <div className="container-lg">
                         <div className="row">
                             <div className="col-lg-8 col-12 mx-auto">
@@ -161,6 +165,8 @@ class NewProject extends Component {
                         </div>
                     </div>
                 </section>
+
+                <Footer />
 
             </div>
 

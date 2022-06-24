@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import HeaderLogin from '../../components/Header/User';
 import Helmet from 'react-helmet';
 import api from '../../config/api'
-import { currentUrl, translation } from '../../Helpers';
+import { currentUrl, translation, customAlert } from '../../Helpers';
+import { decodeToken } from '../../config/auth';
 
 class Cause extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            user: decodeToken(),
             projects: [],
             cause: ""
         }
@@ -19,7 +21,6 @@ class Cause extends Component {
     }
 
     async getProjects() {
-
         let url = currentUrl()
         let filter = ''
         if (url === "acessibilidade") {
@@ -59,7 +60,7 @@ class Cause extends Component {
                 //console.log(this.state.projects)
             })
             .catch(() => {
-                alert('Erro para carregar os projetos');
+                customAlert(translation(localStorage.getItem('language')).error.loadProjects, "error");
             })
     }
 
@@ -91,15 +92,16 @@ class Cause extends Component {
                             <div className="col-lg-10 col-12 mx-auto">
 
                                 {/* Se a lista for vazia */}
-                                {(!this.state.projects.length) ?
+                                {(!this.state.projects.filter(status => status.status === "aprovado" || status.status === "progresso").length) ?
                                     <div className="mt-3" style={{ textAlignLast: "center" }}>
                                         <p>{t.interests.causes.sub1} {this.state.cause}</p>
                                     </div> : <></>
                                 }
 
                                 <div className="row my-4 text-start">
-                                    {this.state.projects.map((child, id) => (
+                                    {this.state.projects.filter(status => status.status === "aprovado" || status.status === "progresso").map((child, id) => (
                                         <div className="col-lg-4 col-12" key={id}>
+                                            {console.log(child.status)}
                                             <div className="projeto my-4 mx-2">
                                                 <div className="fundo bg-dog"></div>
                                                 <div className="projeto-interno">

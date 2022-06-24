@@ -46,7 +46,6 @@ class HeaderUser extends Component {
                 <Container>
                     <Navbar.Brand href="/meusInteresses">
                         <img className="d-inline-block align-top" src={LogoName} alt="Logo" width="125" />
-                        {/* All4One */}
                     </Navbar.Brand>
                     <div className="d-lg-none d-block ms-auto">
                         <HeaderIdioms />

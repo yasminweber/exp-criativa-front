@@ -1,7 +1,8 @@
 .newProject {
     .banner-titulo {
         color: white;
-        background-image: linear-gradient(to bottom, #58706e, #008b8b, #58706e);
+        background: rgb(0,139,139);
+        background: linear-gradient(180deg, rgba(0,139,139,1) 0%, rgba(0,107,104,1) 50%, rgba(0,78,71,1) 100%);
         justify-content: start;
         padding: 50px 0 100px;
 

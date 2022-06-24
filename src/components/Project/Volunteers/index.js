@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { currentUrl, subtract_dates, translation } from '../../../Helpers';
+import { currentUrl, subtract_dates, translation, formatDate, customAlert } from '../../../Helpers';
 import api from '../../../config/api';
 import { decodeToken } from '../../../config/auth';
 
@@ -34,7 +34,7 @@ class ProjectVolunteers extends Component {
             })
             .catch((error) => {
                 console.log("erro carregar projeto ", error)
-                alert('Erro para carregar o projeto');
+                customAlert(translation(localStorage.getItem('language')).error.loadProject, "error");
             })
     }
 
@@ -56,12 +56,14 @@ class ProjectVolunteers extends Component {
 
         await api.put(`/attendance/${this.state.id}`, volunteers)
             .then(() => {
-                alert("participantes enviados")
-                window.location.reload()
+                customAlert(translation(localStorage.getItem('language')).success.projectVolunteers, "success");
+                window.setTimeout(function() {
+                    window.location.reload()
+                }, 2000)
             })
             .catch(err => {
                 console.log(err);
-                alert("erro para enviar os participantes")
+                customAlert(translation(localStorage.getItem('language')).error.volunteersProject, "error");
             })
     }
 
@@ -95,7 +97,8 @@ class ProjectVolunteers extends Component {
                                                 <tr key={id}>
                                                     <td>{child.name}</td>
                                                     <td>{child.lastName}</td>
-                                                    <td>{subtract_dates(child.createdAt)} {t.project.info.volunteers.table.days}</td>
+                                                    <td>{formatDate(child.createdAt)}</td>
+                                                    {/* <td>{subtract_dates(child.createdAt)} {t.project.info.volunteers.table.days}</td> */}
                                                     {(this.state.status !== "finalizado") ?
                                                     
                                                     <td><input type="checkbox" className="check-participation" value={child._id} disabled /></td>

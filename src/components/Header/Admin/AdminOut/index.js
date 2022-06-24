@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Container } from 'react-bootstrap';
+import LogoName from '../../../../assets/images/logo-name-right3.svg';
 
 class HeaderAdminOut extends Component {
 
@@ -7,7 +8,7 @@ class HeaderAdminOut extends Component {
         return (
             <Navbar expand="lg" className="header-admin">
                 <Container>
-                    <Navbar.Brand>All4One</Navbar.Brand>
+                    <Navbar.Brand><img width="125" src={LogoName} alt="Logo" /></Navbar.Brand>
                 </Container>
             </Navbar>
         );

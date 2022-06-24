@@ -5,7 +5,6 @@ class CategoryCardProfile extends Component {
         super(props);
         this.state = {
             selected: this.props.selected
-            // selected: false
         }
     }
 
@@ -16,11 +15,9 @@ class CategoryCardProfile extends Component {
                 <div className={this.state.selected ? 'category-option selected' : 'category-option'} id={this.props.category}
                     onClick={() => {
                         let selected = this.props.clickFunction(this.props.category)
-
                         if (selected) {
                             this.setState({ selected: !this.state.selected })
                         }
-
                     }}>
                     <img disable className='category-icon' id={this.props.category} src="https://cdn-icons-png.flaticon.com/512/672/672716.png" alt="" />
                 </div>

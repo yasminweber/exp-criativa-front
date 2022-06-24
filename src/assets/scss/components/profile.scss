@@ -9,15 +9,15 @@
     }
 
     .user-menu {
-        height: 450px;
+        height: fit-content;
         padding: 0;
         border-radius: 15px;
         font-family: 'Sarabun', sans-serif;
-        overflow: hidden;
         border: #008b8b 3px solid;
+        margin-top: 100px;
 
         @include res-md {
-            height: 260px;
+            // height: 260px;
         }
 
         .user-header {
@@ -40,11 +40,12 @@
                 margin-top: -55px;
 
                 .user-photo {
-                    border: 4px solid #dadada;
+                    border: 4px solid #0e5e56;
                     height: 110px;
                     width: 110px;
                     border-radius: 100%;
                     position: absolute;
+                    background-color: #dadada;
 
                     .profile-image {
                         border-radius: 100%;
@@ -75,7 +76,7 @@
                         transition: all 0.2s linear;
 
                         &:hover {
-                            border: 3px solid #e4e4e4;
+                            border: 3px solid #063f38;
                             color: #e4e4e4;
                             font-size: 18px;
                             transition: all 0.2s linear;
@@ -106,6 +107,8 @@
                     flex-direction: column;
                     justify-content: center;
                     text-align: center;
+                    z-index: -10;
+                    border-radius: 0 0 15px 15px;
 
                     // md pela quantidade de informações no menu - se aumentar, mudar
                     @include res-md {
@@ -141,6 +144,11 @@
                             &:hover {
                                 border-bottom: 2px solid #137c72;
                             }
+
+                            &.disabled {
+                                color: #666666;
+                                border: none;
+                            }
                         }
                     }
                 }
@@ -159,6 +167,8 @@
 
     .section-subtitle {
         color: rgb(139, 139, 139);
+        width: 80%;
+        margin: 0 auto;
     }
 
     .register-button {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import HeaderAdminOut from '../../components/Header/Admin/AdminOut';
 import api from '../../config/api'
+import { customAlert, translation } from '../../Helpers';
 
 class AdminLogin extends Component {
 
@@ -31,9 +32,9 @@ class AdminLogin extends Component {
             .catch(err => {
                 console.log(err);
                 if (err.message === "Network Error") {
-                    alert("Erro de conexão com o servidor")
+                    customAlert(translation(localStorage.getItem('language')).error.network, "error");
                 } else {
-                    alert("Email ou senha incorretos")
+                    customAlert(translation(localStorage.getItem('language')).error.invalidCredentials, "error");
                 }
             });
     }
@@ -44,16 +45,20 @@ class AdminLogin extends Component {
 
                 <Helmet>
                     <meta charSet="utf-8" />
-                    <title> All4One </title>
+                    <title> Painel Administrativo | All4One </title>
                 </Helmet>
 
                 <HeaderAdminOut />
 
                 <div className="container-lg">
                     <div className="row mt-5">
-                        <div className="col-md-5 col-12 mx-auto">
-                            <div className="login pt-4 pb-5">
-                                <h1 className="title"> Entrar </h1>
+                        <div className="col-12 mt-4">
+                            <h1 className="title">Bem-vindo ao painel administrativo</h1>
+                        </div>
+
+                        <div className="col-md-5 col-12 mx-auto mt-4">
+                            <div className="login py-4 mt-5">
+                                <h1 className="form-title"> Entrar </h1>
 
                                 <form onSubmit={this.logar} className="form-login mt-4 px-5">
                                     <div className="form-floating mb-3">

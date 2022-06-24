@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { translation } from '../../../Helpers';
 import HeaderIdioms from '../Idioms';
+import LogoName from '../../../assets/images/logo-name-right3.svg';
 
 class HeaderHome extends Component {
     render() {
@@ -9,7 +10,7 @@ class HeaderHome extends Component {
         return (
             <Navbar expand="lg" className="header-home">
                 <Container>
-                    <Navbar.Brand href="/">All4One</Navbar.Brand>
+                    <Navbar.Brand href="/"><img width="125" src={LogoName} alt="Logo" /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav style={{ marginLeft: "auto" }}>

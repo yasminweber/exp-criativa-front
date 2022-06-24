@@ -3,6 +3,7 @@ import { getToken } from "../config/auth";
 //require('dotenv').config();
 
 const api = axios.create({
+    // baseURL: 'https://all-4-one-back.herokuapp.com'
     baseURL: 'http://localhost:4000'
 });
 

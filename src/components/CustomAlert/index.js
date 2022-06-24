@@ -1,31 +1,20 @@
 import { React, Component } from 'react';
-import { Alert } from 'react-bootstrap';
-import { translation } from '../../Helpers';
 
 class CustomAlert extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            show: this.props.show
-        }
-    }
-
-    closeAlert() {
-        this.setState({ show: false });
-    }
 
     render() {
-        const t = translation(localStorage.getItem('language'));
         return (
-            <>
-                {(this.state.aNetwork === true) ?
-                    <Alert variant="danger" onClose={() => this.closeAlert()} dismissible >
-                        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                        <p>Por favor tente novamente mais tarde</p>
-                    </Alert >
-                    : <></>
-                }
-            </>
+            <div className="modal fade" id="custom-alert" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-sm">
+                    <div className="modal-content" id="custom-alert-color">
+                        <div className="modal-header">
+                            <button type="button" className="btn-close" id="modal-close-btn" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body py-0" id="customAlert-description"> </div>
+                        <div className="modal-footer"> </div>
+                    </div>
+                </div>
+            </div>
         );
     }
 }

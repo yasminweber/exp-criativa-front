@@ -4,7 +4,8 @@ import HeaderLogin from '../../../components/Header/User';
 import { currentUrl, dateInput } from '../../../Helpers'
 import api from '../../../config/api';
 import { decodeToken } from '../../../config/auth';
-import { translation } from '../../../Helpers';
+import { translation, customAlert } from '../../../Helpers';
+import Footer from '../../../components/Footer';
 
 class EditProject extends Component {
 
@@ -28,8 +29,9 @@ class EditProject extends Component {
         }
 
         this.componentDidMount = () => {
-            this.getProject();
             this.loadCauses();
+
+            this.getProject();
         }
 
         this.updateProject = this.updateProject.bind(this);
@@ -54,7 +56,7 @@ class EditProject extends Component {
                 this.setState({
                     id: data._id,
                     projectName: data.projectName,
-                    category: data.category,
+                    cause: data.cause,
                     where: data.where,
                     startDate: data.startDate,
                     endDate: data.endDate,
@@ -65,13 +67,12 @@ class EditProject extends Component {
                     improvement: data.improvement,
                     status: data.status
                 });
-                console.log("Projeto carregado");
-
+                // console.log("Projeto carregado");
                 this.checkUser()
             })
             .catch((error) => {
                 console.log("erro carregar projeto ", error)
-                alert('Erro para carregar o projeto');
+                customAlert(translation(localStorage.getItem('language')).error.loadProject, "error");
             })
     }
 
@@ -81,7 +82,7 @@ class EditProject extends Component {
                 console.log("É o mesmo user")
             } else {
                 console.log("Não é o mesmo user")
-                alert("Desculpe, mas você não tem permissão para editar esse projeto")
+                customAlert(translation(localStorage.getItem('language')).error.permission, "error");
                 window.location.href = "/meusInteresses"
             }
         }
@@ -104,21 +105,29 @@ class EditProject extends Component {
 
         console.log(project);
 
-        await api.put(`/project/${this.state.id}`, project);
-
-        alert("Projeto atualizado com sucesso");
-        window.location = '/profile';
+        await api.put(`/project/${this.state.id}`, project)
+        .then(() => {
+            customAlert(translation(localStorage.getItem('language')).success.projectUpdate, "success");
+            window.setTimeout(function() {
+                window.location.href = '/profile';
+            }, 2000)
+        }).catch((error) => {
+            console.log(error)
+            customAlert(translation(localStorage.getItem('language')).error.updateProject, "error");
+        });
     }
 
     async deleteProject() {
         await api.delete(`/project/${this.state.id}`)
             .then(() => {
-                alert("Projeto apagado");
-                window.location = '/profile';
+                customAlert(translation(localStorage.getItem('language')).success.projectDelete, "success");
+                window.setTimeout(function() {
+                    window.location.href = '/profile';
+                }, 2000)
             })
             .catch((error) => {
                 console.log(error)
-                alert('Erro para deletar projeto');
+                customAlert(translation(localStorage.getItem('language')).error.deleteProject, "error");
             })
     }
 
@@ -139,7 +148,6 @@ class EditProject extends Component {
                         <div className="row">
                             <div className="col-md-8 col-12 text-lg-start text-center">
                                 <h1 className="titulo-1">{t.project.editProject.title1}</h1>
-                                {/* <p className="descricao">Colocar qualquer texto que não seja esse de criar novo projeto</p> */}
                             </div>
                             <div className="col-md-4 col-12 d-flex flex-column-reverse align-items-end mt-md-0 mt-4">
                                 <button className="btn-1" onClick={() => { if (window.confirm('Tem certeza que deseja deletar esse projeto?')) this.deleteProject() }}> {t.project.editProject.btn1} </button>
@@ -175,10 +183,8 @@ class EditProject extends Component {
 
                                         <div className="mb-3 form-floating">
                                             <select className="form-select" id="selectCause"
-                                                aria-label="Default select example"
-                                                onChange={(e) => this.setState({ cause: e.target.value })}
-                                                value={this.state.cause} required >
-                                                <option key={0} value={""}> {t.project.form.selectCause} </option>
+                                                value={this.state.cause}
+                                                onChange={(e) => this.setState({ cause: e.target.value })} required >
                                                 {this.state.causes.map(function (cause) {
                                                     return <option key={cause} value={cause}> {cause} </option>;
                                                 })
@@ -245,6 +251,8 @@ class EditProject extends Component {
                         </div>
                     </div>
                 </section>
+
+                <Footer />
 
             </div>
         )

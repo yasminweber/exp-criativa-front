@@ -1,0 +1,176 @@
+.project-info {
+    background: rgb(0, 139, 139);
+    background: linear-gradient(180deg, rgba(0, 139, 139, 1) 0%, rgba(0, 107, 104, 1) 50%, rgba(0, 78, 71, 1) 100%);
+    font-family: 'Sarabun', sans-serif;
+    height: 200px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    border-bottom: #666666ac 2px solid;
+    z-index: 2;
+
+    @include res-lg {
+        height: 240px;
+    }
+
+    .project-image-section {
+        padding: 0;
+        height: 150px;
+        width: 150px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 70px;
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            overflow: hidden;
+            background-color: #0e5e5600;
+            border: #083d38 3px solid;
+
+            .project-photo {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .project-image-input {
+            height: 30%;
+            position: relative;
+            margin-top: -152px;
+            margin-left: 105px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+
+            .project-image-icon {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: #e4e4e4;
+                height: 100%;
+                background-color: #0e5e56;
+                border-radius: 100%;
+                cursor: pointer;
+                transition: all 0.2s linear;
+
+                &:hover {
+                    border: #083d38 2px solid;
+                    color: #e4e4e4;
+                    font-size: 18px;
+                    transition: all 0.2s linear;
+                }
+            }
+        }
+
+    }
+
+    // .project-image {
+    //     height: 150px;
+    //     width: 150px;
+    //     align-items: center;
+    //     justify-content: center;
+    //     border-radius: 100%;
+    //     box-shadow: 2px 2px 2px #666666;
+    //     margin: 0 auto;
+
+    //     @include res-md {
+    //         width: 100px;
+    //         height: 100px;
+    //         margin: 0 auto;
+    //     }
+
+    //     @include res-sm {
+    //         margin-top: 20px;
+    //     }
+
+    //     .image-project {
+    //         width: 150px;
+    //         height: 150px;
+    //         border-radius: 100%;
+
+    //         @include res-md {
+    //             width: 100px;
+    //             height: 100px;
+    //         }
+    //     }
+    // }
+
+    .name-causes {
+        padding-left: 30px;
+        align-items: start;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: end;
+        text-align: start;
+
+        @include res-md {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    }
+
+    .project-name {
+        text-transform: capitalize;
+        font-size: 35px;
+        color: white;
+
+        @include res-md {
+            font-size: 24px;
+        }
+    }
+
+    .project-cause {
+        color: #8cd4cd;
+        font-size: 17px;
+    }
+
+    .subscription-column {
+        align-items: start;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: end;
+        text-align: start;
+        padding-bottom: 10px;
+
+        @include res-lg {
+            align-items: end;
+            margin-top: 16px;
+        }
+
+        @include res-sm {
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .subscription-button {
+            padding: 7px 17px;
+            border: 2px solid #F29F05;
+            color: #F29F05;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            background-color: #ffffff00;
+            border-radius: 50px;
+            box-shadow: 2px 2px 2px #757575;
+            letter-spacing: 1px;
+            word-spacing: 3px;
+            transition: background-color 0.3s linear;
+            float: left;
+
+            &:hover {
+                background-color: #F29F05;
+                transition: background-color 0.2s linear;
+                color: white;
+            }
+        }
+    }
+}

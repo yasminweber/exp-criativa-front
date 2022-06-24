@@ -13,6 +13,7 @@ import AdminLogin from './pages/Admin'
 import Dashboard from './pages/Admin/Dashboard'
 import AdminApproval from './pages/Admin/Approval'
 import Administration from './pages/Admin/Administration'
+import Depoimento from './pages/Depoimento'
 
 const Rotas = () => {
     return (
@@ -41,6 +42,7 @@ const Rotas = () => {
                 <Route path="/cadastro" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/depoimento" element={<Depoimento />} />
 
                 {/* Admin routes */}
                 <Route path="/admin" element={<AdminLogin />} />

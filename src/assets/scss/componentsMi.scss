@@ -2,12 +2,14 @@
 @import "./components/headerIdioms.scss";
 @import "./pages/home.scss";
 @import "./components/causeCard.scss";
+@import "./components/customFooter.scss";
 
 /* ADMIN */
 @import "./pages/adminApproval.scss";
 @import "./pages/administration.scss";
 @import "./pages/dashboardAdmin.scss";
 @import "./pages/loginAdmin.scss";
+@import "./components/headerAdminOut.scss";
 
 @import "./components/projectAdminCard.scss";
 @import "./components/sidebarAdmin.scss";
@@ -17,11 +19,13 @@
 /* PROJECT */
 @import "./pages/newProject.scss";
 @import "./components/projectVolunteers.scss";
+@import "./components/projectInfo.scss";
 
 
 /* USER */
-@import "./components/dashboard.scss";
-@import "./components/headerFora.scss";
+@import "./pages/dashboardInteresses.scss";
+@import "./components/headerHome.scss";
+@import "./pages/depoimento.scss";
 
 /* USER PROJECT */
 @import "./components/profileProjectCard.scss";

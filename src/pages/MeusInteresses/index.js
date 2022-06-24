@@ -3,7 +3,8 @@ import HeaderLogin from '../../components/Header/User';
 import Helmet from 'react-helmet';
 import api from '../../config/api'
 import { decodeToken } from '../../config/auth';
-import { translation } from "../../Helpers";
+import { customAlert, translation } from "../../Helpers";
+import Footer from '../../components/Footer';
 
 class MeusInteresses extends Component {
 
@@ -16,12 +17,13 @@ class MeusInteresses extends Component {
 
         this.componentDidMount = () => {
             this.getProjects()
+            // checkPermission(this.state.user.user.cnpj)
         }
     }
 
     async getProjects() {
         var causas = this.state.user.user.selectedCauses
-        console.log("user causes", causas)
+        // console.log("user causes", causas)
 
         await api.get(`/projects/filter/?filterCause1=${causas[0]}&filterCause2=${causas[1]}&filterCause3=${causas[2]}&filterCause4=${causas[3]}&filterCause5=${causas[4]}`)
             .then((response) => {
@@ -30,7 +32,7 @@ class MeusInteresses extends Component {
             })
             .catch((error) => {
                 console.log(error);
-                alert('Erro para carregar os projetos');
+                customAlert(translation(localStorage.getItem('language')).error.loadProjects, "error")
             })
     }
 
@@ -71,7 +73,7 @@ class MeusInteresses extends Component {
                                                         <h3 className="categoria">{child.cause}</h3>
                                                         <a className="criador" href={'/usuario'}>{child.creator.name}</a>
                                                         <p className="descricao mt-3">{child.description}</p>
-                                                        <div className="text-center enviar mt-4">
+                                                        <div className="text-center enviar mt-sm-4 mt-2">
                                                             <button className="btn-1" onClick={() => { window.location.href = `/project/${child._id}` }}>
                                                                 {t.interests.btn1}
                                                             </button>
@@ -93,8 +95,9 @@ class MeusInteresses extends Component {
                     </div>
                 </section>
 
-            </div>
+                <Footer />
 
+            </div>
         )
     }
 }

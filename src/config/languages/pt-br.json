@@ -6,6 +6,62 @@
         "cancel": "Cancelar",
         "update": "Atualizar"
     },
+    "success": {
+        "register": "Cadastro realizado com sucesso!",
+        "logout": "Você fez logout.",
+        "project": "Solicitação de projeto enviada com sucesso! Aguarde a aprovação do administrador.",
+        "projectUpdate": "Solicitação de projeto atualizada com sucesso!",
+        "projectDelete": "Projeto excluído com sucesso!",
+        "projectEnd": "Projeto finalizado com sucesso!",
+        "projectVolunteers": "Participação no projeto enviada com sucesso!",
+        "subscribe": "Inscrição feita",
+        "unsubscribe": "Sua inscrição foi removida",
+        "admin": "Administrador cadastrado com sucesso!",
+        "adminUpdate": "Administrador atualizado com sucesso!",
+        "adminDelete": "Administrador excluído com sucesso!",
+        "projectApprove": "Projeto aprovado com sucesso!",
+        "projectImprove": "Projeto enviado para pendência com sucesso!",
+        "projectReject": "Projeto rejeitado com sucesso!",
+        "userUpdate": "Usuário atualizado com sucesso!",
+        "userDelete": "Usuário desativado com sucesso!"
+    },
+    "warning": {
+        "password": "As senhas não correspondem.",
+        "categories": "Para alterar as categorias preferidas, ative o modo de edição",
+        "userCategory": "Você já selecionou 5 categorias."
+    },
+    "error": {
+        "network": "Erro de conexão. Por favor verifique sua conexão com a internet.",
+        "server": "Erro de servidor. Por favor tente novamente mais tarde.",
+        "unknown": "Erro desconhecido. Por favor tente novamente mais tarde.",
+        "permission": "Desculpe, você não tem permissão para acessar essa página.",
+        "invalidCredentials": "E-mail ou senha inválidos.",
+        "register": "Erro ao cadastrar. Por favor tente novamente mais tarde.",
+        "email": "E-mail já cadastrado.",
+        "logged": "Usuario não logado. Por favor, faça o login.",
+        "causes": "Erro ao carregar as causas. Por favor tente novamente mais tarde.",
+        "loadProject": "Erro ao carregar o projeto. Por favor tente novamente mais tarde.",
+        "loadProjects": "Erro ao carregar os projetos. Por favor tente novamente mais tarde.",
+        "saveProject": "Erro ao enviar o projeto. Por favor tente novamente mais tarde.",
+        "updateProject": "Erro ao atualizar o projeto. Por favor tente novamente mais tarde.",
+        "deleteProject": "Erro ao deletar o projeto. Por favor tente novamente mais tarde.",
+        "endProject": "Erro ao finalizar o projeto. Por favor tente novamente mais tarde.",
+        "volunteersProject": "Erro ao enviar a participação no projeto. Por favor tente novamente mais tarde.",
+        "subscribe": "Erro com a inscrição.",
+        "admin": "Erro ao cadastrar administrador. Por favor tente novamente mais tarde.",
+        "loadAdmin": "Erro ao carregar o administrador. Por favor tente novamente mais tarde.",
+        "loadAdmins": "Erro ao carregar os administradores. Por favor tente novamente mais tarde.",
+        "saveAdmin": "Erro ao salvar o administrador. Por favor tente novamente mais tarde.",
+        "updateAdmin": "Erro ao atualizar o administrador. Por favor tente novamente mais tarde.",
+        "deleteAdmin": "Erro ao deletar o administrador. Por favor tente novamente mais tarde.",
+        "approveProject": "Erro ao aprovar o projeto. Por favor tente novamente mais tarde.",
+        "improveProject": "Erro ao enviar o projeto para pendência. Por favor tente novamente mais tarde.",
+        "rejectProject": "Erro ao rejeitar o projeto. Por favor tente novamente mais tarde.",
+        "loadUser": "Erro ao carregar o usuário. Por favor tente novamente mais tarde.",
+        "loadUsers": "Erro ao carregar os usuários. Por favor tente novamente mais tarde.",
+        "updateUser": "Erro ao atualizar o usuário. Por favor tente novamente mais tarde.",
+        "deleteUser": "Erro ao desativar o usuário. Por favor tente novamente mais tarde."
+    },
     "headerHome": {
         "btn1": "Login",
         "btn2": "Cadastro"
@@ -53,6 +109,7 @@
             "repeatPassword": "Confirmar a senha",
             "cnpj": "CNPJ",
             "razaoSocial": "Razão Social",
+            "administrator": "Administrador da empresa",
             "administratorName": "Nome",
             "administratorSurname": "Sobrenome",
             "btn1": "Continuar"
@@ -84,7 +141,8 @@
             "homeless": "Sem Teto"
         },
         "profile": "Perfil",
-        "logout": "Sair"
+        "logout": "Sair",
+        "testimonial": "Depoimento"
     },
     "interests": {
         "title": "Meus Interesses | All4One",
@@ -116,7 +174,8 @@
             "endDate": "Data fim",
             "description": "Descrição",
             "qntBenefited": "Quantidade de beneficiados",
-            "qntVolunteers": "Quantidade de voluntários"
+            "qntVolunteers": "Quantidade de voluntários",
+            "btn1": "Enviar solicitação"
         },
         "info": {
             "btnEdit": "Editar projeto",
@@ -141,8 +200,10 @@
                 "placeholder": "O que deseja compartilhar?",
                 "image": "Adicionar imagem",
                 "characters": "caracteres restantes",
+                "images": "Lista de Anexos:",
                 "btnPublish": "Publicar",
-                "whoPublished": "O moderador publicou sobre o projeto dia"
+                "whoPublished": "O moderador publicou sobre o projeto dia",
+                "notYet": "Não há nenhum post."
             },
             "volunteers": {
                 "title": "Voluntários",
@@ -152,7 +213,7 @@
                 "table": {
                     "name": "Nome",
                     "surname": "Sobrenome",
-                    "activeSince": "Ativo há",
+                    "activeSince": "Integrante da All4One desde",
                     "days": "dias",
                     "presence": "Estava presente?"
                 },
@@ -162,5 +223,46 @@
                 "title": "Doações"
             }
         }
+    },
+    "user": {
+        "title": "Perfil | All4One",
+        "menu": {
+            "main": "Meus Dados",
+            "projects": "Meus Projetos",
+            "volunteer": "Sou Voluntário",
+            "achievement": "Conquistas",
+            "donations": "Doações"
+        },
+        "main": {
+            "title1": "Meus Dados",
+            "sub1": "Acompanhe ou atualize seus dados cadastrados!",
+            "sub11": "Você se cadastrou como uma conta pessoal.",
+            "title2": "Minhas categorias favoritas",
+            "sub2": "Utilizamos essa informações para te recomendar projetos que sejam sua cara! Lembre-se, você pode selecionar no máximo 5 categorias!",
+            "btn1": "Editar meus dados",
+            "btn2": "Salvar alterações"
+        },
+        "projects": {
+            "title": "Meus projetos",
+            "sub": "Acompanhe aqui o status de todos os projetos que você criou.",
+            "op1": "Aguardando Aprovação",
+            "op2": "Em andamento",
+            "op3": "Finalizados",
+            "notYet": "Não há projetos a exibir."
+        },
+        "volunteer": {
+            "title": "Sou voluntário",
+            "sub": "Acompanhe aqui o status de todos os projetos que você é voluntário!",
+            "op1": "Em andamento",
+            "op2": "Finalizados",
+            "notYet": "Não há projetos a exibir."
+        }
+    },
+    "testimonial": {
+        "title": "Novo depoimento | All4One",
+        "title1": "Novo depoimento",
+        "sub1": "Compartilhe seu depoimento com a gente!",
+        "description": "Depoimento",
+        "btn": "Enviar"
     }
 }
