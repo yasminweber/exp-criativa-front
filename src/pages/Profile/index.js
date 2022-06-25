@@ -134,7 +134,7 @@ class Profile extends Component {
                                         <li className="item" role="presentation">
                                             <button className="link" id="profileProject-tab" data-bs-toggle="tab" data-bs-target="#profileProject" type="button" role="tab" aria-controls="profileProject" aria-selected="false">{t.user.menu.projects}</button>
                                         </li>
-                                        {(this.state.cnpj === "") ?
+                                        {/* {(this.state.cnpj === "") ? */}
                                         <>
                                         <li className="item" role="presentation">
                                             <button className="link" id="volunteerIn-tab" data-bs-toggle="tab" data-bs-target="#volunteerIn" type="button" role="tab" aria-controls="volunteerIn" aria-selected="false">{t.user.menu.volunteer}</button>
@@ -142,8 +142,8 @@ class Profile extends Component {
                                         <li className="item" role="presentation">
                                             <button className="link disabled pe-none" id="awards-tab" data-bs-toggle="tab" data-bs-target="#awards" type="button" role="tab" aria-controls="awards" aria-selected="false" disabled>{t.user.menu.achievement}</button>
                                         </li> </>
-                                        : <></>
-                                        }
+                                        {/* : <></>
+                                        } */}
                                         <li className="item" role="presentation">
                                             <button className="link disabled pe-none" id="donations-tab" data-bs-toggle="tab" data-bs-target="#donations" type="button" role="tab" aria-controls="donations" aria-selected="false" disabled>{t.user.menu.donations}</button>
                                         </li>

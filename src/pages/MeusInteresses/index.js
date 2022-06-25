@@ -23,7 +23,7 @@ class MeusInteresses extends Component {
 
     async getProjects() {
         var causas = this.state.user.user.selectedCauses
-        // console.log("user causes", causas)
+        console.log("user causes", causas)
 
         await api.get(`/projects/filter/?filterCause1=${causas[0]}&filterCause2=${causas[1]}&filterCause3=${causas[2]}&filterCause4=${causas[3]}&filterCause5=${causas[4]}`)
             .then((response) => {
@@ -62,6 +62,7 @@ class MeusInteresses extends Component {
                     <div className="container-lg">
                         <div className="row">
                             <div className="col-lg-10 col-12 mx-auto">
+                                {console.log("projects", this.state.projects)}
                                 {(this.state.projects.length !== 0) ?
                                     <div className="row my-4 text-start">
                                         {this.state.projects.filter(status => status.status === "aprovado").map((child, id) => (
